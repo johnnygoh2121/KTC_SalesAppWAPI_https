@@ -1,0 +1,27 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectPaymentInvCnDn]    Script Date: 07-Jun-21 23:52:01 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER procedure [dbo].[sp_SelectPaymentInvCnDn] 
+@webDb as  nvarchar(100), 
+@docEntry as int,
+@subSi as nvarchar(100)
+
+as 
+
+declare @sql as nvarchar(max)
+
+select @sql = '
+
+select  '+QUOTENAME(@subSi, '''')+ ' [SubSi]
+, * 
+FROM [' +@webDb+ '].[dbo].[MC3]
+Where DocEntry = ' + QUOTENAME(@docEntry, '''')  
+
+		--print @sql
+exec sp_executesql @sql

@@ -1,0 +1,198 @@
+﻿
+
+
+
+
+-- for each web db 
+
+-- Use KTCW_KK  -- done .. 
+ -- Use KTCW_SW  -- done ..
+ --Use KTCW_TW -- done --
+-- Use KTCW_DI -- done
+ -- Use KTCW_CR -- done
+ -- Use KTCW_GT -- done
+ -- Use KTCW_AM -- done
+ -- Use KTCW_PT -- done
+-- Use KTCW_SW_TEST -- done
+  --Use KTCW_TEST -- done
+ --Use ZW_KTCD -- done
+ -- Use ZW_KTCS -- done
+ --Use ZW_KTCG -- done
+ -- Use TESTKTCWKK -- done
+ -- use KTCW_PT -- done
+
+
+GO
+
+
+-----------------------------------------------
+CREATE TABLE [dbo].[FTAPP_PortalPayment](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[docentry] [int] NULL,
+	[docnum] [int] NULL,
+	[docdate] [datetime] NULL,
+	[docstatus] [nvarchar](120) NULL,
+	[cardcode] [nvarchar](120) NULL,
+	[cardname] [nvarchar](256) NULL,
+	[refno] [nvarchar](256) NULL,
+	[refnofile] [nvarchar](max) NULL,
+	[doc] [nvarchar](120) NULL,
+	[docfile] [nvarchar](max) NULL,
+	[collector] [nvarchar](120) NULL,
+	[doctotal] [decimal](12, 2) NULL,
+	[checkedamt] [decimal](12, 2) NULL,
+	[confirmamt] [decimal](12, 2) NULL,
+	[cancelamt] [decimal](12, 2) NULL,
+	[postamt] [decimal](12, 2) NULL,
+	[ucreated] [nvarchar](120) NULL,
+	[dcreated] [datetime] NULL,
+	[umodified] [nvarchar](120) NULL,
+	[dmodified] [datetime] NULL,
+	[initno] [nvarchar](120) NULL,
+	[checkedby] [nvarchar](120) NULL,
+	[checkeddate] [datetime] NULL,
+	[batchid] [int] NULL,
+	[guid] [uniqueidentifier] NOT NULL,
+ CONSTRAINT [PK_FTAPP_PortalPayment] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+-----------------------------------------------
+CREATE TABLE [dbo].[FTApp_PortalPayment_Docs](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[docentry] [int] NULL,
+	[linenum] [int] NULL,
+	[transid] [int] NULL,
+	[transline] [int] NULL,
+	[sourceid] [int] NULL,
+	[sourcetype] [nvarchar](120) NULL,
+	[sourcedate] [datetime] NULL,
+	[sourcedoc] [int] NULL,
+	[sourceref] [nvarchar](120) NULL,
+	[sourceamt] [decimal](12, 2) NULL,
+	[appliedamt] [decimal](12, 2) NULL,
+	[sourceamtfc] [decimal](12, 2) NULL,
+	[objectcode] [nvarchar](120) NULL,
+	[headGuid] [uniqueidentifier] NOT NULL,
+	[lineGuid] [uniqueidentifier] NOT NULL,
+ CONSTRAINT [PK_FTApp_PaymentDocument] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+--------------------------------
+CREATE TABLE [dbo].[FTApp_PortalPayment_Payments](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[docentry] [int] NULL,
+	[linetype] [nvarchar](120) NULL,
+	[linecode] [nvarchar](120) NULL,
+	[lineamt] [decimal](12, 2) NULL,
+	[linedate] [datetime] NULL,
+	[lineref] [nvarchar](120) NULL,
+	[bank1] [nvarchar](120) NULL,
+	[bank2] [nvarchar](120) NULL,
+	[filename] [nvarchar](max) NULL,
+	[ChequeNo] [nvarchar](120) NULL,
+	[confirmed] [nvarchar](120) NULL,
+	[canceled] [nvarchar](120) NULL,
+	[bankdate] [datetime] NULL,
+	[batchid] [int] NULL,
+	[confusr] [nvarchar](120) NULL,
+	[bankentry] [int] NULL,
+	[bankabs] [int] NULL,
+	[headGuid] [uniqueidentifier] NULL,
+	[lineGuid] [uniqueidentifier] NULL,
+ CONSTRAINT [PK_FTApp_PortalPayment2] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+-------------------------
+CREATE TABLE [dbo].[FTApp_SellerCashLog](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[SubSi] [nvarchar](120) NULL,
+	[UserCode] [nvarchar](120) NULL,
+	[Cash] [decimal](12, 2) NULL,
+	[DocNum] [nvarchar](120) NULL,
+	[BankInStatus] [nvarchar](120) NULL,
+	[CollectedDt] [datetime] NULL,
+	[BankInDt] [datetime] NULL,
+	[CardCode] [nvarchar](120) NULL,
+	[CardName] [nvarchar](120) NULL,
+	[HouseBankCode] [nvarchar](120) NULL,
+	[HouseBankName] [nvarchar](120) NULL,
+	[HouseBankAcctNo] [nvarchar](120) NULL,
+	[HeaderGuid] [uniqueidentifier] NULL,
+	[Remarks] [nvarchar](120) NULL,
+	[DeliveredToCashier] [nvarchar](1) NULL,
+	[DeliveredDt] [datetime] NULL,
+	[BankInSlip] [nvarchar](max) NULL,
+	[CashStatus] [nvarchar](120) NULL,
+ CONSTRAINT [PK_FTApp_SellerCashLog] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+--------------------------------
+
+CREATE TABLE [dbo].[FTApp_SellerChequeLog](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[Subsi] [nvarchar](120) NULL,
+	[UserCode] [nvarchar](120) NULL,
+	[ChequeAmount] [decimal](12, 2) NULL,
+	[ChequeDt] [datetime] NULL,
+	[ChequeNo] [nvarchar](120) NULL,
+	[DocNum] [nvarchar](120) NULL,
+	[BankInStatus] [nvarchar](120) NULL,
+	[ColllectedDt] [datetime] NULL,
+	[BankInDt] [datetime] NULL,
+	[CardCode] [nvarchar](120) NULL,
+	[CardName] [nvarchar](120) NULL,
+	[HouseBankCode] [nvarchar](120) NULL,
+	[HouseBankName] [nvarchar](120) NULL,
+	[HouseBankAcctNo] [nvarchar](120) NULL,
+	[HeaderGuid] [uniqueidentifier] NULL,
+	[Remarks] [nvarchar](120) NULL,
+	[DeliveredToReceiption] [nvarchar](1) NULL,
+	[DeliveredDt] [datetime] NULL,
+	[BankInSlip] [nvarchar](max) NULL,
+	[ChequeStatus] [nvarchar](120) NULL,
+	[ChequeBankName] [nvarchar](120) NULL,
+	[ChequeBankCode] [nvarchar](120) NULL,
+ CONSTRAINT [PK_FTApp_SellerCheque] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+
+
+-- Use KTCW_KK  -- done
+ --Use KTCW_SW  -- done
+--Use KTCW_TW -- done
+ --Use KTCW_DI -- done
+ --Use KTCW_CR -- done
+-- Use KTCW_GT -- done
+-- Use KTCW_AM -- done
+ -- Use KTCW_PT -- done
+-- Use KTCW_SW_TEST -- done
+ --Use KTCW_TEST -- done
+-- Use ZW_KTCD -- done
+ -- Use ZW_KTCS -- done
+-- Use ZW_KTCG -- done
+-- Use TESTKTCWKK -- done
+ --use KTCW_PT -- done
+
+ go
+
+
+ALTER TABLE FTApp_SellerChequeLog
+ADD ReceptDt DateTime null;

@@ -1,0 +1,41 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectCOGItemCode]    Script Date: 10-Jun-21 17:07:17 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[sp_SelectCOGItemCode]
+@erpDb as nvarchar(100), 
+@startDate as datetime, 
+@cardCode as nvarchar(100), 
+@code as nvarchar(100)
+as
+declare @sql as nvarchar(max)
+
+select @sql = '
+SELECT T0.ItemCode
+, T0.ItemName
+, ISNULL(T0.CODEBARS, '+QUOTENAME('','''')+') AS [CodeBars]
+, T0.FrozenFor
+, T0.U_CSUS_UOM AS [UomQty]
+, ISNULL((
+	SELECT MIN(I1.LineTotal/CASE WHEN I1.QUANTITY = 0 THEN 1 ELSE I1.Quantity END)
+		FROM ['+@erpDb+'].[DBO].OINV I0 
+			INNER JOIN ['+@erpDb+'].[DBO].[INV1] I1 ON I1.DocEntry = I0.DocEntry 
+		WHERE I0.CardCode = '+QUOTENAME(@cardCode, '''')+' AND I1.ItemCode = T0.ItemCode
+			 AND I0.DocDate >= '+QUOTENAME(@startDate, '''')+ ' AND I0.DocDate <= GETDATE() AND I1.LineTotal > 0),0) AS [LowestInvoicePrice], 
+	         T6.PRICE AS [ListPrice] 
+FROM ['+@erpDb+'].[DBO].[OITM] T0 WITH (NOLOCK)  
+	INNER JOIN ['+@erpDb+'].[DBO].[OCRD] T5 WITH (NOLOCK)  ON T5.CardCode = '+QUOTENAME(@cardCode, '''')+' 
+	INNER JOIN ['+@erpDb+'].[DBO].[ITM1] T6 WITH (NOLOCK)  ON T6.ItemCode = T0.ItemCode AND T6.PriceList = T5.ListNum 
+WHERE T0.FROZENFOR = '+ QUOTENAME('N','''') + ' 
+    AND T0.ITEMNAME LIKE ' + QUOTENAME('%%%', '''') + '  
+	AND T0.SuppCatNum LIKE ' + QUOTENAME('%%%', '''' ) + '  
+	AND t0.ItemCode = ' + QUOTENAME(@code, '''') + ' 
+	OR  t0.CodeBars = ' + QUOTENAME(@code, '''') + ' 
+ORDER BY T0.ITEMCODE '
+
+-- print @sql
+exec sp_executeSql @sql

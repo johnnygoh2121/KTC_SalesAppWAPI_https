@@ -1,0 +1,90 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectQueueSOLine]    Script Date: 18-Jun-21 13:54:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[sp_SelectQueueSOLine]
+@webDB as nvarchar(100), 
+@erpDb as nvarchar(100),
+@subsi as nvarchar(100), 
+@docEntry as int, 
+@whsCode as nvarchar(100)
+
+as 
+
+declare @sql as nvarchar(max)
+select @sql = '
+
+select '+ QUOTENAME(@subsi, '''')+' [SubSi]
+	, t2.CardCode [AgencyCode]
+	, t2.CardName [AgencyName]
+	, t0.[UOMQTY] 
+	, t0.[QUANTITY]
+	, t0.[QUANTITYCS] [QUANTITYCS_Orig]
+	, CASE WHEN ISNULL(t1.U_CSUS_UOM,0) = 0 OR ISNULL(t1.U_CSUS_UOM,0) = 1 OR t0.QUANTITY = 0 THEN 0 ELSE FLOOR(t0.QUANTITY/t1.U_CSUS_UOM) END AS [QUANTITYCS]
+    , t0.[QUANTITYPC] [QUANTITYPC_Orig]
+	, CASE WHEN ISNULL(t1.U_CSUS_UOM,0) = 0 OR ISNULL(t1.U_CSUS_UOM,0) = 1 OR t0.QUANTITY = 0 THEN T0.QUANTITY ELSE t0.QUANTITY - (FLOOR(t0.QUANTITY/t1.U_CSUS_UOM) * T1.U_CSUS_UOM) END AS [QUANTITYPC] 
+	, t0.[DOCENTRY]
+    ,t0.[LINENUM]
+    ,t0.[ITEMCODE]
+    , CASE WHEN t0.[ITEMNAME] IS NULL THEN T1.ItemName ELSE T0.[ITEMNAME] END [ITEMNAME]
+    , CASE WHEN t0.[CODEBARS] IS NULL THEN T1.CODEBARS ELSE T0.[CODEBARS] END [CODEBARS] 
+    ,t0.[STOCKQTY]
+    ,t0.[PRICE]
+    , t0.[QTY]
+    , t0.[DISC]
+    , t0.[SUPP]
+    , t0.[DISCSUM]
+    , t0.[LINETOTAL]
+    , t0.[PENTRY]
+    , t0.[PLINE]
+    , t0.[PTYPE]
+    , t0.[SUGGESTQTY]
+    , t0.[DOCNUM]
+    , t0.[BORNE]
+    , t0.[SUPPSUM]
+    , t0.[INVQTY]
+    , t0.[INVPRICE]
+    , t0.[INVTOTAL]
+    , t0.[ITEMCOST]
+    , t0.[DIM1]
+    , t0.[DIM2]
+    , t0.[DIM3]
+    , t0.[MBID]
+    , t0.[SUPPCODE]
+    , t0.[REFNO]
+    , t0.[REFITEM]
+    , t0.[UOM]
+    , t0.[BATCHID]
+    , t0.[COKEPROMO]
+    , t0.[SUPPCATNUM]
+    , t0.[TAXCODE]
+    , t0.[PRICE2]
+    , t0.[NONIM]
+    , t0.[PROMOCOUNT]
+    , t0.[NPENTRY]
+    , t0.[NPID]
+    , t0.[NPLINE]
+    , t0.[PROMOPACKAGE]
+    , t0.[PICKEDQTY]
+    , t0.[REFLINE] 
+
+	from ['+@webDB+'].[dbo].[SO1] t0 left join 
+	['+@erpDb+'].[dbo].[OITM] t1 on t1.ItemCode = t0.ItemCode left join 
+	['+@erpDb+'].[dbo].[OCRD] t2 on t2.CardCode = t1.CardCode inner join 
+	['+@erpDb+'].[dbo].[OITW] t3 on t3.ItemCode = t0.ItemCode 
+ where t0.DocEntry = '+QUOTENAME(@docEntry, '''') + '
+ and t0.ItemCode not in (Select distinct ItemCode from ['+@webDB+'].[dbo].[FTAPP_FreezedItems] 
+							Where ItemCode = t0.ITEMCODE 
+								  AND WhsCode = '+QUOTENAME(@whsCode, '''')+')
+ --and t0.STOCKQTY > 0
+ and t3.WhsCode = '+QUOTENAME(@whsCode, '''')+'
+ and t3.OnHand > 0
+ and t0.QUANTITY > 0
+ order by t0.ItemName asc
+'
+--print @sql
+exec sp_executesql @sql

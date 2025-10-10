@@ -1,0 +1,24 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectCogDirectCN_No]    Script Date: 13-Jun-21 22:34:27 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER procedure [dbo].[sp_SelectCogDirectCN_No]
+@webDb as nvarchar(100), 
+@erpDb as nvarchar(100), 
+@returnCogDocEntry as nvarchar(100)
+
+as 
+declare @sql as nvarchar(max) = '
+
+ select t1.DocNum [CreditMemoDocNum]
+ from ['+@webDb+'].[dbo].[RTN] t0 inner join 
+      ['+@erpDb+'].[dbo].[ORIN] t1 on t1.DocEntry = t0.CMENTRY 
+ where t0.DOCENTRY = ' + QUOTENAME(@returnCogDocEntry, '''')
+
+ --print @sql
+ exec sp_executesql @sql

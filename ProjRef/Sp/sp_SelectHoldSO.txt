@@ -1,0 +1,58 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectHoldSO]    Script Date: 14-Jun-21 0:12:27 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[sp_SelectHoldSO] 
+@webDB as nvarchar(100), 
+@erpDb as nvarchar(100),
+@subsi as nvarchar(100), 
+@docStatus as nvarchar(1), 
+@SubSiID as varchar(100)
+
+as 
+
+declare @sql as nvarchar(max)
+select @sql = '
+select '+ QUOTENAME(@subsi, '''')+' [SubSi]
+	, '+QUOTENAME(@SubSiID, '''')+' [SubSiID]
+	, t1.WhsName [WhsName] 	
+	, (select count(*) from ['+@webDB+'].[dbo].[SO1] t2 where t0.DocEntry = t2.DocEntry) [LinesCount]
+
+	, (select top 1 t2.CardCode [CardCode]  from 
+		 ['+@webDB+'].[dbo].[SO1] t1 inner join 
+		 ['+@erpDB+'].[dbo].[OITM] t2 on t1.ITEMCODE = t2.ItemCode 
+		 inner join  ['+@erpDB+'].[dbo].[OCRD] t3 on t2.CardCode = t3.CardCode
+		 where t1.DOCENTRY = t0.DOCENTRY) as [AgencyCode]
+	
+	, (select top 1 t6.CardName  from 
+		 ['+@webDB+'].[dbo].[SO1] t4 inner join 
+		 ['+@erpDB+'].[dbo].[OITM] t5 on t4.ITEMCODE = t5.ItemCode 
+		 inner join ['+@erpDB+'].[dbo].[OCRD] t6 on t6.CardCode = t5.CardCode
+		 where t4.DOCENTRY = t0.DOCENTRY) as [AgencyName]
+	, t8.PrcCode [BranchCode]
+	, t8.PrcName [BranchName]
+	, '+QUOTENAME('Y', '''') + ' [InPickOnhold]
+	, (select HoldReason FROM ['+@webDB+'].[dbo].[FTAPP_OnHoldSoInPicking] WHERE HoldDocEntry = t0.DocEntry) [DocStatusDisplay]
+	, t9.territryID [TerritryID]
+	, t9.descript [TerritryName]
+	, t0.* 
+	from 
+		['+@webDB+'].[dbo].[SO] t0 left join 
+		['+@erpDb+'].[dbo].[OWHS] t1 on t0.WhsCode = t1.WhsCode left join 
+		['+@erpDb+'].[dbo].[OCRD] t7 on t0.CardCode = t7.CardCode left join		
+		['+@erpDb+'].[dbo].[OPRC] t8 on t7.U_COSTCTR = t8.PrcCode left join
+		['+@erpDb+'].[dbo].[OTER] t9 on t9.territryID = t7.Territory
+
+ where 
+ t0.DocStatus = ' + QUOTENAME(@docStatus, '''') +  ' 
+ and t0.DocEntry in (select distinct HoldDocEntry from ['+@webDB+'].[dbo].[FTAPP_OnHoldSoInPicking] WHERE HoldDocEntry = t0.DocEntry)
+
+ order by t0.DOCNUM, t0.DELDATE 
+'
+
+--print @sql
+exec sp_executesql @sql

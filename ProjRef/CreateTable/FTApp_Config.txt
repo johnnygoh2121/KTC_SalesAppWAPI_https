@@ -1,0 +1,22 @@
+﻿USE [KTCW_COMMON]
+GO
+
+/****** Object:  Table [dbo].[FTApp_Config]    Script Date: 20-Mar-21 12:03:03 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[FTApp_Config](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[SetupName] [nvarchar](120) NULL,
+	[SetupValue] [nvarchar](120) NULL,
+ CONSTRAINT [PK_FTApp_Config] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+

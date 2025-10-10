@@ -1,0 +1,43 @@
+﻿
+
+USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectStockCountCode]    Script Date: 27-Jun-21 20:45:01 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[sp_SelectStockCountCode]
+@erpDb as nvarchar(256),
+@code as nvarchar(256), 
+@subsi as nvarchar(256), 
+@whsCode as nvarchar(256)
+as
+
+declare @sql as nvarchar(max)
+select @sql = 
+' 
+select '+QUOTENAME(@subsi, '''')+' [SubSi]
+	, t0.*
+	from ['+@erpDb+'].[dbo].[OITM] t0 with (nolock) inner join 
+	     ['+@erpDb+'].[dbo].[OITW] t1 with (nolock) on t1.ItemCode = t0.ItemCode and t1.WhsCode = ' +QUOTENAME(@whsCode, '''')+'
+	Where t0.ItemCode in 
+	(
+		select distinct tt0.ItemCode 
+		from ['+@erpDb+'].[dbo].[OITM] tt0 with (nolock) inner join 
+			 ['+@erpDb+'].[dbo].[OBCD] tt1 with (nolock) on tt1.ItemCode = tt0.ItemCode 
+		Where 
+			tt0.InvntItem = '+QUOTENAME('Y', '''')+'
+			and tt0.validFor = '+QUOTENAME('Y', '''')+'
+			and (t0.ItemCode = '+QUOTENAME(@code, '''')+' 
+			or tt0.CodeBars = '+QUOTENAME(@code, '''')+'  
+			or tt1.BcdCode = '+QUOTENAME(@code, '''') +') 
+	)'
+
+--print @sql
+exec sp_executesql @sql
+
+
+
+

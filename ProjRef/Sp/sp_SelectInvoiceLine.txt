@@ -1,0 +1,21 @@
+﻿
+USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelecCreditMemoLine]    Script Date: 22-May-21 21:39:03 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[sp_SelectInvoiceLine]
+
+@sapDb as nvarchar(120), 
+@docEntry as int 
+as
+
+declare @sql as nvarchar(max)
+select @sql = '
+select * from ['+@sapDb+'].[dbo].[INV1] 
+where DocEntry =  '+  QUOTENAME(@docEntry, '''')
+
+exec sp_executesql @sql

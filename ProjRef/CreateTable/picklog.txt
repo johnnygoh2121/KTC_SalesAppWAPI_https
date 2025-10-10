@@ -1,0 +1,59 @@
+﻿
+
+
+
+
+-- for each web db 
+-- Use KTCW_KK  -- done
+-- Use TESTKTCWKK -- done
+
+-- Use KTCW_SW  -- done
+-- Use KTCW_TW -- done
+-- Use KTCW_DI -- done
+-- Use KTCW_CR -- done
+-- Use KTCW_GT -- done
+-- Use KTCW_AM -- done
+-- Use KTCW_PT -- done
+-- Use KTCW_SW_TEST -- done
+-- Use KTCW_TEST -- done
+-- Use ZW_KTCD -- done
+-- Use ZW_KTCS -- done
+-- Use ZW_KTCG -- done
+
+
+go
+
+CREATE TABLE [dbo].[FTAPP_PickLog](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[TransDt] [datetime] NULL,
+	[UserCode] [nvarchar](100) NULL,
+	[UserName] [nvarchar](100) NULL,
+	[AuthUserCode] [nvarchar](100) NULL,
+	[AuthUserName] [nvarchar](100) NULL,
+	[ItemCode] [nvarchar](100) NULL,
+	[ItemName] [nvarchar](100) NULL,
+	[CodeBars] [nvarchar](100) NULL,
+	[NeededQty] [decimal](12, 2) NULL,
+	[NeededQtyInPc] [decimal](12, 2) NULL,
+	[NeededQtyInCs] [decimal](12, 2) NULL,
+	[PickedQty] [decimal](12, 2) NULL,
+	[PickedQtyInPcs] [decimal](12, 2) NULL,
+	[PickedQtyInCs] [decimal](12, 2) NULL,
+	[Uom] [nvarchar](100) NULL,
+	[ReportAs] [nvarchar](100) NULL,
+	[WhsName] [nvarchar](100) NULL,
+	[Subsi] [nvarchar](100) NULL,
+	[Branch] [nvarchar](100) NULL,
+	[BranchCode] [nvarchar](100) NULL,
+	[AgencyName] [nvarchar](300) NULL,
+	[AgencyCode] [nvarchar](100) NULL,
+	[BaseEntry] [int] NULL,
+	[BaseLine] [int] NULL,
+	[DocNum] [int] NULL,
+	[StickerNum] [nvarchar](max) NULL,
+ CONSTRAINT [PK_FTAPP_PickLog] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO

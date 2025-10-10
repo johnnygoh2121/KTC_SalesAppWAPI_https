@@ -1,0 +1,85 @@
+﻿
+
+-- sorted list 
+-- Use KTCW_KK 
+-- Use KTCW_SW 
+-- Use KTCW_TW 
+-- Use KTCW_DI 
+-- Use KTCW_CR
+-- Use KTCW_GT 
+-- Use KTCW_AM 
+-- Use KTCW_PT
+-- Use KTCW_SW_TEST
+-- Use KTCW_TEST   
+-- Use ZW_KTCD     
+-- Use ZW_KTCS    
+-- Use ZW_KTCG     
+-- Use TESTKTCWKK  
+-- use KTCW_PT     
+
+
+
+-- for each web db 
+
+-- Use KTCW_KK  -- done
+ --Use KTCW_SW  -- done
+-- Use KTCW_TW -- done
+-- Use KTCW_DI -- done
+ -- Use KTCW_CR -- done
+-- Use KTCW_GT -- done
+-- Use KTCW_AM -- done
+ -- Use KTCW_PT -- done
+-- Use KTCW_SW_TEST -- done
+ --Use KTCW_TEST -- done
+-- Use ZW_KTCD -- done
+ -- Use ZW_KTCS -- done
+-- Use ZW_KTCG -- done
+-- Use TESTKTCWKK -- done
+ --use KTCW_PT -- done
+
+go
+
+
+
+/****** Object:  Table [dbo].[FTAppGeoTrack]    Script Date: 01-Apr-21 17:15:53 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[FTAppGeoTrack](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[StoreCode] [nvarchar](120) NULL,
+	[StoreName] [nvarchar](120) NULL,
+	[ScheduleDate] [datetime] NULL,
+	[UserCode] [nvarchar](120) NULL,
+	[SlpName] [nvarchar](120) NULL,
+	[Latitude] [float] NULL,
+	[Longitude] [float] NULL,
+	[HeaderGuid] [uniqueidentifier] NULL,
+ CONSTRAINT [PK_AppGeoTrack] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[FTAppGeoTrackLine](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[HeadGuid] [uniqueidentifier] NULL,
+	[LineGuid] [uniqueidentifier] NULL,
+	[TripID] [int] NULL,
+	[LastEnterDt] [datetime] NULL,
+	[LastStayOnDt] [datetime] NULL,
+	[LastExitDt] [datetime] NULL,
+	[LastEnterDt_DisToStore] [float] NULL,
+	[LastStayedDt_DisToStore] [float] NULL,
+	[LastExitDt_DisToStore] [float] NULL,
+	[Duration_EntryDtToExitDt] [float] NULL,
+ CONSTRAINT [PK_FTAppGroTrackLine] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO

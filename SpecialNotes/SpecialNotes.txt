@@ -1,0 +1,6 @@
+﻿
+
+1. Remove
+	- Unused geo tables 
+	- Unused payment draft table. 
+

@@ -1,0 +1,28 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectCdnAgency]    Script Date: 14-May-21 16:08:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[sp_SelectCdnAgency] 
+@CompanyName as nvarchar(120), 
+@SapDb as nvarchar(120), 
+@WebDb as nvarchar(120), 
+@CardType as nvarchar(1), 
+@ValidFor as nvarchar(1)
+
+AS
+declare @Sql as nvarchar(max)
+
+select @Sql = '
+SELECT '+ QUOTENAME(@CompanyName, '''')+' [CompanyName], t0.* 
+FROM ['+@SapDb+'].[dbo].[OCRD]  t0
+WHERE t0.CardType =  ' +QUOTENAME(@CardType, '''') + '
+AND t0.CardCode IN (SELECT DISTINCT cardcode FROM ['+@WebDb+'].[dbo].[USERCARD] WHERE CARDTYPE = ' +QUOTENAME(@CardType, '''') + ' )'
+
+
+--print @sql
+exec sp_executesql @Sql
+

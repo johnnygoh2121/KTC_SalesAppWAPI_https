@@ -1,0 +1,54 @@
+﻿
+--use KTCW_KK -- done
+--use KTCW_SW -- done
+--use KTCW_TW -- deon
+--use KTCW_DI -- done
+--use KTCW_CR -- DONE
+--use KTCW_GT -- DONE
+--use KTCW_AM -- DONE
+--use KTCW_PT -- dONE
+--use KTCW_TEST -- DONE
+--use TESTKTCWKK -- done
+--use AVONWEB -- done
+
+go 
+
+
+CREATE TABLE [dbo].[FTAPP_SecBox_DRAFT](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[BoxId] [nvarchar](100) NULL,
+	[PickerCode] [nvarchar](100) NULL,
+	[PickerName] [nvarchar](100) NULL,
+	[PickDt] [datetime] NULL,
+	[PackId] [nvarchar](100) NULL,
+	[PackDt] [datetime] NULL,
+	[PackerCode] [nvarchar](100) NULL,
+	[PackerName] [nvarchar](100) NULL,
+	[BaseEntry] [int] NULL,
+	[BoxGuid] [uniqueidentifier] NULL,
+	[IsLooseBox] [int] NULL,
+	[CreatedDt] [datetime] NULL,
+ CONSTRAINT [PK_FTAPP_SecBox_DRAFT] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[FTAPP_SecBox1_DRAFT](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[ItemCode] [nvarchar](100) NULL,
+	[ItemName] [nvarchar](100) NULL,
+	[Qty] [decimal](12, 3) NULL,
+	[Packaging] [nvarchar](3) NULL,
+	[BoxGuid] [uniqueidentifier] NULL,
+	[ContentGuid] [uniqueidentifier] NULL,
+	[BaseEntry] [int] NULL,
+	[BaseLine] [int] NULL,
+ CONSTRAINT [PK_FTAPP_SecBox1_DRAFT] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+

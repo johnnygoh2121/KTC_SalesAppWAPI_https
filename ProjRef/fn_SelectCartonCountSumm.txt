@@ -1,0 +1,61 @@
+﻿
+
+-- sorted list 
+-- Use KTCW_KK 
+-- Use KTCW_SW 
+-- Use KTCW_TW 
+-- Use KTCW_DI 
+-- Use KTCW_CR
+-- Use KTCW_GT 
+-- Use KTCW_AM 
+-- Use KTCW_PT
+-- Use KTCW_SW_TEST
+-- Use KTCW_TEST   
+-- Use ZW_KTCD     
+-- Use ZW_KTCS    
+-- Use ZW_KTCG     
+-- Use TESTKTCWKK  
+-- use KTCW_PT     
+
+
+go 
+
+
+ALTER FUNCTION [dbo].[fn_SelectCartonCountSumm]
+(	
+	-- Add the parameters for the function here
+	@docEntry as int
+)
+RETURNS TABLE 
+AS
+RETURN 
+(
+	-- Add the SELECT statement with parameter references here
+	select 
+-- full box count
+(select COUNT(*) [FullBoxCount]
+	from [dbo].[FTAPP_Box] t0 		
+where   t0.BaseEntry = @docEntry	
+		and t0.BoxGuid in (select distinct BoxGuid 
+		from  [dbo].[FTAPP_Box1] 
+		Where BaseEntry = @docEntry  and Packaging = 'CS' ) ) [FullCtn]
+,
+-- mix box 
+(select COUNT(*) [MixedBoxCount]
+	from [dbo].[FTAPP_Box] t0 	
+	
+where   t0.BaseEntry = @docEntry 		
+		and t0.BoxGuid in (select distinct BoxGuid from  [dbo].[FTAPP_Box1] 
+		Where BaseEntry = @docEntry and Packaging = 'PC' )) [MixedCtn]
+,
+
+
+		-- total carton
+(select count(*) 
+from [dbo].[FTAPP_Box] t0 
+where t0.BaseEntry = @docEntry
+	and BoxGuid in (select BoxGuid from [dbo].[FTAPP_Box1] t1 where t1.BoxGuid = t0.BoxGuid) )
+
+[TotalCarton]
+
+)

@@ -1,0 +1,132 @@
+﻿
+-- for each web db 
+
+--Use KTCW_KK 
+--Use KTCW_SW 
+--Use KTCW_TW 
+--Use KTCW_DI 
+--Use KTCW_CR 
+--Use KTCW_GT 
+--Use KTCW_AM 
+--Use KTCW_PT
+--Use KTCW_SW_TEST
+--Use KTCW_TEST
+--Use ZW_KTCD
+--Use ZW_KTCS
+--Use ZW_KTCG
+--Use TESTKTCWKK 
+go 
+
+/****** Object:  Table [dbo].[FTApp_Geofence_Entered]    Script Date: 21-Mar-21 16:52:45 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[FTApp_Geofence_Entered](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[TransitionName] [nvarchar](120) NULL,
+	[CardCode] [nvarchar](120) NULL,
+	[UserCode] [nvarchar](120) NULL,
+	[Occured] [datetime] NULL,
+	[Year] [int] NULL,
+	[Month] [int] NULL,
+	[Day] [int] NULL,
+ CONSTRAINT [PK_FTApp_GeofenceEntered] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+-------------- 
+/****** Object:  Table [dbo].[FTApp_Geofence_Exited]    Script Date: 21-Mar-21 16:53:03 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[FTApp_Geofence_Exited](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[TransitionName] [nvarchar](120) NULL,
+	[CardCode] [nvarchar](120) NULL,
+	[UserCode] [nvarchar](120) NULL,
+	[Occured] [datetime] NULL,
+	[Year] [int] NULL,
+	[Month] [int] NULL,
+	[Day] [int] NULL,
+ CONSTRAINT [PK_FTApp_GeofenceExit] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+------------
+
+/****** Object:  Table [dbo].[FTApp_Geofence_Stayed]    Script Date: 21-Mar-21 16:53:25 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[FTApp_Geofence_Stayed](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[TransitionName] [nvarchar](120) NULL,
+	[CardCode] [nvarchar](120) NULL,
+	[UserCode] [nvarchar](120) NULL,
+	[Occured] [datetime] NULL,
+	[Year] [int] NULL,
+	[Month] [int] NULL,
+	[Day] [int] NULL,
+ CONSTRAINT [PK_FTApp_GeofenceStayOn] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[FTAPP_Geofence_Log]    Script Date: 21-Mar-21 16:53:41 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[FTAPP_Geofence_Log](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[UserCode] [nvarchar](120) NULL,
+	[UserName] [nvarchar](120) NULL,
+	[CardCode] [nvarchar](120) NULL,
+	[Year] [int] NULL,
+	[Month] [int] NULL,
+	[Day] [int] NULL,
+	[Occured] [datetime] NULL,
+	[LastEnterTime] [datetime] NULL,
+	[LastExitTime] [datetime] NULL,
+	[Transition] [int] NULL,
+	[RegionId] [nvarchar](120) NULL,
+	[Duration] [decimal](12, 3) NULL,
+	[SinceLastEntry] [decimal](12, 3) NULL,
+	[Latitude] [decimal](8, 6) NULL,
+	[Longitude] [decimal](9, 6) NULL,
+	[Accuracy] [decimal](15, 3) NULL,
+	[TransitionName] [nvarchar](120) NULL,
+ CONSTRAINT [PK_FTAPP_GeofenceLog] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+
+
+
+
+
+
+

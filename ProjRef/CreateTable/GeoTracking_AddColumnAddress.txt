@@ -1,0 +1,24 @@
+﻿
+
+ --Use KTCW_KK  -- done
+ --Use KTCW_SW  -- done
+--Use KTCW_TW -- done
+-- Use KTCW_DI -- done
+ -- Use KTCW_CR -- done
+-- Use KTCW_GT -- done
+-- Use KTCW_AM -- done
+ -- Use KTCW_PT -- done
+-- Use KTCW_SW_TEST -- done
+ --Use KTCW_TEST -- done
+-- Use ZW_KTCD -- done
+ -- Use ZW_KTCS -- done
+-- Use ZW_KTCG -- done
+-- Use TESTKTCWKK -- done
+
+go
+
+ALTER TABLE FTAppGeoTrack
+ADD Address nvarchar(300)
+
+ALTER TABLE FTAppGeoTrackLine ADD ActualLat decimal(9,6)
+ALTER TABLE FTAppGeoTrackLine ADD ActualLongi decimal(9,6)

@@ -1,0 +1,38 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectPaymentDocs]    Script Date: 07-Jun-21 20:27:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER procedure [dbo].[sp_SelectPaymentDocs] 
+
+@webDb as nvarchar(100), 
+@subSi as nvarchar(100),
+@userCode as nvarchar(100), 
+@startDt as datetime , 
+@endDt as datetime
+
+as 
+
+declare @sql as nvarchar(max)
+
+select @sql = '
+SELECT 
+ '+QUOTENAME(@subSi, '''')+ '[SubSi]
+ , * 
+FROM 
+['+@webDb+'].[dbo].[MC] 
+WHERE UCREATED = '+ QUOTENAME(@userCode, '''') + '
+AND convert(date, DocDate) >= ' + QUOTENAME(@startDt, '''') + '
+AND convert(date, DocDate) <= ' + QUOTENAME(@endDt, '''') 
+
+		--print @sql
+exec sp_executesql @sql
+
+
+
+
+

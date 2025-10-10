@@ -1,0 +1,67 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectQueueSO_ByDocEntryWildCard]    Script Date: 14-Jun-21 0:23:48 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[sp_SelectQueueSO_ByDocEntryWildCard] 
+@webDB as nvarchar(100), 
+@erpDb as nvarchar(100),
+@subsi as nvarchar(100), 
+@docStatus as nvarchar(1), 
+@docEntryWhildCard as nvarchar(100), 
+@subSiId as nvarchar(100)
+
+as 
+
+declare @sql as nvarchar(max)
+select @sql = '
+select '+ QUOTENAME(@subsi, '''')+' [SubSi]
+	, '+ QUOTENAME(@subSiId, '''')+' [SubSiId]
+	, t1.WhsName [WhsName] 	
+	, (select count(*) 
+			from ['+@webDB+'].[dbo].[SO1] t2 
+				 inner join  ['+@erpDB+'].[dbo].[OITW] tt2 on tt2.WhsCode = t0.WhsCode and tt2.ItemCode = t2.ItemCode
+			where t0.DocEntry = t2.DocEntry
+			and t2.StockQty > 0
+			and tt2.OnHand > 0
+			and t2.ItemCode Not in (Select distinct ItemCode From ['+@webDB+'].[dbo].[FTAPP_FreezedItems] 
+									Where Itemcode = t2.ItemCode and WhsCode = t0.WhsCode )
+			) [LinesCount]
+
+	, (select top 1 tt5.CardCode [CardCode]  from 
+		 ['+@webDB+'].[dbo].[SO1] tt3 inner join 
+		 ['+@erpDB+'].[dbo].[OITM] tt4 on tt4.ITEMCODE = tt3.ItemCode 
+		 inner join  ['+@erpDB+'].[dbo].[OCRD] tt5 on tt5.CardCode = tt4.CardCode
+		 where tt3.DOCENTRY = t0.DOCENTRY) as [AgencyCode]
+	
+	, (select top 1 tt8.CardName  from 
+		 ['+@webDB+'].[dbo].[SO1] tt6 inner join 
+		 ['+@erpDB+'].[dbo].[OITM] tt7 on tt7.ITEMCODE = tt6.ItemCode 
+		 inner join ['+@erpDB+'].[dbo].[OCRD] tt8 on tt8.CardCode = tt7.CardCode
+		 where tt6.DOCENTRY = t0.DOCENTRY) as [AgencyName]
+
+	, t8.PrcCode [BranchCode]
+	, t8.PrcName [BranchName]
+	, '+QUOTENAME('', '''') + ' [InPickOnhold]
+	, '+QUOTENAME('','''')+ ' [DocStatusDisplay]
+	, t9.territryID [TerritryID]
+	, t9.descript [TerritryName]
+	, t0.* 
+	from 
+		['+@webDB+'].[dbo].[SO] t0 left join 
+		['+@erpDb+'].[dbo].[OWHS] t1 on t0.WhsCode = t1.WhsCode left join 
+		['+@erpDb+'].[dbo].[OCRD] t7 on t0.CardCode = t7.CardCode left join
+		['+@erpDb+'].[dbo].[OPRC] t8 on t7.U_COSTCTR = t8.PrcCode left join
+		['+@erpDb+'].[dbo].[OTER] t9 on t9.territryID = t7.Territory
+ where 
+ t0.DocStatus = ' + QUOTENAME(@docStatus, '''') +  ' 
+ and t0.DocEntry like '+ QUOTENAME('%' + @docEntryWhildCard + '%', '''') +'
+ and t0.DocEntry not in (select distinct HoldDocEntry from ['+@webDB+'].[dbo].[FTAPP_OnHoldSoInPicking])
+ order by t0.DOCNUM, t0.DELDATE 
+'
+
+--print @sql
+exec sp_executesql @sql

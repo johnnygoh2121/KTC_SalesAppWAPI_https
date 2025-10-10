@@ -1,0 +1,35 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectChargeCodePaf]    Script Date: 17-May-21 22:59:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[sp_SelectChargeCodePaf]
+@webDb as nvarchar(100), 
+@sapDb as nvarchar(100), 
+@storeCard as nvarchar(100), 
+@agencyCard as nvarchar(100), 
+@subsi as nvarchar(100)
+as
+
+declare @sql as nvarchar(max)
+select @sql='
+SELECT 
+	 '+QUOTENAME(@subsi, '''')+' [Subsi] 
+	,'+ QUOTENAME('N', '''')+' [SEL]
+	, T0.*, T1.ItmsGrpNam AS [BRANDNAME]
+	, ISNULL(T0.BUDGET,0) - ISNULL(T0.USAGE,0) [BALANCE]  
+FROM ['+@webDb+'].[DBO].[CHRGCODE1] T0 
+	LEFT OUTER JOIN ['+@sapDb+'].[DBO].[OITB] T1 ON T1.ItmsGrpCod = T0.BRAND 
+	INNER JOIN ['+@sapDb+'].[DBO].[OCRD] T2 ON T2.U_COSTCTR = T0.BOP 
+		AND T2.CardCode = '+ QUOTENAME(@storeCard, '''')+' 
+		AND T2.CardType = '+QUOTENAME('C', '''')+' 
+AND CHARINDEX(CAST(ISNULL(T2.U_GRPCODE,T2.GroupCode) AS NVARCHAR(20)),T0.GROUPCODE) <> 0 
+WHERE ISNULL(T0.TERMINATE,'+QUOTENAME('','''')+') <> '+QUOTENAME('Y', '''')+' AND T0.STARTDATE <= GETDATE() AND GETDATE() < DATEADD(dd,1,T0.ENDDATE) 
+	AND T0.AGENCY = '+QUOTENAME(@agencyCard, '''')+' 
+	AND ISNULL(T0.BUDGET,0) > ISNULL(T0.USAGE,0)'
+	
+--print @sql
+exec sp_executesql @sql

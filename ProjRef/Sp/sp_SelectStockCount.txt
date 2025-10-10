@@ -1,0 +1,38 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectStockCount]    Script Date: 12-May-21 15:56:27 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[sp_SelectStockCount]
+@webDb as nvarchar(100), 
+@storeCode as nvarchar(100), 
+@counterCode as nvarchar(100), 
+@start as datetime, 
+@end as datetime
+
+as 
+
+declare @sql nvarchar(max)
+select @sql = '
+
+SELECT id
+        ,CountName
+        ,StoreCode
+        ,StoreName
+        ,CounterCode
+        ,CounterName
+        ,CounteDt
+        ,convert(nvarchar(50), HeadGuid) HeadGuid
+        ,CreatedDt
+    FROM ['+@webDb+'].[dbo].[FTAPP_InStoreStockCount] 
+    WHERE StoreCode = ' +  QUOTENAME(@storeCode, '''') + '
+    AND CounterCode = ' + QUOTENAME (@counterCode, '''') + '
+    AND convert(date, CreatedDt) >=' + QUOTENAME(@start, '''') +' 
+    AND convert(date, CreatedDt) <= '+ QUOTENAME(@end, '''')
+
+	exec sp_executesql @sql
+	--print @sql
+							

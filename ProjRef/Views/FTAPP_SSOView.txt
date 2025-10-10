@@ -1,0 +1,2 @@
+﻿SELECT     id, UserCode, UserName, UserPassword, UserDisplayName, UserCompany, UserCompanyRef, LastUpdate, UserCompanyErpRef
+FROM         dbo.FTAPP_SSO

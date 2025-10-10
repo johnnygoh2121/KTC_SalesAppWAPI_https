@@ -1,0 +1,24 @@
+﻿
+
+USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectCreditMemo_Approval]    Script Date: 19-May-21 11:27:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[sp_SelectArInv_Approval] 
+@webDb as nvarchar(120), 
+@docEntry as int
+
+as
+
+declare @sql as nvarchar(max)
+select @sql = '
+select t0.USERCODE, t1.USERNAME, t0.APPRDATE, t0.APPRREM [ApprRemark]
+		from ['+@webDb+'].[dbo].[DN4] t0 
+		left join ['+@webDb+'].[dbo].[USERS] t1 on t0.USERCODE = t1.USERCODE 
+where DOCENTRY = ' + QUOTENAME(@docEntry, '''')
+
+exec sp_executesql @sql

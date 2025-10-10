@@ -1,0 +1,13 @@
+﻿
+alter procedure sp_SelectGeoTrackLine
+	@WebDb as nvarchar(120), 
+	@HeaderGuid as nvarchar(max)
+	as
+
+	declare @sql_str as nvarchar(max)
+	select @sql_str = 'SELECT * 
+					   FROM ['+@WebDb+'].[DBO].[FTAppGeoTrackLine] 
+				       WHERE HeadGuid = ' + QUOTENAME(@HeaderGuid, '''')
+
+	--print @sql_str
+	exec sp_executesql @sql_str

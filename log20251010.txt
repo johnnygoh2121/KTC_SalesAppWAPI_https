@@ -1,0 +1,387 @@
+2025-10-10 19:33:37.759 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-10 19:33:43.234 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-10 19:33:43.243 +08:00 [INF] Hosting environment: Development
+2025-10-10 19:33:43.258 +08:00 [INF] Content root path: C:\Proj\VS2022\KTC_AppWebAPI _Https
+2025-10-10 19:33:43.424 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:33:43.424 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/weatherforecast  
+2025-10-10 19:33:43.575 +08:00 [INF] Request finished in 160.6893ms 307 
+2025-10-10 19:33:44.105 +08:00 [INF] Request finished in 692.7674ms 307 
+2025-10-10 19:37:04.406 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-10 19:37:08.658 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-10 19:37:08.778 +08:00 [INF] Hosting environment: Development
+2025-10-10 19:37:08.968 +08:00 [INF] Content root path: C:\Proj\VS2022\KTC_AppWebAPI _Https
+2025-10-10 19:37:09.103 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:09.103 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/weatherforecast  
+2025-10-10 19:37:09.308 +08:00 [INF] Request finished in 224.7017ms 307 
+2025-10-10 19:37:09.373 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:09.397 +08:00 [INF] Request finished in 24.6896ms 307 
+2025-10-10 19:37:09.449 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:09.465 +08:00 [INF] Request finished in 15.4674ms 307 
+2025-10-10 19:37:09.478 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:09.498 +08:00 [INF] Request finished in 19.2822ms 307 
+2025-10-10 19:37:09.510 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:09.529 +08:00 [INF] Request finished in 19.3731ms 307 
+2025-10-10 19:37:09.543 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:09.561 +08:00 [INF] Request finished in 17.6143ms 307 
+2025-10-10 19:37:09.572 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:09.588 +08:00 [INF] Request finished in 16.0858ms 307 
+2025-10-10 19:37:09.604 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:09.619 +08:00 [INF] Request finished in 14.7087ms 307 
+2025-10-10 19:37:09.632 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:09.645 +08:00 [INF] Request finished in 12.8344ms 307 
+2025-10-10 19:37:09.656 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:09.669 +08:00 [INF] Request finished in 13.2117ms 307 
+2025-10-10 19:37:09.682 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:09.693 +08:00 [INF] Request finished in 11.5529ms 307 
+2025-10-10 19:37:09.707 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:09.740 +08:00 [INF] Request finished in 36.3193ms 307 
+2025-10-10 19:37:09.751 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:09.784 +08:00 [INF] Request finished in 33.339ms 307 
+2025-10-10 19:37:09.794 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:09.806 +08:00 [INF] Request finished in 12.1508ms 307 
+2025-10-10 19:37:09.822 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:09.834 +08:00 [INF] Request finished in 12.2879ms 307 
+2025-10-10 19:37:09.869 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:09.881 +08:00 [INF] Request finished in 12.4506ms 307 
+2025-10-10 19:37:09.892 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:09.906 +08:00 [INF] Request finished in 13.3976ms 307 
+2025-10-10 19:37:09.919 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:09.931 +08:00 [INF] Request finished in 11.9817ms 307 
+2025-10-10 19:37:09.943 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:09.955 +08:00 [INF] Request finished in 12.3006ms 307 
+2025-10-10 19:37:09.966 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:09.980 +08:00 [INF] Request finished in 14.2227ms 307 
+2025-10-10 19:37:09.994 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.006 +08:00 [INF] Request finished in 12.0821ms 307 
+2025-10-10 19:37:10.020 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.040 +08:00 [INF] Request finished in 19.6024ms 307 
+2025-10-10 19:37:10.051 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.067 +08:00 [INF] Request finished in 15.9221ms 307 
+2025-10-10 19:37:10.085 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.096 +08:00 [INF] Request finished in 9.7147ms 307 
+2025-10-10 19:37:10.104 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.114 +08:00 [INF] Request finished in 10.8556ms 307 
+2025-10-10 19:37:10.122 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.134 +08:00 [INF] Request finished in 12.0662ms 307 
+2025-10-10 19:37:10.142 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.153 +08:00 [INF] Request finished in 11.1949ms 307 
+2025-10-10 19:37:10.161 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.170 +08:00 [INF] Request finished in 8.8307ms 307 
+2025-10-10 19:37:10.180 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.191 +08:00 [INF] Request finished in 10.4767ms 307 
+2025-10-10 19:37:10.201 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.211 +08:00 [INF] Request finished in 9.9865ms 307 
+2025-10-10 19:37:10.220 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.229 +08:00 [INF] Request finished in 9.5325ms 307 
+2025-10-10 19:37:10.236 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.246 +08:00 [INF] Request finished in 10.0744ms 307 
+2025-10-10 19:37:10.256 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.268 +08:00 [INF] Request finished in 12.0756ms 307 
+2025-10-10 19:37:10.278 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.289 +08:00 [INF] Request finished in 10.5958ms 307 
+2025-10-10 19:37:10.297 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.307 +08:00 [INF] Request finished in 10.3849ms 307 
+2025-10-10 19:37:10.320 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.334 +08:00 [INF] Request finished in 13.9709ms 307 
+2025-10-10 19:37:10.347 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.359 +08:00 [INF] Request finished in 1279.4972ms 307 
+2025-10-10 19:37:10.370 +08:00 [INF] Request finished in 22.9012ms 307 
+2025-10-10 19:37:10.381 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.394 +08:00 [INF] Request finished in 10.2984ms 307 
+2025-10-10 19:37:10.408 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.420 +08:00 [INF] Request finished in 11.8666ms 307 
+2025-10-10 19:37:10.429 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.441 +08:00 [INF] Request finished in 11.6248ms 307 
+2025-10-10 19:37:10.451 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.462 +08:00 [INF] Request finished in 10.788ms 307 
+2025-10-10 19:37:10.473 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.483 +08:00 [INF] Request finished in 10.6706ms 307 
+2025-10-10 19:37:10.492 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.501 +08:00 [INF] Request finished in 8.9613ms 307 
+2025-10-10 19:37:10.510 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.519 +08:00 [INF] Request finished in 8.7468ms 307 
+2025-10-10 19:37:10.551 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.559 +08:00 [INF] Request finished in 8.3234ms 307 
+2025-10-10 19:37:10.566 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.577 +08:00 [INF] Request finished in 9.8153ms 307 
+2025-10-10 19:37:10.599 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.613 +08:00 [INF] Request finished in 16.934ms 307 
+2025-10-10 19:37:10.628 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.638 +08:00 [INF] Request finished in 10.2926ms 307 
+2025-10-10 19:37:10.649 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.715 +08:00 [INF] Request finished in 66.367ms 307 
+2025-10-10 19:37:10.729 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.749 +08:00 [INF] Request finished in 19.417ms 307 
+2025-10-10 19:37:10.758 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:37:10.767 +08:00 [INF] Request finished in 9.6628ms 307 
+2025-10-10 19:39:57.704 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-10 19:40:16.239 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-10 19:40:16.254 +08:00 [INF] Hosting environment: Development
+2025-10-10 19:40:16.255 +08:00 [INF] Content root path: C:\Proj\VS2022\KTC_AppWebAPI _Https
+2025-10-10 19:40:16.275 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.275 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/weatherforecast  
+2025-10-10 19:40:16.309 +08:00 [INF] Request finished in 36.0613ms 307 
+2025-10-10 19:40:16.325 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.333 +08:00 [INF] Request finished in 8.5562ms 307 
+2025-10-10 19:40:16.336 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.339 +08:00 [INF] Request finished in 2.985ms 307 
+2025-10-10 19:40:16.343 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.347 +08:00 [INF] Request finished in 3.5185ms 307 
+2025-10-10 19:40:16.350 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.353 +08:00 [INF] Request finished in 2.5891ms 307 
+2025-10-10 19:40:16.355 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.358 +08:00 [INF] Request finished in 3.192ms 307 
+2025-10-10 19:40:16.364 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.368 +08:00 [INF] Request finished in 3.986ms 307 
+2025-10-10 19:40:16.380 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.382 +08:00 [INF] Request finished in 2.6644ms 307 
+2025-10-10 19:40:16.390 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.393 +08:00 [INF] Request finished in 2.6036ms 307 
+2025-10-10 19:40:16.396 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.399 +08:00 [INF] Request finished in 3.4327ms 307 
+2025-10-10 19:40:16.405 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.410 +08:00 [INF] Request finished in 4.9933ms 307 
+2025-10-10 19:40:16.413 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.416 +08:00 [INF] Request finished in 2.9826ms 307 
+2025-10-10 19:40:16.419 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.423 +08:00 [INF] Request finished in 3.9844ms 307 
+2025-10-10 19:40:16.426 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.430 +08:00 [INF] Request finished in 4.334ms 307 
+2025-10-10 19:40:16.434 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.439 +08:00 [INF] Request finished in 3.0977ms 307 
+2025-10-10 19:40:16.443 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.448 +08:00 [INF] Request finished in 5.1405ms 307 
+2025-10-10 19:40:16.452 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.455 +08:00 [INF] Request finished in 3.7906ms 307 
+2025-10-10 19:40:16.462 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.465 +08:00 [INF] Request finished in 2.7565ms 307 
+2025-10-10 19:40:16.469 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.472 +08:00 [INF] Request finished in 3.5615ms 307 
+2025-10-10 19:40:16.475 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.478 +08:00 [INF] Request finished in 2.8166ms 307 
+2025-10-10 19:40:16.481 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.485 +08:00 [INF] Request finished in 3.6255ms 307 
+2025-10-10 19:40:16.488 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.491 +08:00 [INF] Request finished in 2.4939ms 307 
+2025-10-10 19:40:16.494 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.497 +08:00 [INF] Request finished in 3.435ms 307 
+2025-10-10 19:40:16.500 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.503 +08:00 [INF] Request finished in 2.6764ms 307 
+2025-10-10 19:40:16.506 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.508 +08:00 [INF] Request finished in 2.7576ms 307 
+2025-10-10 19:40:16.511 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.515 +08:00 [INF] Request finished in 3.821ms 307 
+2025-10-10 19:40:16.518 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.521 +08:00 [INF] Request finished in 2.717ms 307 
+2025-10-10 19:40:16.524 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.526 +08:00 [INF] Request finished in 2.3254ms 307 
+2025-10-10 19:40:16.529 +08:00 [INF] Request finished in 256.1804ms 307 
+2025-10-10 19:40:16.530 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.534 +08:00 [INF] Request finished in 3.7043ms 307 
+2025-10-10 19:40:16.537 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.540 +08:00 [INF] Request finished in 2.8797ms 307 
+2025-10-10 19:40:16.543 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.545 +08:00 [INF] Request finished in 2.3123ms 307 
+2025-10-10 19:40:16.549 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.553 +08:00 [INF] Request finished in 3.1639ms 307 
+2025-10-10 19:40:16.555 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.558 +08:00 [INF] Request finished in 2.9091ms 307 
+2025-10-10 19:40:16.561 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.564 +08:00 [INF] Request finished in 3.3083ms 307 
+2025-10-10 19:40:16.567 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.570 +08:00 [INF] Request finished in 2.4187ms 307 
+2025-10-10 19:40:16.573 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.575 +08:00 [INF] Request finished in 2.5947ms 307 
+2025-10-10 19:40:16.578 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.582 +08:00 [INF] Request finished in 3.6444ms 307 
+2025-10-10 19:40:16.585 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.588 +08:00 [INF] Request finished in 3.6047ms 307 
+2025-10-10 19:40:16.591 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.595 +08:00 [INF] Request finished in 3.4792ms 307 
+2025-10-10 19:40:16.598 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.601 +08:00 [INF] Request finished in 3.6ms 307 
+2025-10-10 19:40:16.605 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.608 +08:00 [INF] Request finished in 3.3725ms 307 
+2025-10-10 19:40:16.611 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.614 +08:00 [INF] Request finished in 3.092ms 307 
+2025-10-10 19:40:16.617 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.620 +08:00 [INF] Request finished in 2.8568ms 307 
+2025-10-10 19:40:16.623 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.626 +08:00 [INF] Request finished in 2.9116ms 307 
+2025-10-10 19:40:16.629 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.632 +08:00 [INF] Request finished in 3.6678ms 307 
+2025-10-10 19:40:16.635 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.638 +08:00 [INF] Request finished in 2.6542ms 307 
+2025-10-10 19:40:16.641 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.646 +08:00 [INF] Request finished in 4.9498ms 307 
+2025-10-10 19:40:16.651 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.656 +08:00 [INF] Request finished in 4.2997ms 307 
+2025-10-10 19:40:16.659 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.661 +08:00 [INF] Request finished in 2.7044ms 307 
+2025-10-10 19:40:16.665 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.668 +08:00 [INF] Request finished in 3.0653ms 307 
+2025-10-10 19:40:16.671 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-10-10 19:40:16.673 +08:00 [INF] Request finished in 2.6018ms 307 
+2025-10-10 19:42:17.980 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-10 19:42:48.299 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-10 19:42:48.306 +08:00 [INF] Hosting environment: Development
+2025-10-10 19:42:48.307 +08:00 [INF] Content root path: C:\Proj\VS2022\KTC_AppWebAPI _Https
+2025-10-10 19:42:48.330 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/weatherforecast  
+2025-10-10 19:42:48.440 +08:00 [WRN] Failed to determine the https port for redirect.
+2025-10-10 19:42:48.468 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2025-10-10 19:42:48.495 +08:00 [INF] Route matched with {action = "Get", controller = "WeatherForecast"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[KTC_SalesAppWAPI.WeatherForecast] Get() on controller KTC_SalesAppWAPI.Controllers.WeatherForecastController (KTC_SalesAppWAPI).
+2025-10-10 19:42:48.505 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.WeatherForecast[]'.
+2025-10-10 19:42:48.536 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI) in 35.37ms
+2025-10-10 19:42:48.539 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2025-10-10 19:42:48.544 +08:00 [INF] Request finished in 215.4121ms 200 application/json; charset=utf-8
+2025-10-10 19:42:48.635 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/favicon.ico  
+2025-10-10 19:42:48.665 +08:00 [INF] Request finished in 29.5501ms 404 
+2025-10-10 19:43:38.600 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-10 19:43:40.951 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-10 19:43:40.953 +08:00 [INF] Hosting environment: Development
+2025-10-10 19:43:40.956 +08:00 [INF] Content root path: C:\Proj\VS2022\KTC_AppWebAPI _Https
+2025-10-10 19:43:40.986 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/weatherforecast  
+2025-10-10 19:43:41.110 +08:00 [INF] Request finished in 125.561ms 307 
+2025-10-10 19:44:44.229 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-10 19:44:49.324 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-10 19:44:49.326 +08:00 [INF] Hosting environment: Development
+2025-10-10 19:44:49.330 +08:00 [INF] Content root path: C:\Proj\VS2022\KTC_AppWebAPI _Https
+2025-10-10 19:44:49.380 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/weatherforecast  
+2025-10-10 19:44:49.539 +08:00 [WRN] Failed to determine the https port for redirect.
+2025-10-10 19:44:49.557 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2025-10-10 19:44:49.576 +08:00 [INF] Route matched with {action = "Get", controller = "WeatherForecast"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[KTC_SalesAppWAPI.WeatherForecast] Get() on controller KTC_SalesAppWAPI.Controllers.WeatherForecastController (KTC_SalesAppWAPI).
+2025-10-10 19:44:49.583 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.WeatherForecast[]'.
+2025-10-10 19:44:49.612 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI) in 29.8531ms
+2025-10-10 19:44:49.615 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2025-10-10 19:44:49.620 +08:00 [INF] Request finished in 243.0676ms 200 application/json; charset=utf-8
+2025-10-10 19:44:49.693 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/favicon.ico  
+2025-10-10 19:44:49.707 +08:00 [INF] Request finished in 13.8684ms 404 
+2025-10-10 19:50:13.127 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-10 19:50:14.408 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-10 19:50:14.414 +08:00 [INF] Hosting environment: Development
+2025-10-10 19:50:14.418 +08:00 [INF] Content root path: C:\Proj\VS2022\KTC_AppWebAPI _Https
+2025-10-10 19:50:14.488 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/weatherforecast  
+2025-10-10 19:50:14.752 +08:00 [INF] Request finished in 269.2221ms 307 
+2025-10-10 19:51:56.695 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-10 19:51:57.095 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-10 19:51:57.098 +08:00 [INF] Hosting environment: Development
+2025-10-10 19:51:57.106 +08:00 [INF] Content root path: C:\Proj\VS2022\KTC_AppWebAPI _Https
+2025-10-10 19:51:57.133 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/weatherforecast  
+2025-10-10 19:51:57.268 +08:00 [INF] Request finished in 136.8506ms 307 
+2025-10-10 19:52:39.871 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-10 19:52:40.290 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-10 19:52:40.292 +08:00 [INF] Hosting environment: Development
+2025-10-10 19:52:40.298 +08:00 [INF] Content root path: C:\Proj\VS2022\KTC_AppWebAPI _Https
+2025-10-10 19:52:40.333 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/weatherforecast  
+2025-10-10 19:52:40.453 +08:00 [INF] Request finished in 123.0789ms 307 
+2025-10-10 19:53:36.456 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-10 19:53:37.310 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-10 19:53:37.313 +08:00 [INF] Hosting environment: Development
+2025-10-10 19:53:37.320 +08:00 [INF] Content root path: C:\Proj\VS2022\KTC_AppWebAPI _Https
+2025-10-10 19:53:37.343 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/weatherforecast  
+2025-10-10 19:53:37.575 +08:00 [INF] Request finished in 232.5615ms 307 
+2025-10-10 20:15:15.707 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-10 20:15:16.751 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-10 20:15:16.756 +08:00 [INF] Hosting environment: Development
+2025-10-10 20:15:16.770 +08:00 [INF] Content root path: C:\Proj\VS2022\KTC_AppWebAPI _Https
+2025-10-10 20:15:16.823 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/weatherforecast  
+2025-10-10 20:15:17.067 +08:00 [WRN] Failed to determine the https port for redirect.
+2025-10-10 20:15:17.123 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2025-10-10 20:15:17.164 +08:00 [INF] Route matched with {action = "Get", controller = "WeatherForecast"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[KTC_SalesAppWAPI.WeatherForecast] Get() on controller KTC_SalesAppWAPI.Controllers.WeatherForecastController (KTC_SalesAppWAPI).
+2025-10-10 20:15:17.178 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.WeatherForecast[]'.
+2025-10-10 20:15:17.235 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI) in 60.2223ms
+2025-10-10 20:15:17.243 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2025-10-10 20:15:17.252 +08:00 [INF] Request finished in 434.4175ms 200 application/json; charset=utf-8
+2025-10-10 20:15:17.504 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/favicon.ico  
+2025-10-10 20:15:17.526 +08:00 [INF] Request finished in 21.7157ms 404 
+2025-10-10 20:18:39.176 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalCompanies application/json; charset=utf-8 4
+2025-10-10 20:18:39.183 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalCompaniesController.PostAsync (KTC_SalesAppWAPI)'
+2025-10-10 20:18:39.242 +08:00 [INF] Route matched with {action = "Post", controller = "PortalCompanies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync() on controller KTC_SalesAppWAPI.Controllers.PortalCompaniesController (KTC_SalesAppWAPI).
+2025-10-10 20:18:41.049 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[KTC_SalesAppWAPI.Models.PortalCompany.PortalCompany, KTC_SalesAppWAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-10 20:18:41.060 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalCompaniesController.PostAsync (KTC_SalesAppWAPI) in 1815.5345ms
+2025-10-10 20:18:41.065 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalCompaniesController.PostAsync (KTC_SalesAppWAPI)'
+2025-10-10 20:18:41.070 +08:00 [INF] Request finished in 1895.3768ms 200 application/json; charset=utf-8
+2025-10-10 20:20:29.116 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalCompanies application/json; charset=utf-8 4
+2025-10-10 20:20:29.153 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalCompaniesController.PostAsync (KTC_SalesAppWAPI)'
+2025-10-10 20:20:29.156 +08:00 [INF] Route matched with {action = "Post", controller = "PortalCompanies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync() on controller KTC_SalesAppWAPI.Controllers.PortalCompaniesController (KTC_SalesAppWAPI).
+2025-10-10 20:20:29.523 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[KTC_SalesAppWAPI.Models.PortalCompany.PortalCompany, KTC_SalesAppWAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-10 20:20:29.527 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalCompaniesController.PostAsync (KTC_SalesAppWAPI) in 368.1923ms
+2025-10-10 20:20:29.530 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalCompaniesController.PostAsync (KTC_SalesAppWAPI)'
+2025-10-10 20:20:29.535 +08:00 [INF] Request finished in 423.048ms 200 application/json; charset=utf-8
+2025-10-10 20:22:36.511 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalCompanies application/json; charset=utf-8 4
+2025-10-10 20:22:36.517 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalCompaniesController.PostAsync (KTC_SalesAppWAPI)'
+2025-10-10 20:22:36.522 +08:00 [INF] Route matched with {action = "Post", controller = "PortalCompanies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync() on controller KTC_SalesAppWAPI.Controllers.PortalCompaniesController (KTC_SalesAppWAPI).
+2025-10-10 20:22:37.113 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[KTC_SalesAppWAPI.Models.PortalCompany.PortalCompany, KTC_SalesAppWAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-10 20:22:37.117 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalCompaniesController.PostAsync (KTC_SalesAppWAPI) in 590.1097ms
+2025-10-10 20:22:37.121 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalCompaniesController.PostAsync (KTC_SalesAppWAPI)'
+2025-10-10 20:22:37.125 +08:00 [INF] Request finished in 614.3629ms 200 application/json; charset=utf-8
+2025-10-10 20:22:52.657 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Delivery application/json; charset=utf-8 84
+2025-10-10 20:22:52.664 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.Delivery.DeliveryController.PostAsync (KTC_SalesAppWAPI)'
+2025-10-10 20:22:52.687 +08:00 [INF] Route matched with {action = "Post", controller = "Delivery"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult PostAsync(KTC_SalesAppWAPI.DTOs.Delivery.Dto_Delivery) on controller KTC_SalesAppWAPI.Controllers.Delivery.DeliveryController (KTC_SalesAppWAPI).
+2025-10-10 20:22:55.041 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[KTC_SalesAppWAPI.Models.Delivery.FTAPP_TruckCapacity, KTC_SalesAppWAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-10 20:22:55.050 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.Delivery.DeliveryController.PostAsync (KTC_SalesAppWAPI) in 2358.2849ms
+2025-10-10 20:22:55.057 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.Delivery.DeliveryController.PostAsync (KTC_SalesAppWAPI)'
+2025-10-10 20:22:55.059 +08:00 [INF] Request finished in 2402.0253ms 200 application/json; charset=utf-8
+2025-10-10 20:22:55.178 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Delivery application/json; charset=utf-8 27
+2025-10-10 20:22:55.183 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.Delivery.DeliveryController.PostAsync (KTC_SalesAppWAPI)'
+2025-10-10 20:22:55.187 +08:00 [INF] Route matched with {action = "Post", controller = "Delivery"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult PostAsync(KTC_SalesAppWAPI.DTOs.Delivery.Dto_Delivery) on controller KTC_SalesAppWAPI.Controllers.Delivery.DeliveryController (KTC_SalesAppWAPI).
+2025-10-10 20:22:55.507 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[KTC_SalesAppWAPI.Models.AppConfig.FTApp_Config, KTC_SalesAppWAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-10 20:22:55.520 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.Delivery.DeliveryController.PostAsync (KTC_SalesAppWAPI) in 329.0368ms
+2025-10-10 20:22:55.523 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.Delivery.DeliveryController.PostAsync (KTC_SalesAppWAPI)'
+2025-10-10 20:22:55.528 +08:00 [INF] Request finished in 350.5729ms 200 application/json; charset=utf-8
+2025-10-10 20:22:56.157 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/AppUpdate application/json; charset=utf-8 182
+2025-10-10 20:22:56.164 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.AppUpdateController.Post (KTC_SalesAppWAPI)'
+2025-10-10 20:22:56.174 +08:00 [INF] Route matched with {action = "Post", controller = "AppUpdate"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.AppUpdate.AppUpdate_Dto) on controller KTC_SalesAppWAPI.Controllers.AppUpdateController (KTC_SalesAppWAPI).
+2025-10-10 20:22:56.264 +08:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2025-10-10 20:22:56.273 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.AppUpdateController.Post (KTC_SalesAppWAPI) in 95.3942ms
+2025-10-10 20:22:56.277 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.AppUpdateController.Post (KTC_SalesAppWAPI)'
+2025-10-10 20:22:56.281 +08:00 [INF] Request finished in 124.5161ms 200 text/plain; charset=utf-8
+2025-10-10 20:22:58.138 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Dispatch application/json 84
+2025-10-10 20:22:58.142 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.Delivery.DispatchController.PostAsync (KTC_SalesAppWAPI)'
+2025-10-10 20:22:58.147 +08:00 [INF] Route matched with {action = "Post", controller = "Dispatch"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult PostAsync(KTC_SalesAppWAPI.DTOs.Delivery.Dto_Dispatch) on controller KTC_SalesAppWAPI.Controllers.Delivery.DispatchController (KTC_SalesAppWAPI).
+2025-10-10 20:22:59.171 +08:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2025-10-10 20:22:59.176 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.Delivery.DispatchController.PostAsync (KTC_SalesAppWAPI) in 1026.2334ms
+2025-10-10 20:22:59.179 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.Delivery.DispatchController.PostAsync (KTC_SalesAppWAPI)'
+2025-10-10 20:22:59.182 +08:00 [INF] Request finished in 1043.9242ms 404 application/problem+json; charset=utf-8
+2025-10-10 20:24:33.187 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalCompanies application/json; charset=utf-8 4
+2025-10-10 20:24:33.195 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalCompaniesController.PostAsync (KTC_SalesAppWAPI)'
+2025-10-10 20:24:33.198 +08:00 [INF] Route matched with {action = "Post", controller = "PortalCompanies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync() on controller KTC_SalesAppWAPI.Controllers.PortalCompaniesController (KTC_SalesAppWAPI).
+2025-10-10 20:24:33.689 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[KTC_SalesAppWAPI.Models.PortalCompany.PortalCompany, KTC_SalesAppWAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-10 20:24:33.695 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalCompaniesController.PostAsync (KTC_SalesAppWAPI) in 494.2285ms
+2025-10-10 20:24:33.698 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalCompaniesController.PostAsync (KTC_SalesAppWAPI)'
+2025-10-10 20:24:33.700 +08:00 [INF] Request finished in 515.2578ms 200 application/json; charset=utf-8
+2025-10-10 20:25:28.752 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalCompanies application/json; charset=utf-8 4
+2025-10-10 20:25:28.755 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalCompaniesController.PostAsync (KTC_SalesAppWAPI)'
+2025-10-10 20:25:28.758 +08:00 [INF] Route matched with {action = "Post", controller = "PortalCompanies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync() on controller KTC_SalesAppWAPI.Controllers.PortalCompaniesController (KTC_SalesAppWAPI).
+2025-10-10 20:25:29.093 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[KTC_SalesAppWAPI.Models.PortalCompany.PortalCompany, KTC_SalesAppWAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-10 20:25:29.098 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalCompaniesController.PostAsync (KTC_SalesAppWAPI) in 336.1223ms
+2025-10-10 20:25:29.102 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalCompaniesController.PostAsync (KTC_SalesAppWAPI)'
+2025-10-10 20:25:29.105 +08:00 [INF] Request finished in 354.3018ms 200 application/json; charset=utf-8
+2025-10-10 20:26:07.963 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Delivery application/json; charset=utf-8 84
+2025-10-10 20:26:07.967 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.Delivery.DeliveryController.PostAsync (KTC_SalesAppWAPI)'
+2025-10-10 20:26:07.971 +08:00 [INF] Route matched with {action = "Post", controller = "Delivery"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult PostAsync(KTC_SalesAppWAPI.DTOs.Delivery.Dto_Delivery) on controller KTC_SalesAppWAPI.Controllers.Delivery.DeliveryController (KTC_SalesAppWAPI).
+2025-10-10 20:26:28.947 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[KTC_SalesAppWAPI.Models.Delivery.FTAPP_TruckCapacity, KTC_SalesAppWAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-10 20:26:28.952 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.Delivery.DeliveryController.PostAsync (KTC_SalesAppWAPI) in 20976.327ms
+2025-10-10 20:26:28.964 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.Delivery.DeliveryController.PostAsync (KTC_SalesAppWAPI)'
+2025-10-10 20:26:28.968 +08:00 [INF] Request finished in 21005.0518ms 200 application/json; charset=utf-8
+2025-10-10 20:26:46.630 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Delivery application/json; charset=utf-8 27
+2025-10-10 20:26:46.634 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.Delivery.DeliveryController.PostAsync (KTC_SalesAppWAPI)'
+2025-10-10 20:26:46.639 +08:00 [INF] Route matched with {action = "Post", controller = "Delivery"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult PostAsync(KTC_SalesAppWAPI.DTOs.Delivery.Dto_Delivery) on controller KTC_SalesAppWAPI.Controllers.Delivery.DeliveryController (KTC_SalesAppWAPI).
+2025-10-10 20:26:46.871 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[KTC_SalesAppWAPI.Models.AppConfig.FTApp_Config, KTC_SalesAppWAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-10 20:26:46.876 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.Delivery.DeliveryController.PostAsync (KTC_SalesAppWAPI) in 231.1899ms
+2025-10-10 20:26:46.887 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.Delivery.DeliveryController.PostAsync (KTC_SalesAppWAPI)'
+2025-10-10 20:26:46.890 +08:00 [INF] Request finished in 260.2909ms 200 application/json; charset=utf-8
+2025-10-10 20:26:51.812 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/AppUpdate application/json; charset=utf-8 182
+2025-10-10 20:26:51.819 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.AppUpdateController.Post (KTC_SalesAppWAPI)'
+2025-10-10 20:26:51.825 +08:00 [INF] Route matched with {action = "Post", controller = "AppUpdate"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.AppUpdate.AppUpdate_Dto) on controller KTC_SalesAppWAPI.Controllers.AppUpdateController (KTC_SalesAppWAPI).
+2025-10-10 20:26:51.900 +08:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2025-10-10 20:26:51.906 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.AppUpdateController.Post (KTC_SalesAppWAPI) in 76.1552ms
+2025-10-10 20:26:51.910 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.AppUpdateController.Post (KTC_SalesAppWAPI)'
+2025-10-10 20:26:51.917 +08:00 [INF] Request finished in 105.2143ms 200 text/plain; charset=utf-8
+2025-10-10 20:26:54.916 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Dispatch application/json 84
+2025-10-10 20:26:54.920 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.Delivery.DispatchController.PostAsync (KTC_SalesAppWAPI)'
+2025-10-10 20:26:54.923 +08:00 [INF] Route matched with {action = "Post", controller = "Dispatch"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult PostAsync(KTC_SalesAppWAPI.DTOs.Delivery.Dto_Dispatch) on controller KTC_SalesAppWAPI.Controllers.Delivery.DispatchController (KTC_SalesAppWAPI).
+2025-10-10 20:26:56.721 +08:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2025-10-10 20:26:56.734 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.Delivery.DispatchController.PostAsync (KTC_SalesAppWAPI) in 1806.9722ms
+2025-10-10 20:26:56.742 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.Delivery.DispatchController.PostAsync (KTC_SalesAppWAPI)'
+2025-10-10 20:26:56.751 +08:00 [INF] Request finished in 1835.4779ms 404 application/problem+json; charset=utf-8

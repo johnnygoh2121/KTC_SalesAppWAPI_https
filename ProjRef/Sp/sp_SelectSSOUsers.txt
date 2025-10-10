@@ -1,0 +1,53 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectSSOUsers]    Script Date: 22-Mar-21 10:54:11 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[sp_SelectSSOUsers] 
+@companyName as nvarchar(120),
+@webDb as nvarchar(120),
+@erpDb as nvarchar(120),
+@appPassword as nvarchar(9), 
+@userCompanyId as nvarchar(120)
+as
+
+declare @sql as nvarchar(max)
+
+select @sql = 'SELECT DISTINCT ' +
+		'  [UserCode] ' +
+        ', [UserName] ' +
+        ',' + QUOTENAME(@appPassword, '''') + ' [UserPassword]  ' +		
+		', UserName [UserDisplayName]  ' +
+		',' + QUOTENAME(@companyName, '''') + ' [UserCompany]  ' +
+        ',' + QUOTENAME(@webDb, '''') + ' [UserCompanyRef]  ' +
+        ',' + QUOTENAME(@erpDb, '''') + ' [UserCompanyErpRef]  ' +        
+		',  t0.[SlpCode] ' +
+		',  t1.[SlpName] ' +
+		',  t1.[Memo] ' +
+		', '+ QUOTENAME('USERS', '''') +' [SourceType] ' + 
+		', '+ QUOTENAME(@userCompanyId, '''') +' [UserCompanyID] ' + 
+        ' FROM  ' +
+               ' ['+ @webDb +'].[DBO].[USERS] t0 INNER JOIN  ' + '['+ @erpDb +'].[DBO].[OSLP] t1  ON  t0.SLPCODE = t1.SlpCode ' +
+         'WHERE ISNULL(INACTIVE,'''') <> '+ QUOTENAME('Y', '''')    + 
+		 ' UNION ' + 
+		 ' SELECT ' +  
+			'	SlpName [UserCode] ' + 
+			',  Memo [UserName] ' + 
+			',' + QUOTENAME(@appPassword, '''') + ' [UserPassword] ' + 
+			', Memo [UserDisplayName] ' + 
+			',' + QUOTENAME(@companyName, '''') + ' [UserCompany]  ' +
+			',' + QUOTENAME(@webDb, '''') + ' [UserCompanyRef]  ' +
+			',' + QUOTENAME(@erpDb, '''') + ' [UserCompanyErpRef]  ' +			
+			', SlpCode [SlpCode] ' + 
+			', Memo [SlpName] ' + 
+			', Memo [Memo] ' + 
+			', '+ QUOTENAME('OSLP', '''') +' [SourceType] ' + 
+			', '+ QUOTENAME(@userCompanyId, '''') +' [UserCompanyID] ' + 
+			'FROM  ['+ @erpDb + '].[dbo].[OSLP] ' +
+			'WHERE  Locked = ' + QUOTENAME('N', '''') +' and Active = '+ QUOTENAME ('Y', '''')
+
+--print @sql
+exec sp_executesql @sql

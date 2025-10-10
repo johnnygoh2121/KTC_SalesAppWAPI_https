@@ -1,0 +1,39 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectDN]    Script Date: 19-May-21 20:28:30 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[sp_SelectDN] 
+@webDb nvarchar(100), 
+@sapDb nvarchar(100),
+@companyName nvarchar(120), 
+@cardCode nvarchar(120),
+@startDt datetime, 
+@endDt datetime
+
+as 
+
+declare @sql nvarchar(max)
+select @sql = '
+
+select distinct t0.*
+,' + QUOTENAME(@companyName, '''') + ' [Subsi]
+, t1.CardCode [AgencyCode]
+, t1.CardName [AgencyName]
+from ['+ @webDb +'].[dbo].[DN] t0
+left join ['+ @sapDb +'].[dbo].[OCRD] t1 on t0.Agency = t1.CardCode 
+										AND t1.CARDTYPE = '+ QUOTENAME('S', '''')+'
+
+where convert(date, t0.docdate) >= '+ QUOTENAME(@startDt, '''') + '
+and convert(date, t0.docdate) <= '+ QUOTENAME(@endDt, '''') + '
+and t0.CARDCODE = '+ QUOTENAME(@cardCode, '''') +'
+and t0.PTYPE is null
+and t0.CARDCODE in 
+		(select distinct cardcode from ['+ @webDb +'].[dbo].[USERCARD] where CARDTYPE = ' + QUOTENAME('C', '''')+')'
+
+
+		--print @sql
+exec sp_executesql @sql

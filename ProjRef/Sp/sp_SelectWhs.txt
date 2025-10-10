@@ -1,0 +1,27 @@
+﻿
+
+USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectWhs]    Script Date: 27-Jun-21 20:43:22 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER procedure [dbo].[sp_SelectWhs] 
+@subsi as nvarchar(256), 
+@erpDb as nvarchar(256)
+
+as 
+
+declare @sql as nvarchar(max)
+
+select @sql = '
+select  '+QUOTENAME(@subsi, '''') +' [SubSi] 
+		, * 
+		from ['+@erpDb+'].[dbo].[OWHS] with (nolock) 
+		Where Locked = '+QUOTENAME('N', '''')
+
+--print @sql 
+exec sp_executesql @sql

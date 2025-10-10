@@ -1,0 +1,26 @@
+﻿
+
+CREATE PROCEDURE sp_SelectWhsUserAgency
+@webDb as nvarchar(100),
+@erpDb as nvarchar(100), 
+@userCode as nvarchar(100), 
+@subsi as nvarchar(100)
+
+as
+declare @sql as nvarchar(max) = '
+SELECT '+QUOTENAME(@subsi, '''')+' [Subsi], T0.* 
+FROM  
+	['+@erpDb+'].[dbo].[OCRD] T0
+WHERE 
+	CardCode IN (
+					SELECT DISTINCT CARDCODE 
+					FROM ['+@webDb+'].[dbo].[USERCARD] T1 
+					WHERE T1.USERCODE = '+QUOTENAME(@userCode, '''')+' 
+					AND T1.CARDTYPE = '+QUOTENAME('S', '''')+' 
+				) 
+	AND validFor = ' + QUOTENAME('Y', '''') 
+
+
+
+--print @sql
+exec sp_executesql @sql

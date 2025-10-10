@@ -1,0 +1,52 @@
+﻿
+
+--Use KTCW_KK  --		yes 
+--Use KTCW_SW  -- yes
+-- Use KTCW_TW -- yes
+-- Use KTCW_DI -- yes
+--Use KTCW_CR -- yes
+-- Use KTCW_GT -- yes
+--Use KTCW_AM --  yes
+--Use KTCW_PT -- yes
+ --Use KTCW_SW_TEST -- yes
+ -- Use KTCW_TEST -- yes
+  --Use ZW_KTCD -- yes
+-- Use ZW_KTCS -- yes
+  --Use ZW_KTCG -- yes
+-- Use TESTKTCWKK -- yes
+ --use KTCW_PT -- yes
+
+ALTER TABLE FTApp_Geofence_Entered
+ADD DistanceToStore float
+
+ALTER TABLE FTApp_Geofence_Exited
+ADD DistanceToStore float
+
+ALTER TABLE FTApp_Geofence_Stayed
+ADD DistanceToStore float
+
+ALTER TABLE FTAPP_Geofence_Log
+ADD DistanceToStore float
+
+
+ -------------------------- add in trip id -------------------------------
+
+
+--Use KTCW_KK  --		yes 
+-- Use KTCW_SW  -- yes
+-- Use KTCW_TW -- yes
+-- Use KTCW_DI -- yes
+ --Use KTCW_CR -- yes
+-- Use KTCW_GT -- yes
+ -- Use KTCW_AM --  yes
+ --Use KTCW_PT -- yes
+ -- Use KTCW_SW_TEST -- yes
+  --Use KTCW_TEST -- yes
+  --Use ZW_KTCD -- yes
+ -- Use ZW_KTCS -- yes
+  --Use ZW_KTCG -- yes
+ --Use TESTKTCWKK -- yes
+
+
+ALTER TABLE FTAPP_Geofence_Log
+ADD TripId Int

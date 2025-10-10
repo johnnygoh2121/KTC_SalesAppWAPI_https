@@ -1,0 +1,39 @@
+﻿
+USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectStouckCountLines]    Script Date: 11-May-21 22:01:05 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[sp_SelectStouckCountLines]
+@webDb as nvarchar(100), 
+@guid as nvarchar(50)
+
+as 
+
+declare @sql nvarchar(max)
+select @sql = '
+
+SELECT id
+        , ProdCode 
+        , ProdName
+        , ExpiryInterval
+        , ManufactureDt
+        , ExpiryDt
+        , DamageQty
+        , SellableQty
+        , TotalQty         
+        , convert(nvarchar(50), LineGuid) LineGuid
+        , convert(nvarchar(50), HeadGuid) HeadGuid       
+        , CountSeq         
+        , CountedDt        
+        , CounterName      
+        , Remarks 
+    FROM ['+@webDb+'].[dbo].[FTAPP_InStoreStockCountLine]
+    WHERE convert(nvarchar(50),HeadGuid)  = ' + QUOTENAME(@guid, '''')
+
+	exec sp_executesql @sql
+
+							

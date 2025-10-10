@@ -1,0 +1,23 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectCogDocs]    Script Date: 16-Jun-21 11:18:31 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[sp_SelectCogDocs]
+@webDb as nvarchar(100), 
+@subSi as nvarchar(100),
+@startDate as datetime, 
+@endDate as datetime
+
+as 
+declare @sql as nvarchar (max) = '
+
+select '+QUOTENAME(@subSi, '''')+' [SubSi],  * from ['+@webDb+'].[dbo].[COG]
+where convert(date, DOCDATE) >= '+ quotename (@startDate, '''')+'
+and convert(date, DOCDATE) <= '+ quotename (@endDate, '''') 
+
+--print @sql
+exec sp_executesql @sql

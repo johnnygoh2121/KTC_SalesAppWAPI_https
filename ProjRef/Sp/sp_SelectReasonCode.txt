@@ -1,0 +1,29 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectReasonCode]    Script Date: 09-Jun-21 20:07:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER procedure [dbo].[sp_SelectReasonCode] 
+@erpDb as nvarchar(100), 
+@webDb as nvarchar(100),
+@userCode as nvarchar(100) , 
+@subsi as nvarchar(100)
+
+as 
+declare @sql as nvarchar(max)
+
+select @sql = '
+
+SELECT   T0.*
+		, '+QUOTENAME(@subsi, '''') +' [SubSi]
+
+FROM ['+ @erpDb +'].[DBO].[@CSUS_REASON_GL_AR] T0 
+     INNER JOIN ['+ @erpDb +'].[DBO].[OWHS] T1 ON T1.WHSCODE = T0.U_CSUS_WHS WHERE T1.U_OCRCOD1 IN  
+     (SELECT COSTCTR FROM ['+ @webDb +'].[DBO].[USERCENTER] WHERE USERCODE = ' + QUOTENAME(@userCode, '''')+')'
+
+exec sp_executesql @sql
+

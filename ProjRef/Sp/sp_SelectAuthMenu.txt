@@ -1,0 +1,39 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectAuthMenu]    Script Date: 05-Jun-21 21:35:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[sp_SelectAuthMenu]
+@webDb as nvarchar(100), 
+@commDb as nvarchar(100), 
+@userCode as nvarchar(100), 
+@subSi as nvarchar(300)
+
+as 
+declare @sql nvarchar(max)
+select @sql = '
+
+SELECT DISTINCT  
+'+QUOTENAME(@subSi, '''')+ ' [SubSi], 
+'+QUOTENAME(@userCode, '''')+ ' [UserCode], 
+T0.MENUID, 
+T0.MENUNAME ,
+T0.PARENTID,
+T0.MENUTYPE,
+T0.SEQ,
+T0.NAVURL,
+T0.MENUCAT,
+T0.AVAILABLE, 
+T1.VIS
+		FROM ['+@commDb+'].[dbo].[WEBMENU] T0 
+		INNER JOIN ['+@webDb+'].[DBO].[USERMENU] T1 ON T1.MENUID = T0.MENUID 
+					AND ISNULL(T1.VIS,' +QUOTENAME('', '''')+') =' + QUOTENAME('Y', '''')  +' 
+		INNER JOIN ['+@webDb+'].[DBO].[USERGROUP] T2 ON T2.GROUPCODE = T1.USERID
+		AND T2.USERCODE = ' + QUOTENAME(@userCode, '''')
+
+
+--print @sql
+exec sp_executesql @sql

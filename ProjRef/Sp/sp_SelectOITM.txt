@@ -1,0 +1,16 @@
+﻿
+
+
+create procedure sp_SelectOITM 
+@sapDb as nvarchar(100), 
+@itemCode as nvarchar(100)
+
+as 
+
+declare @sql as nvarchar(max)
+
+select @sql = 'SELECT * FROM ['+@sapDb+'].[dbo].[OITM] 
+               WHERE ItemCode = '+QUOTENAME(@itemCode, '''')+' 
+			   Or CodeBars = '+QUOTENAME(@itemCode, '''')
+
+exec sp_executesql @sql

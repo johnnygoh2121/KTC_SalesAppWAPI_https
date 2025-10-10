@@ -1,0 +1,229 @@
+﻿
+
+
+-- Use KTCW_KK  -- done
+-- Use TESTKTCWKK -- done
+
+Use KTCW_SW  -- 
+-- Use KTCW_TW -- 
+-- Use KTCW_DI -- 
+ -- Use KTCW_CR -- 
+-- Use KTCW_GT -- 
+-- Use KTCW_AM -- 
+ -- Use KTCW_PT -- 
+-- Use KTCW_SW_TEST -- 
+ --Use KTCW_TEST -- 
+-- Use ZW_KTCD -- 
+ -- Use ZW_KTCS -- 
+-- Use ZW_KTCG -- 
+
+ --use KTCW_PT --  
+
+CREATE TABLE [dbo].[FTAPP_Box](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[BoxId] [nvarchar](100) NULL,
+	[PickerCode] [nvarchar](100) NULL,
+	[PickerName] [nvarchar](100) NULL,
+	[PickDt] [datetime] NULL,
+	[PackId] [nvarchar](100) NULL,
+	[PackDt] [datetime] NULL,
+	[PackerCode] [nvarchar](100) NULL,
+	[PackerName] [nvarchar](100) NULL,
+	[BaseEntry] [int] NULL,
+	[BoxGuid] [uniqueidentifier] NULL,
+ CONSTRAINT [PK_FTAPP_Box] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+
+CREATE TABLE [dbo].[FTAPP_Box_DRAFT](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[BoxId] [nvarchar](100) NULL,
+	[PickerCode] [nvarchar](100) NULL,
+	[PickerName] [nvarchar](100) NULL,
+	[PickDt] [datetime] NULL,
+	[PackId] [nvarchar](100) NULL,
+	[PackDt] [datetime] NULL,
+	[PackerCode] [nvarchar](100) NULL,
+	[PackerName] [nvarchar](100) NULL,
+	[BaseEntry] [int] NULL,
+	[BoxGuid] [uniqueidentifier] NULL,
+	[IsLooseBox] [int] NULL,
+	[CreatedDt] [datetime] NULL,
+ CONSTRAINT [PK_FTAPP_Box_DRAFT] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[FTAPP_Box1](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[ItemCode] [nvarchar](100) NULL,
+	[ItemName] [nvarchar](100) NULL,
+	[Qty] [decimal](12, 3) NULL,
+	[Packaging] [nvarchar](3) NULL,
+	[BoxGuid] [uniqueidentifier] NULL,
+	[ContentGuid] [uniqueidentifier] NULL,
+	[BaseEntry] [int] NULL,
+	[BaseLine] [int] NULL,
+ CONSTRAINT [PK_FTAPP_Box1] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+CREATE TABLE [dbo].[FTAPP_Box1_DRAFT](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[ItemCode] [nvarchar](100) NULL,
+	[ItemName] [nvarchar](100) NULL,
+	[Qty] [decimal](12, 3) NULL,
+	[Packaging] [nvarchar](3) NULL,
+	[BoxGuid] [uniqueidentifier] NULL,
+	[ContentGuid] [uniqueidentifier] NULL,
+	[BaseEntry] [int] NULL,
+	[BaseLine] [int] NULL,
+ CONSTRAINT [PK_FTAPP_Box1_DRAFT] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[FTAPP_OnHoldSoInPicking](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[HoldDocEntry] [int] NULL,
+	[HoldByUserCode] [nvarchar](100) NULL,
+	[HoldByUserName] [nvarchar](100) NULL,
+	[HoldStartDt] [datetime] NULL,
+ CONSTRAINT [PK_FTAPP_OnHoldSoInPicking] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[FTAPP_SO1_DRAFT](
+	[DOCENTRY] [bigint] NOT NULL,
+	[LINENUM] [int] NOT NULL,
+	[ITEMCODE] [nvarchar](50) NULL,
+	[ITEMNAME] [nvarchar](100) NULL,
+	[CODEBARS] [nvarchar](50) NULL,
+	[UOMQTY] [numeric](20, 6) NULL,
+	[STOCKQTY] [numeric](20, 6) NULL,
+	[PRICE] [numeric](20, 6) NULL,
+	[QUANTITY] [numeric](20, 6) NULL,
+	[QUANTITYCS] [numeric](20, 6) NULL,
+	[QTY] [numeric](20, 6) NULL,
+	[DISC] [numeric](20, 6) NULL,
+	[SUPP] [numeric](20, 6) NULL,
+	[DISCSUM] [numeric](20, 6) NULL,
+	[LINETOTAL] [numeric](20, 6) NULL,
+	[PENTRY] [bigint] NULL,
+	[PLINE] [int] NULL,
+	[PTYPE] [nvarchar](5) NULL,
+	[SUGGESTQTY] [numeric](20, 6) NULL,
+	[DOCNUM] [bigint] NULL,
+	[BORNE] [nvarchar](50) NULL,
+	[SUPPSUM] [numeric](20, 6) NULL,
+	[INVQTY] [numeric](20, 6) NULL,
+	[INVPRICE] [numeric](20, 6) NULL,
+	[INVTOTAL] [numeric](20, 6) NULL,
+	[ITEMCOST] [numeric](20, 6) NULL,
+	[DIM1] [nvarchar](50) NULL,
+	[DIM2] [nvarchar](50) NULL,
+	[DIM3] [nvarchar](50) NULL,
+	[MBID] [int] NULL,
+	[SUPPCODE] [nvarchar](30) NULL,
+	[QUANTITYPC] [numeric](20, 6) NULL,
+	[REFNO] [nvarchar](30) NULL,
+	[REFITEM] [nvarchar](30) NULL,
+	[UOM] [nvarchar](10) NULL,
+	[BATCHID] [int] NULL,
+	[COKEPROMO] [nvarchar](50) NULL,
+	[SUPPCATNUM] [nvarchar](20) NULL,
+	[TAXCODE] [nvarchar](20) NULL,
+	[PRICE2] [numeric](20, 6) NULL,
+	[NONIM] [nvarchar](10) NULL,
+	[PROMOCOUNT] [int] NULL,
+	[NPENTRY] [bigint] NULL,
+	[NPID] [int] NULL,
+	[NPLINE] [int] NULL,
+	[PROMOPACKAGE] [nvarchar](1) NULL,
+	[PICKEDQTY] [numeric](21, 6) NULL,
+	[REFLINE] [int] NULL,
+	[PickedPcs] [numeric](20, 6) NULL,
+	[PickedCase] [numeric](20, 6) NULL,
+	[NeededCase] [numeric](20, 6) NULL,
+	[NeededPcs] [numeric](20, 6) NULL,
+	[ContentDesc] [nvarchar](100) NULL,
+	[SubSi] [nvarchar](100) NULL,
+	[IsMissing] [int] NULL,
+	[IsMissingCs] [int] NULL,
+	[IsMissingPc] [int] NULL,
+	[IsAvailableForPick] [int] NULL,
+	[AgencyName] [nvarchar](100) NULL,
+	[AgencyCode] [nvarchar](100) NULL,
+ CONSTRAINT [PK_FTAPP_DRAFT_SO1] PRIMARY KEY CLUSTERED 
+(
+	[DOCENTRY] ASC,
+	[LINENUM] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+-- add column for pc and cs original qty
+
+-- Use KTCW_KK      -- done
+-- Use KTCW_SW		-- done
+ --Use KTCW_TW		-- done
+-- Use KTCW_DI		-- done
+-- Use KTCW_CR		-- done
+-- Use KTCW_GT		-- done
+-- Use KTCW_AM		-- done
+-- Use KTCW_PT		-- done
+-- Use KTCW_SW_TEST -- done
+-- Use KTCW_TEST    -- done
+-- Use ZW_KTCD		-- done
+-- Use ZW_KTCS		-- done
+-- Use ZW_KTCG		-- done
+ -- Use TESTKTCWKK	-- done
+
+
+go 
+
+-- add coumn to SO1 draft table in each database
+
+ALTER TABLE FTAPP_SO1_DRAFT 
+ADD QUANTITYPC_Orig decimal(12,3);
+
+ALTER TABLE FTAPP_SO1_DRAFT 
+ADD QUANTITYCS_Orig decimal(12,3);
+
+--use KTCW_KK
+--use KTCW_SW
+--use KTCW_TW
+--use KTCW_DI
+--use KTCW_CR
+--use KTCW_GT
+--use KTCW_AM
+--use KTCW_PT
+--use KTCW_SW_TEST
+--use KTCW_TEST
+--use ZW_KTCD
+--use ZW_KTCS
+--use ZW_KTCG
+--use TESTKTCWKK
+
+go
+
+alter table FTAPP_SO1_DRAFT alter column ContentDesc nvarchar(max)
+alter table FTAPP_SO1_DRAFT alter column QUANTITYPC_Orig numeric(20,6) 
+alter table FTAPP_SO1_DRAFT alter column QUANTITYCS_Orig numeric(20,6)
+

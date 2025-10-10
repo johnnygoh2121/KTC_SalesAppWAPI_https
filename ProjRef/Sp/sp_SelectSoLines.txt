@@ -1,0 +1,15 @@
+﻿
+Create procedure sp_SelectSoLines
+@webDb as nvarchar(100), 
+@docEntry as int
+
+as
+
+declare @sql as nvarchar(max)
+select @sql = '
+
+SELECT *
+  FROM ['+@webDb+'].[dbo].[SO1] 
+  WHERE DocEntry = '+ QUOTENAME(@docEntry, '''')
+
+exec sp_executesql @sql

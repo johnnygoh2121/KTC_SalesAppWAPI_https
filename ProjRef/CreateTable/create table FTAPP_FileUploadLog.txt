@@ -1,0 +1,38 @@
+﻿
+--use KTCW_KK -- done
+--use KTCW_SW -- done
+--use KTCW_TW -- deon
+--use KTCW_DI -- done
+--use KTCW_CR -- DONE
+--use KTCW_GT -- DONE
+--use KTCW_AM -- DONE
+--use KTCW_PT -- dONE
+--use KTCW_SW_TEST -- DONE
+--use KTCW_TEST -- DONE
+--use ZW_KTCD -- DONE
+--use ZW_KTCS -- DONE
+--use ZW_KTCG -- DONE
+--use TESTKTCWKK -- done
+
+go 
+
+CREATE TABLE [dbo].[FTAPP_FileUploadLog](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[Module] [nvarchar](max) NULL,
+	[FileType] [nvarchar](120) NULL,
+	[TransDt] [datetime] NULL,
+	[UserCode] [nvarchar](30) NULL,
+	[UserName] [nvarchar](256) NULL,
+	[Filename] [nvarchar](max) NULL,
+	[Version] [nvarchar](60) NULL,
+	[SubSi] [nvarchar](256) NULL,
+	[CardCode] [nvarchar](max) NULL,
+	[UploadStatus] [nvarchar](9) NULL,
+ CONSTRAINT [PK_FTAPP_FileUploadLog] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+

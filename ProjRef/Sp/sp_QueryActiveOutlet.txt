@@ -1,0 +1,34 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_QueryActiveOutlet]    Script Date: 03/13/2021 15:11:15 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+ALTER procedure [dbo].[sp_QueryActiveOutlet]
+@webDb nvarchar(120), 
+@erpDb nvarchar(120), 
+@startDate nvarchar(8), 
+@endDate nvarchar(8), 
+@userCode nvarchar(120), 
+@cardType nvarchar(1),
+@docType nvarchar(1)
+as
+
+declare @sql as nvarchar(max)
+select @sql = 
+ 'select count(t0.cardCode) ' +
+' from [' + @webDb + '].dbo.USERCARD t0 ' +
+' inner join [' + @erpDb + '].dbo.OINV t1 on t0.CARDCODE = t1.CardCode	' +
+' where t0.CARDTYPE = ' + quotename(@cardType, '''') +
+' AND t1.DocType = '  + QUOTENAME(@docType, '''') + 
+' AND t1.DocDate >= ' + QuoteName(@startDate, '''') + 
+' AND t1.DocDate <= ' + QuoteName(@endDate, '''') +
+' AND t0.USERCODE = ' + Quotename(@userCode, '''') +
+' group by (t0.cardCode)'
+
+print @sql
+exec sp_executesql @sql

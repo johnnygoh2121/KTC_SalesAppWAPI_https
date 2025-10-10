@@ -1,0 +1,113 @@
+﻿
+
+
+
+
+
+-- for each web db 
+
+-- Use KTCW_KK      -- done
+-- Use KTCW_SW		-- done
+-- Use KTCW_TW		-- done
+-- Use KTCW_DI		-- done
+-- Use KTCW_CR		-- done
+-- Use KTCW_GT		-- done
+-- Use KTCW_AM		-- done
+-- Use KTCW_PT		-- done
+-- Use KTCW_SW_TEST -- done
+-- Use KTCW_TEST    -- done
+-- Use ZW_KTCD		-- done
+-- Use ZW_KTCS		-- done
+-- Use ZW_KTCG		-- done
+-- Use TESTKTCWKK	-- done
+-- use KTCW_PT		-- done
+
+go 
+
+/****** Object:  Table [dbo].[FTApp_BaseRouteSchedule]    Script Date: 22-Mar-21 10:28:36 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[FTApp_BaseRouteSchedule](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ScheduleNo] [nvarchar](120) NULL,
+	[ScheduleName] [nvarchar](120) NULL,
+	[ScheduleDate] [datetime] NULL,
+	[ScheduleType] [nvarchar](120) NULL,
+	[RouteCode] [nvarchar](120) NULL,
+	[StoreCode] [nvarchar](120) NULL,
+	[StoreName] [nvarchar](120) NULL,
+	[UserCode] [nvarchar](12) NULL,
+	[UserName] [nvarchar](120) NULL,
+	[IsActive] [int] NULL,
+	[SeqNo] [int] NULL,
+	[IsOffRouteCustomer] [int] NULL,
+ CONSTRAINT [PK_FTApp_RouteSchedule] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[FTApp_BaseRouteUserCard]    Script Date: 22-Mar-21 10:28:55 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[FTApp_BaseRouteUserCard](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[RouteCode] [nvarchar](120) NULL,
+	[RouteName] [nvarchar](300) NULL,
+	[RouteNo] [nvarchar](120) NULL,
+	[RouteType] [nvarchar](120) NULL,
+	[UserCode] [nvarchar](12) NULL,
+	[UserName] [nvarchar](120) NULL,
+	[UserCompany] [nvarchar](120) NULL,
+	[StoreCode] [nvarchar](120) NULL,
+	[StoreName] [nvarchar](120) NULL,
+	[Latitute] [decimal](9, 6) NULL,
+	[Longitude] [decimal](9, 6) NULL,
+	[SeqNo] [int] NULL,
+ CONSTRAINT [PK_FTApp_BaseRouteUserCard] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[FTApp_BaseRouteSchedule_log]    Script Date: 22-Mar-21 10:29:21 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[FTApp_BaseRouteSchedule_log](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ScheduleNo] [nvarchar](120) NULL,
+	[ScheduleName] [nvarchar](120) NULL,
+	[ScheduleDate] [datetime] NULL,
+	[ScheduleType] [nvarchar](120) NULL,
+	[RouteCode] [nvarchar](120) NULL,
+	[StoreCode] [nvarchar](120) NULL,
+	[StoreName] [nvarchar](120) NULL,
+	[UserCode] [nvarchar](12) NULL,
+	[UserName] [nvarchar](120) NULL,
+	[IsActive] [int] NULL,
+	[SeqNo] [int] NULL,
+	[IsOffRouteCustomer] [int] NULL,
+	[IsCompliance] [int] NULL,
+	[ComplianceDate] [datetime] NULL,
+ CONSTRAINT [PK_FTApp_RouteSchedule_log] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+

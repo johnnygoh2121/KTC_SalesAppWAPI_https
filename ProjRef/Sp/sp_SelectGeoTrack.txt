@@ -1,0 +1,25 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectGeoTrack]    Script Date: 12-May-21 12:28:20 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER procedure [dbo].[sp_SelectGeoTrack] 
+	@WebDb as nvarchar(120), 
+	@QueryUserCode as nvarchar(120), 
+	@QueryDate as date, 
+	@Subsi as nvarchar(120)
+	as
+
+	declare @sqlstr nvarchar(max) 
+
+	select @sqlstr = 'SELECT '+ QUOTENAME(@Subsi, '''') + '[Subsi] , * 
+					FROM ['+@WebDb+'].[dbo].[FTAppGeoTrack] 
+                    WHERE UserCode = '+QUOTENAME(@QueryUserCode, '''')+' 
+                    AND Convert(date, ScheduleDate) = '+ QUOTENAME(convert(date,@QueryDate), '''')
+
+--print @sqlstr
+exec sp_executesql @sqlstr

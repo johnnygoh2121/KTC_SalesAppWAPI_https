@@ -1,0 +1,32 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectCogItemInvDetails]    Script Date: 13-Jun-21 18:11:10 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ ALTER procedure [dbo].[sp_SelectCogItemInvDetails]
+ @erpDb as nvarchar(100),
+ @itemCode as nvarchar(256), 
+ @cardCode as nvarchar(100), 
+ @startDate as datetime
+
+ as 
+ declare @sql as nvarchar(max) = '
+
+ select top 1
+   t1.DocNum [LastDocNum]
+ , t1.DocDate [LastInvDate]
+ , MIN(t0.LineTotal/CASE WHEN t0.QUANTITY = 0 THEN 1 ELSE t0.Quantity END)  [LowestInvoicePrice]
+ from [TEST_100101SAP].dbo.INV1 t0 inner join [TEST_100101SAP].dbo.OINV t1 on t1.DocEntry = t0.DocEntry
+ where convert (date, t1.DocDate) >= ' + QUOTENAME (@startDate, '''')+' 
+ and convert(date, t1.DocDate) <= GETDATE()
+ and t0.ItemCode = '+QUOTENAME(@itemCode, '''')+'
+ and t1.CardCode = '+QUOTENAME(@cardCode, '''')+'
+ group by t1.DocNum, t1.DocDate, t0.ItemCode
+ order by t1.DocNum desc '
+
+ --print @sql
+ exec sp_executesql @sql
+ 

@@ -1,0 +1,42 @@
+﻿USE [KTCW_COMMON]
+GO
+
+/****** Object:  Table [dbo].[FTAPP_MSalesTarget]    Script Date: 20-Mar-21 12:02:00 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[FTAPP_MSalesTarget](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserCode] [nvarchar](12) NULL,
+	[UserName] [nvarchar](120) NULL,
+	[Currency] [nvarchar](120) NULL,
+	[Year] [decimal](12, 2) NULL,
+	[Jan] [decimal](12, 2) NULL,
+	[Feb] [decimal](12, 2) NULL,
+	[Mar] [decimal](12, 2) NULL,
+	[Apr] [decimal](12, 2) NULL,
+	[May] [decimal](12, 2) NULL,
+	[Jun] [decimal](12, 2) NULL,
+	[Jul] [decimal](12, 2) NULL,
+	[Aug] [decimal](12, 2) NULL,
+	[Sep] [decimal](12, 2) NULL,
+	[Oct] [decimal](12, 2) NULL,
+	[Nov] [decimal](12, 2) NULL,
+	[Dec] [decimal](12, 2) NULL,
+	[CompanyShortName] [nvarchar](120) NULL,
+	[CompanyName] [nvarchar](120) NULL,
+	[AgencyCode] [nvarchar](120) NULL,
+	[AgencyName] [nvarchar](120) NULL,
+	[BOP] [nvarchar](120) NULL,
+	[BOPName] [nvarchar](120) NULL,
+ CONSTRAINT [PK_FTAPP_MSalesTarget] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+

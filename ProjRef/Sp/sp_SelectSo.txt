@@ -1,0 +1,31 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectSo]    Script Date: 14-May-21 13:06:05 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[sp_SelectSo]
+@companyName as nvarchar(120),
+@webDb as nvarchar(100), 
+@slpCode as nvarchar(100),
+@userCode as nvarchar(100),
+@start as datetime, 
+@end as datetime
+
+as
+
+declare @sql as nvarchar(max)
+select @sql = '
+
+SELECT '+ QUOTENAME(@companyName, '''') +' [SubSi], *
+  FROM ['+@webDb+'].[dbo].[SO] 
+  WHERE convert(date, DocDate) >= convert(date, ' + QUOTENAME(@start, '''') + ')
+		and convert(date, DocDate) <= convert(date, ' + QUOTENAME(@end, '''')  +')
+		and SLPCODE = ' + QUOTENAME(@slpCode, '''')  + '
+		or  SLPCODE = ' + QUOTENAME(@userCode, '''')  
+
+--print @sql
+
+exec sp_executesql @sql

@@ -1,0 +1,30 @@
+﻿
+USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectErpCustomer_ByCards]    Script Date: 14-May-21 11:01:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create PROCEDURE [dbo].sp_SelectErpCustomer_SingleCard
+	@CompanyName as nvarchar(120), 
+	@CompanyID as nvarchar(120), 
+	@ErpDb as nvarchar(120), 		
+	@CardCode as nvarchar(max)
+AS
+
+	declare @sqlstr as nvarchar(max)
+	select @sqlStr = 'SELECT *
+						,'+QUOTENAME(@CompanyName, '''') +' [CompanyName]
+                        ,'+QUOTENAME(@CompanyID, '''')+' [CompanyID]
+                        FROM ['+@ErpDb+'].[dbo].[OCRD] t0
+                        WHERE 
+						t0.CardCode = '+QUOTENAME(@CardCode, '''')
+
+--print @sqlstr
+exec sp_executesql @sqlstr
+
+
+
+

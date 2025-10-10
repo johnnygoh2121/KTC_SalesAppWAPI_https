@@ -1,0 +1,28 @@
+﻿
+
+USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectcDnChargeCodeCn]    Script Date: 19-May-21 22:37:05 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create procedure [dbo].[sp_SelectcDnChargeCodeCn_Detail]
+@webDb as nvarchar(100), 
+@erpDb as nvarchar(100), 
+@docNumber as nvarchar(100),
+@pafDocEntry as nvarchar(100)
+as
+
+declare @sql as nvarchar(max)
+select @sql = '
+SELECT T0.*, T0.DOCENTRY AS [BASEENTRY], T0.LINENUM AS [BASELINE], T0.AMOUNT AS [BASEAMOUNT], 
+T2.VATGROUP AS [TAXCODE] 
+FROM ['+@webDb+'].[DBO].[PAF1] T0 
+INNER JOIN ['+@erpDb+'].[DBO].[ORIN] T1 ON T1.DOCNUM = '+QUOTENAME(@docNumber, '''')+'
+INNER JOIN ['+@erpDb+'].[DBO].[RIN1] T2 ON T2.DOCENTRY = T1.DOCENTRY AND T2.LINENUM = T0.LINENUM - 1
+WHERE T0.DOCENTRY = '+QUOTENAME(@pafDocEntry, '''')  
+
+	--print @sql
+exec sp_executesql @sql

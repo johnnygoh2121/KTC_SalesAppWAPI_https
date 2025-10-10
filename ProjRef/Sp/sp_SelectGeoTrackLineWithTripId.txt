@@ -1,0 +1,22 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectGeoTrackLineWithTripId]    Script Date: 04-Apr-21 23:58:05 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[sp_SelectGeoTrackLineWithTripId]
+	@WebDb as nvarchar(120), 
+	@HeaderGuid as nvarchar(max),
+	@TripId as nvarchar(100) 
+	as
+
+declare @sql_str as nvarchar(max)
+	select @sql_str = 'SELECT * 
+					   FROM ['+@WebDb+'].[DBO].[FTAppGeoTrackLine] 
+				       WHERE HeadGuid = ' + QUOTENAME(@HeaderGuid, '''') + '
+					   AND TripID = '+ @TripId
+
+	--print @sql_str
+	exec sp_executesql @sql_str

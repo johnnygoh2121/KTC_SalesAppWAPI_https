@@ -1,0 +1,22 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectWhsUserAgency2]    Script Date: 29-May-21 20:54:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER procedure [dbo].[sp_SelectWhsUserAgency2]
+@webDb as nvarchar(100),
+@userCode as nvarchar(100) 
+
+
+as 
+
+declare @sql as nvarchar(max)
+select @sql = 'SELECT * FROM ['+@webDb+'].[dbo].[USERCARD] WHERE USERCODE = ' + QUOTENAME(@userCode, '''')
+
+
+--print @sql
+exec sp_executesql @sql

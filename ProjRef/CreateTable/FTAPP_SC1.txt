@@ -1,0 +1,70 @@
+﻿
+
+
+
+--use KTCW_KK -- done
+--use KTCW_SW -- done
+--use KTCW_TW -- deon
+--use KTCW_DI -- done
+--use KTCW_CR -- DONE
+--use KTCW_GT -- DONE
+--use KTCW_AM -- DONE
+--use KTCW_PT -- dONE
+--use KTCW_SW_TEST -- DONE
+--use KTCW_TEST -- DONE
+--use ZW_KTCD -- DONE
+--use ZW_KTCS -- DONE
+--use ZW_KTCG -- DONE
+--use TESTKTCWKK -- done
+
+
+DROP TABLE FTAPP_SC1;
+go 
+
+CREATE TABLE [dbo].[FTAPP_SC1](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ScLineGuid] [uniqueidentifier] NULL,
+	[ScGuid] [uniqueidentifier] NULL,
+	[ItemCode] [nvarchar](256) NULL,
+	[ItemName] [nvarchar](256) NULL,
+	[CountedQty] [decimal](12, 3) NULL,
+	[ReCountQty] [decimal](12, 3) NULL,
+	[UomQty] [decimal](12, 3) NULL,
+	[SeqNo] [int] NULL,
+	[SpaceId] [nvarchar](256) NULL,
+	[CounterCode] [nvarchar](256) NULL,
+	[CounterName] [nvarchar](256) NULL,
+	[ReCounterCode] [nvarchar](256) NULL,
+	[ReCounterName] [nvarchar](256) NULL,
+	[CountedDt] [datetime] NULL,
+	[ReCountedDt] [datetime] NULL,
+	[WhsCode] [nvarchar](256) NULL,
+	[WhsName] [nvarchar](256) NULL,
+	[SubSi] [nvarchar](256) NULL,
+	[ScanCode] [nvarchar](256) NULL,
+	[MfgDate] [datetime] NULL,
+	[ExpDate] [datetime] NULL,
+	[Remarks] [nvarchar](max) NULL,
+	[LineStatus] [nvarchar](1) NULL,
+	[UomType] [nvarchar](256) NULL,
+	[SUPPCATNUM] [nvarchar](256) NULL,
+	[CODEBARS] [nvarchar](256) NULL,
+	[U_CSUS_UOM] [decimal](12, 3) NULL,
+	[QUANTITY] [decimal](12, 3) NULL,
+	[REQUANTITY] [decimal](12, 3) NULL,
+	[BatchNo] [nvarchar](256) NULL,
+ CONSTRAINT [PK_FTAPP_SC1] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE FTAPP_SC1
+ADD  ReMfgDate datetime ;
+
+ALTER TABLE FTAPP_SC1
+ADD ReExpDate  datetime ;
+
+ALTER TABLE FTAPP_SC1
+ADD  ReRemarks nvarchar(MAX) ;

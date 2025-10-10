@@ -1,0 +1,143 @@
+﻿use KTCW_KK
+go 
+
+drop view FTAPP_MSalesTargetView
+go 
+create view FTAPP_MSalesTargetView
+as 
+SELECT    *
+FROM         dbo.FTAPP_MSalesTarget
+go
+-----------------------------------------
+
+use KTCW_SW
+go
+drop view FTAPP_MSalesTargetView
+go 
+create view FTAPP_MSalesTargetView
+as 
+SELECT    *
+FROM         dbo.FTAPP_MSalesTarget
+go
+-----------------------------------------
+
+use KTCW_TW
+go
+drop view FTAPP_MSalesTargetView
+go 
+create view FTAPP_MSalesTargetView
+as 
+SELECT    *
+FROM         dbo.FTAPP_MSalesTarget
+go
+-----------------------------------------
+use KTCW_DI
+go 
+drop view FTAPP_MSalesTargetView
+go 
+create view FTAPP_MSalesTargetView
+as 
+SELECT    *
+FROM         dbo.FTAPP_MSalesTarget
+go
+-----------------------------------------
+use KTCW_CR
+go
+drop view FTAPP_MSalesTargetView
+go 
+create view FTAPP_MSalesTargetView
+as 
+SELECT    *
+FROM         dbo.FTAPP_MSalesTarget
+go
+-----------------------------------------
+use KTCW_GT
+go
+drop view FTAPP_MSalesTargetView
+go 
+create view FTAPP_MSalesTargetView
+as 
+SELECT    *
+FROM         dbo.FTAPP_MSalesTarget
+go
+-----------------------------------------
+use KTCW_AM
+go
+drop view FTAPP_MSalesTargetView
+go 
+create view FTAPP_MSalesTargetView
+as 
+SELECT    *
+FROM         dbo.FTAPP_MSalesTarget
+go
+-----------------------------------------
+use KTCW_PT
+go
+drop view FTAPP_MSalesTargetView
+go 
+create view FTAPP_MSalesTargetView
+as 
+SELECT    *
+FROM         dbo.FTAPP_MSalesTarget
+go
+-----------------------------------------
+use KTCW_SW_TEST
+go
+drop view FTAPP_MSalesTargetView
+go 
+create view FTAPP_MSalesTargetView
+as 
+SELECT    *
+FROM         dbo.FTAPP_MSalesTarget
+go
+-----------------------------------------
+use KTCW_TEST
+go
+drop view FTAPP_MSalesTargetView
+go 
+create view FTAPP_MSalesTargetView
+as 
+SELECT    *
+FROM         dbo.FTAPP_MSalesTarget
+go
+-----------------------------------------
+use ZW_KTCD
+go
+drop view FTAPP_MSalesTargetView
+go 
+create view FTAPP_MSalesTargetView
+as 
+SELECT    *
+FROM         dbo.FTAPP_MSalesTarget
+go
+-----------------------------------------
+use ZW_KTCS
+go
+drop view FTAPP_MSalesTargetView
+go 
+create view FTAPP_MSalesTargetView
+as 
+SELECT    *
+FROM         dbo.FTAPP_MSalesTarget
+go
+-----------------------------------------
+use ZW_KTCG
+go
+drop view FTAPP_MSalesTargetView
+go 
+create view FTAPP_MSalesTargetView
+as 
+SELECT    *
+FROM         dbo.FTAPP_MSalesTarget
+go
+-----------------------------------------
+use TESTKTCWKK
+go
+drop view FTAPP_MSalesTargetView
+go 
+create view FTAPP_MSalesTargetView
+as 
+SELECT    *
+FROM         dbo.FTAPP_MSalesTarget
+go
+-----------------------------------------

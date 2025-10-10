@@ -1,0 +1,63 @@
+﻿
+
+
+
+-- for each web db 
+
+-- Use KTCW_KK  -- done
+--Use KTCW_SW  -- done
+-- Use KTCW_TW -- done
+-- Use KTCW_DI -- done
+--Use KTCW_CR -- done
+--Use KTCW_GT -- done
+--Use KTCW_AM -- done
+--Use KTCW_PT -- done
+-- Use KTCW_SW_TEST -- done
+-- Use KTCW_TEST -- done
+-- Use ZW_KTCD -- done
+-- Use ZW_KTCS -- done
+-- Use ZW_KTCG -- done
+--Use TESTKTCWKK -- done
+
+
+go 
+
+CREATE TABLE [dbo].[FTAPP_InStoreStockCount](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[CountName] [nvarchar](120) NULL,
+	[StoreCode] [nvarchar](120) NULL,
+	[StoreName] [nvarchar](120) NULL,
+	[CounterCode] [nvarchar](120) NULL,
+	[CounterName] [nvarchar](120) NULL,
+	[CounteDt] [datetime] NULL,
+	[HeadGuid] [uniqueidentifier] NULL,
+	[CreatedDt] [datetime] NULL,
+ CONSTRAINT [PK_FTAPP_InStoreStockCount] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[FTAPP_InStoreStockCountLine](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[ProdCode] [nvarchar](120) NULL,
+	[ProdName] [nvarchar](256) NULL,
+	[ExpiryInterval] [int] NULL,
+	[ManufactureDt] [datetime] NULL,
+	[ExpiryDt] [datetime] NULL,
+	[DamageQty] [decimal](12, 3) NULL,
+	[SellableQty] [decimal](12, 3) NULL,
+	[TotalQty] [decimal](12, 3) NULL,
+	[LineGuid] [uniqueidentifier] NULL,
+	[HeadGuid] [uniqueidentifier] NULL,
+	[CountSeq] [int] NULL,
+	[CountedDt] [datetime] NULL,
+	[CounterName] [nvarchar](120) NULL,
+	[Remarks] [nvarchar](max) NULL,
+ CONSTRAINT [PK_FTAPP_InStoreStockCountLine] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO

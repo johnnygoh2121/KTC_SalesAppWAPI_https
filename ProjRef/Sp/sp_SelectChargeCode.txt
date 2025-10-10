@@ -1,0 +1,34 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectChargeCode]    Script Date: 17-May-21 11:18:25 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure  [dbo].[sp_SelectChargeCode]
+@webDb as nvarchar(100), 
+@subsi as nvarchar(100),
+@agencyCode as nvarchar(100)
+
+as 
+
+declare @sql as nvarchar(max)
+select @sql = '
+
+select distinct '+ QUOTENAME(@subsi, '''')  +' [Subsi], * 
+from ['+@webDb+'].[dbo].[CHRGCODE1] 
+Where 
+convert(date, STARTDATE) <= GETDATE() 
+AND GETDATE() < DATEADD(dd,1, convert(date, ENDDATE))
+
+and Terminate = '+QUOTENAME('N', '''') + '
+and Agency = '+QUOTENAME(@agencyCode, '''' ) 
+
+--print @sql
+exec sp_executesql @sql
+
+
+
+
+

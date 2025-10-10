@@ -1,0 +1,41 @@
+﻿
+
+-- Use KTCW_KK 
+-- Use KTCW_SW 
+-- Use KTCW_TW 
+-- Use KTCW_DI 
+-- Use KTCW_CR
+-- Use KTCW_GT 
+-- Use KTCW_AM 
+-- Use KTCW_PT
+-- Use KTCW_SW_TEST
+-- Use KTCW_TEST   
+-- Use ZW_KTCD     
+-- Use ZW_KTCS    
+-- Use ZW_KTCG     
+-- Use TESTKTCWKK  
+ 
+
+go 
+
+CREATE TABLE [dbo].[FTAPP_FreezedItems](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ItemCode] [nvarchar](100) NULL,
+	[ItemName] [nvarchar](100) NULL,
+	[WhsCode] [nvarchar](100) NULL,
+	[WhsName] [nvarchar](100) NULL,
+	[CodeBars] [nvarchar](100) NULL,
+	[FreezeDt] [datetime] NULL,
+	[FeezeFor] [nvarchar](300) NULL,
+	[FreezeByUserCode] [nvarchar](100) NULL,
+	[FreezeByUserName] [nvarchar](100) NULL,
+	[AgencyCode] [nvarchar](100) NULL,
+	[AngencyName] [nvarchar](100) NULL,
+ CONSTRAINT [PK_FTAPP_FreezedItems] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+

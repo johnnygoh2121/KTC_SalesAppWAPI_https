@@ -1,0 +1,28 @@
+﻿USE [KTCW_COMMON]
+GO
+
+/****** Object:  Table [dbo].[FTApp_WorkingDays]    Script Date: 20-Mar-21 12:04:16 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[FTApp_WorkingDays](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Year] [int] NULL,
+	[Month] [nvarchar](3) NULL,
+	[YearMonth] [datetime] NULL,
+	[FullDay] [int] NULL,
+	[WorkingDays] [int] NULL,
+	[StartDayofTheWeek] [nvarchar](9) NULL,
+	[DayWorkingHour] [int] NULL,
+	[WorkingDayPerWeek] [int] NULL,
+ CONSTRAINT [PK_FTApp_WorkingDays] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+

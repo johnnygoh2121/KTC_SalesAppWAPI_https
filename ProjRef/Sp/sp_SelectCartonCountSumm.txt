@@ -1,0 +1,47 @@
+﻿
+USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectCartonCountSumm]    Script Date: 16-Jun-21 14:55:01 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[sp_SelectCartonCountSumm]
+@webDb as nvarchar(100),
+@docEntry as int
+
+as
+declare @sql as nvarchar(max)
+
+select @sql = '
+
+select 
+-- full box count
+(select COUNT(*) [FullBoxCount]
+	from ['+@webDb+'].[dbo].[FTAPP_Box] t0 		
+where   t0.BaseEntry = '+QUOTENAME(@docEntry, '''')+'  		
+		and t0.BoxGuid in (select distinct BoxGuid 
+		from  ['+@webDb+'].[dbo].[FTAPP_Box1] 
+		Where BaseEntry = '+QUOTENAME(@docEntry, '''')+'  and Packaging = '+QUOTENAME('CS', '''')+' ) ) [FullCtn]
+,
+-- mix box 
+(select COUNT(*) [MixedBoxCount]
+	from ['+@webDb+'].[dbo].[FTAPP_Box] t0 	
+	
+where   t0.BaseEntry = '+QUOTENAME(@docEntry, '''')+'   		
+		and t0.BoxGuid in (select distinct BoxGuid from  ['+@webDb+'].[dbo].[FTAPP_Box1] 
+		Where BaseEntry = '+QUOTENAME(@docEntry, '''')+' and Packaging = '+QUOTENAME('PC', '''')+' )) [MixedCtn]
+,
+
+-- total carton
+
+(select count(*) 
+from ['+@webDb+'].[dbo].[FTAPP_Box] t0 
+where t0.BaseEntry ='+QUOTENAME(@docEntry, '''')+'   
+	and BoxGuid in (select BoxGuid from  ['+@webDb+'].[dbo].[FTAPP_Box1] t1 where t1.BoxGuid = t0.BoxGuid) )
+
+[TotalCarton]'
+
+print @sql
+exec sp_executesql @sql

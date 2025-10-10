@@ -1,0 +1,36 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectcDnChargeCodeCn]    Script Date: 20-May-21 9:51:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[sp_SelectcDnChargeCodeCn]
+@webDb as nvarchar(100), 
+@erpDb as nvarchar(100), 
+@cardCode as nvarchar(100),
+@agencyCode as nvarchar(100)
+as
+
+declare @sql as nvarchar(max)
+select @sql = '
+
+SELECT T0.DOCENTRY
+, T0.DOCNUM [CNNO]
+, T0.DOCDATE [CNDATE]
+, T1.DOCNUM [PAFNO]
+, T0.U_MPAF [MPAF]
+, T0.DOCTOTAL - T0.VATSUM [TOTAL]
+
+FROM ['+@erpDb+'].[DBO].[ORIN] T0 
+		INNER JOIN ['+@webDb+'].[DBO].[PAF] T1 ON 		
+			CAST(T1.DocEntry AS NVARCHAR(20)) = T0.U_CSUS_PAF 
+			AND T1.CNNO = T0.DOCNUM 
+			AND T1.PTYPE = '+QUOTENAME('C', '''') +' 
+WHERE T0.CardCode = '+QUOTENAME(@cardCode, '''') +' 
+	AND T1.AGENCY = '+QUOTENAME(@agencyCode, '''') +' 
+	AND T0.DocDate >= DATEADD(m,-6,GETDATE()) '
+
+	--print @sql
+exec sp_executesql @sql

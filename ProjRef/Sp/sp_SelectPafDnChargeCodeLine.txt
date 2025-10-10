@@ -1,0 +1,24 @@
+﻿
+
+USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectPafChargeCodeLine]    Script Date: 20-May-21 17:46:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create procedure [dbo].[sp_SelectPafDnChargeCodeLine] 
+@webDb as nvarchar(100), 
+@docEntry as int
+as
+declare @sql as nvarchar(max)
+select @sql = '
+
+SELECT * 
+FROM ['+@webDb+'].[dbo].[PAFDN1] 
+WHERE DocEntry =' + QUOTENAME(@docEntry, '''')
+
+--print @sql
+exec sp_executesql @sql
+

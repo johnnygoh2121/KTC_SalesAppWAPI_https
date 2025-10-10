@@ -1,0 +1,29 @@
+﻿
+
+-- sorted list 
+-- Use KTCW_KK 
+-- Use KTCW_SW 
+-- Use KTCW_TW 
+-- Use KTCW_DI 
+-- Use KTCW_CR
+-- Use KTCW_GT 
+-- Use KTCW_AM 
+-- Use KTCW_PT
+-- Use KTCW_SW_TEST
+-- Use KTCW_TEST   
+-- Use ZW_KTCD     
+-- Use ZW_KTCS    
+-- Use ZW_KTCG     
+-- Use TESTKTCWKK  
+-- use KTCW_PT   
+
+go 
+
+
+
+ALTER TABLE FTApp_PortalPayment_Docs
+ADD PartialAmt decimal(12,2)
+
+ALTER TABLE FTApp_PortalPayment_Docs
+ADD IsPaidPartial int
+

@@ -1,0 +1,21 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectStaticCode]    Script Date: 07-May-21 22:25:05 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+ALTER procedure [dbo].[sp_SelectStaticCode] 
+@codeType as nvarchar(100), 
+@webDb as nvarchar(100)
+
+as
+
+declare @sql as nvarchar(max)
+select @sql = 'SELECT * FROM ['+@webDb+'].[dbo].[StaticCode] WHERE CODETYPE =' + QUOTENAME(@codeType, '''')
+
+--print @sql
+exec sp_executesql @sql

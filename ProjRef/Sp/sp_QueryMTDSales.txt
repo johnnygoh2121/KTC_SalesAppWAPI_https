@@ -1,0 +1,40 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_QueryMTDSales]    Script Date: 20-Mar-21 12:06:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[sp_QueryMTDSales] 
+	@companyRef_ nvarchar(120), 
+	@salesCode_ nvarchar(120), 
+	@startDate_ nvarchar(120), 
+	@endDate_ nvarchar(120)
+AS
+
+declare @dbName nvarchar(120)
+declare @slpCode nvarchar(300)
+declare @startDate nvarchar(300)
+declare @endDate nvarchar(300)
+declare @sql nvarchar(max)
+
+select @slpCode = @salesCode_
+select @startDate = @startDate_
+select @endDate = @endDate_
+select @dbName = @companyRef_
+
+select @sql = 'SELECT SUM(T1.Debit - T1.Credit) AS SalesAmt ' +
+'FROM [' +  @dbName +  '].[dbo].[OJDT] T0 ' + 
+'INNER JOIN [' +  @dbName +  '].[dbo].[JDT1] T1 ON T0.TransId = T1.TransId ' + 
+'INNER JOIN [' +  @dbName +  '].[dbo].[OCRD] T2 ON T1.ShortName = T2.CardCode ' + 
+'WHERE T0.RefDate >= ' + quotename(@startDate, '''') +  
+' AND T0.RefDate <= ' + quotename(@endDate, '''') +  
+' AND T0.TransType IN (' + quotename(13, '''') + ',' + QUOTENAME(14, '''') + ')' +
+' AND T2.SlpCode = ' + @slpCode 
+
+--print @sql
+exec sp_executesql @sql
+
+--   set @sql='select * from '+@dbname+'.sys.tables';
+

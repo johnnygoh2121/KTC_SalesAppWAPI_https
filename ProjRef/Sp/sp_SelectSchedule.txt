@@ -1,0 +1,49 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectSchedule]    Script Date: 15-Jun-21 9:01:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER procedure [dbo].[sp_SelectSchedule] 
+	@UserCompany as nvarchar(120),
+	@UserCompanyID as nvarchar(120),
+	@UserCode as nvarchar(120),
+	@SlpName as nvarchar(120),
+	@erpDb as nvarchar(120),
+	@webDb as nvarchar(120),
+	@queryUserCode as nvarchar(120),
+	@date as datetime
+as
+
+/*select @UserCompany  = 'A'
+select @UserCompanyID  = 'A'
+select @UserCode = 'A'
+select @SlpName = 'A'
+select @erpDb = 'A'
+select @webDb = 'A'
+select @date '20210404' */
+declare @sql as NVARCHAR(max) 
+
+select @sql = 
+'SELECT *
+    ,'+ QUOTENAME(@UserCompany, '''')  +' [CompanyName]
+    ,'+ QUOTENAME(@UserCompanyID, '''') + ' [CompanyID]
+    ,'+ QUOTENAME(@UserCode, '''') +' [UserCode]
+    ,'+ QUOTENAME(@SlpName, '''')+' [SlpName]
+    , GETDATE() [ScheduleDate]
+FROM ['+ @erpDb +'].[dbo].[OCRD] t0
+WHERE t0.frozenfor = '+QUOTENAME('Y', '''') + ' 
+AND   t0.CardCode in (
+						SELECT Distinct StoreCode 
+						FROM ['+ @webDb +'].[dbo].[FTApp_BaseRouteSchedule] t1
+						WHERE t1.UserCode = ' + QUOTENAME(@queryUserCode, '''')+' 
+						AND convert(date, t1.ScheduleDate) =  '+ QUOTENAME(convert(date, @date), '''')+'
+						AND t1.IsActive = 1
+					 )'
+
+--print @sql
+exec sp_executesql @sql
+

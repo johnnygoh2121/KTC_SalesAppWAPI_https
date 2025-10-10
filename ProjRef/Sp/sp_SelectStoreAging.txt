@@ -1,0 +1,97 @@
+﻿USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SelectStoreAging]    Script Date: 16-May-21 17:31:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[sp_SelectStoreAging] 
+@sapDb nvarchar(120), 
+@storeCode as nvarchar(120) 
+as
+
+declare @ssql as nvarchar(max)
+
+select @ssql = 
+'
+SELECT 
+ T3.Cardcode [StoreCode]
+,T3.Cardname [StoreName]
+,T1.sysdeb [DebitAmount]
+,T1.syscred [CreditAmount]
+,T1.BaseRef [DocNum]
+--,T1.BALDUEDEB [BalanceDue]
+,(T1.sysdeb - T1.syscred) [Balance]
+,CASE T1.transtype
+WHEN '+QUOTENAME(13, '''') +' then '+QUOTENAME('IN', '''')+'
+WHEN '+QUOTENAME(14, '''') +' then '+QUOTENAME('CN', '''')+'
+WHEN '+QUOTENAME(24, '''') +' then '+QUOTENAME('PY', '''')+'
+ELSE '+QUOTENAME('OTHERS', '''')+'
+END [Type],
+T2.SeriesName + T1.Ref1 [DocNo],
+CASE WHEN t1.Ref2 != '''' THEN t1.Ref2
+	 ELSE t1.Ref1
+	 END [Ref1],
+T2.SeriesName [SeriesName], 
+T2.BeginStr [BeginStr],
+fccurrency [Currency],
+--CONVERT(VARCHAR(10), refdate, 103) [PostingDate],
+--CONVERT(VARCHAR(10), duedate, 103) [DueDate],
+--CONVERT(VARCHAR(10), taxdate, 103) [DocDate] ,
+T1.refdate [PostingDate],
+T1.duedate [DueDate],
+T1.taxdate [DocDate] ,
+CASE
+when (DATEDIFF(dd,T1.refdate,current_timestamp))+1 < 31
+then
+case
+when syscred <> 0 then -syscred
+else sysdeb
+end
+end [Below_30],
+case when ((datediff(dd,T1.refdate,current_timestamp))+1 > 30
+and (datediff(dd,T0.refdate,current_timestamp))+1< 61)
+then
+case
+when syscred <> 0 then -syscred
+else sysdeb
+end
+end [Between30_60],
+case when ((datediff(dd,T1.refdate,current_timestamp))+1 > 60
+and (datediff(dd,T0.refdate,current_timestamp))+1< 91)
+then
+case
+when syscred <> 0 then -syscred
+else sysdeb
+end
+end [Between60_90],
+CASE
+when (DATEDIFF(dd,T1.refdate,current_timestamp))+1 > 90
+then
+case
+
+when syscred= 0 then sysdeb
+
+when sysdeb= 0 then -syscred
+
+end
+
+end [Over_90]
+, DATEDIFF(dd, T1.refdate, getdate()) [Aged]
+
+from ['+ @sapDb +'].[dbo].[OJDT] T0 
+	 INNER JOIN 
+		['+ @sapDb +'].[dbo].[JDT1] T1 ON T0.TransId = T1.TransId	 
+	 LEFT JOIN 
+		['+ @sapDb +'].[dbo].[NNM1] T2 on T0.TransType = T2.ObjectCode and t0.DocSeries = t2.Series
+	INNER JOIN 
+		['+ @sapDb +'].[dbo].[OCRD] T3 ON T1.shortname = T3.cardcode AND T3.CardType = ' + QUOTENAME('c', '''') + '
+	WHERE T1.intrnmatch = ' +QUOTENAME('0', '''') +  '
+		AND T1.BALDUEDEB != T1.BALDUECRED 
+		AND T3.CardCode= '+ QUOTENAME(@storeCode, '''') + '
+		ORDER BY T3.CARDCODE, T0.taxdate '
+
+
+--print @ssql
+exec sp_executesql @ssql

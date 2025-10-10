@@ -1,0 +1,63 @@
+﻿
+USE [KTCW_COMMON]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_QueryStickerTracing]    Script Date: 12-Jun-21 16:01:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[sp_QueryStickerTracing]
+@webDb as nvarchar(100), 
+@startDate as datetime, 
+@endDate as datetime
+
+as
+
+declare @sql as nvarchar(max) = '
+
+select 
+-- sticker query
+  t0.BaseEntry
+, t0.BoxId 
+, t0.PickDt 
+, t0.PickerCode 
+, t0.PickerName 
+, t0.PackId 
+, t0.PackDt 
+, t0.PackerCode 
+, t0.PackerName
+-- sticker content
+, t1.ItemCode 
+, t1.ItemName 
+, t1.Qty 
+, t1.Packaging
+-- SO line / SO1
+, t2.LINENUM 
+, t2.QUANTITY 
+, t2.QUANTITYPC 
+, t2.QUANTITYCS 
+-- SO 
+, t3.DOCDATE 
+, t3.DELDATE 
+, t3.INVNO 
+, t3.CARDCODE 
+, t3.CARDNAME 
+, t3.BILLTO
+, t3.BILLTOADD
+, t3.SHIPTO
+, t3.SHIPTOADD
+
+FROM 
+['+@webDb+'].[dbo].[FTAPP_Box] t0
+	inner join ['+@webDb+'].[dbo].[FTAPP_Box1] t1 on t1.BoxGuid = t0.BoxGuid	
+	left join ['+@webDb+'].[dbo].[SO1] t2 on t2.DOCENTRY = t1.BaseEntry and t2.LINENUM = t1.BaseLine
+	left join ['+@webDb+'].[dbo].[SO] t3 on t3.DOCENTRY = t0.BaseEntry and t2.DOCENTRY = t3.DOCENTRY
+Where 
+	convert(date, t3.DocDate) >= ' + QUOTENAME(@startDate,'''') +'
+	and convert(date, t3.DocDate) <= ' + QUOTENAME(@endDate, '''') +'
+
+order by t0.BaseEntry, t0.BoxId '
+
+--print @sql
+exec sp_executesql @sql

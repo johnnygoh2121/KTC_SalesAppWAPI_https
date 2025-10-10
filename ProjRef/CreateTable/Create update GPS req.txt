@@ -1,0 +1,118 @@
+﻿
+-- Use KTCW_KK      -- done
+-- Use KTCW_SW		-- done
+-- Use KTCW_TW		-- done
+-- Use KTCW_DI		-- done
+-- Use KTCW_CR		-- done
+-- Use KTCW_GT		-- done
+-- Use KTCW_AM		-- done
+-- Use KTCW_PT		-- done
+-- Use KTCW_SW_TEST -- done
+-- Use KTCW_TEST    -- done
+-- Use ZW_KTCD		-- done
+-- Use ZW_KTCS		-- done
+-- Use ZW_KTCG		-- done
+-- Use TESTKTCWKK	-- done
+
+
+
+
+
+/****** Object:  Table [dbo].[FTAPP_ReqUpdateCardGps]    Script Date: 09-Jun-21 13:42:06 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[FTAPP_ReqUpdateCardGps](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[CardCode] [nvarchar](100) NULL,
+	[CardName] [nvarchar](100) NULL,
+	[UserCode] [nvarchar](100) NULL,
+	[UserName] [nvarchar](120) NULL,
+	[CurrentLatitude] [decimal](9, 6) NULL,
+	[CurrentLogitude] [decimal](9, 6) NULL,
+	[NewLatitude] [decimal](9, 6) NULL,
+	[NewLongitude] [decimal](9, 6) NULL,
+	[RequestDt] [datetime] NULL,
+	[UpdateStatus] [nvarchar](100) NULL,
+	[CompanyName] [nvarchar](100) NULL,
+	[CompanyId] [nvarchar](60) NULL
+) ON [PRIMARY]
+GO
+
+
+---- latest table structure 2021 Jun 16
+CREATE TABLE [dbo].[FTAPP_SO1_DRAFT](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[DOCENTRY] [bigint] NOT NULL,
+	[LINENUM] [int] NOT NULL,
+	[ITEMCODE] [nvarchar](50) NULL,
+	[ITEMNAME] [nvarchar](100) NULL,
+	[CODEBARS] [nvarchar](50) NULL,
+	[UOMQTY] [numeric](20, 6) NULL,
+	[STOCKQTY] [numeric](20, 6) NULL,
+	[PRICE] [numeric](20, 6) NULL,
+	[QUANTITY] [numeric](20, 6) NULL,
+	[QUANTITYCS] [numeric](20, 6) NULL,
+	[QTY] [numeric](20, 6) NULL,
+	[DISC] [numeric](20, 6) NULL,
+	[SUPP] [numeric](20, 6) NULL,
+	[DISCSUM] [numeric](20, 6) NULL,
+	[LINETOTAL] [numeric](20, 6) NULL,
+	[PENTRY] [bigint] NULL,
+	[PLINE] [int] NULL,
+	[PTYPE] [nvarchar](5) NULL,
+	[SUGGESTQTY] [numeric](20, 6) NULL,
+	[DOCNUM] [bigint] NULL,
+	[BORNE] [nvarchar](50) NULL,
+	[SUPPSUM] [numeric](20, 6) NULL,
+	[INVQTY] [numeric](20, 6) NULL,
+	[INVPRICE] [numeric](20, 6) NULL,
+	[INVTOTAL] [numeric](20, 6) NULL,
+	[ITEMCOST] [numeric](20, 6) NULL,
+	[DIM1] [nvarchar](50) NULL,
+	[DIM2] [nvarchar](50) NULL,
+	[DIM3] [nvarchar](50) NULL,
+	[MBID] [int] NULL,
+	[SUPPCODE] [nvarchar](30) NULL,
+	[QUANTITYPC] [numeric](20, 6) NULL,
+	[REFNO] [nvarchar](30) NULL,
+	[REFITEM] [nvarchar](30) NULL,
+	[UOM] [nvarchar](10) NULL,
+	[BATCHID] [int] NULL,
+	[COKEPROMO] [nvarchar](50) NULL,
+	[SUPPCATNUM] [nvarchar](20) NULL,
+	[TAXCODE] [nvarchar](20) NULL,
+	[PRICE2] [numeric](20, 6) NULL,
+	[NONIM] [nvarchar](10) NULL,
+	[PROMOCOUNT] [int] NULL,
+	[NPENTRY] [bigint] NULL,
+	[NPID] [int] NULL,
+	[NPLINE] [int] NULL,
+	[PROMOPACKAGE] [nvarchar](1) NULL,
+	[PICKEDQTY] [numeric](21, 6) NULL,
+	[REFLINE] [int] NULL,
+	[PickedPcs] [numeric](21, 6) NULL,
+	[PickedCase] [numeric](21, 6) NULL,
+	[NeededCase] [numeric](21, 6) NULL,
+	[NeededPcs] [numeric](21, 6) NULL,
+	[ContentDesc] [nvarchar](max) NULL,
+	[SubSi] [nvarchar](210) NULL,
+	[IsMissing] [int] NULL,
+	[IsMissingCs] [int] NULL,
+	[IsMissingPc] [int] NULL,
+	[IsAvailableForPick] [int] NULL,
+	[AgencyName] [nvarchar](210) NULL,
+	[AgencyCode] [nvarchar](120) NULL,
+	[QUANTITYPC_Orig] [numeric](21, 6) NULL,
+	[QUANTITYCS_Orig] [numeric](21, 6) NULL,
+ CONSTRAINT [PK_FTAPP_DRAFT_SO1] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC,
+	[DOCENTRY] ASC,
+	[LINENUM] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
