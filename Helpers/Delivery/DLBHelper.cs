@@ -79,9 +79,9 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
 
             // 20250930 
             // get the picked whs code 
-            var pickedWhs = GetPickedWhs(userCode, connStr, Db.WEBDB); 
+            var pickedWhs = GetPickedWhs(userCode, connStr, Db.WEBDB);
             using var conn = new SqlConnection(connStr);
-            
+
             // get the max doc entry
             var maxDocEntry_query = @$"select isnull(max(docentry) +1, 1) from {Db.WEBDB}..DLB ";
             long docEntry = conn.Query<long>(maxDocEntry_query).FirstOrDefault();
@@ -91,7 +91,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                 conn.Open();
             }
 
-          
+
 
 
             #region create DLB, DLB1 
@@ -538,8 +538,8 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
         // create the dlb without auto create the transfer
         public long CreateDLB_WNoTransfer(FTAPP_DLB head, List<FTAPP_DLB1> lines, string userCode, string userName,
             SqlTransaction trans,
-            SqlConnection conn, 
-            string connString )
+            SqlConnection conn,
+            string connString)
         {
             // 20250930
             var pickedWhs = "";
@@ -552,11 +552,11 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                                          {Db.WEBDB}..USERS t1 on t0.UCREATED = t1.USERCODE
                                     Where docentry = @lastDlbEntry ";
 
-                pickedWhs = new SqlConnection(connString).ExecuteScalar<string>(sp_query, new 
+                pickedWhs = new SqlConnection(connString).ExecuteScalar<string>(sp_query, new
                 {
                     lastDlbEntry
                 });
-            } 
+            }
 
             // get the max doc entry
             var maxDocEntry_query = @$"select max(docentry) +1 from {Db.WEBDB}..DLB";
@@ -589,7 +589,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                     UCREATED = head.WhsUserCode,
                     DCREATED = DateTime.Now,
                     UMODIFIED = head.WhsUserCode,
-                    DMODIFIED = DateTime.Now, 
+                    DMODIFIED = DateTime.Now,
                     PICKEDWHS = pickedWhs
                 };
 
