@@ -823,7 +823,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                             Currency = f.First().Currency,
                             IsBoxLabelVis = f.First().IsBoxLabelVis,
                             BoxesCount = f.First().BoxesCount,
-                            U_DROPPOINT = f.First().U_DROPPOINT, 
+                            U_DROPPOINT = f.First().U_DROPPOINT,
                             Warehouse = f.First().Warehouse,
                         })
                         .ToList();
@@ -2944,13 +2944,13 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     hguid = $"{dlb1.HeadGuid}",
                     InvDocNum = dto.DocNum
                 }, trans);
-                if (resDelBoxes <= 0)
+
+                if (resDelBoxes < 0)
                 {
                     trans.Rollback();
                     return BadRequest($"Error delete FTAPP_DLB2 \n" +
                         $"{db.COMPANYNAME}, docNum # {dto.DocNum}, Type: {dto.DocType}");
                 }
-
 
                 // added doc 
                 var sp_delete1 = @$"Delete from {db.WEBDB}..FTAPP_DLB1 
@@ -2964,7 +2964,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     DocNum = dto.DocNum,
                     docType = dto.DocType
                 }, trans);
-                if (resDelDocs <= 0)
+                if (resDelDocs < 0)
                 {
                     trans.Rollback();
                     return BadRequest($"Error delete FTAPP_DLB1 \n" +
