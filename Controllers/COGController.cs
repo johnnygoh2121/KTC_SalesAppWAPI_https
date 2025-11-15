@@ -110,14 +110,116 @@ namespace KTC_SalesAppWAPI.Controllers
                     {
                         return GetBoxContents(dto);
                     }
-                //case "GetCogReturnDocs":
-                //    {
-                //        return GetCogReturnDocs(dto); // RTN
-                //    }
+                case "GetCnDocLineBatches": // 20251114
+                    {
+                        return GetCnDocLineBatches(dto);
+                    }
+                case "GetInvDocLineBatches": // 20251114
+                    {
+                        return GetInvDocLineBatches(dto);
+                    }
                 default:
                     {
-                        return BadRequest("no recognised request");
+                        return BadRequest("no recognized request");
                     }
+            }
+        }
+
+        IActionResult GetInvDocLineBatches(Dto_Cog dto)
+        {
+            try
+            {
+                if (dto.DocEntry <= 0)
+                {
+                    return BadRequest("Invalid doc entry");
+                }
+                if (string.IsNullOrWhiteSpace(dto.ItemCode))
+                {
+                    return BadRequest("Invalid item code");
+                }
+                if (dto.LineNumber < 0)
+                {
+                    return BadRequest("Invalid line number");
+                }
+                if (string.IsNullOrWhiteSpace(dto.Subsi))
+                {
+                    return BadRequest("Invalid subsi");
+                }
+
+                var db = new DbNameHelper().GetDbInfo(_commDbConnStr, dto.Subsi);
+                if (db == null)
+                {
+                    return BadRequest("Invalid db info");
+                }
+
+                var sp_query = @$"exec sp_GetInvLineBatches @webDb, @docEntry,  @itemCode, @lineNum";
+
+                using var conn = new SqlConnection(_commDbConnStr);
+                var batches = conn.Query<DocLineBatch>(sp_query, new
+                {
+                    webDb = db.WEBDB,
+                    docEntry = dto.DocEntry, // cn 
+                    itemCode = dto.ItemCode,
+                    lineNum = dto.LineNumber
+                }).ToList();
+
+                if (batches.Count == 0) return NotFound();
+                return Ok(batches);
+            }
+            catch (Exception e)
+            {
+                LastError = $"{e.Message}\n{e.StackTrace}";
+                _logger.LogError(LastError);
+                return BadRequest(LastError);
+            }
+        }
+
+        IActionResult GetCnDocLineBatches (Dto_Cog dto)
+        {
+            try
+            {
+                if (dto.DocEntry <= 0)
+                {
+                    return BadRequest("Invalid doc entry");
+                }
+                if (string.IsNullOrWhiteSpace(dto.ItemCode))
+                {
+                    return BadRequest("Invalid item code");                   
+                }
+                if (dto.LineNumber < 0)
+                {
+                    return BadRequest("Invalid line number");
+                }
+                if (string.IsNullOrWhiteSpace(dto.Subsi))
+                {
+                    return BadRequest("Invalid subsi");
+                }
+
+                var db = new DbNameHelper().GetDbInfo(_commDbConnStr, dto.Subsi);
+                if (db == null)
+                {
+                    return BadRequest("Invalid db info");
+                }
+
+                var sp_query = @$"exec sp_GetCnLineBatches @webDb, @docEntry,  @itemCode, @lineNum ";
+
+                using var conn = new SqlConnection(_commDbConnStr);
+                var batches = conn.Query<DocLineBatch>(sp_query, new 
+                {
+                    webDb = db.WEBDB,
+                    docEntry = dto.DocEntry, // cn 
+                    itemCode = dto.ItemCode,
+                    lineNum = dto.LineNumber
+                }).ToList();
+
+                if (batches.Count == 0) return NotFound();
+                return Ok(batches);
+            }
+            catch (Exception e)
+            {
+                LastError = $"{e.Message}\n{e.StackTrace}";
+                _logger.LogError(LastError);
+                return BadRequest(LastError);
             }
         }
 

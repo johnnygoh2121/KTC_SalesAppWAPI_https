@@ -49,5 +49,11 @@ namespace KTC_SalesAppWAPI.DTOs.COG
         public string DriverName { get; set; }
         public string PlateNum { get; set; }
 
+        // for cn and invoice return 
+        public int LineNumber { get; set; }        
+        public string ItemName { get; set; }
+        public string BatchNum { get; set; }
+        public decimal BatchQty { get; set; }
+
     }
 }
