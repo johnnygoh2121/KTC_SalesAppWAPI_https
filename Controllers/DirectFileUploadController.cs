@@ -27,6 +27,7 @@ namespace KTC_SalesAppWAPI.Controllers
         string _webPortal_Host_EndPoint = "";
         string _fileSavePath = "";
         string _webAccessPath = "";
+        string _webAccessPath_Actual = "";
         string _commDbConnStr_Bread;
 
         public DirectFileUploadController(IConfiguration configuration,
@@ -35,6 +36,7 @@ namespace KTC_SalesAppWAPI.Controllers
             _configuration = configuration;
             _fileSavePath = _configuration.GetSection("WebAttachmentPath").Value;
             _webAccessPath = _configuration.GetSection("WebAccessPath").Value;
+            _webAccessPath_Actual = _configuration.GetSection("WebAccessPath_Actual").Value;
             _webPortal_Host_EndPoint = _configuration.GetSection("AppSettings").GetSection("WebPortal_Host_EndPoint").Value;
             _commDbConnStr_Bread = _configuration.GetConnectionString("MasterConn_Bread");
 
@@ -250,6 +252,10 @@ namespace KTC_SalesAppWAPI.Controllers
                 {
                     Directory.CreateDirectory(_fileSavePath);
                 }
+                if (!Directory.Exists(_webAccessPath_Actual))
+                {
+                    Directory.CreateDirectory(_webAccessPath_Actual);
+                }
 
                 var path = Path.Combine(_fileSavePath, file.FileName);
                 using (var stream = new FileStream(path, FileMode.Create))
@@ -272,6 +278,12 @@ namespace KTC_SalesAppWAPI.Controllers
 
                     System.IO.File.Delete(newFilePath); // Delete the existing file if exists
                     System.IO.File.Move(path, newFilePath); // Rename the oldFileName into newFileName
+
+                    
+
+                    // 20251120
+                    var newFilePath_Act = Path.Combine(_webAccessPath_Actual, newFileName);
+                    System.IO.File.Copy(newFilePath, newFilePath_Act);
 
                     return Ok(newFileName);
                 }
@@ -320,6 +332,12 @@ namespace KTC_SalesAppWAPI.Controllers
                     Directory.CreateDirectory(_fileSavePath);
                 }
 
+
+                if (!Directory.Exists(_webAccessPath_Actual))
+                {
+                    Directory.CreateDirectory(_webAccessPath_Actual);
+                }
+
                 var filepath = Path.Combine(_fileSavePath, file.FileName);
                 using (var stream = new FileStream(filepath, FileMode.Create))
                 {
@@ -338,6 +356,10 @@ namespace KTC_SalesAppWAPI.Controllers
 
                     System.IO.File.Delete(newFilePath); // Delete the existing file if exists
                     System.IO.File.Move(filepath, newFilePath); // Rename the oldFileName into newFileName
+
+                    // 20251120
+                    var newPathWebAccess = Path.Combine(_webAccessPath_Actual, newFileName);
+                    System.IO.File.Copy(newFilePath, newPathWebAccess);
 
                     // prepare to insert the file info
                     var newFile = new FPROP
@@ -390,7 +412,7 @@ namespace KTC_SalesAppWAPI.Controllers
                     return Ok(webAccess);
                 }
 
-                return BadRequest("File saved wirh error");
+                return BadRequest("File saved with error");
             }
             catch (Exception e)
             {
