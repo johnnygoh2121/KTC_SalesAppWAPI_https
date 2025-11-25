@@ -42,6 +42,7 @@ namespace KTC_SalesAppWAPI.Models.Pick
 
         public bool IsCompleted_AddBoxes { get; set; } = false;
 
+        public bool IsAllowInputBoxQty { get; set; } = false;
 
         #region fields for table OINV
 

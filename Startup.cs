@@ -37,8 +37,16 @@ namespace KTC_SalesAppWAPI
                                       builder.WithOrigins("https://192.168.1.114",
                                                           "http://192.168.1.114").WithMethods("POST");
                                   });
-            });
 
+                // New policy for Angular app
+                options.AddPolicy("AllowAngular", policy =>
+                {
+                    policy.WithOrigins("http://localhost:4200") // Angular dev server
+                          .AllowAnyHeader()
+                          .AllowAnyMethod(); // GET, POST, etc.
+                });
+
+            });
 
             services.AddControllers();
 

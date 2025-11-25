@@ -2,6 +2,7 @@
 using KTC_SalesAppWAPI.DTOs.BaseRoute;
 using KTC_SalesAppWAPI.Helpers;
 using KTC_SalesAppWAPI.Models.GeoFence;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -28,6 +29,7 @@ namespace KTC_SalesAppWAPI.Controllers.BaseRouteSchedule
             _commDbConnStr = _configuration.GetConnectionString(_dbComm);
         }
 
+        [EnableCors("AllowAngular")]
         [HttpPost]
         public IActionResult Post(DTO_BaseRoute dto)
         {
@@ -42,7 +44,6 @@ namespace KTC_SalesAppWAPI.Controllers.BaseRouteSchedule
                     {
                         return GetSchedule(dto);
                     }
-
                 default:
                     {
                         return BadRequest("no recognised request");

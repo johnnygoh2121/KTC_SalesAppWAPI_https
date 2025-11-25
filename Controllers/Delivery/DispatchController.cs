@@ -2374,7 +2374,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 return BadRequest("invalid dbi");
             }
 
-            var query_box = @$" Select * from  {db.WEBDB}..FTAPP_DLB2
+            var query_box = @$" Select * from  {db.WEBDB}..FTAPP_DLB2 with (NOLOCK)
                                     Where InvDocNum = @InvDocNum
                                           and BoxId = @BoxId 
                                           and DLBEntry = @DlbEntry";
@@ -2570,22 +2570,28 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                 using var conn = new SqlConnection(_commDbConnStr);
 
+                var allowInputBoxQty_sp = "Select SetupValue from ktcw_common..FTAPP_Config " +
+                    "where SetupName = 'DeliveryAppUsedInputBoxQty' ";
+
+                var allowInputBoxQty = conn.ExecuteScalar<string>(allowInputBoxQty_sp);
+                var isAllowInputBox = false;
+                if (allowInputBoxQty.ToLower().Equals("y"))
+                {
+                    isAllowInputBox = true;
+                }
+
                 // return ok when all status 
                 // get the invoice from sap                     
-                var query_inv = @$"select * from {db.SAPDB}..OINV with (nolock) where docnum = @docnum";
-                Models.Pick.OINV inv = conn.Query<Models.Pick.OINV>(query_inv, new { docnum = dto.InvNum }).FirstOrDefault();
+                var query_inv = @$"select '{isAllowInputBox}'  [IsAllowInputBoxQty] ,
+                                        * from {db.SAPDB}..OINV with (NOLOCK) where DocNum = @DocNum";
+                Models.Pick.OINV inv = conn.Query<Models.Pick.OINV>(query_inv, new { DocNum = dto.InvNum }).FirstOrDefault();
                 if (inv == null)
                 {
                     return BadRequest($"Invoice #{dto.InvNum} from {dto.Subsi}, Error query for sap invoice.");
                 }
 
                 // get the box list from web portal
-                //var query_box = $@"select BoxId from {db.WEBDB}..FTAPP_Box with (nolock)
-                //                    Where baseentry = @baseentry";
-
-                // get the box list from web portal
-                var query_box = $@"select DISTINCT   t0.BoxId
-                                                      , t0.PickerCode
+                var query_box = $@"select DISTINCT    t0.PickerCode
                                                       , t0.PickerName
                                                       , t0.PickDt
                                                       , t0.PackId
@@ -2602,18 +2608,18 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                                       , t0.CurrentCartonNo
                                                       , t0.OrderNo
                                                       , t0.LabelConsistTotalBoxes
+                                                      , t0.BoxId
+                                from {db.WEBDB}..FTAPP_Box t0 with (NOLOCK)                                
+                                Where t0.BaseEntry = @BaseEntry  ";
 
-                                from {db.WEBDB}..FTAPP_Box t0 with (nolock)
-                                left join  {db.WEBDB}..FTAPP_Box1 t1  with (nolock) on t0.BoxGuid = t1.BoxGuid
-                                Where t0.BaseEntry = @baseentry 
-                                and t1.BoxGuid is not null     ";
+                var boxes = conn.Query<FTAPP_Box>(query_box, new { BaseEntry = inv.U_SOID }).ToList();
+                boxes = boxes.Distinct().ToList();
+                if (boxes.Count == 0)
+                {
+                    return BadRequest($"Invoice #{dto.InvNum} from {dto.Subsi}, Error query for boxes.");
+                }
 
-                inv.Boxes = conn.Query<FTAPP_Box>(query_box, new { baseentry = inv.U_SOID }).ToList();
-                //if (inv.Boxes.Count == 0)
-                //{
-                //    //return BadRequest($"Invoice #{dto.InvNum} from {dto.Subsi}, Error query for boxes.");
-                //}
-
+                inv.Boxes = new List<FTAPP_Box>(boxes);
                 inv.Subsi = db.COMPANYNAME;
                 inv.SubsiId = db.COMPANYID;
                 return Ok(inv);
