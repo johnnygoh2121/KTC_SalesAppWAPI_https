@@ -12,7 +12,7 @@ namespace KTC_SalesAppWAPI.Models.Dispatch
         public string CardCode { get; set; }
         public string CardName { get; set; }
         public string Territory { get; set; }
-        public string GeoCode { get; set; }
+        
         public string Street { get; set; }
         public string Block { get; set; }
         public string ZipCode { get; set; }
@@ -26,6 +26,12 @@ namespace KTC_SalesAppWAPI.Models.Dispatch
         public string DocType { get; set; }
 
         public string DriverName { get; set; }
+
+        public string GeoCode { get; set; } // read from DLB
+        // interbranch indicator
+        // 20251128
+        public bool IsInterbranch { get; set; } = false;
+
 
         public string GetAddress
         {

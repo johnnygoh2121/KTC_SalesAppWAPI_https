@@ -44,7 +44,13 @@ namespace KTC_SalesAppWAPI.Models.Pick
 
         public bool IsAllowInputBoxQty { get; set; } = false;
 
-        #region fields for table OINV
+        public string DROP_POINT_GEOCODE { get; set; } // linked cust OCRD GlblLocNum 
+        public string U_GLN { get; set; }   // donation gps value 
+
+
+        #region fields for table OINVs
+
+
 
         public int U_SOID { get; set; }
         public int DocEntry { get; set; }

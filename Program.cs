@@ -22,17 +22,7 @@ namespace KTC_SalesAppWAPI
         public static Dictionary<string, bool> UserTransToken_BreadCreateCn { get; set; } = new Dictionary<string, bool>();
 
         public static void Main(string[] args)
-        {
-            // before seri log add in
-            //CreateHostBuilder(args).Build().Run();
-
-            // after install serilog sink to file 
-            //Log.Logger = new LoggerConfiguration()
-            //    .Enrich.FromLogContext()
-            //    .WriteTo.Console()
-            //    .CreateLogger();
-            //CreateHostBuilder(args).Build().Run();
-
+        {           
             try
             {
                 Log.Logger = new LoggerConfiguration()
@@ -40,7 +30,7 @@ namespace KTC_SalesAppWAPI
                 .WriteTo.Console(new RenderedCompactJsonFormatter())
                         .WriteTo.Debug(outputTemplate: DateTime.Now.ToString()).WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
-                CreateHostBuilder(args).Build().Run();
+                CreateHostBuilder(args).Build().Run();                
             }
             catch (Exception e)
             {
@@ -65,23 +55,5 @@ namespace KTC_SalesAppWAPI
                 return null;
             }
         }
-
-
-        // after install serilog sink file features
-        //public static IHostBuilder CreateHostBuilder(string[] args) =>
-        //    Host.CreateDefaultBuilder(args)
-        //    .UseSerilog()
-        //        .ConfigureWebHostDefaults(webBuilder =>
-        //        {
-        //            webBuilder.UseStartup<Startup>();
-        //        });
-
-        // before seri log add in 
-        //public static IHostBuilder CreateHostBuilder(string[] args) =>
-        //    Host.CreateDefaultBuilder(args)
-        //        .ConfigureWebHostDefaults(webBuilder =>
-        //        {
-        //            webBuilder.UseStartup<Startup>();
-        //        });
     }
 }

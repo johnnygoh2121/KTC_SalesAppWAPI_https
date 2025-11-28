@@ -2450,39 +2450,42 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                 if (transfer == null) return NotFound();
 
-                // transfer line no need
-                //var query_TransferLine = @$"Select * from {db.SAPDB}..WTR1 with (nolock)
-                //                   Where DocEntry = @DocEntry";
+                // 20251128
+                // get the setup app config 
+                var sp_setupConfig = $@"select SetupValue from KTCW_COMMON..FTAPP_Config 
+                                      where SetupName= 'DeliveryAppUsedInputBoxQty_IBT' ";
 
-                //transfer.Lines = conn.Query<WTR1_Ext>(query_TransferLine, new { transfer.DocEntry }).ToList();
+                var isAllowInputBxWty_val = conn.ExecuteScalar<string>(sp_setupConfig);
+                if ($"{isAllowInputBxWty_val}".ToLower().Equals("y"))
+                {
+                    transfer.IsAllowInputBoxQty = true;
+                }
 
                 // 20230517
                 // query all the box with this ibt / transfer doc
                 // get the box list from web portal
                 var query_box = $@"select DISTINCT t0.BoxId
-                                                      , t0.PickerCode
-                                                      , t0.PickerName
-                                                      , t0.PickDt
-                                                      , t0.PackId
-                                                      , t0.PackDt
-                                                      , t0.PackerCode
-                                                      , t0.PackerName
-                                                      , t0.BaseEntry
-                                                      , t0.BoxGuid
-                                                      , t0.TimeStampSeq
-                                                      , t0.AppVersion
-                                                      , t0.BoxSize
-                                                      , t0.OrderProcessWeek
-                                                      , t0.BusinessCenterCode
-                                                      , t0.CurrentCartonNo
-                                                      , t0.OrderNo
-                                                      , t0.LabelConsistTotalBoxes
+                                        , t0.PickerCode
+                                        , t0.PickerName
+                                        , t0.PickDt
+                                        , t0.PackId
+                                        , t0.PackDt
+                                        , t0.PackerCode
+                                        , t0.PackerName
+                                        , t0.BaseEntry
+                                        , t0.BoxGuid
+                                        , t0.TimeStampSeq
+                                        , t0.AppVersion
+                                        , t0.BoxSize
+                                        , t0.OrderProcessWeek
+                                        , t0.BusinessCenterCode
+                                        , t0.CurrentCartonNo
+                                        , t0.OrderNo
+                                        , t0.LabelConsistTotalBoxes
 
-                                from {db.WEBDB}..FTAPP_IBTBox t0 with (nolock)
-                                left join  {db.WEBDB}..FTAPP_IBTBox1 t1  with (nolock) on t0.BoxGuid = t1.BoxGuid
-                                left join {db.WEBDB}..IBT t3 on t3.DocEntry = t0.BaseEntry
-                                Where t3.TRANSITNO = @IbtDocNum 
-                                and t1.BoxGuid is not null";
+                                from {db.WEBDB}..FTAPP_IBTBox t0 with (NOLOCK)
+                                left join {db.WEBDB}..DLB t1 on t1.DocEntry = t0.BaseEntry
+                                Where t1.TRANSITNO = @IbtDocNum  ";
 
                 // based on scan in transfer doc 
 
@@ -2491,6 +2494,9 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 {
                     return BadRequest($"{db.COMPANYNAME}, Transfer #{dto.InvNum} from {dto.Subsi}, Error query for boxes.");
                 }
+
+                transfer.SubSi = db.COMPANYNAME;
+                transfer.SubsiId = db.COMPANYID;
 
                 return Ok(transfer);
 
@@ -2582,8 +2588,14 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                 // return ok when all status 
                 // get the invoice from sap                     
-                var query_inv = @$"select '{isAllowInputBox}'  [IsAllowInputBoxQty] ,
-                                        * from {db.SAPDB}..OINV with (NOLOCK) where DocNum = @DocNum";
+                var query_inv = @$"select '{isAllowInputBox}' [IsAllowInputBoxQty]                                             
+                                            , t2.GlblLocNum [DROP_POINT_GEOCODE]                                           
+                                            , t0.*
+                                        from {db.SAPDB}..OINV t0 with (NOLOCK) 
+                                        left join {db.SAPDB}..OCRD t1 on t1.CardCode = t0.CardCode 
+                                        left join {db.SAPDB}..OWHS t2 on t2.WhsCode = t1.U_DROPPOINT
+                                        where DocNum = @DocNum";
+
                 Models.Pick.OINV inv = conn.Query<Models.Pick.OINV>(query_inv, new { DocNum = dto.InvNum }).FirstOrDefault();
                 if (inv == null)
                 {

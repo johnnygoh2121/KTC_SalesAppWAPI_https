@@ -20,6 +20,8 @@ namespace KTC_SalesAppWAPI.Models.Delivery
         public string SubsiId { get; set; }
         public int LineCount { get; set; }
 
+        public bool IsAllowInputBoxQty { get; set; } = false; // for ibt box transfer 
+        public string GEOCODE { get; set; } // to warehouse GPS
 
         public List<WTR1_Ext> Lines { get; set; }
         public List<FTAPP_Box> Boxes { get; set; }

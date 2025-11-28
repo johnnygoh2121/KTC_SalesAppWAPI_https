@@ -21,36 +21,47 @@ namespace KTC_SalesAppWAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // MVC + API controllers
             services.AddControllersWithViews();
+            services.AddRazorPages();
 
             services.AddSingleton<IFileProvider>(
                 new PhysicalFileProvider(
                     Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
 
-            //services.AddCors();
-
+            // CORS policy
             services.AddCors(options =>
             {
-                options.AddPolicy(name: MyAllowSpecificOrigins,
-                                  builder =>
-                                  {
-                                      builder.WithOrigins("https://192.168.1.114",
-                                                          "http://192.168.1.114").WithMethods("POST");
-                                  });
-
-                // New policy for Angular app
-                options.AddPolicy("AllowAngular", policy =>
+                options.AddPolicy("AllowAngular", builder =>
                 {
-                    policy.WithOrigins("http://localhost:4200") // Angular dev server
-                          .AllowAnyHeader()
-                          .AllowAnyMethod(); // GET, POST, etc.
+                    builder.WithOrigins("http://localhost:4200")
+                           .AllowAnyHeader()
+                           .AllowAnyMethod()
+                           .AllowCredentials(); // Add if using cookies/auth
                 });
-
             });
 
-            services.AddControllers();
 
-            services.AddRazorPages();
+
+            //services.AddControllersWithViews();
+
+            //services.AddSingleton<IFileProvider>(
+            //    new PhysicalFileProvider(
+            //        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));          
+
+            //services.AddControllers();
+            //services.AddRazorPages();
+
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("AllowAngular", builder =>
+            //    {
+            //        builder.WithOrigins("http://localhost:4200")
+            //               .AllowAnyHeader()
+            //               .AllowAnyMethod();
+            //    });
+        //});
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,26 +75,20 @@ namespace KTC_SalesAppWAPI
             {
                 app.UseHsts();
             }
-
-            app.UseHttpsRedirection(); 
-
-            // using Microsoft.Extensions.FileProviders;
-            // using System.IO;
+            app.UseHttpsRedirection();
             app.UseDefaultFiles();
-
             app.UseStaticFiles();
 
+            // 20251127            
             app.UseRouting();
-
-            app.UseCors(MyAllowSpecificOrigins);
-
+            app.UseCors("AllowAngular");            
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
-            {                
+            {
                 endpoints.MapControllers();
                 endpoints.MapRazorPages();
             });
+            
         }
     }
 }

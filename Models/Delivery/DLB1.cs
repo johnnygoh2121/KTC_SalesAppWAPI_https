@@ -39,5 +39,7 @@ namespace KTC_SalesAppWAPI.Models.Delivery
         public bool IsReScan { get; set; } // for add in rescan feature indicator
 
         public string IsAllowDlbReScan { get; set; } // for dlb rescan
+
+        public bool IsInterBranch { get; set; }
     }
 }

@@ -1,0 +1,408 @@
+2025-11-27 13:26:12.848 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-27 13:26:21.971 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-27 13:26:22.193 +08:00 [INF] Hosting environment: Development
+2025-11-27 13:26:22.208 +08:00 [INF] Content root path: C:\Proj\VS2022\KTC_AppWebAPI _Https
+2025-11-27 13:26:22.488 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/weatherforecast  
+2025-11-27 13:26:22.489 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-11-27 13:26:22.542 +08:00 [WRN] Failed to determine the https port for redirect.
+2025-11-27 13:26:22.927 +08:00 [INF] Request finished in 464.4343ms 404 
+2025-11-27 13:26:23.839 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2025-11-27 13:26:23.937 +08:00 [INF] Route matched with {action = "Get", controller = "WeatherForecast"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[KTC_SalesAppWAPI.WeatherForecast] Get() on controller KTC_SalesAppWAPI.Controllers.WeatherForecastController (KTC_SalesAppWAPI).
+2025-11-27 13:26:23.960 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.WeatherForecast[]'.
+2025-11-27 13:26:24.029 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI) in 75.6405ms
+2025-11-27 13:26:24.034 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2025-11-27 13:26:24.046 +08:00 [INF] Request finished in 1585.4449ms 200 application/json; charset=utf-8
+2025-11-27 13:26:24.494 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/favicon.ico  
+2025-11-27 13:26:24.735 +08:00 [INF] Request finished in 241.3812ms 404 
+2025-11-27 14:14:06.763 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/BaseRoute  
+2025-11-27 14:14:06.808 +08:00 [INF] CORS policy execution failed.
+2025-11-27 14:14:06.814 +08:00 [INF] Request origin http://localhost:4200 does not have permission to access the resource.
+2025-11-27 14:14:06.823 +08:00 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-11-27 14:14:06.831 +08:00 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-11-27 14:14:06.854 +08:00 [INF] Request finished in 101.697ms 405 
+2025-11-27 14:28:34.419 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-27 14:28:41.404 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-27 14:28:41.408 +08:00 [INF] Hosting environment: Development
+2025-11-27 14:28:41.411 +08:00 [INF] Content root path: C:\Proj\VS2022\KTC_AppWebAPI _Https
+2025-11-27 14:28:41.480 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/weatherforecast  
+2025-11-27 14:28:41.480 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-11-27 14:28:41.510 +08:00 [WRN] Failed to determine the https port for redirect.
+2025-11-27 14:28:41.611 +08:00 [INF] Request finished in 95.994ms 404 
+2025-11-27 14:28:41.732 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2025-11-27 14:28:41.768 +08:00 [INF] Route matched with {action = "Get", controller = "WeatherForecast"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[KTC_SalesAppWAPI.WeatherForecast] Get() on controller KTC_SalesAppWAPI.Controllers.WeatherForecastController (KTC_SalesAppWAPI).
+2025-11-27 14:28:41.780 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.WeatherForecast[]'.
+2025-11-27 14:28:41.806 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI) in 28.7202ms
+2025-11-27 14:28:41.809 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2025-11-27 14:28:41.813 +08:00 [INF] Request finished in 336.4803ms 200 application/json; charset=utf-8
+2025-11-27 14:30:01.882 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 33
+2025-11-27 14:30:01.902 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 14:30:01.935 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 14:30:09.544 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-27 14:30:09.555 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 7616.4175ms
+2025-11-27 14:30:09.557 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 14:30:09.559 +08:00 [INF] Request finished in 7677.833ms 200 application/json; charset=utf-8
+2025-11-27 14:30:26.483 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/BaseRoute  
+2025-11-27 14:30:26.537 +08:00 [INF] CORS policy execution failed.
+2025-11-27 14:30:26.558 +08:00 [INF] Request origin http://localhost:4200 does not have permission to access the resource.
+2025-11-27 14:30:26.606 +08:00 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-11-27 14:30:26.667 +08:00 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-11-27 14:30:26.836 +08:00 [INF] Request finished in 351.3645ms 405 
+2025-11-27 14:34:08.333 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-27 14:34:08.961 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-27 14:34:08.964 +08:00 [INF] Hosting environment: Development
+2025-11-27 14:34:08.966 +08:00 [INF] Content root path: C:\Proj\VS2022\KTC_AppWebAPI _Https
+2025-11-27 14:34:09.014 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/weatherforecast  
+2025-11-27 14:34:09.182 +08:00 [WRN] Failed to determine the https port for redirect.
+2025-11-27 14:34:09.213 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2025-11-27 14:34:09.242 +08:00 [INF] Route matched with {action = "Get", controller = "WeatherForecast"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[KTC_SalesAppWAPI.WeatherForecast] Get() on controller KTC_SalesAppWAPI.Controllers.WeatherForecastController (KTC_SalesAppWAPI).
+2025-11-27 14:34:09.250 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.WeatherForecast[]'.
+2025-11-27 14:34:09.293 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI) in 43.4768ms
+2025-11-27 14:34:09.303 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2025-11-27 14:34:09.310 +08:00 [INF] Request finished in 299.2656ms 200 application/json; charset=utf-8
+2025-11-27 14:41:25.856 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/BaseRoute  
+2025-11-27 14:41:25.907 +08:00 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-11-27 14:41:25.920 +08:00 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-11-27 14:41:25.943 +08:00 [INF] Request finished in 82.5015ms 405 
+2025-11-27 14:43:32.104 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/BaseRoute  
+2025-11-27 14:43:32.169 +08:00 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-11-27 14:43:32.190 +08:00 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-11-27 14:43:32.213 +08:00 [INF] Request finished in 107.7662ms 405 
+2025-11-27 14:44:03.866 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 33
+2025-11-27 14:44:03.989 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Endpoint KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) contains CORS metadata, but a middleware was not found that supports CORS.
+Configure your application startup by adding app.UseCors() inside the call to Configure(..) in the application startup code. The call to app.UseAuthorization() must appear between app.UseRouting() and app.UseEndpoints(...).
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.ThrowMissingCorsMiddlewareException(Endpoint endpoint)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2025-11-27 14:44:04.884 +08:00 [INF] Request finished in 1076.0807ms 500 text/plain
+2025-11-27 14:45:46.876 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-27 14:45:47.480 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-27 14:45:47.483 +08:00 [INF] Hosting environment: Development
+2025-11-27 14:45:47.486 +08:00 [INF] Content root path: C:\Proj\VS2022\KTC_AppWebAPI _Https
+2025-11-27 14:45:47.557 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/weatherforecast  
+2025-11-27 14:45:47.728 +08:00 [WRN] Failed to determine the https port for redirect.
+2025-11-27 14:45:47.787 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2025-11-27 14:45:47.889 +08:00 [INF] Route matched with {action = "Get", controller = "WeatherForecast"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[KTC_SalesAppWAPI.WeatherForecast] Get() on controller KTC_SalesAppWAPI.Controllers.WeatherForecastController (KTC_SalesAppWAPI).
+2025-11-27 14:45:47.910 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.WeatherForecast[]'.
+2025-11-27 14:45:47.998 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI) in 91.2006ms
+2025-11-27 14:45:48.017 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2025-11-27 14:45:48.030 +08:00 [INF] Request finished in 476.3577ms 200 application/json; charset=utf-8
+2025-11-27 14:45:53.072 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 33
+2025-11-27 14:45:53.124 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Endpoint KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) contains CORS metadata, but a middleware was not found that supports CORS.
+Configure your application startup by adding app.UseCors() inside the call to Configure(..) in the application startup code. The call to app.UseAuthorization() must appear between app.UseRouting() and app.UseEndpoints(...).
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.ThrowMissingCorsMiddlewareException(Endpoint endpoint)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2025-11-27 14:45:53.396 +08:00 [INF] Request finished in 324.5648ms 500 text/plain
+2025-11-27 14:53:34.901 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-27 14:53:35.673 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-27 14:53:35.676 +08:00 [INF] Hosting environment: Development
+2025-11-27 14:53:35.685 +08:00 [INF] Content root path: C:\Proj\VS2022\KTC_AppWebAPI _Https
+2025-11-27 14:53:35.725 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/weatherforecast  
+2025-11-27 14:53:36.537 +08:00 [WRN] Failed to determine the https port for redirect.
+2025-11-27 14:53:36.728 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2025-11-27 14:53:37.121 +08:00 [INF] Route matched with {action = "Get", controller = "WeatherForecast"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[KTC_SalesAppWAPI.WeatherForecast] Get() on controller KTC_SalesAppWAPI.Controllers.WeatherForecastController (KTC_SalesAppWAPI).
+2025-11-27 14:53:37.312 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.WeatherForecast[]'.
+2025-11-27 14:53:37.921 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI) in 762.8772ms
+2025-11-27 14:53:37.932 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2025-11-27 14:53:38.048 +08:00 [INF] Request finished in 2225.6402ms 200 application/json; charset=utf-8
+2025-11-27 14:53:43.944 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 33
+2025-11-27 14:53:44.108 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Endpoint KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) contains CORS metadata, but a middleware was not found that supports CORS.
+Configure your application startup by adding app.UseCors() inside the call to Configure(..) in the application startup code. The call to app.UseAuthorization() must appear between app.UseRouting() and app.UseEndpoints(...).
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.ThrowMissingCorsMiddlewareException(Endpoint endpoint)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2025-11-27 14:53:44.833 +08:00 [INF] Request finished in 909.7149ms 500 text/plain
+2025-11-27 14:54:34.813 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 33
+2025-11-27 14:54:34.826 +08:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Endpoint KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) contains CORS metadata, but a middleware was not found that supports CORS.
+Configure your application startup by adding app.UseCors() inside the call to Configure(..) in the application startup code. The call to app.UseAuthorization() must appear between app.UseRouting() and app.UseEndpoints(...).
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.ThrowMissingCorsMiddlewareException(Endpoint endpoint)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2025-11-27 14:54:34.849 +08:00 [INF] Request finished in 28.6182ms 500 text/plain
+2025-11-27 15:07:04.393 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-27 15:07:05.331 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-27 15:07:05.345 +08:00 [INF] Hosting environment: Development
+2025-11-27 15:07:05.348 +08:00 [INF] Content root path: C:\Proj\VS2022\KTC_AppWebAPI _Https
+2025-11-27 15:07:05.382 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/weatherforecast  
+2025-11-27 15:07:05.525 +08:00 [WRN] Failed to determine the https port for redirect.
+2025-11-27 15:07:05.559 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2025-11-27 15:07:05.582 +08:00 [INF] Route matched with {action = "Get", controller = "WeatherForecast"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[KTC_SalesAppWAPI.WeatherForecast] Get() on controller KTC_SalesAppWAPI.Controllers.WeatherForecastController (KTC_SalesAppWAPI).
+2025-11-27 15:07:05.593 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.WeatherForecast[]'.
+2025-11-27 15:07:05.637 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI) in 44.2463ms
+2025-11-27 15:07:05.644 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2025-11-27 15:07:05.649 +08:00 [INF] Request finished in 268.6122ms 200 application/json; charset=utf-8
+2025-11-27 15:07:09.682 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 33
+2025-11-27 15:07:09.707 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 15:07:09.733 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 15:07:14.019 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-27 15:07:14.031 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 4294.1148ms
+2025-11-27 15:07:14.036 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 15:07:14.042 +08:00 [INF] Request finished in 4359.3097ms 200 application/json; charset=utf-8
+2025-11-27 15:07:20.491 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/BaseRoute  
+2025-11-27 15:07:20.545 +08:00 [INF] CORS policy execution successful.
+2025-11-27 15:07:20.552 +08:00 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-11-27 15:07:20.557 +08:00 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-11-27 15:07:20.566 +08:00 [INF] Request finished in 75.6529ms 405 
+2025-11-27 15:43:20.539 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:61293/BaseRoute  
+2025-11-27 15:43:20.566 +08:00 [INF] CORS policy execution successful.
+2025-11-27 15:43:20.579 +08:00 [INF] Request finished in 40.7082ms 204 
+2025-11-27 15:43:20.589 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 22
+2025-11-27 15:43:20.593 +08:00 [INF] CORS policy execution successful.
+2025-11-27 15:43:20.599 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 15:43:20.607 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 15:43:23.197 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-27 15:43:23.202 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 2590.5949ms
+2025-11-27 15:43:23.205 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 15:43:23.209 +08:00 [INF] Request finished in 2620.7051ms 200 application/json; charset=utf-8
+2025-11-27 16:11:38.804 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:61293/BaseRoute  
+2025-11-27 16:11:38.831 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:11:38.844 +08:00 [INF] Request finished in 39.5552ms 204 
+2025-11-27 16:11:38.967 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 22
+2025-11-27 16:11:39.013 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:11:39.027 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:11:39.042 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 16:11:42.949 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-27 16:11:42.956 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 3904.6415ms
+2025-11-27 16:11:42.965 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:11:42.974 +08:00 [INF] Request finished in 4007.7097ms 200 application/json; charset=utf-8
+2025-11-27 16:15:40.801 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:61293/BaseRoute  
+2025-11-27 16:15:40.973 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:15:40.980 +08:00 [INF] Request finished in 179.4017ms 204 
+2025-11-27 16:15:41.005 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 22
+2025-11-27 16:15:41.053 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:15:41.116 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:15:41.133 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 16:15:41.547 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-27 16:15:41.568 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 428.4357ms
+2025-11-27 16:15:41.578 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:15:41.584 +08:00 [INF] Request finished in 579.3932ms 200 application/json; charset=utf-8
+2025-11-27 16:17:30.597 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:61293/BaseRoute  
+2025-11-27 16:17:30.699 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:17:30.711 +08:00 [INF] Request finished in 114.2029ms 204 
+2025-11-27 16:17:30.719 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 22
+2025-11-27 16:17:30.818 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:17:30.836 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:17:30.859 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 16:17:31.120 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-27 16:17:31.242 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 307.3154ms
+2025-11-27 16:17:31.267 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:17:31.360 +08:00 [INF] Request finished in 641.4986ms 200 application/json; charset=utf-8
+2025-11-27 16:20:09.410 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:61293/BaseRoute  
+2025-11-27 16:20:09.452 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:20:09.531 +08:00 [INF] Request finished in 117.4238ms 204 
+2025-11-27 16:20:09.586 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 22
+2025-11-27 16:20:09.603 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:20:09.616 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:20:09.637 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 16:20:09.940 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-27 16:20:09.998 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 342.3559ms
+2025-11-27 16:20:10.022 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:20:10.045 +08:00 [INF] Request finished in 459.6017ms 200 application/json; charset=utf-8
+2025-11-27 16:20:12.568 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 22
+2025-11-27 16:20:12.606 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:20:12.625 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:20:12.644 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 16:20:12.726 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-27 16:20:12.771 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 113.2835ms
+2025-11-27 16:20:12.780 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:20:12.789 +08:00 [INF] Request finished in 221.1934ms 200 application/json; charset=utf-8
+2025-11-27 16:20:23.026 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:61293/BaseRoute  
+2025-11-27 16:20:23.038 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:20:23.065 +08:00 [INF] Request finished in 39.0223ms 204 
+2025-11-27 16:20:23.100 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 133
+2025-11-27 16:20:23.155 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:20:23.162 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:20:23.172 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 16:20:23.212 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-27 16:20:23.218 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 40.2792ms
+2025-11-27 16:20:23.222 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:20:23.227 +08:00 [INF] Request finished in 128.0127ms 200 application/json; charset=utf-8
+2025-11-27 16:20:44.513 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:61293/BaseRoute  
+2025-11-27 16:20:44.529 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:20:44.549 +08:00 [INF] Request finished in 40.9799ms 204 
+2025-11-27 16:20:44.566 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 133
+2025-11-27 16:20:44.577 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:20:44.593 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:20:44.610 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 16:20:44.644 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-27 16:20:44.652 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 30.1204ms
+2025-11-27 16:20:44.663 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:20:44.673 +08:00 [INF] Request finished in 104.8946ms 200 application/json; charset=utf-8
+2025-11-27 16:25:08.810 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:61293/BaseRoute  
+2025-11-27 16:25:08.825 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:25:08.835 +08:00 [INF] Request finished in 24.3461ms 204 
+2025-11-27 16:25:08.935 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 22
+2025-11-27 16:25:08.945 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:25:08.954 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:25:09.045 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 16:25:09.215 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-27 16:25:09.222 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 137.7667ms
+2025-11-27 16:25:09.237 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:25:09.243 +08:00 [INF] Request finished in 308.1529ms 200 application/json; charset=utf-8
+2025-11-27 16:30:10.886 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:61293/BaseRoute  
+2025-11-27 16:30:10.902 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:30:10.919 +08:00 [INF] Request finished in 32.6469ms 204 
+2025-11-27 16:30:10.946 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 22
+2025-11-27 16:30:10.967 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:30:10.982 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:30:10.992 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 16:30:11.378 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-27 16:30:11.416 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 413.2579ms
+2025-11-27 16:30:11.456 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:30:11.470 +08:00 [INF] Request finished in 526.3203ms 200 application/json; charset=utf-8
+2025-11-27 16:30:52.562 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:61293/BaseRoute  
+2025-11-27 16:30:52.856 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:30:52.922 +08:00 [INF] Request finished in 359.2272ms 204 
+2025-11-27 16:30:52.979 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 22
+2025-11-27 16:30:53.154 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:30:53.160 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:30:53.166 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 16:30:54.227 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-27 16:30:54.233 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 1059.8519ms
+2025-11-27 16:30:54.243 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:30:54.248 +08:00 [INF] Request finished in 1268.8802ms 200 application/json; charset=utf-8
+2025-11-27 16:40:56.107 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:61293/BaseRoute  
+2025-11-27 16:40:56.335 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:40:56.353 +08:00 [INF] Request finished in 246.3978ms 204 
+2025-11-27 16:40:56.452 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 22
+2025-11-27 16:40:56.462 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:40:56.475 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:40:56.586 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 16:40:56.795 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-27 16:40:56.853 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 237.5681ms
+2025-11-27 16:40:56.905 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:40:56.961 +08:00 [INF] Request finished in 508.6371ms 200 application/json; charset=utf-8
+2025-11-27 16:41:02.411 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:61293/BaseRoute  
+2025-11-27 16:41:02.425 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:41:02.448 +08:00 [INF] Request finished in 37.448ms 204 
+2025-11-27 16:41:02.463 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 159
+2025-11-27 16:41:02.566 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:41:02.579 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:41:02.586 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 16:41:13.871 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[KTC_SalesAppWAPI.Models.GeoFence.FTApp_BaseRouteSchedule, KTC_SalesAppWAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-27 16:41:13.893 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 11299.0109ms
+2025-11-27 16:41:13.898 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:41:13.902 +08:00 [INF] Request finished in 11438.4045ms 200 application/json; charset=utf-8
+2025-11-27 16:44:02.436 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:61293/BaseRoute  
+2025-11-27 16:44:02.451 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:44:02.462 +08:00 [INF] Request finished in 26.4996ms 204 
+2025-11-27 16:44:02.473 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 22
+2025-11-27 16:44:02.479 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:44:02.485 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:44:02.493 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 16:44:02.838 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-27 16:44:02.849 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 348.2658ms
+2025-11-27 16:44:02.870 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:44:02.874 +08:00 [INF] Request finished in 402.0111ms 200 application/json; charset=utf-8
+2025-11-27 16:46:41.459 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:61293/BaseRoute  
+2025-11-27 16:46:41.504 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:46:41.640 +08:00 [INF] Request finished in 180.3397ms 204 
+2025-11-27 16:46:41.655 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 22
+2025-11-27 16:46:41.661 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:46:41.668 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:46:41.676 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 16:46:41.794 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-27 16:46:41.806 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 124.2763ms
+2025-11-27 16:46:41.816 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:46:41.829 +08:00 [INF] Request finished in 173.8062ms 200 application/json; charset=utf-8
+2025-11-27 16:46:43.204 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 22
+2025-11-27 16:46:43.314 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:46:43.436 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:46:43.568 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 16:46:43.629 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-27 16:46:43.711 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 116.5975ms
+2025-11-27 16:46:43.778 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:46:43.821 +08:00 [INF] Request finished in 617.7718ms 200 application/json; charset=utf-8
+2025-11-27 16:46:55.059 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:61293/BaseRoute  
+2025-11-27 16:46:55.067 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:46:55.078 +08:00 [INF] Request finished in 19.2233ms 204 
+2025-11-27 16:46:55.086 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 159
+2025-11-27 16:46:55.100 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:46:55.109 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:46:55.116 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 16:47:05.852 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[KTC_SalesAppWAPI.Models.GeoFence.FTApp_BaseRouteSchedule, KTC_SalesAppWAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-27 16:47:05.860 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 10739.7013ms
+2025-11-27 16:47:05.866 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:47:05.869 +08:00 [INF] Request finished in 10783.1196ms 200 application/json; charset=utf-8
+2025-11-27 16:54:18.375 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:61293/BaseRoute  
+2025-11-27 16:54:18.474 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:54:18.479 +08:00 [INF] Request finished in 103.6674ms 204 
+2025-11-27 16:54:18.495 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 22
+2025-11-27 16:54:18.536 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:54:18.564 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:54:18.593 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 16:54:18.719 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-27 16:54:18.725 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 124.1688ms
+2025-11-27 16:54:18.737 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:54:18.742 +08:00 [INF] Request finished in 246.765ms 200 application/json; charset=utf-8
+2025-11-27 16:54:38.396 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:61293/BaseRoute  
+2025-11-27 16:54:38.432 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:54:38.446 +08:00 [INF] Request finished in 50.7414ms 204 
+2025-11-27 16:54:38.470 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 22
+2025-11-27 16:54:38.479 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:54:38.490 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:54:38.499 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 16:54:38.556 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-27 16:54:38.583 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 75.6401ms
+2025-11-27 16:54:38.612 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:54:38.620 +08:00 [INF] Request finished in 149.8228ms 200 application/json; charset=utf-8
+2025-11-27 16:55:25.296 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:61293/BaseRoute  
+2025-11-27 16:55:25.596 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:55:25.808 +08:00 [INF] Request finished in 512.0501ms 204 
+2025-11-27 16:55:25.912 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 22
+2025-11-27 16:55:25.930 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:55:25.941 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:55:25.949 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 16:55:26.085 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-27 16:55:26.111 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 156.3326ms
+2025-11-27 16:55:26.270 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:55:26.297 +08:00 [INF] Request finished in 384.2748ms 200 application/json; charset=utf-8
+2025-11-27 16:55:29.814 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 22
+2025-11-27 16:55:29.928 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:55:29.935 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:55:29.943 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 16:55:30.006 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-27 16:55:30.065 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 112.7581ms
+2025-11-27 16:55:30.147 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:55:30.211 +08:00 [INF] Request finished in 397.4906ms 200 application/json; charset=utf-8
+2025-11-27 16:59:12.515 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:61293/BaseRoute  
+2025-11-27 16:59:12.525 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:59:12.548 +08:00 [INF] Request finished in 33.4584ms 204 
+2025-11-27 16:59:12.558 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 159
+2025-11-27 16:59:12.564 +08:00 [INF] CORS policy execution successful.
+2025-11-27 16:59:12.569 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:59:12.574 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 16:59:19.083 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[KTC_SalesAppWAPI.Models.GeoFence.FTApp_BaseRouteSchedule, KTC_SalesAppWAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-27 16:59:19.087 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 6509.1854ms
+2025-11-27 16:59:19.093 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 16:59:19.096 +08:00 [INF] Request finished in 6538.2814ms 200 application/json; charset=utf-8
+2025-11-27 17:58:11.622 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:61293/BaseRoute  
+2025-11-27 17:58:11.712 +08:00 [INF] CORS policy execution successful.
+2025-11-27 17:58:11.800 +08:00 [INF] Request finished in 227.9351ms 204 
+2025-11-27 17:58:12.049 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 22
+2025-11-27 17:58:12.209 +08:00 [INF] CORS policy execution successful.
+2025-11-27 17:58:12.345 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 17:58:12.490 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 17:58:12.975 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-27 17:58:13.035 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 437.8354ms
+2025-11-27 17:58:13.055 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 17:58:13.061 +08:00 [INF] Request finished in 1139.4897ms 200 application/json; charset=utf-8
+2025-11-27 17:58:24.813 +08:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:61293/BaseRoute  
+2025-11-27 17:58:24.828 +08:00 [INF] CORS policy execution successful.
+2025-11-27 17:58:24.847 +08:00 [INF] Request finished in 34.4936ms 204 
+2025-11-27 17:58:24.867 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/BaseRoute application/json 159
+2025-11-27 17:58:24.919 +08:00 [INF] CORS policy execution successful.
+2025-11-27 17:58:24.959 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 17:58:24.982 +08:00 [INF] Route matched with {action = "Post", controller = "BaseRoute"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.BaseRoute.DTO_BaseRoute) on controller KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController (KTC_SalesAppWAPI).
+2025-11-27 17:58:25.150 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[KTC_SalesAppWAPI.Models.GeoFence.FTApp_BaseRouteSchedule, KTC_SalesAppWAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-27 17:58:25.165 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI) in 153.873ms
+2025-11-27 17:58:25.181 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.BaseRouteSchedule.BaseRouteController.Post (KTC_SalesAppWAPI)'
+2025-11-27 17:58:25.193 +08:00 [INF] Request finished in 325.8927ms 200 application/json; charset=utf-8
