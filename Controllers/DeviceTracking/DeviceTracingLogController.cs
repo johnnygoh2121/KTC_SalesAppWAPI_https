@@ -120,7 +120,8 @@ namespace KTC_SalesAppWAPI.Controllers.DeviceTracking
                         log.TruckNo,
                         log.Latitude,
                         log.Longitude,
-                        log.StopTime,
+                        //log.StopTime,
+                        DateTime.Now, // change to server time 
                         log.DeviceDateTime,
                         log.Speed,
                         log.StreetName,
