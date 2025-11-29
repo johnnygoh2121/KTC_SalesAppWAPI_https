@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using KTC_SalesAppWAPI.DTOs.DeviceTracing;
 using KTC_SalesAppWAPI.Helpers;
+using KTC_SalesAppWAPI.Models.Login;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -112,6 +113,7 @@ namespace KTC_SalesAppWAPI.Controllers.DeviceTracking
                 dataTable.Columns.Add("BusinessName", typeof(string));
                 dataTable.Columns.Add("City", typeof(string));
                 dataTable.Columns.Add("Synced", typeof(bool));
+                dataTable.Columns.Add("DriverName", typeof (string));               
 
                 foreach (var log in dto.Logs)
                 {
@@ -119,24 +121,23 @@ namespace KTC_SalesAppWAPI.Controllers.DeviceTracking
                         log.DeviceId,
                         log.TruckNo,
                         log.Latitude,
-                        log.Longitude,
-                        //log.StopTime,
-                        DateTime.Now, // change to server time 
+                        log.Longitude,                        
+                        DateTime.Now, // change to server time  //log.StopTime,
                         log.DeviceDateTime,
                         log.Speed,
                         log.StreetName,
                         log.BuildingName,
                         log.BusinessName,
                         log.City,
-                        log.Synced
+                        1,  // always set to 1 
+                        log.DriverName
                     );
                 }
 
-               // DeviceId, TruckNo, Latitude, Longitude, StopTime, DeviceDateTime,
-               //Speed, StreetName, BuildingName, BusinessName, City, Synced
+                // DeviceId, TruckNo, Latitude, Longitude, StopTime, DeviceDateTime,
+                 //Speed, StreetName, BuildingName, BusinessName, City, Synced, DriverName
 
                 using var conn = new SqlConnection(_commDbConnStr);
-
                 var parameters = new DynamicParameters();
                 parameters.Add("@Logs", dataTable.AsTableValuedParameter("dbo.DeviceTraceLogType"));
                 parameters.Add("@webDb", db.WEBDB);
@@ -165,6 +166,26 @@ namespace KTC_SalesAppWAPI.Controllers.DeviceTracking
 
 // reference 
 /*
+--use KTCW_KK
+--use KTCW_TG
+--use KTCW_ML
+--use KTCW_SW
+--use KTCW_TW
+--use KTCW_DI
+--use KTCW_CR
+--use KTCW_GT
+--use KTCW_AM
+--use KTCW_PT
+--use KTCW_SH
+--use TEST_WEB_KK
+--use TEST_WEB_TW
+--use TEST_WEB_AM
+--use ktcw_common
+go
+
+  -- DeviceId, TruckNo, Latitude, Longitude, StopTime, DeviceDateTime,
+  -- Speed, StreetName, BuildingName, BusinessName, City, Synced, DriverName
+
 CREATE TYPE dbo.DeviceTraceLogType AS TABLE
 (
     DeviceId NVARCHAR(100),
@@ -176,8 +197,10 @@ CREATE TYPE dbo.DeviceTraceLogType AS TABLE
     Speed FLOAT NULL,
     StreetName NVARCHAR(200) NULL,
     BuildingName NVARCHAR(200) NULL,
-    BusinessName NVARCHAR(200) NULL,
-    City NVARCHAR(100) NULL
+	BusinessName NVARCHAR(200) NULL,   
+	City NVARCHAR(200) null,
+    Synced  bit,
+	DriverName nvarchar(120) null
 );
 go 
 
@@ -191,55 +214,14 @@ BEGIN
     DECLARE @sql NVARCHAR(MAX) = '
         INSERT INTO ' + QUOTENAME(@webDb) + '..[FTAPP_DeviceTraceLog] (
             DeviceId, TruckNo, Latitude, Longitude, StopTime, DeviceDateTime,
-            Speed, StreetName, BuildingName, BusinessName, City, Synced
+            Speed, StreetName, BuildingName, BusinessName, City, Synced, DriverName
         )
         SELECT DeviceId, TruckNo, Latitude, Longitude, StopTime, DeviceDateTime,
-               Speed, StreetName, BuildingName, BusinessName, City, Synced
+               Speed, StreetName, BuildingName, BusinessName, City, Synced, DriverName
         FROM @Logs;';
 
     EXEC sp_executesql @sql,
         N'@Logs dbo.DeviceTraceLogType READONLY',
         @Logs;
 END
-
-
-go CREATE TYPE dbo.DeviceTraceLogType AS TABLE
-(
-    DeviceId NVARCHAR(100),
-    TruckNo NVARCHAR(50),
-    Latitude FLOAT,
-    Longitude FLOAT,
-    StopTime DATETIME,
-    DeviceDateTime DATETIME,
-    Speed FLOAT NULL,
-    StreetName NVARCHAR(200) NULL,
-    BuildingName NVARCHAR(200) NULL,
-    BusinessName NVARCHAR(200) NULL,
-    City NVARCHAR(100) NULL
-);
-go 
-
-CREATE PROCEDURE [dbo].[BulkInsertDeviceTraceLog]
-    @Logs dbo.DeviceTraceLogType READONLY,
-    @webDb NVARCHAR(120)
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    DECLARE @sql NVARCHAR(MAX) = '
-        INSERT INTO ' + QUOTENAME(@webDb) + '..[FTAPP_DeviceTraceLog] (
-            DeviceId, TruckNo, Latitude, Longitude, StopTime, DeviceDateTime,
-            Speed, StreetName, BuildingName, BusinessName, City, Synced
-        )
-        SELECT DeviceId, TruckNo, Latitude, Longitude, StopTime, DeviceDateTime,
-               Speed, StreetName, BuildingName, BusinessName, City, Synced
-        FROM @Logs;';
-
-    EXEC sp_executesql @sql,
-        N'@Logs dbo.DeviceTraceLogType READONLY',
-        @Logs;
-END
-
-
-go 
 */
