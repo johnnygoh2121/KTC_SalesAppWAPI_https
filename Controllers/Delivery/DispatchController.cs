@@ -2993,7 +2993,8 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                         Country = grp.First().County,
                         State = grp.First().State,
                         NumOfDoc = grp.Sum(invCount => invCount.NumOfDoc),
-                        DriverName = grp.First().DriverName
+                        DriverName = grp.First().DriverName, 
+                        IsInterbranch = grp.First().IsInterbranch,
                     }).ToList();
 
                 if (groupByStore.Count == 0) return NotFound();
@@ -3018,17 +3019,6 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                             TruckNo = dto.TruckNo
                         });
                 }
-
-                //var filter = groupByStore.Where(s => s.LastCheckedInDt != default).ToList();
-                //if (filter.Count == 0)
-                //{
-                //    return NotFound();
-                //}
-
-                //for (int i = 0; i < filter.Count; i ++)
-                //{
-                //    filter[i].Id = i;
-                //}
 
                 return Ok(groupByStore);
             }
