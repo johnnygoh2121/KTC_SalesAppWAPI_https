@@ -2179,15 +2179,15 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
             // check dlb exist 
             using var checkConn = new SqlConnection(_commDbConnStr);
-            var query_dlb = @$"select * from {db.WEBDB}..FTAPP_DLB with (nolock) 
+            var query_dlb = @$"select * from {db.WEBDB}..FTAPP_DLB with (NOLOCK) 
                                         Where DlbEntry = @DlbEntry";
 
             var dlb = checkConn.Query<FTAPP_DLB>(query_dlb, new { dto.DlbEntry }).FirstOrDefault();
             if (dlb == null)
             {
                 return BadRequest($"{db.COMPANYNAME}, " +
-                 $"The query DLB records {dto.DlbEntry}, for doc: {dto.DocNum}, type:{dto.DocType} no found, " +
-                 $"please try again. Thanks.");
+                     $"The query DLB records {dto.DlbEntry}, for doc: {dto.DocNum}, type:{dto.DocType} no found, " +
+                     $"please try again. Thanks.");
             }
 
             var query_dlb1 = @$" Select * 
@@ -2229,6 +2229,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
             }
 
             // check line 
+
             var sp_checkLine = @$"select * from {db.WEBDB}..FTAPP_DLB2 with (nolock)                                 
                                     Where HeadGuid = @HeadGuid 
                                     and InvDocNum = @InvDocNum;";
@@ -2262,14 +2263,15 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
             try
             {
+
                 // update all the box out time 
                 // else perform update of the intransist date time 
-                var update_sql = @$"Update {db.WEBDB}..FTAPP_DLB2                                    
+                var update_sql1 = @$"Update {db.WEBDB}..FTAPP_DLB2                                    
                                     set OutTransitDt = GETDATE()
                                     Where HeadGuid = @HeadGuid 
                                     and InvDocNum = @InvDocNum; ";
 
-                var res_UpdDLB2Dt = conn.Execute(update_sql, new
+                var res_UpdDLB2Dt = conn.Execute(update_sql1, new
                 {
                     dlb.HeadGuid,
                     InvDocNum = dto.DocNum
@@ -2284,11 +2286,11 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 }
 
                 // else perform update of the out transist date time (FTAPP DLB1)
-                update_sql = @$"Update {db.WEBDB}..FTAPP_DLB1
+                var update_sql = @$"Update {db.WEBDB}..FTAPP_DLB1
                         set OutDt = GETDATE()
-                        Where id = @id";
+                        Where Headguid = @id";
 
-                var res_UpdDlb1Dt = conn.Execute(update_sql, new { id = foundDoc.id }, trans);
+                var res_UpdDlb1Dt = conn.Execute(update_sql, new { id = foundDoc.HeadGuid }, trans);
                 if (res_UpdDlb1Dt <= 0)
                 {
                     trans.Rollback();
@@ -2486,9 +2488,9 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                         , t0.OrderNo
                                         , t0.LabelConsistTotalBoxes
 
-                                from {db.WEBDB}..FTAPP_IBTBox t0 with (NOLOCK)
-                                left join {db.WEBDB}..DLB t1 on t1.DocEntry = t0.BaseEntry
-                                Where t1.TRANSITNO = @IbtDocNum  ";
+                                        from {db.WEBDB}..FTAPP_IBTBox t0 with (NOLOCK)
+                                        left join {db.WEBDB}..IBT     t1 with (NOLOCK) on t1.DOCENTRY = t0.BaseEntry
+                                        Where t1.TRANSITNO =  @IbtDocNum  ";
 
                 // based on scan in transfer doc 
 
@@ -2998,7 +3000,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                         Country = grp.First().County,
                         State = grp.First().State,
                         NumOfDoc = grp.Sum(invCount => invCount.NumOfDoc),
-                        DriverName = grp.First().DriverName, 
+                        DriverName = grp.First().DriverName,
                         IsInterbranch = grp.First().IsInterbranch,
                     }).ToList();
 
@@ -3044,11 +3046,13 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                             if (dlb1s.Count == 0) continue;
 
-                            // base on the dlb1
-                            var invoice = dlb1s.Where(i => i.DOCTYPE == "I").FirstOrDefault();
-                            if (invoice == null) continue;
+                            if (store.DocType == "I") // invoice 
+                            {
+                                // base on the dlb1
+                                var invoice = dlb1s.Where(i => i.DOCTYPE == "I").FirstOrDefault();
+                                if (invoice == null) continue;
 
-                            var query_inv = @$"select t2.GlblLocNum [DROP_POINT_GEOCODE]                                           
+                                var query_inv = @$"select t2.GlblLocNum [DROP_POINT_GEOCODE]                                           
                                                 , t2.WhsCode [InterBranchWhsCode]
                                                 , t2.WhsName  [InterBranchWhsName]
                                                 , t0.*
@@ -3057,16 +3061,43 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                  left join {db.SAPDB}..OWHS t2 with (NOLOCK) on t2.WhsCode = t1.U_DROPPOINT
                                  where DocNum = @DocNum";
 
-                            var inv = conn.Query<Models.Pick.OINV>(query_inv, new 
-                            {
-                                DocNum = invoice.DOCNUM
-                            }).FirstOrDefault();
+                                var inv = conn.Query<Models.Pick.OINV>(query_inv, new
+                                {
+                                    DocNum = invoice.DOCNUM
+                                }).FirstOrDefault();
 
-                            if (inv != null)
+                                if (inv != null)
+                                {
+                                    groupByStore[g].DROP_POINT_GEOCODE = inv.DROP_POINT_GEOCODE;
+                                    groupByStore[g].WhsCode = inv.InterBranchWhsCode;
+                                    groupByStore[g].WhsName = inv.InterBranchWhsName;
+                                }
+                            }
+                            else // transfer
                             {
-                                groupByStore[g].DROP_POINT_GEOCODE = inv.DROP_POINT_GEOCODE;
-                                groupByStore[g].WhsCode = inv.InterBranchWhsCode;
-                                groupByStore[g].WhsName = inv.InterBranchWhsName;
+                                // base on the dlb1
+                                var transfer = dlb1s.Where(i => i.DOCTYPE == "T").FirstOrDefault();
+                                if (transfer == null) continue;
+
+                                var sp_ibtWhs = $@"select t1.GlblLocNum [DROP_POINT_GEOCODE]
+                                                , t1.WhsCode [InterBranchWhsCode]
+                                                , t1.WhsName [InterBranchWhsName]
+                                                from {db.WEBDB}..IBT t0 with (NOLOCK)
+                                                left join {db.SAPDB}..OWHS t1 with (NOLOCK) on t1.WhsCode = t0.WhsCode
+                                                Where t0.Transitno = @transferDocNum";
+
+                                var trf = conn.Query<Models.Pick.OINV>(sp_ibtWhs, new
+                                {
+                                    transferDocNum = transfer.DOCNUM
+                                }).FirstOrDefault();
+
+                                if (trf != null)
+                                {
+                                    groupByStore[g].DROP_POINT_GEOCODE = trf.DROP_POINT_GEOCODE;
+                                    groupByStore[g].WhsCode = trf.InterBranchWhsCode;
+                                    groupByStore[g].WhsName = trf.InterBranchWhsName;
+                                }
+
                             }
                         }
                     }
