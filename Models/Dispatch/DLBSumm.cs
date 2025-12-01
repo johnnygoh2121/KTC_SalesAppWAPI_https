@@ -31,6 +31,10 @@ namespace KTC_SalesAppWAPI.Models.Dispatch
         // interbranch indicator
         // 20251128
         public bool IsInterbranch { get; set; } = false;
+        public string DROP_POINT_GEOCODE { get; set; }
+
+        public string WhsCode { get; set; } // for inter branch 
+        public string WhsName { get; set; } // for inter branch
 
 
         public string GetAddress

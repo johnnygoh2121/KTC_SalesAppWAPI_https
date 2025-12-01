@@ -8,15 +8,18 @@ using KTC_SalesAppWAPI.Models.CommonDb;
 using KTC_SalesAppWAPI.Models.Delivery;
 using KTC_SalesAppWAPI.Models.Dispatch;
 using KTC_SalesAppWAPI.Models.DN;
+using KTC_SalesAppWAPI.Models.Login;
 using KTC_SalesAppWAPI.Models.Pick;
 using KTC_SalesAppWAPI.Models.Transfer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using SAPbobsCOM;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace KTC_SalesAppWAPI.Controllers.Delivery
 {
@@ -2589,7 +2592,9 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 // return ok when all status 
                 // get the invoice from sap                     
                 var query_inv = @$"select '{isAllowInputBox}' [IsAllowInputBoxQty]                                             
-                                            , t2.GlblLocNum [DROP_POINT_GEOCODE]                                           
+                                            , t2.GlblLocNum [DROP_POINT_GEOCODE]  
+                                            , t2.WhsCode [InterBranchWhsCode]
+                                            , t2.WhsName  [InterBranchWhsName]
                                             , t0.*
                                         from {db.SAPDB}..OINV t0 with (NOLOCK) 
                                         left join {db.SAPDB}..OCRD t1 on t1.CardCode = t0.CardCode 
@@ -3006,7 +3011,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     if (store == null) continue;
 
                     var sql_checkIn = @$"select top 1 CheckedInDt 
-                                      from ktcw_common..FTAPP_StoreCheckedIn 
+                                      from KTCW_COMMON..FTAPP_StoreCheckedIn 
                                       Where CardName = @CardName 
                                       and TruckNo = @TruckNo 
                                       order by id desc";
@@ -3018,6 +3023,53 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                             CardName = store.CardName,
                             TruckNo = dto.TruckNo
                         });
+
+                    if (store.IsInterbranch) // load in the invoice, drop point warehouse 
+                    {
+                        // get a invoice number (any)
+                        // get the invoice drop point whs 
+
+                        for (int u = 0; u < companies.Count; u++)
+                        {
+                            var db = companies[u];
+                            if (db == null) continue;
+
+                            var sp_Listinvoice = "exec sp_GetDlbDoc_ByCardName @webDb, @truckNo, @storeName";
+                            var dlb1s = conn.Query<DLB1>(sp_Listinvoice, new
+                            {
+                                webDb = db.WEBDB,
+                                truckNo = dto.TruckNo,
+                                storeName = store.CardName
+                            }).ToList();
+
+                            if (dlb1s.Count == 0) continue;
+
+                            // base on the dlb1
+                            var invoice = dlb1s.Where(i => i.DOCTYPE == "I").FirstOrDefault();
+                            if (invoice == null) continue;
+
+                            var query_inv = @$"select t2.GlblLocNum [DROP_POINT_GEOCODE]                                           
+                                                , t2.WhsCode [InterBranchWhsCode]
+                                                , t2.WhsName  [InterBranchWhsName]
+                                                , t0.*
+                                 from {db.SAPDB}..OINV t0 with (NOLOCK) 
+                                 left join {db.SAPDB}..OCRD t1 with (NOLOCK) on t1.CardCode = t0.CardCode 
+                                 left join {db.SAPDB}..OWHS t2 with (NOLOCK) on t2.WhsCode = t1.U_DROPPOINT
+                                 where DocNum = @DocNum";
+
+                            var inv = conn.Query<Models.Pick.OINV>(query_inv, new 
+                            {
+                                DocNum = invoice.DOCNUM
+                            }).FirstOrDefault();
+
+                            if (inv != null)
+                            {
+                                groupByStore[g].DROP_POINT_GEOCODE = inv.DROP_POINT_GEOCODE;
+                                groupByStore[g].WhsCode = inv.InterBranchWhsCode;
+                                groupByStore[g].WhsName = inv.InterBranchWhsName;
+                            }
+                        }
+                    }
                 }
 
                 return Ok(groupByStore);

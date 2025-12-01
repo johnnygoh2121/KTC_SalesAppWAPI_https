@@ -48,6 +48,9 @@ namespace KTC_SalesAppWAPI.Models.Pick
         public string U_GLN { get; set; }   // donation gps value 
 
 
+       public string  InterBranchWhsCode { get; set; }
+       public string  InterBranchWhsName { get; set; }
+
         #region fields for table OINVs
 
 
