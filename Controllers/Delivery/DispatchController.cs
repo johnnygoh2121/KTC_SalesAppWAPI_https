@@ -3006,6 +3006,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     .Select(grp => new DLBSumm
                     {
                         CardName = grp.First().CardName,
+                        CardCode = grp.First().CardCode,
                         Territory = grp.First().Territory,
                         GeoCode = grp.First().GeoCode,
                         Street = grp.First().Street,

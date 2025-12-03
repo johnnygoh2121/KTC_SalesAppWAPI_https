@@ -66,7 +66,7 @@ namespace KTC_SalesAppWAPI.Models.Delivery
         public int LastDlbEntry { get; set; } // indicate the last dlb being copy from 
 
         // for server update usage 
-        public long LastDlbDocEntry { get; set; }
+        //public long LastDlbDocEntry { get; set; }
 
         // for allow the continue scan in the box 
         public ScanAddBoxesInfo AddBoxInfo { get; set; }

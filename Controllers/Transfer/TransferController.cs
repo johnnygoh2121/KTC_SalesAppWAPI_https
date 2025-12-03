@@ -289,6 +289,7 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
             {
                 // prepare the dlb1 list 
                 var newDlbs = new List<FTAPP_DLB1>();
+                var newDlbs_Boxes = new List<FTAPP_DLB2>();
 
                 // 20220912
                 // base on the invoice close the DLB 
@@ -300,7 +301,7 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                 var invs = conn.Query<FTAPP_Transfer1>(queryInvs, new { GroupGuid = dto.SaveGuid }).ToList();
                 if (invs.Count == 0) return NotFound();
 
-                var lastDLbEntry = -1;
+                long lastDLbEntry = -1;
                 // the list later reuse to recreate the new DLB record
                 // loop each invoice 
                 for (int i = 0; i < invs.Count; i++)
@@ -329,6 +330,8 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                     {
                         lastInv = dlbInvs[0]; // the last invoice
                     }
+
+                    lastDLbEntry = lastInv.DOCENTRY;
 
                     var sapInv_sp = $@"select * from {db.SAPDB}..OINV t0 with (nolock) where docnum  = @docnum ";
                     var sapInvoice = conn.Query<OINV>(sapInv_sp, new { docnum = lastInv.DOCNUM }).FirstOrDefault();
@@ -374,11 +377,30 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                         DocTotal = lastInv.DOCTOTAL,
                         CartonNo = boxes.Sum(v => v.LabelConsistTotalBoxes),
                         RefNo = lastInv.REFNO,
-                        ConsigmentNo = lastInv.CONSIGNMENTNO,
-                        LastDlbDocEntry = lastInv.DOCENTRY  // kept the last dlb doc entry
+                        ConsigmentNo = lastInv.CONSIGNMENTNO,                        
+                        LastDlbEntry = (int) lastDLbEntry
                     };
 
                     newDlbs.Add(newdlb1);
+
+                    for (int b = 0; b < boxes.Count; b++)
+                    {
+                        var box = boxes[b];
+                        if (box == null) continue;
+                        var newDlb2 = new FTAPP_DLB2
+                        {
+                            InvDocNum = sapInvoice.DocNum,
+                            BoxId = box.BoxId,
+                            OutTransDt = DateTime.Now,
+                            InTransDt = DateTime.Now,
+                            SoDocEntry = box.BaseEntry,
+                            DlbEntry = -1,
+                            HeadGuid = dto.SaveGuid
+                        };
+
+                        newDlbs_Boxes.Add(newDlb2);
+                    }
+
                 } // end for loop
 
                 // get the transfer record 
@@ -418,7 +440,8 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                 {
                     try
                     {
-                        var insertedFTAPP_Dlb = InsertDlbWhenTransfer(db, dlbHead, newDlbs, conn, trans);
+                        // create the FTAPP DLB + DLB1
+                        var insertedFTAPP_Dlb = InsertDlbWhenTransfer(db, dlbHead, newDlbs, newDlbs_Boxes, conn, trans);
                         if (!insertedFTAPP_Dlb)
                         {
                             trans.Rollback();
@@ -426,6 +449,7 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                                                 $"Trans roll backed, pls try again [0]");
                         }
 
+                        // create the portal DLB + transfer 
                         var dlbHelper = new DLBHelper(db, dto.SaveGuid, dlbHead.TruckNo);
                         var dlbEntry = dlbHelper
                             .CreateDLB_WNoTransfer(dlbHead, newDlbs, transfer.ReceiverCode, 
@@ -475,12 +499,12 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                             conn.Execute(update_dlb, new
                             {
                                 Status = "C",
-                                DocEntry = newDlb.LastDlbDocEntry,
+                                DocEntry = newDlb.LastDlbEntry,
                                 DocNum = newDlb.DocNum,
                                 DocType = "I"
                             }, trans);
 
-                            lastDlbEntry = newDlb.LastDlbDocEntry;
+                            lastDlbEntry = newDlb.LastDlbEntry;
                         }
 
                         trans.Commit();
@@ -510,7 +534,8 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
             }
         }
 
-        bool InsertDlbWhenTransfer(DbInfo db, FTAPP_DLB head, List<FTAPP_DLB1> lines, SqlConnection conn, SqlTransaction trans)
+        bool InsertDlbWhenTransfer(DbInfo db, FTAPP_DLB head, List<FTAPP_DLB1> lines, List<FTAPP_DLB2> boxes,
+                                    SqlConnection conn, SqlTransaction trans)
         {
             try
             {
@@ -556,7 +581,7 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                                                , DocTotal
                                                , CartonNo
                                                , RefNo
-                                               , ConsigmentNo, SubSi
+                                               , ConsigmentNo, SubSi, LastDlbEntry
                                 ) values (                                           
                                             @DocNum                                           
                                            ,@StoreCode
@@ -571,11 +596,32 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                                            ,@DocTotal
                                            ,@CartonNo
                                            ,@RefNo
-                                           ,@ConsigmentNo, @SubSi
+                                           ,@ConsigmentNo, @SubSi , @LastDlbEntry
                                 )";
 
                 var res1 = conn.Execute(sp_insert1, lines, trans);
 
+                // insert the box 
+                var insertBox_sp = @$"INSERT INTO {db.WEBDB}..FTAPP_DLB2 ( 
+                                            InvDocNum
+                                           ,BoxId
+                                           ,OutTransDt
+                                           ,InTransDt
+                                           ,OutTransitDt
+                                           ,SoDocEntry
+                                           ,DlbEntry
+                                           ,HeadGuid 
+                                        ) values (
+                                            @InvDocNum
+                                           ,@BoxId
+                                           ,GETDATE()
+                                           ,GETDATE()
+                                           ,GETDATE()
+                                           ,@SoDocEntry
+                                           ,@DlbEntry
+                                           ,@HeadGuid  )";
+
+                res1 = conn.Execute(insertBox_sp, boxes, trans);
 
                 // need to create the FTAPP_HoldDlryInvoice
                 // insert the on hold invoice 

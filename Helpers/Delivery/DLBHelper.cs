@@ -550,7 +550,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
             var pickedWhs = "";
             if (lines.Count > 0)
             {
-                var lastDlbEntry = lines.LastOrDefault().LastDlbDocEntry;
+                var lastDlbEntry = lines.LastOrDefault().LastDlbEntry;
 
                 var sp_query = $@"select distinct t1.ORIWHS 
                                     from {Db.WEBDB}..DLB t0 inner join 
@@ -738,7 +738,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                     }
 
                     var insertLineSql = $"{sp_insert_line_head} ) values ( {sp_insert_line_tail}) ";
-                    conn.Execute(insertLineSql, line, trans);
+                    conn.Execute(insertLineSql, line, trans);                   
                 }
 
                 // update the on hold table with dlb entry linked 
@@ -750,16 +750,16 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                 conn.Execute(updateInvHoldReason,
                     new
                     {
-                        reason = "Intransit",
+                        reason = "In transit",
                         dlbEntry = docEntry,
                         headGuid = HeadGuid
                     }, trans);
 
+
                 // update the dlb 2 box with new dlb entry 
                 var update_dlb2 = @$"update {Db.WEBDB}..FTAPP_DLB2 
-                                        set DlbEntry = @dlbEntry
-                                        Where headGuid  = @headGuid";
-
+                                     set DlbEntry = @dlbEntry
+                                     Where headGuid  = @headGuid";
                 conn.Execute(update_dlb2, new
                 {
                     dlbEntry = docEntry,
