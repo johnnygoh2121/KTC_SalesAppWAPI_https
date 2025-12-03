@@ -13,6 +13,7 @@ namespace KTC_SalesAppWAPI.Models.GeoFence
         public string StoreCode { get; set; }
         public string StoreName { get; set; }
         public string UserCode { get; set; }
+        public string UserName { get; set; }
         public int IsActive { get; set; }
         public int IsOffRouteCustomer { get; set; }
         public string SeqNo { get; set; }

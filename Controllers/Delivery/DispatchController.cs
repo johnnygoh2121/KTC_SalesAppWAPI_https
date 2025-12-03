@@ -8,18 +8,15 @@ using KTC_SalesAppWAPI.Models.CommonDb;
 using KTC_SalesAppWAPI.Models.Delivery;
 using KTC_SalesAppWAPI.Models.Dispatch;
 using KTC_SalesAppWAPI.Models.DN;
-using KTC_SalesAppWAPI.Models.Login;
 using KTC_SalesAppWAPI.Models.Pick;
 using KTC_SalesAppWAPI.Models.Transfer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using SAPbobsCOM;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 
 namespace KTC_SalesAppWAPI.Controllers.Delivery
 {
@@ -211,7 +208,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     newCardName = dto.CardName.Replace("'", "''");
                 }
 
-                var sp_query = @"exec sp_GetDlbDoc_ByCardName @webDb, @truckNo, @storeName";
+                var sp_query = @"exec sp_GetDlbDoc_ByCardName_Test1 @webDb, @truckNo, @storeName";
                 var list = conn.Query<DLB1>(sp_query, new
                 {
                     webDb = db.WEBDB,
@@ -2385,22 +2382,42 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                           and DLBEntry = @DlbEntry";
 
             using var conn = new SqlConnection(_commDbConnStr);
-            conn.Open();
-            using var trans = conn.BeginTransaction();
-            try
+            var foundBx = conn.Query<FTAPP_DLB2>(query_box, new
             {
-                var foundBx = conn.Query<FTAPP_DLB2>(query_box, new
+                InvDocNum = dto.InvNum,
+                BoxId = dto.BoxId,
+                DlbEntry = dto.DlbEntry
+            }).FirstOrDefault();
+
+            if (foundBx == null)
+            {
+                // 20251203
+                var sp_repair = "exec sp_RepairFTAPP_DLB2_SingleInvNo @webDb , @dlbNum , @invNum ";
+                var updated = conn.Execute(sp_repair, new
+                {
+                    webDb = db.WEBDB,
+                    dlbNum = dto.DlbEntry,
+                    invNum = dto.InvNum
+                });
+
+                foundBx = conn.Query<FTAPP_DLB2>(query_box, new
                 {
                     InvDocNum = dto.InvNum,
                     BoxId = dto.BoxId,
                     DlbEntry = dto.DlbEntry
-                }, trans).FirstOrDefault();
+                }).FirstOrDefault();
 
-                if (foundBx == null)
-                {
-                    return BadRequest($"Box {dto.BoxId}, no found for transfer, please try again.");
-                }
+                //return BadRequest($"Box {dto.BoxId}, no found for transfer, please try again.");
+            }
 
+            if (conn.State == System.Data.ConnectionState.Closed)
+            {
+                conn.Open();
+            }
+
+            try
+            {
+                using var trans = conn.BeginTransaction();
                 // else perform update of the intransist date time 
                 // update based on id 
                 var update_sql = @$"Update {db.WEBDB}..FTAPP_DLB2                                    
@@ -2418,8 +2435,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 return BadRequest($"Update box id: {foundBx.BoxId} fail, please try again.");
             }
             catch (Exception e)
-            {
-                trans.Rollback();
+            {                
                 LastError = $"{e.Message}\n{e.StackTrace}";
                 _logger.LogError(LastError);
                 return BadRequest($"request not handler.\n{LastError}");
@@ -2907,7 +2923,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                         newCardName = dto.CardName.Replace("'", "''");
                     }
 
-                    var sp_query = @"exec sp_GetDlbDoc_ByCardName @webDb, @truckNo, @storeName";
+                    var sp_query = @"exec sp_GetDlbDoc_ByCardName_Test1 @webDb, @truckNo, @storeName";
                     var list = conn.Query<DLB1>(sp_query, new
                     {
                         webDb = db.WEBDB,
@@ -3036,7 +3052,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                             var db = companies[u];
                             if (db == null) continue;
 
-                            var sp_Listinvoice = "exec sp_GetDlbDoc_ByCardName @webDb, @truckNo, @storeName";
+                            var sp_Listinvoice = "exec sp_GetDlbDoc_ByCardName_Test1 @webDb, @truckNo, @storeName";
                             var dlb1s = conn.Query<DLB1>(sp_Listinvoice, new
                             {
                                 webDb = db.WEBDB,

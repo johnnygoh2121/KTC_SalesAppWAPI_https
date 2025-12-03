@@ -41,5 +41,7 @@ namespace KTC_SalesAppWAPI.Models.Delivery
         public string IsAllowDlbReScan { get; set; } // for dlb rescan
 
         public bool IsInterBranch { get; set; }
+
+        public string U_DELGLN { get; set; }
     }
 }

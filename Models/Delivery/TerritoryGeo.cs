@@ -5,5 +5,7 @@
         public string Territory {get; set;}
         public string GeoCode { get; set; }
 
+        public string U_DELGLN { get; set; }
+
     }
 }

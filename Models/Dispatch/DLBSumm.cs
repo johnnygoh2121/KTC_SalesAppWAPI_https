@@ -36,6 +36,8 @@ namespace KTC_SalesAppWAPI.Models.Dispatch
         public string WhsCode { get; set; } // for inter branch 
         public string WhsName { get; set; } // for inter branch
 
+        public string U_DELGLN { get; set; } // for store / outlet  whs 
+
 
         public string GetAddress
         {

@@ -410,7 +410,7 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                     DLBStatus = "O",
                 };
 
-                // need to insert into the FTAPP_DLB strcuture 
+                // need to insert into the FTAPP_DLB structure 
                 // with not box 
 
                 if (conn.State == System.Data.ConnectionState.Closed) conn.Open();
@@ -488,7 +488,7 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                         {
                             NewDlbEntry = dlbEntry,
                             LastDlbEntry = lastDlbEntry,
-                            ResultMessage = "Success transfered and new DLB created",
+                            ResultMessage = "Success transferred and new DLB created",
                         };
 
                         return Ok(replied);
@@ -512,7 +512,6 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
 
         bool InsertDlbWhenTransfer(DbInfo db, FTAPP_DLB head, List<FTAPP_DLB1> lines, SqlConnection conn, SqlTransaction trans)
         {
-
             try
             {
                 // insert the head FTAPP_DLB
@@ -618,7 +617,7 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                 }
                 return true;
             }
-            catch (Exception e) // insert execption
+            catch (Exception e) // insert exception
             {
                 trans.Rollback();
                 LastError = $"{e.Message}\n{e.StackTrace}";

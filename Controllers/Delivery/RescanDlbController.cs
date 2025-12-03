@@ -13,6 +13,7 @@ using KTC_SalesAppWAPI.Models.COG;
 using System.Collections.Generic;
 using KTC_SalesAppWAPI.Helpers.Delivery;
 using KTC_SalesAppWAPI.Models.CommonDb;
+using System.Data;
 
 namespace KTC_SalesAppWAPI.Controllers.Delivery
 {
@@ -482,50 +483,6 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     {
                         continue;
                     }
-
-                    //// get all document dlb1 from FTAPP 
-                    //// check driver scan add doc is tally with the whs app scan in doc
-                    //var qr_dlb1 = @$"Select * from {db.WEBDB}..FTAPP_DLB1 
-                    //            Where HeadGuid = @headerGuid ";
-
-                    //var dlb1s = conn.Query<FTAPP_DLB1>(qr_dlb1, new
-                    //{
-                    //    headerGuid = dto.SaveHeadGuid
-                    //}).ToList();
-
-                    //var repliedMsg = "";
-                    //for (int b = 0; b < dlb1s.Count; b++)
-                    //{
-                    //    var whsAppDoc = dlb1s[b];
-                    //    if (whsAppDoc == null) continue;
-                    //    var isAny = compLines.Any(bb => bb.DocNum == whsAppDoc.DocNum &&
-                    //                                   bb.DocType == whsAppDoc.DocType);
-                    //    if (!isAny)
-                    //    {
-                    //        var docTypeDesc = GetDocType(whsAppDoc.DocType);
-                    //        repliedMsg += $"Please scan add {docTypeDesc}, Doc# {whsAppDoc.DocNum}\n";
-                    //    }
-
-                    //    // add in another checking
-                    //    // when doc type is invoice
-                    //    // check the sap invoice for number is valid then add in 
-                    //    // 20220905
-                    //    if (whsAppDoc.DocType == "I")
-                    //    {
-                    //        var sp_checkSapInv = @$"Select * from {db.SAPDB}..OINV with (nolock) where DocNum = @DocNum";
-                    //        var inv = conn.Query<OINV>(sp_checkSapInv, new { DocNum = whsAppDoc.DocNum }).FirstOrDefault();
-                    //        if (inv == null)
-                    //        {
-                    //            repliedMsg += $"{db.COMPANYNAME}\n invoice Doc# {whsAppDoc.DocNum} is invalid";
-                    //        }
-                    //    }
-                    //}
-
-                    //if (!string.IsNullOrWhiteSpace(repliedMsg))
-                    //{
-                    //    return BadRequest(repliedMsg);
-                    //}
-
                     dlb.Remarks = dto.Remarks;
                     dlb.NRIC = dto.Nric;
 
@@ -535,7 +492,10 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     }
 
                     var helper = new DLBHelper(db, dto.SaveHeadGuid, dlb.TruckNo);
-                    var dlbDocEntry = helper.CreateDLB(dlb, compLines, dto.UserCode, dto.UserName, dto.IsInterbranch);
+                    var isReScan = true;
+                    var dlbDocEntry = helper.CreateDLB(dlb, compLines, dto.UserCode, dto.UserName, 
+                        dto.IsInterbranch, isReScan);
+
                     if (dlbDocEntry == -1)
                     {
                         return BadRequest(helper.Error);
@@ -544,7 +504,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     var dlbRepliedDoc = new
                     {
                         DLBEntry = dlbDocEntry,
-                        DocStatus = "Success, Intransit",
+                        DocStatus = "Success, In-transit",
                         SubSi = db.COMPANYNAME
                     };
 
@@ -552,11 +512,11 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                     //var test = dto.Dlb1;
 
-                    // hanlder the dlb isrescan enty .. 
+                    // handler the dlb is rescan entry .. 
                     // update the DLB1 to status of R with and dl doc entry
                     // doc number and doc type 
                     var filterRescanDlbs = compLines.Where(x => x.IsReScan).ToList();
-                    if (filterRescanDlbs.Count == 0) continue; // companie loop
+                    if (filterRescanDlbs.Count == 0) continue; // company loop
 
                     if (conn.State == System.Data.ConnectionState.Closed) conn.Open();
                     using var trans = conn.BeginTransaction();
@@ -566,7 +526,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                         for (int rc = 0; rc < filterRescanDlbs.Count; rc++)
                         {
                             //check before the update
-                            var sp_query = @$"select * from {db.WEBDB}..DLB1 with (nolock) 
+                            var sp_query = @$"select * from {db.WEBDB}..DLB1 with (NOLOCK) 
                                             where docentry = @docentry
                                             and doctype = @doctype
                                             and docnum = @docnum ";

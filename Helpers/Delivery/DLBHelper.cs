@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using KTC_SalesAppWAPI.Models.CommonDb;
 using KTC_SalesAppWAPI.Models.Delivery;
+using KTC_SalesAppWAPI.Models.Dispatch;
 using KTC_SalesAppWAPI.Models.Pick;
 using KTC_SalesAppWAPI.Models.Transfer;
 using System;
@@ -73,7 +74,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
         }
 
         public long CreateDLB(FTAPP_DLB head, List<FTAPP_DLB1> lines, string userCode, string userName,
-            bool isInterbranch)
+            bool isInterbranch, bool isRescan = false)
         {
             var connStr = Db.GetWebDbConnStr();
 
@@ -90,8 +91,6 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
             {
                 conn.Open();
             }
-
-
 
 
             #region create DLB, DLB1 
@@ -119,7 +118,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                     DCREATED = DateTime.Now,
                     UMODIFIED = head.WhsUserCode,
                     DMODIFIED = DateTime.Now,
-                    ISINTERBRANCH = isInterbranch, // 20250808
+                    ISINTERBRANCH =  isRescan == true ? false : isInterbranch, // 20250808
                     PICKEDWHS = pickedWhs,
                 };
 
@@ -228,6 +227,31 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                         Error = "Error insert the dlb line";
                         return -1;
                     }
+
+                    if (doc.DocType == "I")
+                    {
+                        // 20251203
+                        // to ensure the FTAPP_DLB1 and FTAPP_DLB2 was create for this
+                        var sp_InsertFTAP_DLB2 = @"exec KTCW_COMMON..sp_RepairFTAPP_DLB2_SingleInvNo @webDb,  @dlbNum, @invNum ";
+                        var reInsertDlb2 = conn.Execute(sp_InsertFTAP_DLB2,
+                                new
+                                {
+                                    webDb = Db.WEBDB,
+                                    dlbNum = docEntry,
+                                    invNum = doc.DocNum,
+                                }, trans);
+
+                        var sp_InsertFTAP_DLB1 = $@"exec KTCW_COMMON..sp_RepairFTAPP_DLB1_SingleInvNo @webDb,  @dlbEntry, @invNum ,@docType";
+                        var reInsertDlb1 = conn.Execute(sp_InsertFTAP_DLB1,
+                                 new
+                                 {
+                                     webDb = Db.WEBDB,
+                                     dlbEntry = docEntry,
+                                     invNum = doc.DocNum,
+                                     docType = doc.DocType
+                                 }, trans);
+                    }
+                    
                     lineCnt++;
                 }
                 // --------------------------------------
@@ -305,27 +329,8 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                         Error = $"Error update on DLB hold table {Db.COMPANYNAME}, Dlb Entry : {docEntry}";
                         return -1;
                     }
-                }
-
-
-                // update the dlb 2 box with new dlb entry 
-                var update_dlb2 = @$"update {Db.WEBDB}..FTAPP_DLB2 
-                                        set DlbEntry = @dlbEntry
-                                        Where headGuid  = @headGuid";
-
-                var updateFTAPP_DLB2_Res = conn.Execute(update_dlb2, new
-                {
-                    dlbEntry = docEntry,
-                    headGuid = HeadGuid
-                }, trans);
-
-                if (updateFTAPP_DLB2_Res < 0)
-                {
-                    trans.Rollback();
-                    Error = "Error update on FTAPP_DLB2 table";
-                    return -1;
-                }
-
+                }                
+                
                 // perform update to the FTAPP_DLB 
                 var update_FTAPP_DLB = @$"Update {Db.WEBDB}..FTAPP_DLB
                                          Set DLBEntry = @docEntry 
@@ -346,7 +351,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                     dlbStatus = "O",
                     nric = head.NRIC,
                     remarks = head.Remarks,
-                    IsInterbranch = isInterbranch,
+                    IsInterbranch = isRescan ? false:  isInterbranch,
                 }, trans);
 
                 if (updateFTAPP_DLB_Res < 0)
@@ -809,11 +814,11 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
 
         TerritoryGeo GetTerritoryAndGeo(string cardCode)
         {
-            var sp_query = @$"select t2.descript[TERRITORY], t1.GlblLocNum[GEOCODE] 
+            var sp_query = @$"select t2.descript[TERRITORY], t1.GlblLocNum [GEOCODE] , t1.U_DELGLN  [U_DELGLN]
                                 from                               
-                                {Db.SAPDB}..OCRD t1 with (nolock)
+                                {Db.SAPDB}..OCRD t1 with (NOLOCK)
                                 left join 
-                                {Db.SAPDB}..OTER t2 with (nolock) on t2.territryID = t1.Territory
+                                {Db.SAPDB}..OTER t2 with (NOLOCK) on t2.territryID = t1.Territory
                                 where t1.CardCode = @cardCode";
 
             using var conn = new SqlConnection(Db.GetErpDbConnStr());
