@@ -3002,9 +3002,11 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                 // group by customer name / store code from multiple company
                 var groupByStore = dlbs
-                    .GroupBy(u => u.CardName)
+                    .GroupBy(u => new { u.Subsi, u.CardName, u.IsInterbranch, u.DocEntry }) 
                     .Select(grp => new DLBSumm
                     {
+                        Subsi = grp.First().Subsi,
+                        SubsiId = grp.First().SubsiId,
                         CardName = grp.First().CardName,
                         CardCode = grp.First().CardCode,
                         Territory = grp.First().Territory,
@@ -3019,7 +3021,10 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                         NumOfDoc = grp.Sum(invCount => invCount.NumOfDoc),
                         DriverName = grp.First().DriverName,
                         IsInterbranch = grp.First().IsInterbranch,
-                        DocType = grp.First().DocType
+                        DocType = grp.First().DocType, 
+                        DocEntry = grp.First().DocEntry,
+                        OutDt = grp.First().OutDt,
+
                     }).ToList();
 
                 if (groupByStore.Count == 0) return NotFound();

@@ -12,7 +12,7 @@ namespace KTC_SalesAppWAPI.Models.Dispatch
         public string CardCode { get; set; }
         public string CardName { get; set; }
         public string Territory { get; set; }
-        
+
         public string Street { get; set; }
         public string Block { get; set; }
         public string ZipCode { get; set; }
@@ -38,6 +38,9 @@ namespace KTC_SalesAppWAPI.Models.Dispatch
 
         public string U_DELGLN { get; set; } // for store / outlet  whs 
 
+        public long DocEntry { get; set; }
+
+        public DateTime OutDt { get; set; } = default;
 
         public string GetAddress
         {
