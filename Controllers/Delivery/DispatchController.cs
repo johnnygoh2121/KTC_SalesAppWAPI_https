@@ -2933,7 +2933,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                     if (list.Count == 0) continue;
 
-                    // filter again usong programming method to 
+                    // filter again  programming method 
                     // to get the store name again from the list
                     var filterByCardName = list.Where(d => d.CARDNAME == dto.CardName).ToList();
                     if (filterByCardName.Count == 0) continue;
@@ -3019,6 +3019,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                         NumOfDoc = grp.Sum(invCount => invCount.NumOfDoc),
                         DriverName = grp.First().DriverName,
                         IsInterbranch = grp.First().IsInterbranch,
+                        DocType = grp.First().DocType
                     }).ToList();
 
                 if (groupByStore.Count == 0) return NotFound();
@@ -3109,7 +3110,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                 }).FirstOrDefault();
 
                                 if (trf != null)
-                                {
+                                {                                                    
                                     groupByStore[g].DROP_POINT_GEOCODE = trf.DROP_POINT_GEOCODE;
                                     groupByStore[g].WhsCode = trf.InterBranchWhsCode;
                                     groupByStore[g].WhsName = trf.InterBranchWhsName;

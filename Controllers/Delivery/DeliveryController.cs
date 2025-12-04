@@ -766,11 +766,13 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                         , case when ISNULL(t0.CartonNo, 0) > 0 then 1 else 0 end [IsBoxLabelVis]
                                         , t0.CartonNo [BoxesCount]
                                         , t1.U_DROPPOINT [U_DROPPOINT]                                         
-                                  from      {webDb.WEBDB}..FTAPP_DLB1 t0 with (nolock)
-                                  inner join {webDb.SAPDB}..OCRD      t1 with (nolock) on t1.CardCode = t0.StoreCode
+                                  from       {webDb.WEBDB}..FTAPP_DLB1 t0 with (nolock)
+                                  inner join {webDb.SAPDB}..OCRD       t1 with (nolock) on t1.CardCode = t0.StoreCode
                                   where convert(nvarchar(50), HeadGuid) = @HeadGuid ";
 
-                    var dlb1s = conn.Query<FTAPP_DLB1>(sp_dlb1s, new { HeadGuid = $"{dto.SaveHeadGuid}" }).Distinct().ToList();
+                    var dlb1s = conn
+                        .Query<FTAPP_DLB1>(sp_dlb1s, new { HeadGuid = $"{dto.SaveHeadGuid}" }).Distinct().ToList();
+
                     if (dlb1s.Count == 0) continue;
 
                     // 20250828 
