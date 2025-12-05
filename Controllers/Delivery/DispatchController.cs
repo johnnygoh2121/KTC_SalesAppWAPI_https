@@ -55,6 +55,10 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     {
                         return LoadDlbDoc_ByCardName(dto);
                     }
+                case "LoadDlbDoc_ByCardName_DLBEntry":
+                    {
+                        return LoadDlbDoc_ByCardName_DLBEntry(dto);
+                    }
                 case "LoadInvLines":
                     {
                         return LoadInvLines(dto);
@@ -2392,8 +2396,18 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
             if (foundBx == null)
             {
                 // 20251203
-                var sp_repair = "exec sp_RepairFTAPP_DLB2_SingleInvNo @webDb , @dlbNum , @invNum ";
+                var sp_repair = "exec sp_RepairFTAPP_DLB1_SingleInvNo @webDb , @dlbEntry , @invNum, @docType ";
                 var updated = conn.Execute(sp_repair, new
+                {
+                    webDb = db.WEBDB,
+                    dlbEntry = dto.DlbEntry,
+                    invNum = dto.InvNum, 
+                    docType = dto.DocType
+                });
+
+                // 20251203
+                sp_repair = "exec sp_RepairFTAPP_DLB2_SingleInvNo @webDb , @dlbNum , @invNum ";
+                updated = conn.Execute(sp_repair, new
                 {
                     webDb = db.WEBDB,
                     dlbNum = dto.DlbEntry,
@@ -2405,9 +2419,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     InvDocNum = dto.InvNum,
                     BoxId = dto.BoxId,
                     DlbEntry = dto.DlbEntry
-                }).FirstOrDefault();
-
-                //return BadRequest($"Box {dto.BoxId}, no found for transfer, please try again.");
+                }).FirstOrDefault();             
             }
 
             if (conn.State == System.Data.ConnectionState.Closed)
@@ -2946,6 +2958,63 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     return NotFound();
                 }
 
+                return Ok(dlb1s);
+            }
+            catch (Exception e)
+            {
+                LastError = $"{e.Message}\n{e.StackTrace}";
+                _logger.LogError(LastError);
+                return BadRequest($"request not handler.\n{LastError}");
+            }
+        }
+
+        IActionResult LoadDlbDoc_ByCardName_DLBEntry(Dto_Dispatch dto)
+        {
+            try
+            {                
+                if (string.IsNullOrWhiteSpace(dto.CardName))
+                {
+                    return BadRequest("invalid store name");
+                }
+                if (dto.DlbEntry <= 0)
+                {
+                    return BadRequest("Invalid DLB doc entry.");
+                }
+                if (string.IsNullOrWhiteSpace(dto.Subsi))
+                {
+                    return BadRequest("Invalid Subsi");
+                }                
+                var db = new DbNameHelper().GetDbInfo(_commDbConnStr, dto.Subsi);                                
+                if (db == null)
+                {
+                    return BadRequest("delivery features no deployed");
+                }
+                string newCardName = dto.CardName;
+                if (dto.CardName.Contains("'"))
+                {
+                    newCardName = dto.CardName.Replace("'", "''");
+                }
+                var dlb1s = new List<DLB1>();
+                var sp_query = @"exec sp_GetDlbDoc_ByDLBEntry @webDb, @DlbEntry ";
+                using var conn = new SqlConnection(_commDbConnStr);                
+                var list = conn.Query<DLB1>(sp_query, new
+                {
+                    webDb = db.WEBDB,
+                    DlbEntry = dto.DlbEntry
+                }).ToList();                
+
+                // filter again  programming method 
+                // to get the store name again from the list
+                var filterByCardName = list.Where(d => d.CARDNAME == dto.CardName).ToList();
+                if (filterByCardName.Count> 0)
+                {
+                    dlb1s.AddRange(filterByCardName);
+                }
+
+                if (dlb1s.Count == 0)
+                {
+                    return NotFound();
+                }
                 return Ok(dlb1s);
             }
             catch (Exception e)
