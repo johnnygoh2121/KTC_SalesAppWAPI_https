@@ -765,10 +765,11 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                         , '{webDb.COMPANYNAME}' [SubSi]
                                         , case when ISNULL(t0.CartonNo, 0) > 0 then 1 else 0 end [IsBoxLabelVis]
                                         , t0.CartonNo [BoxesCount]
-                                        , t1.U_DROPPOINT [U_DROPPOINT]                                         
-                                  from       {webDb.WEBDB}..FTAPP_DLB1 t0 with (nolock)
-                                  inner join {webDb.SAPDB}..OCRD       t1 with (nolock) on t1.CardCode = t0.StoreCode
-                                  where convert(nvarchar(50), HeadGuid) = @HeadGuid ";
+                                        , t1.U_DROPPOINT [U_DROPPOINT]   
+                                        , t0.App_Determined_IsInterbranch
+                                  from       {webDb.WEBDB}..FTAPP_DLB1 t0 with (NOLOCK)
+                                  inner join {webDb.SAPDB}..OCRD       t1 with (NOLOCK) on t1.CardCode = t0.StoreCode
+                                  where convert(NVARCHAR(50), HeadGuid) = @HeadGuid ";
 
                     var dlb1s = conn
                         .Query<FTAPP_DLB1>(sp_dlb1s, new { HeadGuid = $"{dto.SaveHeadGuid}" }).Distinct().ToList();
@@ -827,6 +828,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                             BoxesCount = f.First().BoxesCount,
                             U_DROPPOINT = f.First().U_DROPPOINT,
                             Warehouse = f.First().Warehouse,
+                            App_Determined_IsInterbranch = f.First().App_Determined_IsInterbranch
                         })
                         .ToList();
 
@@ -2713,6 +2715,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                                , ToWhsCode
                                                , ToWhsName 
                                                , IBTEntry 
+                                               , App_Determined_IsInterbranch
                                 ) values (                                           
                                             @DocNum                                           
                                            ,@StoreCode
@@ -2732,6 +2735,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                            ,@ToWhsCode
                                            ,@ToWhsName
                                            ,@IBTEntry
+                                           ,@App_Determined_IsInterbranch
                                 )";
                     var res1 = conn.Execute(sp_insert1, newInsertLines, trans);
                 }
@@ -2753,6 +2757,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                                , RefNo = @RefNo
                                                , ConsigmentNo = @ConsigmentNo, 
                                                , SubSi = @SubSi
+                                               , App_Determined_IsInterbranch = @App_Determined_IsInterbranch
                                         where HeadGuid = @HeadGuid
                                         and DocEntry = @DocEntry
                                         and DocNum = @DocNum";
@@ -4203,17 +4208,29 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                 // return ok when all status 
                 // get the invoice from sap                     
-                var query_inv = @$"select * from {db.SAPDB}..OINV with (nolock) where docentry = @docEntry";
+                //var query_inv = @$"select * from {db.SAPDB}..OINV with (NOLOCK) where DocEntry = @docEntry";
+
+                var query_inv = @$"select t2.* 
+                                , t2.U_GLN [INVLevGPS]
+                                , t0.U_DELGLN [DriverStoreWhsGPS]
+                                , t0.GlblLocNum [SellerStoreGPS]
+                                , t0.U_DROPPOINT [DROP_POINT_WHSCODE]
+                                , t1.GlblLocNum [DROP_POINT_WHS_GPS]
+                                , t3.WHSCODE [SO_WHSCODE]
+                                , t4.GlblLocNum [SO_WHS_GPS]
+                                 from {db.SAPDB}..OCRD t0 with (NOLOCK)
+                                inner join {db.SAPDB}..OWHS t1 with (NOLOCK) on t1.WhsCode = t0.U_DROPPOINT
+                                inner join {db.SAPDB}..OINV t2 with (NOLOCK) on t2.CardCode = t0.CardCode
+                                inner join {db.WEBDB}..SO t3 on t3.INVNO = t2.DocNum and t3.INVENTRY = t2.DocEntry
+                                inner join {db.SAPDB}..OWHS t4 with (NOLOCK) on t4.WhsCode = t3.WHSCODE
+                                where LEN(ISNULL(U_DROPPOINT, '')) > 0 
+                                and t2.DocEntry = @docEntry ";
+
                 OINV inv = conn.Query<OINV>(query_inv, new { docEntry = docSo.INVENTRY }).FirstOrDefault();
                 if (inv == null)
                 {
                     return BadRequest($"{db.COMPANYNAME}, Invoice #{docSo.INVNO} from {docSo.INVENTRY}, Error query for sap invoice.");
                 }
-
-                // check invoice in draft
-                // 20241024
-
-
 
                 // get the box list from web portal
                 // 20230415

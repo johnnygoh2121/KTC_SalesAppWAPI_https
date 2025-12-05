@@ -13,16 +13,26 @@ namespace KTC_SalesAppWAPI.Models.Pick
         // for transfer app property
         public string ScanInCode { get; set; }
 
+        // for delivery app
+        // when add in invoice                  
+        public string INVLevGPS { get; set; }
+        public string DriverStoreWhsGPS { get; set; }
+        public string SellerStoreGPS { get; set; }
+        public string DROP_POINT_WHSCODE { get; set; }
+        public string DROP_POINT_WHS_GPS { get; set; }
+        public string SO_WHSCODE { get; set; }
+        public string SO_WHS_GPS { get; set; }
+
 
         // for delivery property
-        public List<FTAPP_Box> Boxes { get; set; } 
+        public List<FTAPP_Box> Boxes { get; set; }
 
         public List<INV1> Lines { get; set; }
         public PafApproval Approval { get; set; }
 
         public string Subsi { get; set; }
         public string SubsiId { get; set; }
-        
+
         public string UserDisplayName { get; set; }
         public string OwnerCode_ { get; set; } // for invoice  whs return 
         public string OwnerName { get; set; } // for invoice  whs return 
@@ -48,8 +58,8 @@ namespace KTC_SalesAppWAPI.Models.Pick
         public string U_GLN { get; set; }   // donation gps value 
 
 
-       public string  InterBranchWhsCode { get; set; }
-       public string  InterBranchWhsName { get; set; }
+        public string InterBranchWhsCode { get; set; }
+        public string InterBranchWhsName { get; set; }
 
         #region fields for table OINVs
 
@@ -500,7 +510,7 @@ namespace KTC_SalesAppWAPI.Models.Pick
         public string U_ProdReason { get; set; }
         public string U_GIReason { get; set; }
         public string U_PONO { get; set; }
-        
+
         #endregion fields for table OINV
 
     }

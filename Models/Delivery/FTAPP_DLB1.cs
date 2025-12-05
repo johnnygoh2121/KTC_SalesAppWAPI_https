@@ -7,6 +7,10 @@ namespace KTC_SalesAppWAPI.Models.Delivery
     public class FTAPP_DLB1
     {
 
+        // for app 
+
+        public bool App_Determined_IsInterbranch { get; set ; }
+
         // 20241024 
         // for checking draft 
         public string DriverName { get; set; }

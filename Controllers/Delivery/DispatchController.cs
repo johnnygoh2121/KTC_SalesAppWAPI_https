@@ -2401,7 +2401,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 {
                     webDb = db.WEBDB,
                     dlbEntry = dto.DlbEntry,
-                    invNum = dto.InvNum, 
+                    invNum = dto.InvNum,
                     docType = dto.DocType
                 });
 
@@ -2419,7 +2419,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     InvDocNum = dto.InvNum,
                     BoxId = dto.BoxId,
                     DlbEntry = dto.DlbEntry
-                }).FirstOrDefault();             
+                }).FirstOrDefault();
             }
 
             if (conn.State == System.Data.ConnectionState.Closed)
@@ -2447,7 +2447,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 return BadRequest($"Update box id: {foundBx.BoxId} fail, please try again.");
             }
             catch (Exception e)
-            {                
+            {
                 LastError = $"{e.Message}\n{e.StackTrace}";
                 _logger.LogError(LastError);
                 return BadRequest($"request not handler.\n{LastError}");
@@ -2623,12 +2623,12 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 // get the invoice from sap                     
                 var query_inv = @$"select '{isAllowInputBox}' [IsAllowInputBoxQty]                                             
                                             , t2.GlblLocNum [DROP_POINT_GEOCODE]  
-                                            , t2.WhsCode [InterBranchWhsCode]
+                                            , t2.WhsCode  [InterBranchWhsCode]
                                             , t2.WhsName  [InterBranchWhsName]
                                             , t0.*
                                         from {db.SAPDB}..OINV t0 with (NOLOCK) 
-                                        left join {db.SAPDB}..OCRD t1 on t1.CardCode = t0.CardCode 
-                                        left join {db.SAPDB}..OWHS t2 on t2.WhsCode = t1.U_DROPPOINT
+                                        left join {db.SAPDB}..OCRD t1 with (NOLOCK)  on t1.CardCode = t0.CardCode 
+                                        left join {db.SAPDB}..OWHS t2 with (NOLOCK)  on t2.WhsCode = t1.U_DROPPOINT
                                         where DocNum = @DocNum";
 
                 Models.Pick.OINV inv = conn.Query<Models.Pick.OINV>(query_inv, new { DocNum = dto.InvNum }).FirstOrDefault();
@@ -2971,7 +2971,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
         IActionResult LoadDlbDoc_ByCardName_DLBEntry(Dto_Dispatch dto)
         {
             try
-            {                
+            {
                 if (string.IsNullOrWhiteSpace(dto.CardName))
                 {
                     return BadRequest("invalid store name");
@@ -2982,9 +2982,9 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 }
                 if (string.IsNullOrWhiteSpace(dto.Subsi))
                 {
-                    return BadRequest("Invalid Subsi");
-                }                
-                var db = new DbNameHelper().GetDbInfo(_commDbConnStr, dto.Subsi);                                
+                    return BadRequest("Invalid SUBSI");
+                }
+                var db = new DbNameHelper().GetDbInfo(_commDbConnStr, dto.Subsi);
                 if (db == null)
                 {
                     return BadRequest("delivery features no deployed");
@@ -2996,26 +2996,26 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 }
                 var dlb1s = new List<DLB1>();
                 var sp_query = @"exec sp_GetDlbDoc_ByDLBEntry @webDb, @DlbEntry ";
-                using var conn = new SqlConnection(_commDbConnStr);                
+                using var conn = new SqlConnection(_commDbConnStr);
                 var list = conn.Query<DLB1>(sp_query, new
                 {
                     webDb = db.WEBDB,
                     DlbEntry = dto.DlbEntry
-                }).ToList();                
+                }).ToList();
 
                 // filter again  programming method 
                 // to get the store name again from the list
                 var filterByCardName = list.Where(d => d.CARDNAME == dto.CardName).ToList();
-                if (filterByCardName.Count> 0)
+                if (filterByCardName.Count > 0)
                 {
                     dlb1s.AddRange(filterByCardName);
                 }
 
-                if (dlb1s.Count == 0)
+                if (dlb1s.Count > 0)
                 {
-                    return NotFound();
+                    return Ok(dlb1s);                    
                 }
-                return Ok(dlb1s);
+                return NotFound();
             }
             catch (Exception e)
             {
@@ -3071,7 +3071,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                 // group by customer name / store code from multiple company
                 var groupByStore = dlbs
-                    .GroupBy(u => new { u.Subsi, u.CardName, u.IsInterbranch, u.DocEntry }) 
+                    .GroupBy(u => new { u.Subsi, u.CardName, u.IsInterbranch, u.DocEntry })
                     .Select(grp => new DLBSumm
                     {
                         Subsi = grp.First().Subsi,
@@ -3090,7 +3090,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                         NumOfDoc = grp.Sum(invCount => invCount.NumOfDoc),
                         DriverName = grp.First().DriverName,
                         IsInterbranch = grp.First().IsInterbranch,
-                        DocType = grp.First().DocType, 
+                        DocType = grp.First().DocType,
                         DocEntry = grp.First().DocEntry,
                         OutDt = grp.First().OutDt,
 
@@ -3184,7 +3184,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                 }).FirstOrDefault();
 
                                 if (trf != null)
-                                {                                                    
+                                {
                                     groupByStore[g].DROP_POINT_GEOCODE = trf.DROP_POINT_GEOCODE;
                                     groupByStore[g].WhsCode = trf.InterBranchWhsCode;
                                     groupByStore[g].WhsName = trf.InterBranchWhsName;
