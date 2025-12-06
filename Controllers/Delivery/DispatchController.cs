@@ -59,6 +59,10 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     {
                         return LoadDlbDoc_ByCardName_DLBEntry(dto);
                     }
+                case "LoadDlbDoc_ByCardName_ByDlbEntry_Single":
+                    {
+                        return LoadDlbDoc_ByCardName_ByDlbEntry_Single(dto);
+                    }
                 case "LoadInvLines":
                     {
                         return LoadInvLines(dto);
@@ -3014,6 +3018,53 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 if (dlb1s.Count > 0)
                 {
                     return Ok(dlb1s);                    
+                }
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                LastError = $"{e.Message}\n{e.StackTrace}";
+                _logger.LogError(LastError);
+                return BadRequest($"request not handler.\n{LastError}");
+            }
+        }
+
+        IActionResult LoadDlbDoc_ByCardName_ByDlbEntry_Single(Dto_Dispatch dto)
+        {
+            try
+            {                
+                if (dto.DlbEntry <= 0)
+                {
+                    return BadRequest("Invalid DLB doc entry.");
+                }
+                if (dto.LineNum <= -1)
+                {
+                    return BadRequest("Invalid DLB doc line number .");
+                }
+                if (string.IsNullOrWhiteSpace(dto.Subsi))
+                {
+                    return BadRequest("Invalid SUBSI");
+                }
+                var db = new DbNameHelper().GetDbInfo(_commDbConnStr, dto.Subsi);
+                if (db == null)
+                {
+                    return BadRequest("delivery features no deployed");
+                }
+                    
+                var sp_query = @"exec sp_GetDlbDoc_ByDLBEntry_Single @webDb, @DlbEntry , @LineNum  ";
+                using var conn = new SqlConnection(_commDbConnStr);
+                var selectedDlb1 = conn.Query<DLB1>(sp_query, new
+                {
+                    webDb = db.WEBDB,
+                    DlbEntry = dto.DlbEntry,
+                    LineNum = dto.LineNum
+                }).FirstOrDefault();
+
+                // filter again  programming method 
+                // to get the store name again from the list                
+                if (selectedDlb1 != null)
+                {
+                    return Ok(selectedDlb1);
                 }
                 return NotFound();
             }

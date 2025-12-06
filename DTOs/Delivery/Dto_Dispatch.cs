@@ -44,6 +44,8 @@ namespace KTC_SalesAppWAPI.DTOs.Delivery
 
         public string AttchmentStatus { get; set; }
 
+        public int LineNum { get; set; }
+
 
 
     }
