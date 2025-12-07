@@ -4127,7 +4127,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                           , DRIVERDATE
                                           , DRIVERTIME
 
-                               from {db.WEBDB}..DLB1 with (nolock)
+                               from {db.WEBDB}..DLB1 with (NOLOCK)
                                where DocNum = @docnum 
                                and doctype = @docType 
                                order by CONVERT(date, DMODIFIED) ";
@@ -4215,13 +4215,14 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                 , t0.U_DELGLN [DriverStoreWhsGPS]
                                 , t0.GlblLocNum [SellerStoreGPS]
                                 , t0.U_DROPPOINT [DROP_POINT_WHSCODE]
+                                , t1.GlblLocNum [DROP_POINT_GEOCODE] 
                                 , t1.GlblLocNum [DROP_POINT_WHS_GPS]
                                 , t3.WHSCODE [SO_WHSCODE]
                                 , t4.GlblLocNum [SO_WHS_GPS]
-                                 from {db.SAPDB}..OCRD t0 with (NOLOCK)
+                                 from      {db.SAPDB}..OCRD t0 with (NOLOCK)
                                 inner join {db.SAPDB}..OWHS t1 with (NOLOCK) on t1.WhsCode = t0.U_DROPPOINT
                                 inner join {db.SAPDB}..OINV t2 with (NOLOCK) on t2.CardCode = t0.CardCode
-                                inner join {db.WEBDB}..SO t3 on t3.INVNO = t2.DocNum and t3.INVENTRY = t2.DocEntry
+                                inner join {db.WEBDB}..SO   t3 with (NOLOCK) on t3.DocEntry = t2.U_SOID
                                 inner join {db.SAPDB}..OWHS t4 with (NOLOCK) on t4.WhsCode = t3.WHSCODE
                                 where LEN(ISNULL(U_DROPPOINT, '')) > 0 
                                 and t2.DocEntry = @docEntry ";
