@@ -1138,6 +1138,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                                , ToWhsCode
                                                , ToWhsName 
                                                , IBTEntry
+                                               , App_Determined_IsInterbranch
                                 ) values (                                           
                                             @DocNum                                           
                                            ,@StoreCode
@@ -1159,6 +1160,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                            ,@ToWhsCode
                                            ,@ToWhsName
                                            ,@IBTEntry
+                                           ,@App_Determined_IsInterbranch
                                 )";
 
                         var res1 = conn.Execute(sp_insert1, newInsertLines, trans);
@@ -1183,6 +1185,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                                , SubSi = @SubSi
                                                , IsReScan = @IsReScan
                                                , LastDlbEntry = @LastDlbEntry
+                                               , App_Determined_IsInterbranch = @App_Determined_IsInterbranch
                                         where HeadGuid = @HeadGuid
                                         and DocEntry = @DocEntry
                                         and DocNum = @DocNum";
@@ -1925,7 +1928,29 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 // return ok when all status 
                 // get the invoice from sap
                 // 
-                var query_inv = @$"select * from {db.SAPDB}..OINV with (nolock) where docnum = @docnum";
+                //var query_inv = @$"select * from {db.SAPDB}..OINV with (nolock) where docnum = @docnum";
+
+                // return ok when all status 
+                // get the invoice from sap                     
+                //var query_inv = @$"select * from {db.SAPDB}..OINV with (NOLOCK) where DocEntry = @docEntry";
+
+                var query_inv = @$"select t2.* 
+                                , t2.U_GLN [INVLevGPS]
+                                , t0.U_DELGLN [DriverStoreWhsGPS]
+                                , t0.GlblLocNum [SellerStoreGPS]
+                                , t0.U_DROPPOINT [DROP_POINT_WHSCODE]
+                                , t1.GlblLocNum [DROP_POINT_GEOCODE] 
+                                , t1.GlblLocNum [DROP_POINT_WHS_GPS]
+                                , t3.WHSCODE [SO_WHSCODE]
+                                , t4.GlblLocNum [SO_WHS_GPS]
+                                 from      {db.SAPDB}..OCRD t0 with (NOLOCK)
+                                inner join {db.SAPDB}..OWHS t1 with (NOLOCK) on t1.WhsCode = t0.U_DROPPOINT
+                                inner join {db.SAPDB}..OINV t2 with (NOLOCK) on t2.CardCode = t0.CardCode
+                                inner join {db.WEBDB}..SO   t3 with (NOLOCK) on t3.DocEntry = t2.U_SOID
+                                inner join {db.SAPDB}..OWHS t4 with (NOLOCK) on t4.WhsCode = t3.WHSCODE
+                                where LEN(ISNULL(U_DROPPOINT, '')) > 0 
+                                and t2.DocNum = @docnum ";
+              
                 OINV inv = conn.Query<OINV>(query_inv, new { docnum = dto.DocNum }).FirstOrDefault();
                 if (inv == null)
                 {

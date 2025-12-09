@@ -181,6 +181,10 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
             {
                 return BadRequest("Invalid truck no");
             }
+            if (string.IsNullOrWhiteSpace(dto.CheckInGps))
+            {
+                return BadRequest("Invalid truck check in GPS");
+            }
 
             var companies = new DbNameHelper().GetDbInfo_DeliveryApp(_commDbConnStr);
             if (companies == null)
@@ -226,10 +230,9 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                 if (list.Count == 0) continue;
 
-                // massage the dlb with the cardname 
+                // massage the dlb with the card name 
                 var filterByCardName = list.Where(d => d.CARDNAME == dto.CardName).ToList();
                 if (filterByCardName.Count == 0) continue;
-
 
                 for (int i = 0; i < filterByCardName.Count; i++)
                 {
@@ -240,27 +243,33 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     // loop the dlb to update the time 
                     var update_sp = @$"Update {db.WEBDB}..DLB1 
                                    Set CheckInDt = GETDATE() 
+                                     , CHECKINGPS = @CheckInGps
                                    Where DocEntry = @DOCENTRY 
                                      and LINENUM = @LINENUM ";
 
-                    var updateCnt = conn.Execute(update_sp, new { dlb1.DOCENTRY, dlb1.LINENUM }, trans);
+                    var updateCnt = conn.Execute(update_sp, new
+                    {
+                        dlb1.DOCENTRY,
+                        dlb1.LINENUM,
+                        dto.CheckInGps
+                    }, trans);
                 }
             }
-
 
             // finally update the check in time 
             try
             {
                 // purely insert the check in time.
-                var insert_sq = @"insert into ktcw_common..FTAPP_StoreCheckedIn (
-                                    CardName, TruckNo, CheckedInDt
+                var insert_sq = @"insert into KTCW_COMMON..FTAPP_StoreCheckedIn (
+                                    CardName, TruckNo, CheckedInDt, CheckInGps
                                 ) values (  
-                                    @CardName, @TruckNo, GETDATE() )";
+                                    @CardName, @TruckNo, GETDATE() , @CheckInGps)";
 
                 var result = conn.Execute(insert_sq, new
                 {
                     CardName = dto.CardName,
-                    TruckNo = dto.TruckNo
+                    TruckNo = dto.TruckNo,
+                    CheckInGps = dto.CheckInGps,
                 }, trans);
 
                 trans.Commit();
@@ -3017,7 +3026,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                 if (dlb1s.Count > 0)
                 {
-                    return Ok(dlb1s);                    
+                    return Ok(dlb1s);
                 }
                 return NotFound();
             }
@@ -3032,7 +3041,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
         IActionResult LoadDlbDoc_ByCardName_ByDlbEntry_Single(Dto_Dispatch dto)
         {
             try
-            {                
+            {
                 if (dto.DlbEntry <= 0)
                 {
                     return BadRequest("Invalid DLB doc entry.");
@@ -3050,7 +3059,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 {
                     return BadRequest("delivery features no deployed");
                 }
-                    
+
                 var sp_query = @"exec sp_GetDlbDoc_ByDLBEntry_Single @webDb, @DlbEntry , @LineNum  ";
                 using var conn = new SqlConnection(_commDbConnStr);
                 var selectedDlb1 = conn.Query<DLB1>(sp_query, new

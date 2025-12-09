@@ -46,6 +46,9 @@ namespace KTC_SalesAppWAPI.DTOs.Delivery
 
         public int LineNum { get; set; }
 
+        // 20251209
+        public string CheckInGps { get; set; }
+
 
 
     }
