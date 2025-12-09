@@ -73,12 +73,12 @@ namespace KTC_SalesAppWAPI.Controllers
             }
             if (string.IsNullOrWhiteSpace(dto.CountLine.SubSi))
             {
-                return BadRequest("Invalid subsi");
+                return BadRequest("Invalid SUBSI");
             }
             var db = new DbNameHelper().GetDbInfo(CommDbConnStr, dto.CountLine.SubSi);
             if (db == null)
             {
-                return BadRequest("Invalid subsi info");
+                return BadRequest("Invalid SUBSI info");
             }
 
             // check record duplicated
@@ -100,7 +100,7 @@ namespace KTC_SalesAppWAPI.Controllers
                 }
 
                 trans.Rollback();
-                return BadRequest("Dleete count line fail");
+                return BadRequest("Delete count line fail");
             }
             catch (Exception e)
             {

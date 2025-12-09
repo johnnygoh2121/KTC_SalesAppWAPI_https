@@ -2817,7 +2817,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
             try
             {
                 var query = @"Select * 
-                             from FTAPP_DeliveryReasonCodes with (nolock)";
+                             from FTAPP_DeliveryReasonCodes with (NOLOCK)";
 
                 using var conn = new SqlConnection(_commDbConnStr);
                 var reasonCodes = conn.Query<UnDeliveredReasonCodes>(query).ToList();
