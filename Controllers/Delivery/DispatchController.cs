@@ -13,6 +13,7 @@ using KTC_SalesAppWAPI.Models.Transfer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using SAPbobsCOM;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -3178,6 +3179,21 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                             TruckNo = dto.TruckNo
                         });
 
+                    // add list of invoice number 
+                    var db1 = new DbNameHelper().GetDbInfo( _commDbConnStr, groupByStore[g].Subsi);
+                    if (db1 != null)
+                    {
+                        var inv1DocNum = $@"Select distinct DocNum from {db1.WEBDB}..DLB1 
+                                            Where DocEntry = @DocEntry 
+                                            and DocType = 'I' ";
+
+                        groupByStore[g].InvoiceNumList = conn.Query<int>(inv1DocNum, new
+                        {
+                            DocEntry = groupByStore[g].DocEntry
+                        }).ToList();
+                    }
+
+
                     if (store.IsInterbranch) // load in the invoice, drop point warehouse 
                     {
                         // get a invoice number (any)
@@ -3197,6 +3213,8 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                             }).ToList();
 
                             if (dlb1s.Count == 0) continue;
+
+                            
 
                             if (store.DocType == "I") // invoice 
                             {

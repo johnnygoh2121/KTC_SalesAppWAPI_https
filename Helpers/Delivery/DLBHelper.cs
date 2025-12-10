@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using KTC_SalesAppWAPI.Models.CommonDb;
 using KTC_SalesAppWAPI.Models.Delivery;
-using KTC_SalesAppWAPI.Models.Dispatch;
 using KTC_SalesAppWAPI.Models.Pick;
 using KTC_SalesAppWAPI.Models.Transfer;
 using System;
@@ -148,7 +147,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                         CARDNAME = doc.StoreName,
                         DOCTOTAL = doc.DocTotal,
                         TERRITORY = terAndGeo == null ? "" : terAndGeo.Territory,
-                        GEOCODE = terAndGeo == null ? "" : terAndGeo.GeoCode,
+                        GEOCODE = terAndGeo == null ? "" : string.IsNullOrWhiteSpace(terAndGeo.U_DELGLN) ? terAndGeo.GeoCode : terAndGeo.U_DELGLN,
                         TOTALPAGES = 1,
                         CARTONNO = actualTotalBox,
                         REFNO = doc.RefNo,
@@ -616,7 +615,8 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                         CARDNAME = doc.StoreName,
                         DOCTOTAL = doc.DocTotal,
                         TERRITORY = terAndGeo == null ? "" : terAndGeo.Territory,
-                        GEOCODE = terAndGeo == null ? "" : terAndGeo.GeoCode,
+                        //GEOCODE = terAndGeo == null ? "" : terAndGeo.U_DELGLN,
+                        GEOCODE = terAndGeo == null ? "" : string.IsNullOrWhiteSpace(terAndGeo.U_DELGLN) ? terAndGeo.GeoCode : terAndGeo.U_DELGLN,
                         TOTALPAGES = 1,
                         CARTONNO = doc.CartonNo,
                         REFNO = doc.RefNo,

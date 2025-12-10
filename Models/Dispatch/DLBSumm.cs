@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace KTC_SalesAppWAPI.Models.Dispatch
 {
@@ -41,6 +42,8 @@ namespace KTC_SalesAppWAPI.Models.Dispatch
         public long DocEntry { get; set; }
 
         public DateTime OutDt { get; set; } = default;
+
+        public List<int> InvoiceNumList { get; set; }
 
         public string GetAddress
         {
