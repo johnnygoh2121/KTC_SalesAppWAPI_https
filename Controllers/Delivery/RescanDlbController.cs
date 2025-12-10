@@ -1727,7 +1727,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 }
                 
                 // 20230316
-                // check for aged instransit warehouse 
+                // check for aged in transit warehouse 
                 var sp_CheckAgedInv_InsWhs = @"exec sp_GetOldestAgedInv_TransWhs_v1 @webDb , @whsCode  ";
                 var agedInvs_InWhs = conn.Query<AgedDoc>(sp_CheckAgedInv_InsWhs, new
                 {
