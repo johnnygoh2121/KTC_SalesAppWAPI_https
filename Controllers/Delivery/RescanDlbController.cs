@@ -492,9 +492,9 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     }
 
                     var helper = new DLBHelper(db, dto.SaveHeadGuid, dlb.TruckNo);
-                    var isReScan = true;
-                    var dlbDocEntry = helper.CreateDLB(dlb, compLines, dto.UserCode, dto.UserName, 
-                        dto.IsInterbranch, isReScan);
+                     //var isReScan = true;
+                    var dlbDocEntry = helper.CreateDLB(dlb, compLines, dto.UserCode, dto.UserName,
+                        dto.IsInterbranch); //, isReScan);
 
                     if (dlbDocEntry == -1)
                     {

@@ -2206,7 +2206,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
             }
 
             var query_dlb1 = @$" Select * 
-                                from  {db.WEBDB}..FTAPP_DLB1   with (nolock)                                
+                                from  {db.WEBDB}..FTAPP_DLB1   with (NOLOCK)                                
                                 where HeadGuid = @HeadGuid
                                 and DocNum = @DocNum
                                 and DocType = @DocType 
@@ -2245,7 +2245,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
             // check line 
 
-            var sp_checkLine = @$"select * from {db.WEBDB}..FTAPP_DLB2 with (nolock)                                 
+            var sp_checkLine = @$"select * from {db.WEBDB}..FTAPP_DLB2 with (NOLOCK)                                 
                                     Where HeadGuid = @HeadGuid 
                                     and InvDocNum = @InvDocNum;";
 
@@ -2280,7 +2280,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
             {
 
                 // update all the box out time 
-                // else perform update of the intransist date time 
+                // else perform update of the in transits date time 
                 var update_sql1 = @$"Update {db.WEBDB}..FTAPP_DLB2                                    
                                     set OutTransitDt = GETDATE()
                                     Where HeadGuid = @HeadGuid 
@@ -2300,7 +2300,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                     $"please try again. Thanks.");
                 }
 
-                // else perform update of the out transist date time (FTAPP DLB1)
+                // else perform update of the out transits date time (FTAPP DLB1)
                 var update_sql = @$"Update {db.WEBDB}..FTAPP_DLB1
                         set OutDt = GETDATE()
                         Where Headguid = @id";
@@ -3185,11 +3185,13 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     {
                         var inv1DocNum = $@"Select distinct DocNum from {db1.WEBDB}..DLB1 
                                             Where DocEntry = @DocEntry 
+                                            and CardCode = @CardCode
                                             and DocType = 'I' ";
 
                         groupByStore[g].InvoiceNumList = conn.Query<int>(inv1DocNum, new
                         {
-                            DocEntry = groupByStore[g].DocEntry
+                            DocEntry = groupByStore[g].DocEntry, 
+                            CardCode = groupByStore[g].CardCode
                         }).ToList();
                     }
 

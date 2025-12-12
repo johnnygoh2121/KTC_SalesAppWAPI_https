@@ -73,7 +73,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
         }
 
         public long CreateDLB(FTAPP_DLB head, List<FTAPP_DLB1> lines, string userCode, string userName,
-            bool isInterbranch, bool isRescan = false)
+            bool isInterbranch ) //, bool isRescan = false)
         {
             var connStr = Db.GetWebDbConnStr();
 
@@ -117,7 +117,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                     DCREATED = DateTime.Now,
                     UMODIFIED = head.WhsUserCode,
                     DMODIFIED = DateTime.Now,
-                    ISINTERBRANCH =  isRescan == true ? false : isInterbranch, // 20250808
+                    ISINTERBRANCH = isInterbranch,//isRescan == true ? false : isInterbranch, // 20250808
                     PICKEDWHS = pickedWhs,
                 };
 
@@ -350,7 +350,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                     dlbStatus = "O",
                     nric = head.NRIC,
                     remarks = head.Remarks,
-                    IsInterbranch = isRescan ? false:  isInterbranch,
+                    IsInterbranch = isInterbranch //isRescan ? false:  isInterbranch,
                 }, trans);
 
                 if (updateFTAPP_DLB_Res < 0)

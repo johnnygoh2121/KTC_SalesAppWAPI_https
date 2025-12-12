@@ -1703,7 +1703,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     }
 
                     var helper = new DLBHelper(db, dto.SaveHeadGuid, dlb.TruckNo);
-
+                                                                                                         
                     var dlbDocEntry = helper.CreateDLB(dlb, companyDlbs, dto.UserCode, dto.UserName, dto.IsInterbranch);
                     if (dlbDocEntry == -1)
                     {
@@ -4211,21 +4211,21 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 //var query_inv = @$"select * from {db.SAPDB}..OINV with (NOLOCK) where DocEntry = @docEntry";
 
                 var query_inv = @$"select t2.* 
-                                , t2.U_GLN [INVLevGPS]
-                                , t0.U_DELGLN [DriverStoreWhsGPS]
-                                , t0.GlblLocNum [SellerStoreGPS]
-                                , t0.U_DROPPOINT [DROP_POINT_WHSCODE]
-                                , t1.GlblLocNum [DROP_POINT_GEOCODE] 
-                                , t1.GlblLocNum [DROP_POINT_WHS_GPS]
-                                , t3.WHSCODE [SO_WHSCODE]
-                                , t4.GlblLocNum [SO_WHS_GPS]
-                                 from      {db.SAPDB}..OCRD t0 with (NOLOCK)
-                                inner join {db.SAPDB}..OWHS t1 with (NOLOCK) on t1.WhsCode = t0.U_DROPPOINT
-                                inner join {db.SAPDB}..OINV t2 with (NOLOCK) on t2.CardCode = t0.CardCode
-                                inner join {db.WEBDB}..SO   t3 with (NOLOCK) on t3.DocEntry = t2.U_SOID
-                                inner join {db.SAPDB}..OWHS t4 with (NOLOCK) on t4.WhsCode = t3.WHSCODE
-                                where LEN(ISNULL(U_DROPPOINT, '')) > 0 
-                                and t2.DocEntry = @docEntry ";
+                                    , t2.U_GLN [INVLevGPS]
+                                    , t0.U_DELGLN [DriverStoreWhsGPS]
+                                    , t0.GlblLocNum [SellerStoreGPS]
+                                    , t0.U_DROPPOINT [DROP_POINT_WHSCODE]
+                                    , t1.GlblLocNum [DROP_POINT_GEOCODE] 
+                                    , t1.GlblLocNum [DROP_POINT_WHS_GPS]
+                                    , t3.WHSCODE [SO_WHSCODE]
+                                    , t4.GlblLocNum [SO_WHS_GPS]
+                                     from      {db.SAPDB}..OCRD t0 with (NOLOCK)
+                                    left join {db.SAPDB}..OWHS t1 with (NOLOCK) on t1.WhsCode = t0.U_DROPPOINT
+                                    left join {db.SAPDB}..OINV t2 with (NOLOCK) on t2.CardCode = t0.CardCode
+                                    left join {db.WEBDB}..SO   t3 with (NOLOCK) on t3.DocEntry = t2.U_SOID
+                                    left join {db.SAPDB}..OWHS t4 with (NOLOCK) on t4.WhsCode = t3.WHSCODE
+                                    where t2.DocEntry = @docEntry ";
+                                     
 
                 OINV inv = conn.Query<OINV>(query_inv, new { docEntry = docSo.INVENTRY }).FirstOrDefault();
                 if (inv == null)
