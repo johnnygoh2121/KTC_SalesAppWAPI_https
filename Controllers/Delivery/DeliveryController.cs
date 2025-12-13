@@ -2715,7 +2715,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                                , ToWhsCode
                                                , ToWhsName 
                                                , IBTEntry 
-                                               , App_Determined_IsInterbranch
+                                               , App_Determined_IsInterbranch, GeoCode
                                 ) values (                                           
                                             @DocNum                                           
                                            ,@StoreCode
@@ -2735,7 +2735,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                            ,@ToWhsCode
                                            ,@ToWhsName
                                            ,@IBTEntry
-                                           ,@App_Determined_IsInterbranch
+                                           ,@App_Determined_IsInterbranch, @GeoCode
                                 )";
                     var res1 = conn.Execute(sp_insert1, newInsertLines, trans);
                 }
@@ -2757,7 +2757,9 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                                , RefNo = @RefNo
                                                , ConsigmentNo = @ConsigmentNo, 
                                                , SubSi = @SubSi
-                                               , App_Determined_IsInterbranch = @App_Determined_IsInterbranch
+                                               , App_Determined_IsInterbranch = @App_Determined_IsInterbranch, 
+                                               , GeoCode = @GeoCode
+                                               ，GeoType = @GeoType
                                         where HeadGuid = @HeadGuid
                                         and DocEntry = @DocEntry
                                         and DocNum = @DocNum";

@@ -19,6 +19,9 @@ namespace KTC_SalesAppWAPI.Models.Delivery
 
         public DateTime OutTransDt { get; set; }
 
+        public string GeoCode { get; set; }
+        public string GeoType { get; set; }
+
 
 
         // 20230518

@@ -116,7 +116,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                     UCREATED = head.WhsUserCode,
                     DCREATED = DateTime.Now,
                     UMODIFIED = head.WhsUserCode,
-                    DMODIFIED = DateTime.Now,
+                    DMODIFIED = DateTime.Now,                    
                     ISINTERBRANCH = isInterbranch,//isRescan == true ? false : isInterbranch, // 20250808
                     PICKEDWHS = pickedWhs,
                 };
