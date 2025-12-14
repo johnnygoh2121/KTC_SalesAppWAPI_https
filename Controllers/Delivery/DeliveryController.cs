@@ -767,6 +767,8 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                         , t0.CartonNo [BoxesCount]
                                         , t1.U_DROPPOINT [U_DROPPOINT]   
                                         , t0.App_Determined_IsInterbranch
+                                        , t0.GeoCode
+                                        , t0.GeoType
                                   from       {webDb.WEBDB}..FTAPP_DLB1 t0 with (NOLOCK)
                                   inner join {webDb.SAPDB}..OCRD       t1 with (NOLOCK) on t1.CardCode = t0.StoreCode
                                   where convert(NVARCHAR(50), HeadGuid) = @HeadGuid ";
@@ -2715,7 +2717,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                                , ToWhsCode
                                                , ToWhsName 
                                                , IBTEntry 
-                                               , App_Determined_IsInterbranch, GeoCode
+                                               , App_Determined_IsInterbranch, GeoCode, GeoType
                                 ) values (                                           
                                             @DocNum                                           
                                            ,@StoreCode
@@ -2735,7 +2737,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                            ,@ToWhsCode
                                            ,@ToWhsName
                                            ,@IBTEntry
-                                           ,@App_Determined_IsInterbranch, @GeoCode
+                                           ,@App_Determined_IsInterbranch, @GeoCode, @GeoType
                                 )";
                     var res1 = conn.Execute(sp_insert1, newInsertLines, trans);
                 }
