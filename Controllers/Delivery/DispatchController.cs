@@ -3100,7 +3100,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     return BadRequest("Invalid date");
                 }
 
-                // cobine reading the dlb summary 
+                // combine reading the dlb summary 
                 var companies = new DbNameHelper().GetDbInfo_DeliveryApp(_commDbConnStr);
                 if (companies.Count == 0)
                 {
@@ -3154,7 +3154,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                         DocType = grp.First().DocType,
                         DocEntry = grp.First().DocEntry,
                         OutDt = grp.First().OutDt,
-
+                        App_Determined_IsInterbranch = grp.First().App_Determined_IsInterbranch
                     }).ToList();
 
                 if (groupByStore.Count == 0) return NotFound();
@@ -3215,9 +3215,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                             }).ToList();
 
                             if (dlb1s.Count == 0) continue;
-
                             
-
                             if (store.DocType == "I") // invoice 
                             {
                                 // base on the dlb1

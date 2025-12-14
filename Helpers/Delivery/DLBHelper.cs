@@ -97,6 +97,10 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
             try
             {
                 var costCt = GetUserCostCenter(head.WhsUserCode);
+
+                // check any lines with interbranch then consider interbranch, for pit boon
+                var IsHeaderInterBranch = lines.Any(y => y.App_Determined_IsInterbranch == true);
+
                 // create the dlb head 
                 var newHead = new DLB
                 {
@@ -117,7 +121,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                     DCREATED = DateTime.Now,
                     UMODIFIED = head.WhsUserCode,
                     DMODIFIED = DateTime.Now,                    
-                    ISINTERBRANCH = isInterbranch,//isRescan == true ? false : isInterbranch, // 20250808
+                    ISINTERBRANCH = IsHeaderInterBranch, //isInterbranch, //isRescan == true ? false : isInterbranch, // 20250808
                     PICKEDWHS = pickedWhs,
                 };
 
@@ -135,7 +139,8 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                         actualTotalBox = doc.CartonNo;
                     }
 
-                    var terAndGeo = GetTerritoryAndGeo(doc.StoreCode);
+                    TerritoryGeo terAndGeo = GetTerritoryAndGeo(doc.StoreCode);                   
+
                     var newLines = new DLB1
                     {
                         DOCENTRY = docEntry,
@@ -147,7 +152,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                         CARDNAME = doc.StoreName,
                         DOCTOTAL = doc.DocTotal,
                         TERRITORY = terAndGeo == null ? "" : terAndGeo.Territory,
-                        GEOCODE = terAndGeo == null ? "" : string.IsNullOrWhiteSpace(terAndGeo.U_DELGLN) ? terAndGeo.GeoCode : terAndGeo.U_DELGLN,
+                        GEOCODE =  doc.GeoCode,
                         TOTALPAGES = 1,
                         CARTONNO = actualTotalBox,
                         REFNO = doc.RefNo,
@@ -157,7 +162,8 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                         UMODIFIED = head.WhsUserCode,
                         DMODIFIED = DateTime.Now,
                         RECDATE = default,
-                        CONSIGNMENTNO = doc.ConsigmentNo
+                        CONSIGNMENTNO = doc.ConsigmentNo,
+                        App_Determined_IsInterbranch = doc.App_Determined_IsInterbranch
                     };
 
                     // try to build sql insert
@@ -177,7 +183,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                                            , STATUS
                                            , PAGES
                                            , UMODIFIED
-                                           , CONSIGNMENTNO  ";
+                                           , CONSIGNMENTNO , App_Determined_IsInterbranch ";
 
                     var sp_insert_line_tail = @$"@DOCENTRY
                                            ,@LINENUM
@@ -194,7 +200,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                                            ,@STATUS
                                            ,@PAGES
                                            ,@UMODIFIED
-                                           ,@CONSIGNMENTNO  ";
+                                           ,@CONSIGNMENTNO , @App_Determined_IsInterbranch ";
 
                     if (newLines.DOCDATE != default)
                     {

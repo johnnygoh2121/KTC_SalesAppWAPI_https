@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 
@@ -767,6 +768,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                         , t0.CartonNo [BoxesCount]
                                         , t1.U_DROPPOINT [U_DROPPOINT]   
                                         , t0.App_Determined_IsInterbranch
+                                             
                                         , t0.GeoCode
                                         , t0.GeoType
                                   from       {webDb.WEBDB}..FTAPP_DLB1 t0 with (NOLOCK)
@@ -830,7 +832,9 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                             BoxesCount = f.First().BoxesCount,
                             U_DROPPOINT = f.First().U_DROPPOINT,
                             Warehouse = f.First().Warehouse,
-                            App_Determined_IsInterbranch = f.First().App_Determined_IsInterbranch
+                            App_Determined_IsInterbranch = f.First().App_Determined_IsInterbranch, 
+                            GeoCode = f.First().GeoCode,
+                            GeoType = f.First().GeoType,
                         })
                         .ToList();
 
@@ -1670,7 +1674,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     var db = new DbNameHelper().GetDbInfo(_commDbConnStr, subsi);
                     if (db == null) continue;
 
-                    var qr_dlb = @$"Select * from {db.WEBDB}..FTAPP_DLB with (nolock)
+                    var qr_dlb = @$"Select * from {db.WEBDB}..FTAPP_DLB with (NOLOCK)
                                   Where HeadGuid = @headerGuid ";
 
                     var dlb = conn.Query<FTAPP_DLB>(qr_dlb, new
@@ -1678,7 +1682,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                         headerGuid = dto.SaveHeadGuid,
 
                     }).FirstOrDefault();
-
+                    
                     if (dlb == null)
                     {
                         continue;
@@ -1686,8 +1690,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                     if (dlb.DLBStatus != "D")
                     {
-                        continue;
-                        //return BadRequest("DLB already posted as OUT.");
+                        continue;                        
                     }
 
                     var companyDlbs = dto.Dlb1.Where(d => d.SubSi == subsi).ToList();
@@ -1703,7 +1706,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     {
                         dlb.WhsUserCode = dto.UserCode;
                     }
-
+                    
                     var helper = new DLBHelper(db, dto.SaveHeadGuid, dlb.TruckNo);
                                                                                                          
                     var dlbDocEntry = helper.CreateDLB(dlb, companyDlbs, dto.UserCode, dto.UserName, dto.IsInterbranch);
@@ -1740,6 +1743,188 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 }
             }
         }
+
+        //IActionResult SaveDLB_ByDriver_Split(Dto_Delivery dto)
+        //{
+        //    try
+        //    {
+        //        // check the user in dlb creation 
+        //        if (string.IsNullOrWhiteSpace(dto.UserToken))
+        //        {
+        //            goto ByPassTransCheck;                    
+        //        }
+
+        //        // check the memory for the key exist
+        //        if (Program.UserTransToken_CreateDLB == null) Program.UserTransToken_CreateDLB = new Dictionary<string, bool>();
+
+        //        // check user token in list
+        //        var isListed = Program.UserTransToken_CreateDLB.ContainsKey(dto.UserToken);
+
+        //        if (isListed) // yes in 
+        //        {
+        //            bool inTran = Program.UserTransToken_CreateDLB[dto.UserToken];
+        //            if (inTran)
+        //            {
+        //                return BadRequest("Create DLB in process, please recheck the created DLB Thanks.");
+        //            }
+        //            else
+        //            {
+        //                Program.UserTransToken_CreateDLB[dto.UserToken] = true;
+        //            }
+        //        }
+        //        else // no then add in and set true 
+        //        {
+        //            Program.UserTransToken_CreateDLB.Add(dto.UserToken, true); // add and set to intrans
+        //        }
+
+        //    ByPassTransCheck:
+
+        //        if (dto.Dlb1 == null)
+        //        {
+        //            return BadRequest("Invalid dlb lines");
+        //        }
+        //        if (dto.Dlb1.Count == 0)
+        //        {
+        //            return BadRequest("Invalid dlb lines [0]");
+        //        }
+        //        if (dto.SaveHeadGuid == default)
+        //        {
+        //            return BadRequest("Invalid DLB guid");
+        //        }
+        //        if (string.IsNullOrWhiteSpace(dto.UserCode))
+        //        {
+        //            return BadRequest("Invalid user code");
+        //        }
+        //        if (string.IsNullOrWhiteSpace(dto.UserName))
+        //        {
+        //            return BadRequest("Invalid user name");
+        //        }
+
+        //        var dlbRepliedDocs = new List<object>();
+        //        var companies = dto.Dlb1.Select(s => s.SubSi).Distinct().ToList(); // list of company
+
+        //        using var conn = new SqlConnection(_commDbConnStr);
+
+        //        for (int c = 0; c < companies.Count; c++)
+        //        {
+        //            var subsi = companies[c];
+        //            if (string.IsNullOrWhiteSpace(subsi)) continue;
+
+        //            var db = new DbNameHelper().GetDbInfo(_commDbConnStr, subsi);
+        //            if (db == null) continue;
+
+        //            var qr_dlb = @$"Select * from {db.WEBDB}..FTAPP_DLB with (NOLOCK)
+        //                          Where HeadGuid = @headerGuid ";
+
+        //            var dlb = conn.Query<FTAPP_DLB>(qr_dlb, new
+        //            {
+        //                headerGuid = dto.SaveHeadGuid,
+
+        //            }).FirstOrDefault();
+
+        //            if (dlb == null)
+        //            {
+        //                continue;
+        //            }
+
+        //            if (dlb.DLBStatus != "D")
+        //            {
+        //                continue;                        
+        //            }
+
+        //            var companyDlbs = dto.Dlb1.Where(d => d.SubSi == subsi).ToList();
+        //            if (companyDlbs.Count == 0) // there is no line belong to this company
+        //            {
+        //                continue; // to nex company
+        //            }
+
+        //            dlb.Remarks = dto.Remarks;
+        //            dlb.NRIC = dto.Nric;
+
+        //            if (string.IsNullOrWhiteSpace(dlb.WhsUserCode))
+        //            {
+        //                dlb.WhsUserCode = dto.UserCode;
+        //            }
+
+        //            // 20251214
+        //            // split the interbranch and gps to 1 dlb 
+        //            // handler the delivery to store as another DLB 
+
+        //            var interBranches_docs = companyDlbs
+        //                .Where(i => i.App_Determined_IsInterbranch == true).ToList();
+
+        //            var dlbs_created = new List<long>();
+        //            long interBranches_dlbEntry = -1;
+        //            if (interBranches_docs.Count > 0)
+        //            {
+        //                // handler the create of the DLB for interbranch 
+        //                interBranches_dlbEntry = HandlerInterBranch_DLBCreation(db, dto, dlb,  interBranches_docs);
+        //                dlbs_created.Add(interBranches_dlbEntry);
+        //            }
+
+        //            // process as per normal
+        //            var normal_docs = companyDlbs
+        //                .Where(i => i.App_Determined_IsInterbranch == false).ToList();
+
+        //            var helper = new DLBHelper(db, dto.SaveHeadGuid, dlb.TruckNo);                    
+        //            var dlbDocEntry = helper.CreateDLB(dlb, normal_docs, dto.UserCode, dto.UserName, false);
+        //            if (dlbDocEntry == -1)
+        //            {
+        //                return BadRequest(helper.Error);
+        //            }
+
+        //            dlbs_created.Add(dlbDocEntry);
+                    
+        //            var dlbRepliedDoc = new
+        //            {
+        //                DLBEntry = string.Join(",", dlbs_created.Distinct()) , // in comma separated 
+        //                DocStatus = "Success, Intransit",
+        //                SubSi = db.COMPANYNAME
+        //            };
+
+        //            dlbRepliedDocs.Add(dlbRepliedDoc);
+        //        } // for loop 
+
+        //        return Ok(dlbRepliedDocs); // list of created dlb docs
+
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        LastError = $"{e.Message}\n{e.StackTrace}";
+        //        _logger.LogError(LastError);
+        //        return BadRequest($"request not handler.\n{LastError}");
+        //    }
+        //    finally
+        //    {
+        //        // reset the user to un transaction
+        //        if (!string.IsNullOrWhiteSpace(dto.UserToken) && Program.UserTransToken_CreateDLB.Count > 0)
+        //        {
+        //            Program.UserTransToken_CreateDLB.Remove(dto.UserToken);
+        //        }
+        //    }
+        //}
+
+        //// 20251214
+        //long HandlerInterBranch_DLBCreation (DbInfo db, Dto_Delivery dto, FTAPP_DLB dlb , List<FTAPP_DLB1> normalDocs)
+        //{
+        //    try
+        //    {
+        //        var helper = new DLBHelper(db, dto.SaveHeadGuid, dlb.TruckNo);
+        //        var dlbDocEntry = helper.CreateDLB(dlb, normalDocs, dto.UserCode, dto.UserName, true);
+        //        if (dlbDocEntry == -1)
+        //        {
+        //            return -1;
+        //        }
+
+        //        return dlbDocEntry;
+        //    }
+        //    catch (Exception except)
+        //    {
+        //        LastError = $"{except.Message}\n{except.StackTrace}";
+        //        _logger.LogError(LastError);
+        //        return -1;
+        //    }
+        //}
 
         string GetDocType(string docType)
         {

@@ -45,6 +45,8 @@ namespace KTC_SalesAppWAPI.Models.Dispatch
 
         public List<int> InvoiceNumList { get; set; }
 
+        public bool App_Determined_IsInterbranch { get; set; }
+
         public string GetAddress
         {
             get

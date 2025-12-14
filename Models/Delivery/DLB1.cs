@@ -43,5 +43,8 @@ namespace KTC_SalesAppWAPI.Models.Delivery
         public bool IsInterBranch { get; set; }
 
         public string U_DELGLN { get; set; }
+
+
+        public bool App_Determined_IsInterbranch { get; set; }
     }
 }

@@ -6,11 +6,8 @@ namespace KTC_SalesAppWAPI.Models.Delivery
 {
     public class FTAPP_DLB1
     {
-
         // for app 
-
         public bool App_Determined_IsInterbranch { get; set ; }
-
         // 20241024 
         // for checking draft 
         public string DriverName { get; set; }
@@ -21,8 +18,6 @@ namespace KTC_SalesAppWAPI.Models.Delivery
 
         public string GeoCode { get; set; }
         public string GeoType { get; set; }
-
-
 
         // 20230518
         // for transger property saving the toWhsCode and toWhsName 
