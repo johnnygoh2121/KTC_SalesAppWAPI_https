@@ -45,7 +45,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                 if (string.IsNullOrWhiteSpace(connStr)) return "";
                 if (string.IsNullOrWhiteSpace(webDb)) return "";
 
-                var so_Query = @$"select ORIWHS from {webDb}..USERS with (nolock) 
+                var so_Query = @$"select ORIWHS from {webDb}..USERS with (NOLOCK) 
                                     where USERCODE = @userCode ";
 
                 using (var conn = new SqlConnection(connStr))
@@ -230,26 +230,38 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
 
                     if (doc.DocType == "I")
                     {
-                        // 20251203
-                        // to ensure the FTAPP_DLB1 and FTAPP_DLB2 was create for this
-                        var sp_InsertFTAP_DLB2 = @"exec KTCW_COMMON..sp_RepairFTAPP_DLB2_SingleInvNo @webDb,  @dlbNum, @invNum ";
-                        var reInsertDlb2 = conn.Execute(sp_InsertFTAP_DLB2,
-                                new
-                                {
-                                    webDb = Db.WEBDB,
-                                    dlbNum = docEntry,
-                                    invNum = doc.DocNum,
-                                }, trans);
+                        var sp_CheckExit_dlb1 = $"Select top 1 * from {Db.WEBDB}..FTAPP_DLB1 where HeadGuid = @HeadGuid";
+                        var found_dlb1 = conn.Query<FTAPP_DLB1>(sp_CheckExit_dlb1, new { HeadGuid = head.HeadGuid }, trans).FirstOrDefault();
 
-                        var sp_InsertFTAP_DLB1 = $@"exec KTCW_COMMON..sp_RepairFTAPP_DLB1_SingleInvNo @webDb,  @dlbEntry, @invNum ,@docType";
-                        var reInsertDlb1 = conn.Execute(sp_InsertFTAP_DLB1,
-                                 new
-                                 {
-                                     webDb = Db.WEBDB,
-                                     dlbEntry = docEntry,
-                                     invNum = doc.DocNum,
-                                     docType = doc.DocType
-                                 }, trans);
+                        if (found_dlb1 == null)
+                        {
+                            // 20251203
+                            // to ensure the FTAPP_DLB1 and FTAPP_DLB2 was create for this
+                            var sp_InsertFTAP_DLB2 = @"exec KTCW_COMMON..sp_RepairFTAPP_DLB1_SingleInvNo @webDb,  @dlbNum, @invNum ";
+                            var reInsertDlb2 = conn.Execute(sp_InsertFTAP_DLB2,
+                                    new
+                                    {
+                                        webDb = Db.WEBDB,
+                                        dlbNum = docEntry,
+                                        invNum = doc.DocNum,
+                                    }, trans);
+                        }
+
+                        var sp_CheckExit_dlb12 = $"Select top 1 *  from {Db.WEBDB}..FTAPP_DLB2 where HeadGuid = @HeadGuid";
+                        var found_dlb2 = conn.Query<FTAPP_DLB2>(sp_CheckExit_dlb1, new { HeadGuid = head.HeadGuid }, trans).FirstOrDefault();
+
+                        if (found_dlb2 == null)
+                        {
+                            var sp_InsertFTAP_DLB1 = $@"exec KTCW_COMMON..sp_RepairFTAPP_DLB2_SingleInvNo @webDb,  @dlbEntry, @invNum ,@docType";
+                            var reInsertDlb1 = conn.Execute(sp_InsertFTAP_DLB1,
+                                     new
+                                     {
+                                         webDb = Db.WEBDB,
+                                         dlbEntry = docEntry,
+                                         invNum = doc.DocNum,
+                                         docType = doc.DocType
+                                     }, trans);
+                        }
                     }
                     
                     lineCnt++;
@@ -552,9 +564,13 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
             {
                 var lastDlbEntry = lines.LastOrDefault().LastDlbEntry;
 
-                var sp_query = $@"select distinct t1.ORIWHS 
-                                    from {Db.WEBDB}..DLB t0 inner join 
-                                         {Db.WEBDB}..USERS t1 on t0.UCREATED = t1.USERCODE
+                //var sp_query = $@"select distinct t1.ORIWHS 
+                //                    from {Db.WEBDB}..DLB t0 inner join 
+                //                         {Db.WEBDB}..USERS t1 on t0.UCREATED = t1.USERCODE
+                //                    Where DocEntry = @lastDlbEntry ";
+
+                var sp_query = $@"select top 1 PICKEDWHS
+                                    from {Db.WEBDB}..DLB
                                     Where DocEntry = @lastDlbEntry ";
 
                 pickedWhs = new SqlConnection(connString).ExecuteScalar<string>(sp_query, new

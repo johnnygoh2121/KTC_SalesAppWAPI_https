@@ -9,7 +9,6 @@ using KTC_SalesAppWAPI.Models.Transfer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using SAPbobsCOM;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -335,6 +334,7 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                     if (lastFTAPP_DLb == null)
                     {
                         // if null how to process
+                        return BadRequest($"Error query the FTAPP_DLB Last DLB Entry {lastDLbEntry}, {dto.Subsi}");
                     }
 
                     // get the dlb1 invoice 
@@ -342,6 +342,7 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                                          where HeadGuid = @HeadGuid
                                          and DocNum = @DocNum 
                                          and DocType = 'I'";
+
                     var dlb1 = conn.Query<FTAPP_DLB1>(last_Dlb1_sp, new
                     {
                         HeadGuid = lastFTAPP_DLb.HeadGuid,
@@ -349,7 +350,7 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                     }).FirstOrDefault();
                     if (dlb1 == null)
                     {
-                        // if null how to process
+                        return BadRequest($"Error query the FTAPP_DLB1 {lastInv.DOCNUM}, {dto.Subsi}");
                     }
 
 
@@ -393,15 +394,17 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                         DocType = "I",
                         BoxStatusDesc = "load in truck",
                         BoxesCount = boxes.Sum(v => v.LabelConsistTotalBoxes),
-                        DocDate = DateTime.Now,
+                        DocDate = dlb1.DocDate,
                         DocTotal = lastInv.DOCTOTAL,
                         CartonNo = boxes.Sum(v => v.LabelConsistTotalBoxes),
                         RefNo = lastInv.REFNO,
                         ConsigmentNo = lastInv.CONSIGNMENTNO,                        
                         LastDlbEntry = (int) lastDLbEntry, 
-                        App_Determined_IsInterbranch = dlb1.App_Determined_IsInterbranch, 
-                        GeoCode = dlb1.GeoCode, 
-                        GeoType = dlb1.GeoType,
+                        App_Determined_IsInterbranch = (bool) dlb1?.App_Determined_IsInterbranch, 
+                        GeoCode = dlb1?.GeoCode, 
+                        GeoType = dlb1?.GeoType,
+                        SubSi = dto.Subsi, 
+                        TransInDt = DateTime.Now
                     };
 
                     newDlbs.Add(newdlb1);
@@ -454,7 +457,7 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                     Remarks = "TransferToDriver",
                     DriverName = transfer.DriverName,                    
                     DLBStatus = "O",
-                    Subsi = transfer.Subsi, 
+                    Subsi = dto.Subsi, 
                     IsInterbranch = isInterBranch
                 };
 
@@ -576,7 +579,7 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                                                , HeadGuid 
                                                , Remarks
                                                , DriverName
-                                               , DLBStatus, SubSi
+                                               , DLBStatus, SubSi, IsInterbranch
                                     ) values (
                                            @WhsUserCode
                                           ,@WhsUserName
@@ -587,7 +590,7 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                                           ,@HeadGuid 
                                           ,@Remarks
                                           ,@DriverName
-                                          ,@DLBStatus , @SubSi
+                                          ,@DLBStatus , @SubSi, @IsInterbranch
                                     )";
 
                 var res = conn.Execute(sp_insert, head, trans);
@@ -607,7 +610,13 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                                                , DocTotal
                                                , CartonNo
                                                , RefNo
-                                               , ConsigmentNo, SubSi, LastDlbEntry
+                                               , ConsigmentNo
+                                               , SubSi
+                                               , LastDlbEntry
+                                               , App_Determined_IsInterbranch
+                                               , GeoCode
+                                               , GeoType
+                                               , TransInDt
                                 ) values (                                           
                                             @DocNum                                           
                                            ,@StoreCode
@@ -622,7 +631,13 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                                            ,@DocTotal
                                            ,@CartonNo
                                            ,@RefNo
-                                           ,@ConsigmentNo, @SubSi , @LastDlbEntry
+                                           ,@ConsigmentNo
+                                           ,@SubSi
+                                           ,@LastDlbEntry
+                                           ,@App_Determined_IsInterbranch
+                                           ,@GeoCode
+                                           ,@GeoType
+                                           ,@TransInDt
                                 )";
 
                 var res1 = conn.Execute(sp_insert1, lines, trans);
