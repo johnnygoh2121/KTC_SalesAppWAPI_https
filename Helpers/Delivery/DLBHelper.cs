@@ -23,12 +23,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
 
         public DLBHelper(DbInfo db)
         {
-            Db = db;
-            //HeadGuid = headGuid;
-
-            //var truckInfo = GetTruckCompany(truckNo);
-            //TruckCardCode = truckInfo?.TruckCardCode;
-            //TruckCardName = truckInfo?.TruckCardName;
+            Db = db;            
         }
 
         public DLBHelper(DbInfo db, Guid headGuid, string truckNo)
@@ -560,7 +555,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                 var sp_query = $@"select distinct t1.ORIWHS 
                                     from {Db.WEBDB}..DLB t0 inner join 
                                          {Db.WEBDB}..USERS t1 on t0.UCREATED = t1.USERCODE
-                                    Where docentry = @lastDlbEntry ";
+                                    Where DocEntry = @lastDlbEntry ";
 
                 pickedWhs = new SqlConnection(connString).ExecuteScalar<string>(sp_query, new
                 {
@@ -569,8 +564,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
             }
 
             // get the max doc entry
-            var maxDocEntry_query = @$"select max(docentry) +1 from {Db.WEBDB}..DLB";
-
+            var maxDocEntry_query = @$"Select MAX(DocEntry) +1 from {Db.WEBDB}..DLB";
             var cmd = new SqlCommand(maxDocEntry_query, conn);
             cmd.Transaction = trans;
             long docEntry = (long)cmd.ExecuteScalar();
@@ -581,18 +575,13 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                 var newHead = new DLB
                 {
                     DOCENTRY = docEntry,
-
                     DOCNUM = docEntry,
                     DOCDATE = head.OutTransDt,
                     DOCSTATUS = "C", // C= confirmed, D = draft
-
                     // 20221027
                     // query to get the latest
-                    CARDCODE = TruckCardCode, //head.TruckCardCode,
-                    CARDNAME = TruckCardName,  //head.TruckCardName,
-
-                    //CARDCODE = head.TruckCardCode,
-                    //CARDNAME = head.TruckCardName,
+                    CARDCODE = TruckCardCode,  
+                    CARDNAME = TruckCardName,                      
                     TRUCKNO = head.TruckNo,
                     BOP = GetUserCostCenter(head.WhsUserCode),
                     REMARKS = head.Remarks,
@@ -600,7 +589,8 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                     DCREATED = DateTime.Now,
                     UMODIFIED = head.WhsUserCode,
                     DMODIFIED = DateTime.Now,
-                    PICKEDWHS = pickedWhs
+                    PICKEDWHS = pickedWhs, 
+                    ISINTERBRANCH = head.IsInterbranch
                 };
 
                 var lineCnt = 0;
@@ -620,9 +610,8 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                         CARDCODE = doc.StoreCode,
                         CARDNAME = doc.StoreName,
                         DOCTOTAL = doc.DocTotal,
-                        TERRITORY = terAndGeo == null ? "" : terAndGeo.Territory,
-                        //GEOCODE = terAndGeo == null ? "" : terAndGeo.U_DELGLN,
-                        GEOCODE = terAndGeo == null ? "" : string.IsNullOrWhiteSpace(terAndGeo.U_DELGLN) ? terAndGeo.GeoCode : terAndGeo.U_DELGLN,
+                        TERRITORY = terAndGeo == null ? "" : terAndGeo.Territory,                        
+                        GEOCODE = doc.GeoCode,
                         TOTALPAGES = 1,
                         CARTONNO = doc.CartonNo,
                         REFNO = doc.RefNo,
@@ -632,7 +621,8 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                         UMODIFIED = head.WhsUserCode,
                         DMODIFIED = DateTime.Now,
                         RECDATE = default,
-                        CONSIGNMENTNO = doc.ConsigmentNo
+                        CONSIGNMENTNO = doc.ConsigmentNo, 
+                        App_Determined_IsInterbranch = doc.App_Determined_IsInterbranch,                           
                     };
 
                     newDlb1.Add(newLines);
@@ -649,8 +639,10 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                                            , TRUCKNO
                                            , BOP
                                            , REMARKS
-                                           , UCREATED
-                                           , UMODIFIED , PICKEDWHS ";
+                                           , UCREATED                                           
+                                           , UMODIFIED 
+                                           , PICKEDWHS 
+                                           , ISINTERBRANCH ";
 
                 var sp_insert_head_tail = @$" @DOCENTRY
                                            ,@DOCNUM
@@ -662,7 +654,9 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                                            ,@BOP
                                            ,@REMARKS
                                            ,@UCREATED
-                                           ,@UMODIFIED , @PICKEDWHS ";
+                                           ,@UMODIFIED 
+                                           ,@PICKEDWHS
+                                           ,@ISINTERBRANCH ";
 
                 if (newHead.DCREATED != default)
                 {
@@ -702,7 +696,8 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                                            , STATUS
                                            , PAGES
                                            , UMODIFIED
-                                           , CONSIGNMENTNO  ";
+                                           , CONSIGNMENTNO  
+                                           , App_Determined_IsInterbranch ";
 
                     var sp_insert_line_tail = @$"@DOCENTRY
                                            ,@LINENUM
@@ -719,7 +714,8 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                                            ,@STATUS
                                            ,@PAGES
                                            ,@UMODIFIED
-                                           ,@CONSIGNMENTNO  ";
+                                           ,@CONSIGNMENTNO 
+                                           ,@App_Determined_IsInterbranch ";
 
                     if (line.DOCDATE != default)
                     {
@@ -849,6 +845,19 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                 {
                     userCode = userCode
                 });
+
+                // if null then requery with app manager
+                if (string.IsNullOrWhiteSpace(costCtr))
+                {
+                     sp_query = @$"select top 1 COSTCTR, * 
+                                from {Db.WEBDB}..USERCENTER 
+                                where USERCODE = @userCode";
+
+                    costCtr = conn.ExecuteScalar<string>(sp_query, new
+                    {
+                        userCode = "appmanager"
+                    });
+                }
 
                 return costCtr;
             }

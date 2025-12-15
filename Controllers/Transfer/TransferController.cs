@@ -9,6 +9,7 @@ using KTC_SalesAppWAPI.Models.Transfer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using SAPbobsCOM;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -275,7 +276,6 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
             {
                 return BadRequest("Invalid guid");
             }
-
             var db = new DbNameHelper().GetDbInfo(_commDbConnStr, dto.Subsi);
             if (db == null)
             {
@@ -283,8 +283,6 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
             }
 
             using var conn = new SqlConnection(_commDbConnStr);
-            //SqlTransaction trans = null; // to be use in later stage 
-
             try
             {
                 // prepare the dlb1 list 
@@ -312,7 +310,7 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                                     where Status = @Status 
                                     and DocNum = @DocNum  
                                     and DocType = @DocType 
-                                    Order by CONVERT(date, DMODIFIED) ";
+                                    Order by CONVERT(date, DMODIFIED) desc ";
 
                     var dlbInvs = conn.Query<DLB1>(queryDlb,
                         new
@@ -325,18 +323,40 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                     // if no open invoice 
                     if (dlbInvs.Count == 0) continue;
 
-                    var lastInv = dlbInvs.LastOrDefault();
+                    var lastInv = dlbInvs.FirstOrDefault();
                     if (lastInv == null)
                     {
                         lastInv = dlbInvs[0]; // the last invoice
                     }
 
                     lastDLbEntry = lastInv.DOCENTRY;
+                    var lastDlb_sp = $"select * from {db.WEBDB}..FTAPP_DLB where DLBEntry = @lastDLbEntry";
+                    var lastFTAPP_DLb = conn.Query<FTAPP_DLB>(lastDlb_sp, new { lastDLbEntry }).FirstOrDefault();
+                    if (lastFTAPP_DLb == null)
+                    {
+                        // if null how to process
+                    }
 
-                    var sapInv_sp = $@"select * from {db.SAPDB}..OINV t0 with (nolock) where docnum  = @docnum ";
+                    // get the dlb1 invoice 
+                    var last_Dlb1_sp = @$"select * from {db.WEBDB}..FTAPP_DLB1 
+                                         where HeadGuid = @HeadGuid
+                                         and DocNum = @DocNum 
+                                         and DocType = 'I'";
+                    var dlb1 = conn.Query<FTAPP_DLB1>(last_Dlb1_sp, new
+                    {
+                        HeadGuid = lastFTAPP_DLb.HeadGuid,
+                        DocNum = lastInv.DOCNUM
+                    }).FirstOrDefault();
+                    if (dlb1 == null)
+                    {
+                        // if null how to process
+                    }
+
+
+                    var sapInv_sp = $@"select * from {db.SAPDB}..OINV t0 with (NOLOCK) where docnum  = @docnum ";
                     var sapInvoice = conn.Query<OINV>(sapInv_sp, new { docnum = lastInv.DOCNUM }).FirstOrDefault();
 
-                    var query_box = $@"select DISTINCT   t0.BoxId
+                    var query_box = $@"select DISTINCT  t0.BoxId
                                                       , t0.PickerCode
                                                       , t0.PickerName
                                                       , t0.PickDt
@@ -378,7 +398,10 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                         CartonNo = boxes.Sum(v => v.LabelConsistTotalBoxes),
                         RefNo = lastInv.REFNO,
                         ConsigmentNo = lastInv.CONSIGNMENTNO,                        
-                        LastDlbEntry = (int) lastDLbEntry
+                        LastDlbEntry = (int) lastDLbEntry, 
+                        App_Determined_IsInterbranch = dlb1.App_Determined_IsInterbranch, 
+                        GeoCode = dlb1.GeoCode, 
+                        GeoType = dlb1.GeoType,
                     };
 
                     newDlbs.Add(newdlb1);
@@ -416,6 +439,8 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                     return BadRequest("Invalid guid for reading transfer data");
                 }
 
+                var isInterBranch = newDlbs.Any(h => h.App_Determined_IsInterbranch == true);
+
                 // create the dlb head 
                 var dlbHead = new FTAPP_DLB
                 {
@@ -427,9 +452,10 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                     TruckCardName = transfer.LocationName, // refer to truck company name
                     HeadGuid = dto.SaveGuid,
                     Remarks = "TransferToDriver",
-                    DriverName = transfer.DriverName,
-                    //DLBEntry = -1,
+                    DriverName = transfer.DriverName,                    
                     DLBStatus = "O",
+                    Subsi = transfer.Subsi, 
+                    IsInterbranch = isInterBranch
                 };
 
                 // need to insert into the FTAPP_DLB structure 
@@ -601,13 +627,11 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
 
                 var res1 = conn.Execute(sp_insert1, lines, trans);
 
-                // insert the box 
                 var insertBox_sp = @$"INSERT INTO {db.WEBDB}..FTAPP_DLB2 ( 
                                             InvDocNum
                                            ,BoxId
                                            ,OutTransDt
-                                           ,InTransDt
-                                           ,OutTransitDt
+                                           ,InTransDt                                            
                                            ,SoDocEntry
                                            ,DlbEntry
                                            ,HeadGuid 
@@ -615,8 +639,7 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                                             @InvDocNum
                                            ,@BoxId
                                            ,GETDATE()
-                                           ,GETDATE()
-                                           ,GETDATE()
+                                           ,GETDATE()                                            
                                            ,@SoDocEntry
                                            ,@DlbEntry
                                            ,@HeadGuid  )";

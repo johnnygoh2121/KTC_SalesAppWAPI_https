@@ -2278,7 +2278,6 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
             try
             {
-
                 // update all the box out time 
                 // else perform update of the in transits date time 
                 var update_sql1 = @$"Update {db.WEBDB}..FTAPP_DLB2                                    
@@ -2333,7 +2332,6 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                         $"please try again. Thanks.");
                     }
                 }
-
 
                 // update transfer doc delivery date
                 // 20230521
