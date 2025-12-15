@@ -3,6 +3,7 @@ using KTC_SalesAppWAPI.Models.CommonDb;
 using KTC_SalesAppWAPI.Models.Delivery;
 using KTC_SalesAppWAPI.Models.Pick;
 using KTC_SalesAppWAPI.Models.Transfer;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -139,8 +140,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                         actualTotalBox = doc.CartonNo;
                     }
 
-                    TerritoryGeo terAndGeo = GetTerritoryAndGeo(doc.StoreCode);                   
-
+                    TerritoryGeo terAndGeo = GetTerritoryAndGeo(doc.StoreCode);   
                     var newLines = new DLB1
                     {
                         DOCENTRY = docEntry,
