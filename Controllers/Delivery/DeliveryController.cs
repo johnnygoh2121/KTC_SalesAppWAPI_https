@@ -3371,7 +3371,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                 if (db == null)
                 {
-                    return BadRequest("Invalie dbi");
+                    return BadRequest("Invalid dbi");
                 }
 
                 if (dto.IsAgedInvoice)

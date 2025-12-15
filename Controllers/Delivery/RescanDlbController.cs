@@ -1138,7 +1138,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                                , ToWhsCode
                                                , ToWhsName 
                                                , IBTEntry
-                                               , App_Determined_IsInterbranch
+                                               , App_Determined_IsInterbranch, GeoType, GeoCode
                                 ) values (                                           
                                             @DocNum                                           
                                            ,@StoreCode
@@ -1160,7 +1160,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                            ,@ToWhsCode
                                            ,@ToWhsName
                                            ,@IBTEntry
-                                           ,@App_Determined_IsInterbranch
+                                           ,@App_Determined_IsInterbranch, @GeoType, @GeoCode
                                 )";
 
                         var res1 = conn.Execute(sp_insert1, newInsertLines, trans);
