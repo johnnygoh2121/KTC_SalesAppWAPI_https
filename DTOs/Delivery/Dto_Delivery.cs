@@ -63,6 +63,18 @@ namespace KTC_SalesAppWAPI.DTOs.Delivery
 
         // 20250808
         public bool IsInterbranch { get; set; }
- 
+
+        // 20251220
+        public string Driver1_guid { get; set; }
+        public string Driver2_guid { get; set; }
+        public string Device_id { get; set; }
+
+        /*
+            req.driver1_guid = DriverGuidStorage.GetDriver1Async();
+                req.driver1_guid = DriverGuidStorage.GetDriver2Async();
+                req.device_id = DependencyService.Get<IDeviceIdService>()?.GetDeviceId();         
+         */
+
+
     }
 }

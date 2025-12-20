@@ -2283,7 +2283,55 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                 if (foundCoy == null) return NotFound();
 
-                return Ok(logins);
+                // Driver 1
+                if (string.Equals(foundCoy.Pass, dto.Password, StringComparison.Ordinal))
+                {
+                    // Device ID check (only if one is already registered for driver1)
+                    if (!string.IsNullOrWhiteSpace(foundCoy.Driver1_Device_Id) &&
+                        !string.Equals(foundCoy.Driver1_Device_Id, dto.Device_id ?? string.Empty, StringComparison.Ordinal))
+                    {
+                        return BadRequest("The driver 1 device id was not matched");
+                    }
+
+                    // GUID check (only if one is already registered for driver1)
+                    if (!string.IsNullOrWhiteSpace(foundCoy.Driver1_Guid))
+                    {
+                        if (!Guid.TryParse(foundCoy.Driver1_Guid, out var g1Stored) ||
+                            !Guid.TryParse(dto.Driver1_guid ?? string.Empty, out var g1Incoming) ||
+                            g1Stored != g1Incoming)
+                        {
+                            return BadRequest("The driver 1 device guid was not matched");
+                        }
+                    }
+
+                    return Ok(logins);
+                }
+
+                // Driver 2
+                if (string.Equals(foundCoy.Pass2, dto.Password, StringComparison.Ordinal))
+                {
+                    // NOTE: ensure property casing is consistent in your model: Driver2_Device_Id (not Driver2_device_Id)
+                    if (!string.IsNullOrWhiteSpace(foundCoy.Driver2_Device_Id) &&
+                        !string.Equals(foundCoy.Driver2_Device_Id, dto.Device_id ?? string.Empty, StringComparison.Ordinal))
+                    {
+                        return BadRequest("The driver 2 device id was not matched");
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(foundCoy.Driver2_Guid))
+                    {
+                        if (!Guid.TryParse(foundCoy.Driver2_Guid, out var g2Stored) ||
+                            !Guid.TryParse(dto.Driver2_guid ?? string.Empty, out var g2Incoming) ||
+                            g2Stored != g2Incoming)
+                        {
+                            return BadRequest("The driver 2 device guid was not matched");
+                        }
+                    }
+
+                    return Ok(logins);
+                }
+
+
+                return BadRequest("There is not matched login");
             }
             catch (Exception e)
             {
