@@ -192,7 +192,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     }
                 default:
                     {
-                        return BadRequest("no recognised request");
+                        return BadRequest("no recognized request");
                     }
             }
         }
@@ -203,13 +203,13 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
             {
                 if (string.IsNullOrWhiteSpace(dto.Subsi))
                 {
-                    return BadRequest("Invalid subsi");
+                    return BadRequest("Invalid SUBSI");
                 }
 
                 var dbs = new DbNameHelper().GetDbInfo(_commDbConnStr, dto.Subsi);
                 if (dbs == null)
                 {
-                    return BadRequest("Invalid subsi");
+                    return BadRequest("Invalid SUBSI");
                 }
 
                 var query = $"select * from {dbs.SAPDB}..OWHS ";
@@ -2256,6 +2256,19 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 var logins = new List<FTAPP_TruckCapacity>();
                 using var conn = new SqlConnection(_commDbConnStr);
 
+                // get the app setting 
+                // for by pass the droid device 
+                var sp_GetSetting = @"select setupvalue 
+                                    from ktcw_common..FTAPP_Config Where SetupName = 'DeliveryAppCheckDeviceID'";
+
+                var isCheckDroidDeviceId = false;
+                var isCheckDroidDeviceId_setup = conn.Query<FTApp_Config>(sp_GetSetting).FirstOrDefault();
+                if (isCheckDroidDeviceId_setup != null)
+                {
+                    isCheckDroidDeviceId = $"{isCheckDroidDeviceId_setup?.SetupValue}".ToLower() == "y"? true : false;
+                }
+
+
                 for (int i = 0; i < dbs.Count; i++)
                 {
                     var db = dbs[i];
@@ -2287,45 +2300,110 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 if (string.Equals(foundCoy.Pass, dto.Password, StringComparison.Ordinal))
                 {
                     // Device ID check (only if one is already registered for driver1)
-                    if (!string.IsNullOrWhiteSpace(foundCoy.Driver1_Device_Id) &&
-                        !string.Equals(foundCoy.Driver1_Device_Id, dto.Device_id ?? string.Empty, StringComparison.Ordinal))
+                    //if (!string.IsNullOrWhiteSpace(foundCoy.Driver1_Device_Id) &&
+                    //    !string.Equals(foundCoy.Driver1_Device_Id, dto.Device_id ?? string.Empty, StringComparison.Ordinal))
+                    //{
+                    //    return BadRequest("The driver 1 device id was not matched");
+                    //}
+
+                    if (isCheckDroidDeviceId)
                     {
-                        return BadRequest("The driver 1 device id was not matched");
+                        if ($"{foundCoy.Driver1_Device_Id}" != $"{dto.Device_id}")
+                        {                            
+                            return BadRequest($"The driver 1 device id was not matched\n\nSvr: {dto.Device_id}\nDevice: {foundCoy.Driver1_Device_Id}");
+                        }
                     }
 
                     // GUID check (only if one is already registered for driver1)
-                    if (!string.IsNullOrWhiteSpace(foundCoy.Driver1_Guid))
+                    if (!string.IsNullOrWhiteSpace($"{foundCoy.Driver1_Guid}"))
                     {
-                        if (!Guid.TryParse(foundCoy.Driver1_Guid, out var g1Stored) ||
-                            !Guid.TryParse(dto.Driver1_guid ?? string.Empty, out var g1Incoming) ||
-                            g1Stored != g1Incoming)
+                        string device_driver1_guid = $"{dto.Driver1_guid}";
+                        if (string.IsNullOrWhiteSpace(device_driver1_guid))
+                        {
+                            goto driver1Continue; // to save at device 
+                        }
+                        if (foundCoy.Driver1_Guid != device_driver1_guid)
                         {
                             return BadRequest("The driver 1 device guid was not matched");
                         }
                     }
 
+                    driver1Continue:
+                    
+                    // reset the driver 2 info
+                    var index = logins.IndexOf(foundCoy);
+                    if (index == -1) return Ok(logins);
+
+                    for (int l = 0; l < logins.Count; l++)
+                    {
+                        if (index == l)
+                        {   
+                            logins[l].Pass = "*";
+
+                            logins[l].Pass2 = string.Empty;
+                            logins[l].Driver2_Device_Id = string.Empty;
+                            logins[l].Driver2_Guid = string.Empty;
+                            continue;
+                        }
+
+                        logins[l].Pass2 = string.Empty;
+                        logins[l].Pass = string.Empty;
+                    }
                     return Ok(logins);
                 }
 
                 // Driver 2
                 if (string.Equals(foundCoy.Pass2, dto.Password, StringComparison.Ordinal))
                 {
-                    // NOTE: ensure property casing is consistent in your model: Driver2_Device_Id (not Driver2_device_Id)
-                    if (!string.IsNullOrWhiteSpace(foundCoy.Driver2_Device_Id) &&
-                        !string.Equals(foundCoy.Driver2_Device_Id, dto.Device_id ?? string.Empty, StringComparison.Ordinal))
+                    //// NOTE: ensure property casing is consistent in your model: Driver2_Device_Id (not Driver2_device_Id)
+                    //if (!string.IsNullOrWhiteSpace(foundCoy.Driver2_Device_Id) &&
+                    //    !string.Equals(foundCoy.Driver2_Device_Id, dto.Device_id ?? string.Empty, StringComparison.Ordinal))
+                    //{
+                    //    return BadRequest("The driver 2 device id was not matched");
+                    //}
+
+                    if (isCheckDroidDeviceId)
                     {
-                        return BadRequest("The driver 2 device id was not matched");
+                        if ($"{foundCoy.Driver2_Device_Id}" != $"{dto.Device_id}")
+                        {
+                            return BadRequest($"The driver 2 device id was not matched\n\nSvr: {dto.Device_id}\nDevice: {foundCoy.Driver2_Device_Id}");
+                        }
                     }
 
                     if (!string.IsNullOrWhiteSpace(foundCoy.Driver2_Guid))
                     {
-                        if (!Guid.TryParse(foundCoy.Driver2_Guid, out var g2Stored) ||
-                            !Guid.TryParse(dto.Driver2_guid ?? string.Empty, out var g2Incoming) ||
-                            g2Stored != g2Incoming)
+                        string device_driver2_guid = $"{dto.Driver2_guid}";
+                        if (string.IsNullOrWhiteSpace(device_driver2_guid))
+                        {
+                            goto driver2Continue; // to save at device 
+                        }
+                        if (foundCoy.Driver2_Guid != device_driver2_guid)
                         {
                             return BadRequest("The driver 2 device guid was not matched");
-                        }
+                        }                        
                     }
+
+                    driver2Continue:
+                    // reset the driver 1 info
+                    var index = logins.IndexOf(foundCoy);
+                    if (index == -1) return Ok(logins);                  
+
+                    for (int l = 0; l < logins.Count; l ++)
+                    {
+                        if (index == l)
+                        {
+                            logins[l].Pass2 = "*";
+
+                            logins[l].Pass = string.Empty;
+                            logins[l].Driver1_Device_Id = string.Empty;
+                            logins[l].Driver1_Guid = string.Empty;
+                            continue;
+                        }
+
+                        logins[l].Pass2 = string.Empty;
+                        logins[l].Pass = string.Empty;
+                    }
+
 
                     return Ok(logins);
                 }
