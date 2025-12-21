@@ -2309,8 +2309,8 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     if (isCheckDroidDeviceId)
                     {
                         if ($"{foundCoy.Driver1_Device_Id}" != $"{dto.Device_id}")
-                        {                            
-                            return BadRequest($"The driver 1 device id was not matched\n\nSvr: {dto.Device_id}\nDevice: {foundCoy.Driver1_Device_Id}");
+                        {
+                            return BadRequest($"The driver 1 device id was not matched\nDevice: {dto.Device_id}\nServer: {foundCoy.Driver1_Device_Id}");                            
                         }
                     }
 
@@ -2366,7 +2366,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     {
                         if ($"{foundCoy.Driver2_Device_Id}" != $"{dto.Device_id}")
                         {
-                            return BadRequest($"The driver 2 device id was not matched\n\nSvr: {dto.Device_id}\nDevice: {foundCoy.Driver2_Device_Id}");
+                            return BadRequest($"The driver 2 device id was not matched\nDevice: {dto.Device_id}\nServer: {foundCoy.Driver2_Device_Id}");
                         }
                     }
 
