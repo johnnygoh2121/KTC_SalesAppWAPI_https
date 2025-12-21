@@ -2016,7 +2016,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
             if (string.IsNullOrWhiteSpace(dto.Subsi))
             {
-                return BadRequest("Invalid subsi");
+                return BadRequest("Invalid SUBSI");
             }
             if (string.IsNullOrWhiteSpace(dto.InvNum))
             {
@@ -2054,7 +2054,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                 if (foundBx.InTransDt != default)
                 {
-                    return BadRequest($"Box {dto.BoxId} in transisted {foundBx.InTransDt:dd-MMM-yy hh:mm tt}, " +
+                    return BadRequest($"Box {dto.BoxId} in transited {foundBx.InTransDt:dd-MMM-yy hh:mm tt}, " +
                                         $"please try again.");
                 }
                 // else perform update of the intransist date time 
@@ -2249,7 +2249,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                 if (string.IsNullOrWhiteSpace(dto.Subsi))
                 {
-                    return BadRequest("Invalid Subsi");
+                    return BadRequest("Invalid SUBSI");
                 }
 
                 var dbs = new DbNameHelper().GetDbInfo_DeliveryApp(_commDbConnStr);
@@ -2268,6 +2268,15 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     isCheckDroidDeviceId = $"{isCheckDroidDeviceId_setup?.SetupValue}".ToLower() == "y"? true : false;
                 }
 
+                sp_GetSetting =  @"select setupvalue 
+                                    from ktcw_common..FTAPP_Config Where SetupName = 'DeliveryAppCheckDeviceID_Activate'";
+
+                var isCheckDroidDeviceId_Activate = false;
+                var isCheckDroidDeviceId_Activate_setup = conn.Query<FTApp_Config>(sp_GetSetting).FirstOrDefault();
+                if (isCheckDroidDeviceId_Activate_setup != null)
+                {
+                    isCheckDroidDeviceId_Activate = $"{isCheckDroidDeviceId_Activate_setup?.SetupValue}".ToLower() == "y" ? true : false;
+                }
 
                 for (int i = 0; i < dbs.Count; i++)
                 {
@@ -2288,41 +2297,49 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 }
 
                 if (logins.Count == 0) return NotFound();
+                var foundCoy1 = logins.Where(l => $"{l.SubSi}".Trim().ToLower()
+                                                   .Equals($"{dto.Subsi}".Trim().ToLower()))
+                                                   .FirstOrDefault();
 
-                // double check with selected driver login subsi 
-                var foundCoy = logins.Where(l => $"{l.SubSi}".Trim().ToLower()
+                // 20251221
+                // by pass the guid and device id check 
+                if (isCheckDroidDeviceId_Activate == false)
+                {
+                    if (foundCoy1 != null) return Ok(logins);
+                    return BadRequest("There is not matched login");
+                }
+
+                // else process the check for device id and guid 
+                // double check with selected driver login SUBSI 
+                if (foundCoy1 == null)
+                {
+                    foundCoy1 = logins.Where(l => $"{l.SubSi}".Trim().ToLower()
                                                     .Equals($"{dto.Subsi}".Trim().ToLower()))
                                                     .FirstOrDefault();
+                }
 
-                if (foundCoy == null) return NotFound();
+                if (foundCoy1 == null) return NotFound();
 
                 // Driver 1
-                if (string.Equals(foundCoy.Pass, dto.Password, StringComparison.Ordinal))
-                {
-                    // Device ID check (only if one is already registered for driver1)
-                    //if (!string.IsNullOrWhiteSpace(foundCoy.Driver1_Device_Id) &&
-                    //    !string.Equals(foundCoy.Driver1_Device_Id, dto.Device_id ?? string.Empty, StringComparison.Ordinal))
-                    //{
-                    //    return BadRequest("The driver 1 device id was not matched");
-                    //}
-
+                if (string.Equals(foundCoy1.Pass, dto.Password, StringComparison.Ordinal))
+                {                   
                     if (isCheckDroidDeviceId)
                     {
-                        if ($"{foundCoy.Driver1_Device_Id}" != $"{dto.Device_id}")
+                        if ($"{foundCoy1.Driver1_Device_Id}" != $"{dto.Device_id}")
                         {
-                            return BadRequest($"The driver 1 device id was not matched\nDevice: {dto.Device_id}\nServer: {foundCoy.Driver1_Device_Id}");                            
+                            return BadRequest($"The driver 1 device id was not matched\nDevice: {dto.Device_id}\nServer: {foundCoy1.Driver1_Device_Id}");                            
                         }
                     }
 
                     // GUID check (only if one is already registered for driver1)
-                    if (!string.IsNullOrWhiteSpace($"{foundCoy.Driver1_Guid}"))
+                    if (!string.IsNullOrWhiteSpace($"{foundCoy1.Driver1_Guid}"))
                     {
                         string device_driver1_guid = $"{dto.Driver1_guid}";
                         if (string.IsNullOrWhiteSpace(device_driver1_guid))
                         {
                             goto driver1Continue; // to save at device 
                         }
-                        if (foundCoy.Driver1_Guid != device_driver1_guid)
+                        if (foundCoy1.Driver1_Guid != device_driver1_guid)
                         {
                             return BadRequest("The driver 1 device guid was not matched");
                         }
@@ -2331,7 +2348,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     driver1Continue:
                     
                     // reset the driver 2 info
-                    var index = logins.IndexOf(foundCoy);
+                    var index = logins.IndexOf(foundCoy1);
                     if (index == -1) return Ok(logins);
 
                     for (int l = 0; l < logins.Count; l++)
@@ -2353,31 +2370,24 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 }
 
                 // Driver 2
-                if (string.Equals(foundCoy.Pass2, dto.Password, StringComparison.Ordinal))
-                {
-                    //// NOTE: ensure property casing is consistent in your model: Driver2_Device_Id (not Driver2_device_Id)
-                    //if (!string.IsNullOrWhiteSpace(foundCoy.Driver2_Device_Id) &&
-                    //    !string.Equals(foundCoy.Driver2_Device_Id, dto.Device_id ?? string.Empty, StringComparison.Ordinal))
-                    //{
-                    //    return BadRequest("The driver 2 device id was not matched");
-                    //}
-
+                if (string.Equals(foundCoy1.Pass2, dto.Password, StringComparison.Ordinal))
+                {                   
                     if (isCheckDroidDeviceId)
                     {
-                        if ($"{foundCoy.Driver2_Device_Id}" != $"{dto.Device_id}")
+                        if ($"{foundCoy1.Driver2_Device_Id}" != $"{dto.Device_id}")
                         {
-                            return BadRequest($"The driver 2 device id was not matched\nDevice: {dto.Device_id}\nServer: {foundCoy.Driver2_Device_Id}");
+                            return BadRequest($"The driver 2 device id was not matched\nDevice: {dto.Device_id}\nServer: {foundCoy1.Driver2_Device_Id}");
                         }
                     }
 
-                    if (!string.IsNullOrWhiteSpace(foundCoy.Driver2_Guid))
+                    if (!string.IsNullOrWhiteSpace(foundCoy1.Driver2_Guid))
                     {
                         string device_driver2_guid = $"{dto.Driver2_guid}";
                         if (string.IsNullOrWhiteSpace(device_driver2_guid))
                         {
                             goto driver2Continue; // to save at device 
                         }
-                        if (foundCoy.Driver2_Guid != device_driver2_guid)
+                        if (foundCoy1.Driver2_Guid != device_driver2_guid)
                         {
                             return BadRequest("The driver 2 device guid was not matched");
                         }                        
@@ -2385,7 +2395,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                     driver2Continue:
                     // reset the driver 1 info
-                    var index = logins.IndexOf(foundCoy);
+                    var index = logins.IndexOf(foundCoy1);
                     if (index == -1) return Ok(logins);                  
 
                     for (int l = 0; l < logins.Count; l ++)
@@ -2425,7 +2435,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
             {
                 if (string.IsNullOrWhiteSpace(dto.Subsi))
                 {
-                    return BadRequest("Invalid subsi");
+                    return BadRequest("Invalid SUBSI");
                 }
                 if (string.IsNullOrWhiteSpace(dto.IbtNum))
                 {
@@ -3366,7 +3376,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
         {
             if (string.IsNullOrWhiteSpace(dto.Subsi))
             {
-                return BadRequest("Invalid subsi");
+                return BadRequest("Invalid SUBSI");
             }
 
             if (dto.Dbl2 == null)
@@ -3427,12 +3437,12 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
             {
                 // perform the insert
                 var sp_insert = @$"INSERT INTO {db.WEBDB}..FTAPP_DLB2 (                                       
-                                InvDocNum
-                               ,BoxId
-                               ,OutTransDt   
-                               ,InTransDt                            
-                               ,SoDocEntry 
-                               ,DlbEntry
+                                 InvDocNum
+                               , BoxId
+                               , OutTransDt   
+                               , InTransDt                            
+                               , SoDocEntry 
+                               , DlbEntry
                                , HeadGuid
                                 ) values ( 
                                 @InvDocNum

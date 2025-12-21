@@ -2442,7 +2442,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
             try
             {
                 using var trans = conn.BeginTransaction();
-                // else perform update of the intransist date time 
+                // else perform update of the in transit date time 
                 // update based on id 
                 var update_sql = @$"Update {db.WEBDB}..FTAPP_DLB2                                    
                         set OutTransitDt = GETDATE()
