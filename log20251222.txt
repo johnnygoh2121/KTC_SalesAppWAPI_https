@@ -1,0 +1,107 @@
+2025-12-22 12:46:20.542 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-12-22 12:46:21.731 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-22 12:46:21.735 +08:00 [INF] Hosting environment: Development
+2025-12-22 12:46:21.738 +08:00 [INF] Content root path: C:\Proj\VS2022\KTC_AppWebAPI _Https
+2025-12-22 12:46:21.859 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/weatherforecast  
+2025-12-22 12:46:21.859 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2025-12-22 12:46:21.904 +08:00 [WRN] Failed to determine the https port for redirect.
+2025-12-22 12:46:21.967 +08:00 [INF] Request finished in 115.8161ms 404 
+2025-12-22 12:46:22.106 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2025-12-22 12:46:22.137 +08:00 [INF] Route matched with {action = "Get", controller = "WeatherForecast"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[KTC_SalesAppWAPI.WeatherForecast] Get() on controller KTC_SalesAppWAPI.Controllers.WeatherForecastController (KTC_SalesAppWAPI).
+2025-12-22 12:46:22.146 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.WeatherForecast[]'.
+2025-12-22 12:46:22.167 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI) in 24.1584ms
+2025-12-22 12:46:22.170 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2025-12-22 12:46:22.173 +08:00 [INF] Request finished in 322.4783ms 200 application/json; charset=utf-8
+2025-12-22 12:46:22.809 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/favicon.ico  
+2025-12-22 12:46:22.822 +08:00 [INF] Request finished in 12.9521ms 404 
+2025-12-22 12:48:58.599 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalCompanies application/json; charset=utf-8 4
+2025-12-22 12:48:58.605 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalCompaniesController.PostAsync (KTC_SalesAppWAPI)'
+2025-12-22 12:48:58.633 +08:00 [INF] Route matched with {action = "Post", controller = "PortalCompanies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync() on controller KTC_SalesAppWAPI.Controllers.PortalCompaniesController (KTC_SalesAppWAPI).
+2025-12-22 12:48:59.940 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[KTC_SalesAppWAPI.Models.PortalCompany.PortalCompany, KTC_SalesAppWAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-12-22 12:48:59.951 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalCompaniesController.PostAsync (KTC_SalesAppWAPI) in 1314.4991ms
+2025-12-22 12:48:59.955 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalCompaniesController.PostAsync (KTC_SalesAppWAPI)'
+2025-12-22 12:48:59.961 +08:00 [INF] Request finished in 1362.967ms 200 application/json; charset=utf-8
+2025-12-22 12:50:42.887 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalLogin application/json; charset=utf-8 159
+2025-12-22 12:50:42.891 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2025-12-22 12:50:42.916 +08:00 [INF] Route matched with {action = "Post", controller = "PortalLogin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync(KTC_SalesAppWAPI.DTOs.PortalLogin.PortalLogin_dto) on controller KTC_SalesAppWAPI.Controllers.PortalLoginController (KTC_SalesAppWAPI).
+2025-12-22 12:50:44.845 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.Models.Login.BearerToken'.
+2025-12-22 12:50:44.855 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI) in 1934.7631ms
+2025-12-22 12:50:44.860 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2025-12-22 12:50:44.867 +08:00 [INF] Request finished in 1979.7924ms 200 application/json; charset=utf-8
+2025-12-22 12:50:45.000 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/SSO application/json; charset=utf-8 85
+2025-12-22 12:50:45.004 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.SSOController.Post (KTC_SalesAppWAPI)'
+2025-12-22 12:50:45.011 +08:00 [INF] Route matched with {action = "Post", controller = "SSO"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.UserProfile_Dto) on controller KTC_SalesAppWAPI.Controllers.SSOController (KTC_SalesAppWAPI).
+2025-12-22 12:50:45.693 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.DTOs.UserProfile_Dto'.
+2025-12-22 12:50:45.779 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.SSOController.Post (KTC_SalesAppWAPI) in 762.2592ms
+2025-12-22 12:50:45.784 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.SSOController.Post (KTC_SalesAppWAPI)'
+2025-12-22 12:50:45.790 +08:00 [INF] Request finished in 790.4827ms 200 application/json; charset=utf-8
+2025-12-22 12:50:46.066 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalLogin application/json; charset=utf-8 159
+2025-12-22 12:50:46.070 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2025-12-22 12:50:46.074 +08:00 [INF] Route matched with {action = "Post", controller = "PortalLogin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync(KTC_SalesAppWAPI.DTOs.PortalLogin.PortalLogin_dto) on controller KTC_SalesAppWAPI.Controllers.PortalLoginController (KTC_SalesAppWAPI).
+2025-12-22 12:50:46.309 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.Models.Login.BearerToken'.
+2025-12-22 12:50:46.316 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI) in 237.0086ms
+2025-12-22 12:50:46.321 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2025-12-22 12:50:46.326 +08:00 [INF] Request finished in 259.6653ms 200 application/json; charset=utf-8
+2025-12-22 12:50:47.055 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/AppUpdate application/json; charset=utf-8 244
+2025-12-22 12:50:47.059 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.AppUpdateController.Post (KTC_SalesAppWAPI)'
+2025-12-22 12:50:47.067 +08:00 [INF] Route matched with {action = "Post", controller = "AppUpdate"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.AppUpdate.AppUpdate_Dto) on controller KTC_SalesAppWAPI.Controllers.AppUpdateController (KTC_SalesAppWAPI).
+2025-12-22 12:50:47.096 +08:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2025-12-22 12:50:47.106 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.AppUpdateController.Post (KTC_SalesAppWAPI) in 33.9454ms
+2025-12-22 12:50:47.109 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.AppUpdateController.Post (KTC_SalesAppWAPI)'
+2025-12-22 12:50:47.115 +08:00 [INF] Request finished in 60.4503ms 200 text/plain; charset=utf-8
+2025-12-22 12:51:08.140 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pick application/json; charset=utf-8 88
+2025-12-22 12:51:08.145 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PickController.PostAsync (KTC_SalesAppWAPI)'
+2025-12-22 12:51:08.163 +08:00 [INF] Route matched with {action = "Post", controller = "Pick"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult PostAsync(KTC_SalesAppWAPI.DTOs.Pick.Dto_Pick) on controller KTC_SalesAppWAPI.Controllers.PickController (KTC_SalesAppWAPI).
+2025-12-22 12:51:08.333 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pick application/json; charset=utf-8 22
+2025-12-22 12:51:08.342 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PickController.PostAsync (KTC_SalesAppWAPI)'
+2025-12-22 12:51:08.346 +08:00 [INF] Route matched with {action = "Post", controller = "Pick"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult PostAsync(KTC_SalesAppWAPI.DTOs.Pick.Dto_Pick) on controller KTC_SalesAppWAPI.Controllers.PickController (KTC_SalesAppWAPI).
+2025-12-22 12:51:08.536 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[KTC_SalesAppWAPI.Models.Login.OCRD_Ext, KTC_SalesAppWAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-12-22 12:51:08.543 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[KTC_SalesAppWAPI.Models.Pick.FTAPP_BoxSize, KTC_SalesAppWAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-12-22 12:51:08.555 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PickController.PostAsync (KTC_SalesAppWAPI) in 205.7344ms
+2025-12-22 12:51:08.564 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PickController.PostAsync (KTC_SalesAppWAPI)'
+2025-12-22 12:51:08.574 +08:00 [INF] Request finished in 240.1068ms 200 application/json; charset=utf-8
+2025-12-22 12:51:08.727 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PickController.PostAsync (KTC_SalesAppWAPI) in 555.0521ms
+2025-12-22 12:51:08.734 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PickController.PostAsync (KTC_SalesAppWAPI)'
+2025-12-22 12:51:08.737 +08:00 [INF] Request finished in 596.3314ms 200 application/json; charset=utf-8
+2025-12-22 12:51:11.700 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/pick application/json; charset=utf-8 132
+2025-12-22 12:51:11.703 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PickController.PostAsync (KTC_SalesAppWAPI)'
+2025-12-22 12:51:11.706 +08:00 [INF] Route matched with {action = "Post", controller = "Pick"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult PostAsync(KTC_SalesAppWAPI.DTOs.Pick.Dto_Pick) on controller KTC_SalesAppWAPI.Controllers.PickController (KTC_SalesAppWAPI).
+2025-12-22 12:51:17.559 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.Models.SalesOrder.SO'.
+2025-12-22 12:51:17.572 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PickController.PostAsync (KTC_SalesAppWAPI) in 5863.7762ms
+2025-12-22 12:51:17.575 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PickController.PostAsync (KTC_SalesAppWAPI)'
+2025-12-22 12:51:17.577 +08:00 [INF] Request finished in 5877.5209ms 200 application/json; charset=utf-8
+2025-12-22 12:51:18.113 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pick application/json; charset=utf-8 141
+2025-12-22 12:51:18.116 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PickController.PostAsync (KTC_SalesAppWAPI)'
+2025-12-22 12:51:18.119 +08:00 [INF] Route matched with {action = "Post", controller = "Pick"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult PostAsync(KTC_SalesAppWAPI.DTOs.Pick.Dto_Pick) on controller KTC_SalesAppWAPI.Controllers.PickController (KTC_SalesAppWAPI).
+2025-12-22 12:51:18.342 +08:00 [INF] Executing HttpStatusCodeResult, setting HTTP status code 200
+2025-12-22 12:51:18.347 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PickController.PostAsync (KTC_SalesAppWAPI) in 225.678ms
+2025-12-22 12:51:18.349 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PickController.PostAsync (KTC_SalesAppWAPI)'
+2025-12-22 12:51:18.352 +08:00 [INF] Request finished in 239.0522ms 200 
+2025-12-22 12:51:18.444 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pick application/json; charset=utf-8 88
+2025-12-22 12:51:18.447 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PickController.PostAsync (KTC_SalesAppWAPI)'
+2025-12-22 12:51:18.449 +08:00 [INF] Route matched with {action = "Post", controller = "Pick"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult PostAsync(KTC_SalesAppWAPI.DTOs.Pick.Dto_Pick) on controller KTC_SalesAppWAPI.Controllers.PickController (KTC_SalesAppWAPI).
+2025-12-22 12:51:39.376 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType304`2[[System.Collections.Generic.List`1[[KTC_SalesAppWAPI.Models.SalesOrder.SO1, KTC_SalesAppWAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[KTC_SalesAppWAPI.Models.Pick.FTAPP_Box, KTC_SalesAppWAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-12-22 12:51:39.390 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PickController.PostAsync (KTC_SalesAppWAPI) in 20939.4288ms
+2025-12-22 12:51:39.393 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PickController.PostAsync (KTC_SalesAppWAPI)'
+2025-12-22 12:51:39.396 +08:00 [INF] Request finished in 20951.4639ms 200 application/json; charset=utf-8
+2025-12-22 12:51:40.941 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pick application/json; charset=utf-8 109
+2025-12-22 12:51:40.944 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PickController.PostAsync (KTC_SalesAppWAPI)'
+2025-12-22 12:51:40.947 +08:00 [INF] Route matched with {action = "Post", controller = "Pick"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult PostAsync(KTC_SalesAppWAPI.DTOs.Pick.Dto_Pick) on controller KTC_SalesAppWAPI.Controllers.PickController (KTC_SalesAppWAPI).
+2025-12-22 12:51:40.998 +08:00 [INF] Executing ObjectResult, writing value of type 'null'.
+2025-12-22 12:51:41.003 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PickController.PostAsync (KTC_SalesAppWAPI) in 53.6459ms
+2025-12-22 12:51:41.007 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PickController.PostAsync (KTC_SalesAppWAPI)'
+2025-12-22 12:51:41.011 +08:00 [INF] Request finished in 70.1596ms 204 
+2025-12-22 12:51:58.563 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/pick application/json; charset=utf-8 124
+2025-12-22 12:51:58.567 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PickController.PostAsync (KTC_SalesAppWAPI)'
+2025-12-22 12:51:58.573 +08:00 [INF] Route matched with {action = "Post", controller = "Pick"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult PostAsync(KTC_SalesAppWAPI.DTOs.Pick.Dto_Pick) on controller KTC_SalesAppWAPI.Controllers.PickController (KTC_SalesAppWAPI).
+2025-12-22 12:51:58.617 +08:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2025-12-22 12:51:58.624 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PickController.PostAsync (KTC_SalesAppWAPI) in 48.1471ms
+2025-12-22 12:51:58.628 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PickController.PostAsync (KTC_SalesAppWAPI)'
+2025-12-22 12:51:58.631 +08:00 [INF] Request finished in 67.8683ms 404 application/problem+json; charset=utf-8
+2025-12-22 12:51:58.829 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/pick application/json; charset=utf-8 162
+2025-12-22 12:51:58.834 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PickController.PostAsync (KTC_SalesAppWAPI)'
+2025-12-22 12:51:58.838 +08:00 [INF] Route matched with {action = "Post", controller = "Pick"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult PostAsync(KTC_SalesAppWAPI.DTOs.Pick.Dto_Pick) on controller KTC_SalesAppWAPI.Controllers.PickController (KTC_SalesAppWAPI).
+2025-12-22 12:51:58.882 +08:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2025-12-22 12:51:58.887 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PickController.PostAsync (KTC_SalesAppWAPI) in 43.4558ms
+2025-12-22 12:51:58.890 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PickController.PostAsync (KTC_SalesAppWAPI)'
+2025-12-22 12:51:58.894 +08:00 [INF] Request finished in 64.8683ms 404 application/problem+json; charset=utf-8

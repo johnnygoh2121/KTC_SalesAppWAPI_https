@@ -1827,7 +1827,7 @@ namespace KTC_SalesAppWAPI.Controllers
             {
                 if (string.IsNullOrWhiteSpace(dto.Subsi))
                 {
-                    return BadRequest("The subsi name is empty");
+                    return BadRequest("The SUBSI name is empty");
                 }
                 if (dto.DocEntry < 0)
                 {
@@ -1960,13 +1960,23 @@ namespace KTC_SalesAppWAPI.Controllers
                         }).ToList();
                     }
 
-                    // avoid devision by zero
+                    // avoid division by zero
                     var uomQty = results[i].UOMQTY == 0 ? 1 : results[i].UOMQTY;
                     if (uomQty == 1)
                     {
-                        results[i].QUANTITYPC = results[i].QUANTITY;
-                        results[i].QUANTITYCS = 0;
-                        results[i].UOM = "PC";
+
+                        if (results[i].U_MustCase == "Y")
+                        {
+                            results[i].QUANTITYPC = 0;;
+                            results[i].QUANTITYCS = results[i].QUANTITY;
+                            results[i].UOM = "CS";
+                        }
+                        else
+                        {
+                            results[i].QUANTITYPC = results[i].QUANTITY;
+                            results[i].QUANTITYCS = 0;
+                            results[i].UOM = "PC";
+                        }
                         goto ContinueLoad;
                     }
 
