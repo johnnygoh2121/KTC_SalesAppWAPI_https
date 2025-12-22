@@ -2305,8 +2305,26 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 // by pass the guid and device id check 
                 if (isCheckDroidDeviceId_Activate == false)
                 {
-                    if (foundCoy1 != null) return Ok(logins);
-                    return BadRequest("There is not matched login");
+                    if (foundCoy1 != null)
+                    {
+                        for (int p = 0; p < logins.Count; p++)
+                        {
+                            logins[p].Pass = string.Empty;
+                            logins[p].Pass2 = string.Empty;
+
+                            logins[p].Driver1_Device_Id = string.Empty;
+                            logins[p].Driver1_Guid = string.Empty;
+
+                            logins[p].Driver2_Device_Id = string.Empty;
+                            logins[p].Driver2_Guid = string.Empty;
+                        }
+
+                        return Ok(logins);                        
+                    }
+                    else
+                    {
+                        return BadRequest("There is not matched login");
+                    }
                 }
 
                 // else process the check for device id and guid 
@@ -2319,6 +2337,21 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 }
 
                 if (foundCoy1 == null) return NotFound();
+                if (foundCoy1.Skip_Guid == true)
+                {
+                    for (int p = 0; p < logins.Count; p++)
+                    {
+                        logins[p].Pass = string.Empty;
+                        logins[p].Pass2 = string.Empty;
+
+                        logins[p].Driver1_Device_Id = string.Empty;
+                        logins[p].Driver1_Guid = string.Empty;
+
+                        logins[p].Driver2_Device_Id = string.Empty;
+                        logins[p].Driver2_Guid = string.Empty;
+                    }
+                    return Ok(logins);
+                }
 
                 // Driver 1
                 if (string.Equals(foundCoy1.Pass, dto.Password, StringComparison.Ordinal))
@@ -2413,7 +2446,6 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                         logins[l].Pass2 = string.Empty;
                         logins[l].Pass = string.Empty;
                     }
-
 
                     return Ok(logins);
                 }

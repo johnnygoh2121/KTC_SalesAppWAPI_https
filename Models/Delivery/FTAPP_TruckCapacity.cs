@@ -20,5 +20,8 @@
         public string Driver2_Guid { get; set; }
         public string Pass { get; set; }
         public string Pass2 { get; set; }
+
+        public bool Skip_Guid { get; set; }
+        
     }
 }
