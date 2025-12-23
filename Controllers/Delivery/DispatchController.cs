@@ -2257,6 +2257,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
             if (lines.Count == 0)
             {
+                                             
                 var sp_recreateDlb2 = $"exec sp_RepairFTAPP_DLB2_SingleInvNo @webDb, @dlbNum, @invNum ";
                 using var reCreateConn_dlb2 = new SqlConnection(_commDbConnStr);
                 var res = reCreateConn_dlb2.Execute(sp_recreateDlb2, new

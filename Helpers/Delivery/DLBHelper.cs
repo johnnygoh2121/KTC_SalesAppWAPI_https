@@ -3,7 +3,6 @@ using KTC_SalesAppWAPI.Models.CommonDb;
 using KTC_SalesAppWAPI.Models.Delivery;
 using KTC_SalesAppWAPI.Models.Pick;
 using KTC_SalesAppWAPI.Models.Transfer;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -23,7 +22,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
 
         public DLBHelper(DbInfo db)
         {
-            Db = db;            
+            Db = db;
         }
 
         public DLBHelper(DbInfo db, Guid headGuid, string truckNo)
@@ -69,7 +68,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
         }
 
         public long CreateDLB(FTAPP_DLB head, List<FTAPP_DLB1> lines, string userCode, string userName,
-            bool isInterbranch ) //, bool isRescan = false)
+            bool isInterbranch) //, bool isRescan = false)
         {
             var connStr = Db.GetWebDbConnStr();
 
@@ -86,7 +85,6 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
             {
                 conn.Open();
             }
-
 
             #region create DLB, DLB1 
             using var trans = conn.BeginTransaction();
@@ -116,7 +114,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                     UCREATED = head.WhsUserCode,
                     DCREATED = DateTime.Now,
                     UMODIFIED = head.WhsUserCode,
-                    DMODIFIED = DateTime.Now,                    
+                    DMODIFIED = DateTime.Now,
                     ISINTERBRANCH = IsHeaderInterBranch, //isInterbranch, //isRescan == true ? false : isInterbranch, // 20250808
                     PICKEDWHS = pickedWhs,
                 };
@@ -135,7 +133,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                         actualTotalBox = doc.CartonNo;
                     }
 
-                    TerritoryGeo terAndGeo = GetTerritoryAndGeo(doc.StoreCode);   
+                    TerritoryGeo terAndGeo = GetTerritoryAndGeo(doc.StoreCode);
                     var newLines = new DLB1
                     {
                         DOCENTRY = docEntry,
@@ -147,7 +145,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                         CARDNAME = doc.StoreName,
                         DOCTOTAL = doc.DocTotal,
                         TERRITORY = terAndGeo == null ? "" : terAndGeo.Territory,
-                        GEOCODE =  doc.GeoCode,
+                        GEOCODE = doc.GeoCode,
                         TOTALPAGES = 1,
                         CARTONNO = actualTotalBox,
                         REFNO = doc.RefNo,
@@ -263,7 +261,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                                      }, trans);
                         }
                     }
-                    
+
                     lineCnt++;
                 }
                 // --------------------------------------
@@ -341,8 +339,8 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                         Error = $"Error update on DLB hold table {Db.COMPANYNAME}, Dlb Entry : {docEntry}";
                         return -1;
                     }
-                }                
-                
+                }
+
                 // perform update to the FTAPP_DLB 
                 var update_FTAPP_DLB = @$"Update {Db.WEBDB}..FTAPP_DLB
                                          Set DLBEntry = @docEntry 
@@ -375,7 +373,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
 
                 #endregion insert DLB , DLB1 
 
-                #region insert transfer
+            #region insert transfer
                 // ------------------------------------------
                 // prepare create the transfer invoice here 
                 // get all the invoice out from the DLB list
@@ -596,8 +594,8 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                     DOCSTATUS = "C", // C= confirmed, D = draft
                     // 20221027
                     // query to get the latest
-                    CARDCODE = TruckCardCode,  
-                    CARDNAME = TruckCardName,                      
+                    CARDCODE = TruckCardCode,
+                    CARDNAME = TruckCardName,
                     TRUCKNO = head.TruckNo,
                     BOP = GetUserCostCenter(head.WhsUserCode),
                     REMARKS = head.Remarks,
@@ -605,7 +603,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                     DCREATED = DateTime.Now,
                     UMODIFIED = head.WhsUserCode,
                     DMODIFIED = DateTime.Now,
-                    PICKEDWHS = pickedWhs, 
+                    PICKEDWHS = pickedWhs,
                     ISINTERBRANCH = head.IsInterbranch
                 };
 
@@ -626,7 +624,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                         CARDCODE = doc.StoreCode,
                         CARDNAME = doc.StoreName,
                         DOCTOTAL = doc.DocTotal,
-                        TERRITORY = terAndGeo == null ? "" : terAndGeo.Territory,                        
+                        TERRITORY = terAndGeo == null ? "" : terAndGeo.Territory,
                         GEOCODE = doc.GeoCode,
                         TOTALPAGES = 1,
                         CARTONNO = doc.CartonNo,
@@ -637,8 +635,8 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                         UMODIFIED = head.WhsUserCode,
                         DMODIFIED = DateTime.Now,
                         RECDATE = default,
-                        CONSIGNMENTNO = doc.ConsigmentNo, 
-                        App_Determined_IsInterbranch = doc.App_Determined_IsInterbranch,                           
+                        CONSIGNMENTNO = doc.ConsigmentNo,
+                        App_Determined_IsInterbranch = doc.App_Determined_IsInterbranch,
                     };
 
                     newDlb1.Add(newLines);
@@ -756,7 +754,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                     }
 
                     var insertLineSql = $"{sp_insert_line_head} ) values ( {sp_insert_line_tail}) ";
-                    conn.Execute(insertLineSql, line, trans);                   
+                    conn.Execute(insertLineSql, line, trans);
                 }
 
                 // update the on hold table with dlb entry linked 
@@ -865,7 +863,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                 // if null then requery with app manager
                 if (string.IsNullOrWhiteSpace(costCtr))
                 {
-                     sp_query = @$"select top 1 COSTCTR, * 
+                    sp_query = @$"select top 1 COSTCTR, * 
                                 from {Db.WEBDB}..USERCENTER 
                                 where USERCODE = @userCode";
 

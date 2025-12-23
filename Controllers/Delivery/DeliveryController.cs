@@ -3425,7 +3425,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
             // check exist
             using var connSelect = new SqlConnection(_commDbConnStr);
             var sp_CheckDupl = @$"select InvDocNum ,  BoxId 
-                                      from {db.WEBDB}..FTAPP_DLB2  with (nolock)
+                                      from {db.WEBDB}..FTAPP_DLB2  with (NOLOCK)
                                       Where InvDocNum = @InvDocNum 
                                       and HeadGuid = @HeadGuid 
                                       and BoxId = @BoxId ";
@@ -3439,24 +3439,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
             if (found != null) // already save 
             {
-                return Ok();
-                //var sp_Delete = @$"Delete {db.WEBDB}..FTAPP_DLB2 
-                //                  Where InvDocNum = @InvDocNum 
-                //                        and HeadGuid = @HeadGuid 
-                //                        and BoxId = @BoxId ";
-
-                //var deleRes = conn.ExecuteScalar<int>(sp_Delete, new
-                //{
-                //    InvDocNum = dto.Dbl2.InvDocNum,
-                //    HeadGuid = dto.Dbl2.HeadGuid,
-                //    BoxId = dto.Dbl2.BoxId
-                //}, trans);
-
-                //if (deleRes < 0)
-                //{
-                //    trans.Rollback();
-                //    return BadRequest($"Error delete existing box. {dto.Dbl2.BoxId} ");
-                //}
+                return Ok();               
             }
 
             // start a transaction and insert 
