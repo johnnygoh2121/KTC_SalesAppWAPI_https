@@ -46,8 +46,8 @@ namespace KTC_SalesAppWAPI.Controllers
                 var db = new DbNameHelper().GetDbInfo(_commDbConnStr, log.SubSi);
                 if (db == null)
                 {
-                    _logger.LogError("db info query error, or invalid subsi");
-                    return BadRequest("db info query error, or invalid subsi");
+                    _logger.LogError("db info query error, or invalid SUBSI");
+                    return BadRequest("db info query error, or invalid SUBSI");
                 }
 
                 var sql_insertLog = @$"INSERT INTO [{db.WEBDB}].[dbo].[FTAPP_FileUploadLog] (

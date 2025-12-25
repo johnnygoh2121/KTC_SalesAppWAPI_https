@@ -590,6 +590,8 @@ namespace KTC_SalesAppWAPI.Controllers
 
                         newDoc.docstatus = "S";
                         uri = new Uri($"{svrAdr}{dto.Request}/{dto.SoDocCompanyID}/{dto.SoDocUpdateType}");
+
+                        
                     }
 
                     // post to portal 
