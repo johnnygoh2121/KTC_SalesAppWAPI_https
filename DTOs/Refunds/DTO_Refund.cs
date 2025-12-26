@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KTC_SalesAppWAPI.Models.Refund;
+using System;
 
 namespace KTC_SalesAppWAPI.DTOs.Refunds
 {
@@ -9,6 +10,12 @@ namespace KTC_SalesAppWAPI.DTOs.Refunds
         public DateTime EndDt { get; set; }
         public string SubSi { get; set; }      
         public string UserCode { get; set; }
+
+        // for posting 
+        public string RequestName { get; set; }
+        public string DocUpdateType { get; set; }
+        public string QueryKeys { get; set; }
+        public Refund RefundDoc { get; set; }
 
     }
 }

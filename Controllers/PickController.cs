@@ -46,7 +46,7 @@ namespace KTC_SalesAppWAPI.Controllers
         {
             _configuration = configuration;
             _logger = logger;
-            _commDbConnStr = _configuration.GetConnectionString(_dbComm);
+            _commDbConnStr = _configuration.GetConnectionString(_dbComm);            
             WebHostAddrEndPoint = configuration.GetSection("AppSettings").GetSection("WebPortal_Host_EndPoint").Value;
         }
 
