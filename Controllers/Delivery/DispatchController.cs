@@ -2171,7 +2171,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
         {
             if (string.IsNullOrWhiteSpace(dto.Subsi))
             {
-                return BadRequest("Invalid subsi");
+                return BadRequest("Invalid SUBSI");
             }
             if (string.IsNullOrWhiteSpace(dto.DocType))
             {
@@ -2256,8 +2256,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
             }).ToList();
 
             if (lines.Count == 0)
-            {
-                                             
+            {                                             
                 var sp_recreateDlb2 = $"exec sp_RepairFTAPP_DLB2_SingleInvNo @webDb, @dlbNum, @invNum ";
                 using var reCreateConn_dlb2 = new SqlConnection(_commDbConnStr);
                 var res = reCreateConn_dlb2.Execute(sp_recreateDlb2, new
@@ -2266,6 +2265,12 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     dlbNum = dto.DlbEntry,
                     invNum = dto.DocNum
                 });
+
+                lines = checkConn.Query<FTAPP_DLB2>(sp_checkLine, new
+                {
+                    HeadGuid = dlb.HeadGuid,
+                    InvDocNum = dto.DocNum
+                }).ToList();
 
                 //return BadRequest($"{db.COMPANYNAME}, " +
                 //  $"The query DLB2 doc records {dto.DlbEntry}, doc: {dto.DocNum}, type:{dto.DocType} no found, " +
@@ -2282,7 +2287,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 // update all the box out time 
                 // else perform update of the in transits date time 
                 var update_sql1 = @$"Update {db.WEBDB}..FTAPP_DLB2                                    
-                                    set OutTransitDt = GETDATE()
+                                    set OutTransitDt = DATEADD(MINUTE, 6 ,GETDATE ())
                                     Where HeadGuid = @HeadGuid 
                                     and InvDocNum = @InvDocNum; ";
 
@@ -2446,7 +2451,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 // else perform update of the in transit date time 
                 // update based on id 
                 var update_sql = @$"Update {db.WEBDB}..FTAPP_DLB2                                    
-                        set OutTransitDt = GETDATE()
+                        set OutTransitDt =  DATEADD(MINUTE, 6 ,GETDATE ())
                         Where id = @id";
 
                 var updateRes = conn.Execute(update_sql, new { id = foundBx.id }, trans);

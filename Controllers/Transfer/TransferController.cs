@@ -409,6 +409,25 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
 
                     newDlbs.Add(newdlb1);
 
+                    // try to get
+                    var last_Dlb2_sp = $@"Select TOP 1 * from {db.WEBDB}.. FTAPP_DLB2 
+                                          where HeadGuid = @headGuid 
+                                                and InvDocNum = @InvDocNum ";
+
+                    var dlb2 = conn.Query<FTAPP_DLB2>(last_Dlb2_sp, new
+                    {
+                        HeadGuid = lastFTAPP_DLb.HeadGuid,
+                        DocNum = lastInv.DOCNUM
+                    }).FirstOrDefault();
+
+                    var OutTransDt = DateTime.Now;
+                    var InTransDt = DateTime.Now;
+                    if (dlb2 != null)
+                    {
+                        OutTransDt = dlb2.OutTransDt;
+                        InTransDt = dlb2.InTransDt;
+                    }
+
                     for (int b = 0; b < boxes.Count; b++)
                     {
                         var box = boxes[b];
@@ -417,8 +436,8 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                         {
                             InvDocNum = sapInvoice.DocNum,
                             BoxId = box.BoxId,
-                            OutTransDt = DateTime.Now,
-                            InTransDt = DateTime.Now,
+                            OutTransDt = OutTransDt,
+                            InTransDt = InTransDt,
                             SoDocEntry = box.BaseEntry,
                             DlbEntry = -1,
                             HeadGuid = dto.SaveGuid

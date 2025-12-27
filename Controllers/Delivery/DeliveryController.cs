@@ -2057,7 +2057,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     return BadRequest($"Box {dto.BoxId} in transited {foundBx.InTransDt:dd-MMM-yy hh:mm tt}, " +
                                         $"please try again.");
                 }
-                // else perform update of the intransist date time 
+                // else perform update of the in transist date time 
                 var update_sql = @$"Update {db.WEBDB}..FTAPP_DLB2                                    
                         set InTransDt = GETDATE()
                         Where id = @id";
@@ -3388,8 +3388,8 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 // boxes 
                 var sp_delete = @$"update {db.WEBDB}..FTAPP_DLB2 
                                     set InTransDt = null
-                                    Where InvDocNum = @invDocNum";
-
+                                    Where InvDocNum = @invDocNum  ";
+            
                 conn.Execute(sp_delete, new { invDocNum = dto.InvNum }, trans);
 
                 trans.Commit();
