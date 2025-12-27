@@ -166,8 +166,9 @@ namespace KTC_SalesAppWAPI.Controllers
 
                                   from {db.WEBDB}..REFUND t0 with (NOLOCK) 
                                   where  t0.DOCDATE >= @startDt
-                                  and    t0.DOCDATE <= @endDt 
-                                  and    t0.UCREATED = @userCode";
+                                   and   t0.DOCDATE <= @endDt 
+                                   and   t0.UCREATED = @userCode
+                                  order by t0.DocEntry desc ";
 
                 var conn = new SqlConnection(_commDbConnStr);
                 var docs = conn.Query<Refund>(sp_Query, new
@@ -177,9 +178,25 @@ namespace KTC_SalesAppWAPI.Controllers
                     userCode = dto.UserCode
                 }).ToList();
 
-                if (docs.Count > 0) return Ok(docs);
+                if (docs.Count == 0)
+                    return NotFound();
 
-                return NotFound();
+                // load each refund 1 and refund 2 
+                for (int i = 0; i < docs.Count; i++)
+                {
+                    var refund = docs[i];
+                    if (refund == null) continue;
+
+                    var sp_load_ref1 = @$"select * from {db.WEBDB}..REFUND1 with (NOLOCK) where DocEntry = @DocEntry";
+
+                    docs[i].Cheques = conn.Query<Refund1>(sp_load_ref1, new { refund.DocEntry }).ToList();
+
+                    var sp_load_ref2 = @$"select * from {db.WEBDB}..REFUND2 with (NOLOCK) where DocEntry = @DocEntry";
+                    docs[i].Documents = conn.Query<Refund2>(sp_load_ref2, new { refund.DocEntry }).ToList();
+                }
+
+                return Ok(docs);
+
             }
             catch (Exception except)
             {
