@@ -29,6 +29,10 @@ namespace KTC_SalesAppWAPI.Models.Refund
         public decimal? SourceAmtFc { get; set; }
 
         public string ObjectCode { get; set; }
+
+        public string Collector { get; set; }
+        public string NumAtCard { get; set; }
+        public string Currency { get; set; }
     }
 
 }

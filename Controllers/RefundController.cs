@@ -163,7 +163,6 @@ namespace KTC_SalesAppWAPI.Controllers
                 var sp_Query = $@"Select '{db.COMPANYID}' [SubSiId],
                                          '{db.COMPANYNAME}' [SubSiName],
                                          t0.* 
-
                                   from {db.WEBDB}..REFUND t0 with (NOLOCK) 
                                   where  t0.DOCDATE >= @startDt
                                    and   t0.DOCDATE <= @endDt 

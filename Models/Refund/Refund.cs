@@ -63,6 +63,9 @@ namespace KTC_SalesAppWAPI.Models.Refund
 
         public DateTime? DmMdified { get; set; }
         public string ApprrEm { get; set; }
+
+        public string RefundType { get; set; }
+
         public List<Refund1> Cheques { get; set; }
         public List<Refund2> Documents { get; set; }
 
@@ -88,16 +91,12 @@ namespace KTC_SalesAppWAPI.Models.Refund
             {
                 if (DocTotal >= 0) 
                 {
-                    return "Bal. Refund";
+                    return "Refund";
                 }
 
-                return "Collecting Bal. ";
+                return "Collecting";
             }
         }
-
     }
-
-
-
 
 }
