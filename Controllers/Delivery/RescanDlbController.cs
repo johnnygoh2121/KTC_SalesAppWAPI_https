@@ -1246,7 +1246,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                 if (dto.IsAgedInvoice)
                 {
-                    goto ProcessNormallCheck;
+                    goto ProcessNormalCheck;
                 }
 
                
@@ -1258,7 +1258,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                 if (string.IsNullOrWhiteSpace(whsCode))
                 {
-                    goto ProcessNormallCheck;
+                    goto ProcessNormalCheck;
                 }
 
                 // 20240331
@@ -1376,49 +1376,68 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                 if (newAgedDocs.Count == 0)
                 {
-                    goto ProcessNormallCheck;
+                    goto ProcessNormalCheck;
                 }
 
-                // 20240524 
-                // add select the top 10 record to driver 
-                var showNumAgedRec_sp = "select setupValue from ktcw_common..FTApp_Config Where SetupName = 'NumOfAgedDocShow'";
-                int showNumAgedRec = conn1.ExecuteScalar<int>(showNumAgedRec_sp);
+                // Find the oldest calendar date
+                var oldestDate = newAgedDocs.Min(d => d.DocDate.Date);
 
-                if (showNumAgedRec == 0)
+                // Select all docs that fall on that date, optionally order them for display
+                var oldestDocs = newAgedDocs
+                    .Where(d => d.DocDate.Date == oldestDate)
+                    .OrderBy(d => d.DocDate) // if you want time-of-day order within that date
+                    .ToList();
+
+                var dto1 = new Dto_AgedDoc
                 {
-                    showNumAgedRec = 10;
-                }
+                    AgedDocs = oldestDocs,
+                    Invoice = null
+                };
 
-                // show the top 10 record 
-                newAgedDocs = new List<AgedDoc>(newAgedDocs.OrderBy(d => d.DocDate).Take(showNumAgedRec));
+                return Ok(dto1);
 
 
-                //    // get the older dates 
-                //    // 20240520
-                //    var olderDate = newAgedDocs.OrderBy(d => d.DocDate).First().DocDate;
-                //    if (olderDate == default)
-                //    {
-                //        goto ProcessNormal;
-                //    }
 
-                //    var olderDatesList = newAgedDocs.Where(d => d.DocDate.Date == olderDate.Date).Distinct().ToList();
-                //    newAgedDocs = new List<AgedDoc>(olderDatesList);
+            // 20240524 
+            // add select the top 10 record to driver 
+            //var showNumAgedRec_sp = "select setupValue from ktcw_common..FTApp_Config Where SetupName = 'NumOfAgedDocShow'";
+            //int showNumAgedRec = conn1.ExecuteScalar<int>(showNumAgedRec_sp);
 
-                //ProcessNormal:
+            //if (showNumAgedRec == 0)
+            //{
+            //    showNumAgedRec = 10;
+            //}
 
-                // mix the invoie anf ibt base on aged
-                //newAgedDocs = newAgedDocs.OrderBy(a => a.DayAged).ToList();
-                if (newAgedDocs.Count > 0)
-                {
-                    var newDto1 = new Dto_AgedDoc
-                    {
-                        AgedDocs = newAgedDocs,
-                        Transfer = null
-                    };
-                    return Ok(newDto1); // return to the app 
-                }
+            //// show the top 10 record 
+            //newAgedDocs = new List<AgedDoc>(newAgedDocs.OrderBy(d => d.DocDate).Take(showNumAgedRec));
 
-            ProcessNormallCheck:
+
+            //    // get the older dates 
+            //    // 20240520
+            //    var olderDate = newAgedDocs.OrderBy(d => d.DocDate).First().DocDate;
+            //    if (olderDate == default)
+            //    {
+            //        goto ProcessNormal;
+            //    }
+
+            //    var olderDatesList = newAgedDocs.Where(d => d.DocDate.Date == olderDate.Date).Distinct().ToList();
+            //    newAgedDocs = new List<AgedDoc>(olderDatesList);
+
+            //ProcessNormal:
+
+            // mix the invoie anf ibt base on aged
+            //newAgedDocs = newAgedDocs.OrderBy(a => a.DayAged).ToList();
+            //if (newAgedDocs.Count > 0)
+            //{
+            //    var newDto1 = new Dto_AgedDoc
+            //    {
+            //        AgedDocs = newAgedDocs,
+            //        Transfer = null
+            //    };
+            //    return Ok(newDto1); // return to the app 
+            //}
+
+            ProcessNormalCheck:
 
                 var sp_query = $@"select t0.* 
                                   from {db.WEBDB}..DLB1 t0 with (nolock)
@@ -1627,7 +1646,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 using var conn = new SqlConnection(_commDbConnStr);
                 if (dto.IsAgedInvoice)
                 {
-                    goto ProcessNormallCheck;
+                    goto ProcessNormalCheck;
                 }
 
 
@@ -1643,7 +1662,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                 if (string.IsNullOrWhiteSpace(whsCode))
                 {
-                    goto ProcessNormallCheck;
+                    goto ProcessNormalCheck;
                 }
 
                 // 20240331
@@ -1740,7 +1759,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     newAgedDocs.AddRange(agedInvs_InWhs);
                 }
               
-                // remove duplicated invioce 
+                // remove duplicated invoice 
                 // group the same to 1
                 newAgedDocs = newAgedDocs.GroupBy(g => g.DocNum)
                     .Select(i => i.FirstOrDefault()).ToList();
@@ -1759,21 +1778,39 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 }
                 if (newAgedDocs.Count == 0)
                 {
-                    goto ProcessNormallCheck;
-                }
+                    goto ProcessNormalCheck;
+                }                
 
-                // 20240524 
-                // add select the top 10 record to driver 
-                var showNumAgedRec_sp = "select setupValue from ktcw_common..FTApp_Config Where SetupName = 'NumOfAgedDocShow'";
-                int showNumAgedRec = conn.ExecuteScalar<int>(showNumAgedRec_sp);
-                if (showNumAgedRec == 0)
+                // Find the oldest calendar date
+                var oldestDate = newAgedDocs.Min(d => d.DocDate.Date);
+
+                // Select all docs that fall on that date, optionally order them for display
+                var oldestDocs = newAgedDocs
+                    .Where(d => d.DocDate.Date == oldestDate)
+                    .OrderBy(d => d.DocDate) // if you want time-of-day order within that date
+                    .ToList();
+
+                var dto1 = new Dto_AgedDoc
                 {
-                    showNumAgedRec = 10;
-                }
+                    AgedDocs = oldestDocs,
+                    Invoice = null
+                };
 
-                // show the top 10 record 
-                newAgedDocs = new List<AgedDoc>(newAgedDocs.OrderBy(d => d.DocDate).Take(showNumAgedRec));
-                
+                return Ok(dto1);
+
+
+            // 20240524 
+            // add select the top 10 record to driver 
+            //var showNumAgedRec_sp = "select setupValue from ktcw_common..FTApp_Config Where SetupName = 'NumOfAgedDocShow'";
+            //int showNumAgedRec = conn.ExecuteScalar<int>(showNumAgedRec_sp);
+            //if (showNumAgedRec == 0)
+            //{
+            //    showNumAgedRec = 10;
+            //}
+
+            // show the top 10 record 
+            //newAgedDocs = new List<AgedDoc>(newAgedDocs.OrderBy(d => d.DocDate).Take(showNumAgedRec));
+
 
             // 20240520
             // get the older dates 
@@ -1787,19 +1824,19 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
             //newAgedDocs = new List<AgedDoc>(olderDatesList);
 
             //ProcessNormal:
-                // mix the invoie anf ibt base on aged
-                //newAgedDocs = newAgedDocs.OrderBy(a => a.DayAged).ToList();
-                if (newAgedDocs.Count > 0)
-                {
-                    var newDto = new Dto_AgedDoc
-                    {
-                        AgedDocs = newAgedDocs,
-                        Invoice = null
-                    };
-                    return Ok(newDto); // return to the app 
-                }
+            // mix the invoie anf ibt base on aged
+            //newAgedDocs = newAgedDocs.OrderBy(a => a.DayAged).ToList();
+            //if (newAgedDocs.Count > 0)
+            //{
+            //    var newDto = new Dto_AgedDoc
+            //    {
+            //        AgedDocs = newAgedDocs,
+            //        Invoice = null
+            //    };
+            //    return Ok(newDto); // return to the app 
+            //}
 
-            ProcessNormallCheck:
+            ProcessNormalCheck:
                 var sp_query = $@"select t0.* 
                                   from {db.WEBDB}..DLB1 t0 with (nolock)
                                   Where t0.docnum = @docnum 
