@@ -1,23 +1,15 @@
 ﻿using Dapper;
-using KTC_SalesAppWAPI.Controllers.IBT;
-using KTC_SalesAppWAPI.DTOs.IBTReceipt;
 using KTC_SalesAppWAPI.DTOs.Refunds;
 using KTC_SalesAppWAPI.Helpers;
 using KTC_SalesAppWAPI.Models.Refund;
-using KTC_SalesAppWAPI.Models.SalesOrder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
-using System.Data;
 using System.Data.SqlClient;
-using System.IO;
 using System.Linq;
-using System.Reflection.Metadata;
 
 namespace KTC_SalesAppWAPI.Controllers
 {
@@ -192,6 +184,9 @@ namespace KTC_SalesAppWAPI.Controllers
 
                     var sp_load_ref2 = @$"select * from {db.WEBDB}..REFUND2 with (NOLOCK) where DocEntry = @DocEntry";
                     docs[i].Documents = conn.Query<Refund2>(sp_load_ref2, new { refund.DocEntry }).ToList();
+
+                    var sp_load_ref3 = @$"select * from {db.WEBDB}..REFUND3 with (NOLOCK) where DocEntry = @DocEntry";
+                    docs[i].Attachments = conn.Query<Refund3>(sp_load_ref3, new { refund.DocEntry }).ToList();
                 }
 
                 return Ok(docs);

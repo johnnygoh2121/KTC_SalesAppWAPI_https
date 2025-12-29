@@ -269,7 +269,7 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
         {
             if (string.IsNullOrWhiteSpace(dto.Subsi))
             {
-                return BadRequest("Invalid subsi");
+                return BadRequest("Invalid SUBSI");
             }
             if (dto.SaveGuid == default)
             {
@@ -412,12 +412,13 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                     // try to get
                     var last_Dlb2_sp = $@"Select TOP 1 * from {db.WEBDB}.. FTAPP_DLB2 
                                           where HeadGuid = @headGuid 
-                                                and InvDocNum = @InvDocNum ";
+                                            and InvDocNum = @InvDocNum ";
 
                     var dlb2 = conn.Query<FTAPP_DLB2>(last_Dlb2_sp, new
                     {
                         HeadGuid = lastFTAPP_DLb.HeadGuid,
-                        DocNum = lastInv.DOCNUM
+                        InvDocNum = lastInv.DOCNUM,
+                        
                     }).FirstOrDefault();
 
                     var OutTransDt = DateTime.Now;
