@@ -371,9 +371,27 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                     return -1;
                 }
 
+                // update the FTAPP_DLB2 dlb entry 
+                var update_FTAPP_DLB2 = @$"Update {Db.WEBDB}..FTAPP_DLB2
+                                         Set DLBEntry = @docEntry                                              
+                                              where HeadGuid = @HeadGuid";
+
+                var updateFTAPP_DLB_Res2 = conn.Execute(update_FTAPP_DLB2, new
+                {
+                    docEntry,
+                    HeadGuid,                                
+                }, trans);
+
+                if (updateFTAPP_DLB_Res2 < 0)
+                {
+                    trans.Rollback();
+                    Error = "Error update on FTAPP_DLB2 table ";
+                    return -1;
+                }
+
                 #endregion insert DLB , DLB1 
 
-            #region insert transfer
+                #region insert transfer
                 // ------------------------------------------
                 // prepare create the transfer invoice here 
                 // get all the invoice out from the DLB list

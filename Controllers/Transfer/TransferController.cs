@@ -9,6 +9,7 @@ using KTC_SalesAppWAPI.Models.Transfer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using SAPbobsCOM;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -284,6 +285,10 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
             using var conn = new SqlConnection(_commDbConnStr);
             try
             {
+
+               
+
+
                 // prepare the dlb1 list 
                 var newDlbs = new List<FTAPP_DLB1>();
                 var newDlbs_Boxes = new List<FTAPP_DLB2>();
@@ -297,6 +302,19 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
 
                 var invs = conn.Query<FTAPP_Transfer1>(queryInvs, new { GroupGuid = dto.SaveGuid }).ToList();
                 if (invs.Count == 0) return NotFound();
+
+                // get the start and end date transfer 
+                var sp_query_transfereDt = @$"select min(transdt) [StartLoad]
+                                                    , max(transdt) [EndLoad]
+                                    from {db.WEBDB}..FTAPP_Transfer2
+                                    where GroupGuid =  @GroupGuid";
+
+                var transferStartEndDt = conn
+                    .Query<TransferStartEndDt>(sp_query_transfereDt,
+                    new
+                    {
+                        GroupGuid = dto.SaveGuid
+                    }).FirstOrDefault();
 
                 long lastDLbEntry = -1;
                 // the list later reuse to recreate the new DLB record
@@ -353,7 +371,6 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                         return BadRequest($"Error query the FTAPP_DLB1 {lastInv.DOCNUM}, {dto.Subsi}");
                     }
 
-
                     var sapInv_sp = $@"select * from {db.SAPDB}..OINV t0 with (NOLOCK) where docnum  = @docnum ";
                     var sapInvoice = conn.Query<OINV>(sapInv_sp, new { docnum = lastInv.DOCNUM }).FirstOrDefault();
 
@@ -382,6 +399,10 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                                     and t1.BoxGuid is not null";
 
                     var boxes = conn.Query<FTAPP_Box>(query_box, new { baseentry = sapInvoice.U_SOID }).ToList();
+
+                    // try to get the transfer min and max date time 
+                    bool isSameDateTime = transferStartEndDt.StartLoad == transferStartEndDt.EndLoad; //
+
                     var newdlb1 = new FTAPP_DLB1
                     {
                         DocNum = sapInvoice.DocNum,
@@ -404,7 +425,8 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                         GeoCode = dlb1?.GeoCode, 
                         GeoType = dlb1?.GeoType,
                         SubSi = dto.Subsi, 
-                        TransInDt = DateTime.Now
+                        TransInDt = isSameDateTime == true? transferStartEndDt.StartLoad.AddMinutes(6) : transferStartEndDt.EndLoad
+                        //DateTime.Now // (DateTime) dlb1?.TransInDt
                     };
 
                     newDlbs.Add(newdlb1);
@@ -423,10 +445,18 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
 
                     var OutTransDt = DateTime.Now;
                     var InTransDt = DateTime.Now;
-                    if (dlb2 != null)
+                    if (transferStartEndDt != null)
                     {
-                        OutTransDt = dlb2.OutTransDt;
-                        InTransDt = dlb2.InTransDt;
+                        if (isSameDateTime)
+                        {
+                            OutTransDt = transferStartEndDt.StartLoad;
+                            InTransDt = transferStartEndDt.EndLoad.AddMinutes(6);
+                        }
+                        else
+                        {
+                            OutTransDt = transferStartEndDt.StartLoad;
+                            InTransDt = transferStartEndDt.EndLoad;
+                        }
                     }
 
                     for (int b = 0; b < boxes.Count; b++)
@@ -673,8 +703,8 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                                         ) values (
                                             @InvDocNum
                                            ,@BoxId
-                                           ,GETDATE()
-                                           ,GETDATE()                                            
+                                           ,@OutTransDt
+                                           ,@InTransDt
                                            ,@SoDocEntry
                                            ,@DlbEntry
                                            ,@HeadGuid  )";

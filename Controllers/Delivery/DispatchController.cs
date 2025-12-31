@@ -2287,7 +2287,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 // update all the box out time 
                 // else perform update of the in transits date time 
                 var update_sql1 = @$"Update {db.WEBDB}..FTAPP_DLB2                                    
-                                    set OutTransitDt = DATEADD(MINUTE, 6 ,GETDATE ())
+                                    set OutTransitDt = DATEADD(MINUTE, 3 ,GETDATE ())
                                     Where HeadGuid = @HeadGuid 
                                     and InvDocNum = @InvDocNum; ";
 
@@ -2377,7 +2377,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
             if (string.IsNullOrWhiteSpace(dto.Subsi))
             {
-                return BadRequest("Invalid subsi");
+                return BadRequest("Invalid SUBSI");
             }
             if (string.IsNullOrWhiteSpace(dto.InvNum))
             {
@@ -2401,16 +2401,16 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
             var query_box = @$" Select * from  {db.WEBDB}..FTAPP_DLB2 with (NOLOCK)
                                     Where InvDocNum = @InvDocNum
                                           and BoxId = @BoxId 
-                                          and DLBEntry = @DlbEntry";
+                                          and DLBEntry = @DlbEntry ";
 
             using var conn = new SqlConnection(_commDbConnStr);
             var foundBx = conn.Query<FTAPP_DLB2>(query_box, new
             {
                 InvDocNum = dto.InvNum,
-                BoxId = dto.BoxId,
-                DlbEntry = dto.DlbEntry
+                BoxId    = dto.BoxId,
+                DlbEntry = dto.DlbEntry             
             }).FirstOrDefault();
-
+            
             if (foundBx == null)
             {
                 // 20251203
@@ -2451,7 +2451,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 // else perform update of the in transit date time 
                 // update based on id 
                 var update_sql = @$"Update {db.WEBDB}..FTAPP_DLB2                                    
-                        set OutTransitDt =  DATEADD(MINUTE, 6 ,GETDATE ())
+                        set OutTransitDt =  DATEADD(MINUTE, 3 ,GETDATE ())
                         Where id = @id";
 
                 var updateRes = conn.Execute(update_sql, new { id = foundBx.id }, trans);

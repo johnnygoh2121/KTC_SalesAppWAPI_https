@@ -833,7 +833,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                             BoxesCount = f.First().BoxesCount,
                             U_DROPPOINT = f.First().U_DROPPOINT,
                             Warehouse = f.First().Warehouse,
-                            App_Determined_IsInterbranch = f.First().App_Determined_IsInterbranch, 
+                            App_Determined_IsInterbranch = f.First().App_Determined_IsInterbranch,
                             GeoCode = f.First().GeoCode,
                             GeoType = f.First().GeoType,
                         })
@@ -1683,7 +1683,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                         headerGuid = dto.SaveHeadGuid,
 
                     }).FirstOrDefault();
-                    
+
                     if (dlb == null)
                     {
                         continue;
@@ -1691,7 +1691,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                     if (dlb.DLBStatus != "D")
                     {
-                        continue;                        
+                        continue;
                     }
 
                     var companyDlbs = dto.Dlb1.Where(d => d.SubSi == subsi).ToList();
@@ -1707,9 +1707,9 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     {
                         dlb.WhsUserCode = dto.UserCode;
                     }
-                    
+
                     var helper = new DLBHelper(db, dto.SaveHeadGuid, dlb.TruckNo);
-                                                                                                         
+
                     var dlbDocEntry = helper.CreateDLB(dlb, companyDlbs, dto.UserCode, dto.UserName, dto.IsInterbranch);
                     if (dlbDocEntry == -1)
                     {
@@ -1875,7 +1875,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
         //            }
 
         //            dlbs_created.Add(dlbDocEntry);
-                    
+
         //            var dlbRepliedDoc = new
         //            {
         //                DLBEntry = string.Join(",", dlbs_created.Distinct()) , // in comma separated 
@@ -1987,7 +1987,6 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 }
 
                 //foundDoc.TransInDt = DateTime.Now;
-
                 // else perform update of the intransist date time 
                 var update_sql = @$"Update {db.WEBDB}..FTAPP_DLB1
                         set TransInDt = GETDATE()
@@ -1996,6 +1995,18 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 var updateRes = conn.Execute(update_sql, new { id = foundDoc.id }, trans);
                 if (updateRes == 1)
                 {
+                    // update the FTAPP_DLB2 box at truck date 
+                    var update_sqlBox = @$"Update {db.WEBDB}..FTAPP_DLB2
+                                set InTransDt = GETDATE()
+                                Where HeadGuid = @HeadGuid 
+                                and InvDocNum = @DocNum ";
+
+                    var updateRes1 = conn.Execute(update_sqlBox, new
+                    {
+                        HeadGuid = foundDoc.HeadGuid,
+                        DocNum = foundDoc.DocNum,
+                    }, trans);
+
                     trans.Commit();
                     return Ok();
                 }
@@ -2266,10 +2277,10 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 var isCheckDroidDeviceId_setup = conn.Query<FTApp_Config>(sp_GetSetting).FirstOrDefault();
                 if (isCheckDroidDeviceId_setup != null)
                 {
-                    isCheckDroidDeviceId = $"{isCheckDroidDeviceId_setup?.SetupValue}".ToLower() == "y"? true : false;
+                    isCheckDroidDeviceId = $"{isCheckDroidDeviceId_setup?.SetupValue}".ToLower() == "y" ? true : false;
                 }
 
-                sp_GetSetting =  @"select setupvalue 
+                sp_GetSetting = @"select setupvalue 
                                     from ktcw_common..FTAPP_Config Where SetupName = 'DeliveryAppCheckDeviceID_Activate'";
 
                 var isCheckDroidDeviceId_Activate = false;
@@ -2320,7 +2331,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                             logins[p].Driver2_Guid = string.Empty;
                         }
 
-                        return Ok(logins);                        
+                        return Ok(logins);
                     }
                     else
                     {
@@ -2356,12 +2367,12 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                 // Driver 1
                 if (string.Equals(foundCoy1.Pass, dto.Password, StringComparison.Ordinal))
-                {                   
+                {
                     if (isCheckDroidDeviceId)
                     {
                         if ($"{foundCoy1.Driver1_Device_Id}" != $"{dto.Device_id}")
                         {
-                            return BadRequest($"The driver 1 device id was not matched\nDevice: {dto.Device_id}\nServer: {foundCoy1.Driver1_Device_Id}");                            
+                            return BadRequest($"The driver 1 device id was not matched\nDevice: {dto.Device_id}\nServer: {foundCoy1.Driver1_Device_Id}");
                         }
                     }
 
@@ -2379,8 +2390,8 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                         }
                     }
 
-                    driver1Continue:
-                    
+                driver1Continue:
+
                     // reset the driver 2 info
                     var index = logins.IndexOf(foundCoy1);
                     if (index == -1) return Ok(logins);
@@ -2388,7 +2399,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     for (int l = 0; l < logins.Count; l++)
                     {
                         if (index == l)
-                        {   
+                        {
                             logins[l].Pass = "*";
 
                             logins[l].Pass2 = string.Empty;
@@ -2405,7 +2416,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                 // Driver 2
                 if (string.Equals(foundCoy1.Pass2, dto.Password, StringComparison.Ordinal))
-                {                   
+                {
                     if (isCheckDroidDeviceId)
                     {
                         if ($"{foundCoy1.Driver2_Device_Id}" != $"{dto.Device_id}")
@@ -2424,15 +2435,15 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                         if (foundCoy1.Driver2_Guid != device_driver2_guid)
                         {
                             return BadRequest("The driver 2 device guid was not matched");
-                        }                        
+                        }
                     }
 
-                    driver2Continue:
+                driver2Continue:
                     // reset the driver 1 info
                     var index = logins.IndexOf(foundCoy1);
-                    if (index == -1) return Ok(logins);                  
+                    if (index == -1) return Ok(logins);
 
-                    for (int l = 0; l < logins.Count; l ++)
+                    for (int l = 0; l < logins.Count; l++)
                     {
                         if (index == l)
                         {
@@ -3012,7 +3023,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                     //var res = conn.Execute(sp_delete, new { headerGuid = dto.Dlb.HeadGuid }, trans);
 
-                    // insert the head
+                    // insert the head                    
                     var sp_insert = @$" INSERT INTO {db.WEBDB}..FTAPP_DLB (
                                                  WhsUserCode
                                                , WhsUserName
@@ -3046,13 +3057,41 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     }
                 }
 
-
+                // 20251231
+                // leave the TransInDt null (field for record the last box entry
                 // get the new line to insert 
                 var newInsertLines = dto.Dlb1.Where(x => $"{x.SaveAs}".Equals("savenew")).ToList();
                 if (newInsertLines.Count > 0)
                 {
-                    // insert then lines
-                    var sp_insert1 = @$"INSERT INTO {db.WEBDB}..FTAPP_DLB1 (                                              
+                    var toInsert_list = new List<FTAPP_DLB1>();
+                    for (int d = 0; d < newInsertLines.Count; d++)
+                    {
+                        var dlb = dto.Dlb1[d];
+                        if (dlb == null) continue;
+
+                        var checkDupli = @$"Select * from {db.WEBDB}..FTAPP_DLB1 
+                                        where 
+                                            DocNum = @DocNum 
+                                        and DocType = @DocType                                        
+                                        and HeadGuid = @HeadGuid";
+
+                        var found = conn.Query<FTAPP_DLB1>(checkDupli, new
+                        {
+                            dlb.DocNum,
+                            dlb.DocType,
+                            dto.Dlb.HeadGuid,
+
+                        }, trans).FirstOrDefault();
+
+                        if (found != null) continue;
+
+                        toInsert_list.Add(dlb);
+                    }
+
+                    if (toInsert_list.Count > 0)
+                    {
+                        // insert then lines
+                        var sp_insert1 = @$"INSERT INTO {db.WEBDB}..FTAPP_DLB1 (                                              
                                                  DocNum                                                                                              
                                                , StoreCode
                                                , StoreName
@@ -3093,7 +3132,8 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                            ,@IBTEntry
                                            ,@App_Determined_IsInterbranch, @GeoCode, @GeoType
                                 )";
-                    var res1 = conn.Execute(sp_insert1, newInsertLines, trans);
+                        var res1 = conn.Execute(sp_insert1, toInsert_list, trans);
+                    }
                 }
 
                 // get the line for update
@@ -3282,14 +3322,16 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
             try
             {
-                var query_dlb1 = @$"select * from {db.WEBDB}..FTAPP_DLB1 with (nolock)
+                var query_dlb1 = @$"select * from {db.WEBDB}..FTAPP_DLB1 with (NOLOCK)
                                     Where DocNum = @DocNum 
-                                          and DocType = @docType ";
+                                          and DocType = @docType 
+                                          and HeadeGuid = @HeadGuid ";
 
                 var dlb1 = conn.Query<FTAPP_DLB1>(query_dlb1, new
                 {
                     DocNum = dto.DocNum,
-                    docType = dto.DocType
+                    docType = dto.DocType,
+                    HeadGuid = dto.HeadGuid,
                 }, trans).FirstOrDefault();
 
                 if (dlb1 == null)
@@ -3301,7 +3343,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                 // boxes  -----------------------
                 var sp_delete = @$"Delete from {db.WEBDB}..FTAPP_DLB2 
-                                    Where convert( nvarchar(50) ,HeadGuid) = @hguid 
+                                   Where convert( nvarchar(50) ,HeadGuid) = @headGuid 
                                           and InvDocNum = @InvDocNum ";
 
                 var resDelBoxes = conn.Execute(sp_delete, new
@@ -3390,7 +3432,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 var sp_delete = @$"update {db.WEBDB}..FTAPP_DLB2 
                                     set InTransDt = null
                                     Where InvDocNum = @invDocNum  ";
-            
+
                 conn.Execute(sp_delete, new { invDocNum = dto.InvNum }, trans);
 
                 trans.Commit();
@@ -3411,25 +3453,22 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
             {
                 return BadRequest("Invalid SUBSI");
             }
-
             if (dto.Dbl2 == null)
             {
                 return BadRequest("Invalid out box");
             }
-
             var db = new DbNameHelper().GetDbInfo(_commDbConnStr, dto.Subsi);
             if (db == null)
             {
                 return BadRequest("invalid dbi");
             }
-
             // check exist
             using var connSelect = new SqlConnection(_commDbConnStr);
             var sp_CheckDupl = @$"select InvDocNum ,  BoxId 
-                                      from {db.WEBDB}..FTAPP_DLB2  with (NOLOCK)
-                                      Where InvDocNum = @InvDocNum 
-                                      and HeadGuid = @HeadGuid 
-                                      and BoxId = @BoxId ";
+                                    from {db.WEBDB}..FTAPP_DLB2  with (NOLOCK)
+                                    Where InvDocNum = @InvDocNum 
+                                    and HeadGuid = @HeadGuid 
+                                    and BoxId = @BoxId ";
 
             var found = connSelect.Query<FTAPP_DLB1>(sp_CheckDupl, new
             {
@@ -3440,7 +3479,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
             if (found != null) // already save 
             {
-                return Ok();               
+                return Ok();
             }
 
             // start a transaction and insert 
@@ -3452,6 +3491,8 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
             try
             {
                 // perform the insert
+                // keep the column OutTransitDt null 
+                // it will be out when user scan out at store
                 var sp_insert = @$"INSERT INTO {db.WEBDB}..FTAPP_DLB2 (                                       
                                  InvDocNum
                                , BoxId
@@ -3464,7 +3505,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                 @InvDocNum
                                ,@BoxId
                                ,GETDATE()
-                               ,GETDATE()
+                               ,null
                                ,@SoDocEntry 
                                ,@DlbEntry 
                                ,@HeadGuid      
@@ -4606,7 +4647,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                     left join {db.WEBDB}..SO   t3 with (NOLOCK) on t3.DocEntry = t2.U_SOID
                                     left join {db.SAPDB}..OWHS t4 with (NOLOCK) on t4.WhsCode = t3.WHSCODE
                                     where t2.DocEntry = @docEntry ";
-                                     
+
 
                 OINV inv = conn.Query<OINV>(query_inv, new { docEntry = docSo.INVENTRY }).FirstOrDefault();
                 if (inv == null)
