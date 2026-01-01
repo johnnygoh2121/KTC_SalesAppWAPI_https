@@ -9,6 +9,7 @@ using KTC_SalesAppWAPI.Models.Delivery;
 using KTC_SalesAppWAPI.Models.Dispatch;
 using KTC_SalesAppWAPI.Models.DN;
 using KTC_SalesAppWAPI.Models.Pick;
+using KTC_SalesAppWAPI.Models.SalesOrder;
 using KTC_SalesAppWAPI.Models.Transfer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -924,8 +925,8 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
             // check the exiting append in the file name behind
 
             var checkDlb1_sp = $@"SELECT t1.* 
-                                  from {db.WEBDB}..FTAPP_DLB t0 with (nolock)
-                                  inner join {db.WEBDB}..FTAPP_DLB1 t1 with (nolock) on t1.HeadGuid = t0.HeadGuid
+                                  from {db.WEBDB}..FTAPP_DLB t0 with (NOLOCK)
+                                  inner join {db.WEBDB}..FTAPP_DLB1 t1 with (NOLOCK) on t1.HeadGuid = t0.HeadGuid
                                   where t0.DLBEntry = @DlbEntry
                                   and t1.DocNum =  @DocNum 
                                   and t1.DocType = @DocType; ";
@@ -1032,7 +1033,25 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 // invoice only 
                 if (dto.DocType == "I")
                 {
-                    var isDone = CreateTransferToStore(db, dlb1.DocNum, updateConn, updTrans);
+                    var isIBTInv = dlb1.App_Determined_IsInterbranch;
+                    OWHS_Ext whs = null;
+                    if (isIBTInv)
+                    {
+                        var sp_query_whs = $@"select  * from {db.SAPDB}..OWHS 
+                                            Where GlblLocNum =  @GeoCode";
+
+                        whs = checkConn.Query<OWHS_Ext>(sp_query_whs, new
+                        {
+                            dlb1.GeoCode
+                        }).FirstOrDefault();
+                    }
+
+                    var isDone = CreateTransferToStore(db, dlb1.DocNum,(int) dto.DlbEntry, 
+                        isIBTInv, whs,
+                        dto.UserCode, dto.UserName,   
+                        updateConn, updTrans);
+
+
                     if (isDone == false)
                     {
                         updTrans.Rollback();
@@ -1054,7 +1073,9 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
             }
         }
 
-        bool CreateTransferToStore(DbInfo db, int InvNum, SqlConnection updateConn, SqlTransaction updateTrans)
+        bool CreateTransferToStore(DbInfo db, int InvNum, int dlbEntry, bool isIbtInv, OWHS_Ext whs,
+            string whsAppLoginCode , string whsAppLoginName , 
+            SqlConnection updateConn, SqlTransaction updateTrans)
         {
             try
             {
@@ -1095,18 +1116,32 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     return true;
                 }
 
+                string receiverCode = inv.CardCode, receiverName = inv.CardName, 
+                       locationCode = inv.ShipToCode, locationName = inv.ShipToCode, driverName = "NA";
+
+                if (isIbtInv == true && whs != null)
+                {
+                    receiverCode = whsAppLoginCode;
+                    receiverName = whsAppLoginName;
+                    locationCode = whs.WhsCode;
+                    locationName = whs.WhsName;
+                    driverName = whsAppLoginName;
+                }
+
                 var groupGuid = Guid.NewGuid();
                 var tHead = new FTAPP_Transfer
                 {
-                    ReceiverCode = inv.CardCode,
-                    ReceiverName = inv.CardName,
-                    LocationCode = inv.ShipToCode,
-                    LocationName = inv.ShipToCode,
+                    ReceiverCode = receiverCode,
+                    ReceiverName = receiverName,
+                    LocationCode = locationCode,
+                    LocationName = locationName,
+
                     TransDt = DateTime.Now,
                     DocStatus = "T",
-                    DriverName = "NA",
+                    DriverName = driverName,
                     GroupGuid = groupGuid,
-                    Module = "ToStore"
+                    Module = isIbtInv == true ? "ToWhs_ByDriver" : "ToStore", 
+                    DLBEntry = dlbEntry
                 };
 
                 var tLines = new List<FTAPP_Transfer1>();
@@ -1154,7 +1189,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 {
                     InvNo = InvNum,
                     TransDt = DateTime.Now,
-                    GroupGuid = groupGuid
+                    GroupGuid = groupGuid,                     
                 };
 
                 tLines.Add(newT);
@@ -2323,19 +2358,23 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 // update the sap invoice delivery datetime 
                 if (dto.DocType == "I")
                 {
-                    var update_Inv_deliveryDt = @$"Update {db.SAPDB}..OINV set U_DelDate = @DateValue where DocNum = @DocNum";
-                    var res_updSapInv_DeliveryDt = conn.Execute(update_Inv_deliveryDt, new
+                    // if not inter branch invoice then update the deliver
+                    if (foundDoc.App_Determined_IsInterbranch == false)
                     {
-                        DateValue = $"{DateTime.Now:yyyy-MM-dd}",
-                        DocNum = dto.DocNum
-                    }, trans);
+                        var update_Inv_deliveryDt = @$"Update {db.SAPDB}..OINV set U_DelDate = @DateValue where DocNum = @DocNum";
+                        var res_updSapInv_DeliveryDt = conn.Execute(update_Inv_deliveryDt, new
+                        {
+                            DateValue = $"{DateTime.Now:yyyy-MM-dd}",
+                            DocNum = dto.DocNum
+                        }, trans);
 
-                    if (res_updSapInv_DeliveryDt <= 0)
-                    {
-                        trans.Rollback();
-                        return BadRequest($"{db.COMPANYNAME}, " +
-                                        $"Error update Invoice {dto.DlbEntry}, doc: {dto.DocNum}, type:{dto.DocType} no found, " +
-                                        $"please try again. Thanks.");
+                        if (res_updSapInv_DeliveryDt <= 0)
+                        {
+                            trans.Rollback();
+                            return BadRequest($"{db.COMPANYNAME}, " +
+                                            $"Error update Invoice {dto.DlbEntry}, doc: {dto.DocNum}, type:{dto.DocType} no found, " +
+                                            $"please try again. Thanks.");
+                        }
                     }
                 }
 

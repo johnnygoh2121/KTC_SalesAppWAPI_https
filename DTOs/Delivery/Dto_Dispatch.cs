@@ -9,6 +9,7 @@ namespace KTC_SalesAppWAPI.DTOs.Delivery
         public string Subsi { get; set; }
         public string TruckNo { get; set; }
         public string UserCode { get; set; }
+        public string UserName { get; set; }
         public DateTime DlvryDate { get; set; }
 
         public DateTime StartDt { get; set; }

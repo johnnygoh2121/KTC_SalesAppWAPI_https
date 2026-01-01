@@ -226,7 +226,7 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
 
             if (string.IsNullOrWhiteSpace(dto.Subsi))
             {
-                return BadRequest("Invalid subsi");
+                return BadRequest("Invalid SUBSI");
             }
             if (dto.SaveGuid == default)
             {
@@ -238,24 +238,39 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                 return BadRequest("Invalid dbi");
             }
 
-            var sp_updateTransfer = @$"update {db.WEBDB}..FTAPP_Transfer
-                                            set DocStatus = @DocStatus 
-                                            Where GroupGuid = @GroupGuid";
-
+            
+            
             using var conn = new SqlConnection(_commDbConnStr);
             conn.Open();
             using var trans = conn.BeginTransaction();
 
             try
             {
-                conn.Execute(sp_updateTransfer, new
+                var sp_GetTransfer = $@"select * from {db.WEBDB}..FTAPP_Transfer Where GroupGuid = @GroupGuid ";
+                var transfer = conn.Query<FTAPP_Transfer>(sp_GetTransfer, new
                 {
-                    DocStatus = "T", // <-- done transfer
                     GroupGuid = dto.SaveGuid
-                }, trans);
+                }, trans).FirstOrDefault();
 
-                trans.Commit();
-                return Ok();
+
+                if (transfer != null)
+                {
+                    var sp_updateTransfer = @$"update {db.WEBDB}..FTAPP_Transfer
+                                        set DocStatus = @DocStatus 
+                                        Where GroupGuid = @GroupGuid";
+
+                    var res = conn.Execute(sp_updateTransfer, new
+                    {
+                        DocStatus = "T", // <-- done transfer
+                        GroupGuid = dto.SaveGuid
+                    }, trans);
+
+                    trans.Commit();
+                    return Ok();
+                }
+
+                trans.Rollback();
+                return BadRequest("Error update the transfer, please try again. Thank you");
             }
             catch (Exception e)
             {
@@ -1145,7 +1160,7 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
             }
             if (string.IsNullOrWhiteSpace(dto.Subsi))
             {
-                return BadRequest("Invalid subsi");
+                return BadRequest("Invalid SUBSI");
             }
             if (dto.TransferHead == null)
             {
@@ -1165,8 +1180,9 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                 return BadRequest("Invalid dbi");
             }
 
-            var sp_lastRec = @$"select * from {db.WEBDB}..FTAPP_Transfer with (nolock) 
-                                Where GroupGuid = @GroupGuid";
+            var sp_lastRec = @$"select * 
+                                from {db.WEBDB}..FTAPP_Transfer with (NOLOCK) 
+                                where GroupGuid = @GroupGuid";
 
             using var conn = new SqlConnection(_commDbConnStr);
             var found = conn.Query<FTAPP_Transfer>(sp_lastRec, new { GroupGuid = dto.SaveGuid }).FirstOrDefault();
@@ -1242,7 +1258,6 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                         }
                     }
 
-
                     // insert the lines 
                     var insert_lines = $@"insert into {db.WEBDB}..FTAPP_Transfer1 ( 
                                           InvNo
@@ -1299,7 +1314,7 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
 
             if (string.IsNullOrWhiteSpace(dto.Subsi))
             {
-                return BadRequest("Invalid subsi info, please try again.");
+                return BadRequest("Invalid SUBSI info, please try again.");
             }
 
             var db = new DbNameHelper().GetDbInfo(_commDbConnStr, dto.Subsi);
@@ -1310,8 +1325,8 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
 
             // look for duplicated
             var check_dupl = @$"select * 
-                                From {db.WEBDB}..FTAPP_Transfer2 with (nolock)
-                                Where GroupGuid = @GroupGuid 
+                                from {db.WEBDB}..FTAPP_Transfer2 with (NOLOCK)
+                                where GroupGuid = @GroupGuid 
                                 and BoxId = @BoxId 
                                 and InvNo = @InvNo ";
 
@@ -1384,7 +1399,7 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                 }
                 if (string.IsNullOrWhiteSpace(subsiId))
                 {
-                    return BadRequest("Invalid subsi id");
+                    return BadRequest("Invalid SUBSI id");
                 }
 
                 var db = new DbNameHelper().GetDbInfoById(_commDbConnStr, subsiId);
@@ -1420,7 +1435,7 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                 // return ok when all status 
                 // get the invoice from sap
                 using var conn = new SqlConnection(_commDbConnStr);
-                var query_inv = @$"select * from {db.SAPDB}..OINV with (nolock) where docnum = @docnum";
+                var query_inv = @$"select * from {db.SAPDB}..OINV with (NOLOCK) where DocNum = @docnum";
                 OINV inv = conn.Query<OINV>(query_inv, new { docnum = docNum }).FirstOrDefault();
                 if (inv == null)
                 {
@@ -1451,8 +1466,8 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                                                       , t0.OrderNo
                                                       , t0.LabelConsistTotalBoxes
 
-                                from {db.WEBDB}..FTAPP_Box t0 with (nolock)
-                                left join  {db.WEBDB}..FTAPP_Box1 t1  with (nolock) on t0.BoxGuid = t1.BoxGuid
+                                from {db.WEBDB}..FTAPP_Box t0 with (NOLOCK)
+                                left join  {db.WEBDB}..FTAPP_Box1 t1  with (NOLOCK) on t0.BoxGuid = t1.BoxGuid
                                 Where t0.BaseEntry = @baseentry 
                                 and t1.BoxGuid is not null";
 
@@ -1461,6 +1476,22 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
                 {
                     return BadRequest($"{db.COMPANYNAME}, Invoice #{docNum}, Error query for boxes.");
                 }
+
+                // get the latest dlb entry 
+                // 20260101
+                var sp_getLastDlbEntry = $@"SELECT TOP (1) t0.DLBEntry
+                                            FROM {db.WEBDB}..FTAPP_DLB AS t0 with (NOLOCK)
+                                            INNER JOIN {db.WEBDB}..FTAPP_DLB1 AS t1 with (NOLOCK)
+                                              ON t0.HeadGuid = t1.HeadGuid
+                                            INNER JOIN {db.WEBDB}..DLB1 AS t2 with (NOLOCK)
+                                              ON t2.DOCNUM = t1.DocNum
+                                             AND t2.DOCTYPE = t1.DocType
+                                             AND t2.App_Determined_IsInterbranch = '1'
+                                            WHERE t1.DocNum = @DocNum
+                                              AND t1.DocType = 'I'
+                                            ORDER BY t0.ID DESC ";
+
+                inv.DlbEntry = conn.ExecuteScalar<int>(sp_getLastDlbEntry, new { DocNum = inv.DocNum });
 
                 inv.Subsi = db.COMPANYNAME;
                 inv.SubsiId = db.COMPANYID;

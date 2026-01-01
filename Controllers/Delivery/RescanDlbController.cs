@@ -1076,9 +1076,9 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 {
                     // delete the head 
                     var sp_delete = @$"delete from {db.WEBDB}..FTAPP_DLB 
-                                  Where HeadGuid = @headerGuid";
+                                  Where HeadGuid = @HeadGuid";
 
-                    var res = conn.Execute(sp_delete, new { headerGuid = dto.Dlb.HeadGuid }, trans);
+                    var res = conn.Execute(sp_delete, new { dto.Dlb.HeadGuid }, trans);
 
                     // insert the head
                     var sp_insert = @$" INSERT INTO {db.WEBDB}..FTAPP_DLB (
@@ -1116,8 +1116,37 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     // get the new line to insert 
                     var newInsertLines = dto.Dlb1.Where(x => $"{x.SaveAs}".Equals("savenew")).ToList();
                     if (newInsertLines.Count > 0)
-                    {// insert then lines
-                        var sp_insert1 = @$"INSERT INTO {db.WEBDB}..FTAPP_DLB1 (                                              
+                    {   // insert then lines
+                        
+                        var newListDoc = new List<FTAPP_DLB1>();
+                        for (int g= 0; g < newInsertLines.Count; g++)
+                        {
+                            var doc = newInsertLines[g];
+                            if (doc == null) continue;
+
+                            var dupliCheck_sp = @$"Select * 
+                                                   From {db.WEBDB}..FTAPP_DLB1 
+                                                   Where HeadGuid = @HeaderGuid 
+                                                     and DocNum = @DocNum 
+                                                     and DocType = @DocType ";
+
+                            var found = conn.Query<FTAPP_DLB1>(dupliCheck_sp, new
+                            {
+                                dto.Dlb.HeadGuid, 
+                                doc.DocNum,
+                                doc.DocType,
+
+                            }).FirstOrDefault();
+
+                            if (found == null)
+                            {
+                                newListDoc.Add(doc);
+                            }
+                        }
+
+                        if (newListDoc != null && newListDoc.Count > 0 )
+                        {
+                            var sp_insert1 = @$"INSERT INTO {db.WEBDB}..FTAPP_DLB1 (                                              
                                                  DocNum                                                                                              
                                                , StoreCode
                                                , StoreName
@@ -1163,7 +1192,8 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                            ,@App_Determined_IsInterbranch, @GeoType, @GeoCode
                                 )";
 
-                        var res1 = conn.Execute(sp_insert1, newInsertLines, trans);
+                            var res1 = conn.Execute(sp_insert1, newListDoc, trans);
+                        }
                     }
 
                     // get the line for update
