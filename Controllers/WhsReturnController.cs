@@ -1149,7 +1149,8 @@ namespace KTC_SalesAppWAPI.Controllers
                         if (found_Cn == null)
                         {
                             // post fail
-                            return BadRequest("Inv return post create Cn fail, please try again. [11x]");
+                            return BadRequest($@"Inv return post create Cn fail, 
+                                                 please try again. [11x], Svr: {IsCnCreateForStore.documentStatus}");
                         }
                         // =====================================
 
