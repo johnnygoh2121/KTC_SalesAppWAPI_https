@@ -1137,7 +1137,7 @@ namespace KTC_SalesAppWAPI.Controllers
                         // check cn number by rtn docentry vs U_SOID
 
                         var sp_QuerySapCn = $@"Select top 1 * 
-                                               From {db.SAPDB}..ORIN with (nolock) 
+                                               From {db.SAPDB}..ORIN with (NOLOCK) 
                                                Where U_SOID = @docEntry
                                                order by DocDate desc; ";
 
