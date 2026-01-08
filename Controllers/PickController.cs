@@ -1840,76 +1840,107 @@ namespace KTC_SalesAppWAPI.Controllers
                 }
 
                 // check got save draft
-                var sql_DraftExist = @$"SELECT distinct 
-                                               DOCENTRY
-                                              , LINENUM
-                                              , ITEMCODE
-                                              , ITEMNAME
-                                              , CODEBARS
-                                              , UOMQTY
-                                              , STOCKQTY
-                                              , PRICE
-                                              , QUANTITY
-                                              , QUANTITYCS
-                                              , QTY
-                                              , DISC
-                                              , SUPP
-                                              , DISCSUM
-                                              , LINETOTAL
-                                              , PENTRY
-                                              , PLINE
-                                              , PTYPE
-                                              , SUGGESTQTY
-                                              , DOCNUM
-                                              , BORNE
-                                              , SUPPSUM
-                                              , INVQTY
-                                              , INVPRICE
-                                              , INVTOTAL
-                                              , ITEMCOST
-                                              , DIM1
-                                              , DIM2
-                                              , DIM3
-                                              , MBID
-                                              , SUPPCODE
-                                              , QUANTITYPC
-                                              , REFNO
-                                              , REFITEM
-                                              , UOM
-                                              , BATCHID
-                                              , COKEPROMO
-                                              , SUPPCATNUM
-                                              , TAXCODE
-                                              , PRICE2
-                                              , NONIM
-                                              , PROMOCOUNT
-                                              , NPENTRY
-                                              , NPID
-                                              , NPLINE
-                                              , PROMOPACKAGE
-                                              , PICKEDQTY
-                                              , REFLINE
-                                              , PickedPcs
-                                              , PickedCase
-                                              , NeededCase
-                                              , NeededPcs
-                                              , ContentDesc
-                                              , SubSi
-                                              , IsMissing
-                                              , IsMissingCs
-                                              , IsMissingPc
-                                              , IsAvailableForPick
-                                              , AgencyName
-                                              , AgencyCode
-                                              , QUANTITYPC_Orig
-                                              , QUANTITYCS_Orig
-                                              , ManBtchNum
-                                              , LineRemark
-                                              , IsSwitchToPcs
-                                              , U_MustCase
-                                            FROM {db.WEBDB}..FTAPP_SO1_DRAFT  with (nolock)
-                                        Where 
-                                            DOCENTRY= @DocEntry order by ITEMNAME asc";
+
+                //var sql_DraftExist = @$"SELECT distinct 
+                //                               DOCENTRY
+                //                              , LINENUM
+                //                              , ITEMCODE
+                //                              , ITEMNAME
+                //                              , CODEBARS
+                //                              , UOMQTY
+                //                              , STOCKQTY
+                //                              , PRICE
+                //                              , QUANTITY
+                //                              , QUANTITYCS
+                //                              , QTY
+                //                              , DISC
+                //                              , SUPP
+                //                              , DISCSUM
+                //                              , LINETOTAL
+                //                              , PENTRY
+                //                              , PLINE
+                //                              , PTYPE
+                //                              , SUGGESTQTY
+                //                              , DOCNUM
+                //                              , BORNE
+                //                              , SUPPSUM
+                //                              , INVQTY
+                //                              , INVPRICE
+                //                              , INVTOTAL
+                //                              , ITEMCOST
+                //                              , DIM1
+                //                              , DIM2
+                //                              , DIM3
+                //                              , MBID
+                //                              , SUPPCODE
+                //                              , QUANTITYPC
+                //                              , REFNO
+                //                              , REFITEM
+                //                              , UOM
+                //                              , BATCHID
+                //                              , COKEPROMO
+                //                              , SUPPCATNUM
+                //                              , TAXCODE
+                //                              , PRICE2
+                //                              , NONIM
+                //                              , PROMOCOUNT
+                //                              , NPENTRY
+                //                              , NPID
+                //                              , NPLINE
+                //                              , PROMOPACKAGE
+                //                              , PICKEDQTY
+                //                              , REFLINE
+                //                              , PickedPcs
+                //                              , PickedCase
+                //                              , NeededCase
+                //                              , NeededPcs
+                //                              , ContentDesc
+                //                              , SubSi
+                //                              , IsMissing
+                //                              , IsMissingCs
+                //                              , IsMissingPc
+                //                              , IsAvailableForPick
+                //                              , AgencyName
+                //                              , AgencyCode
+                //                              , QUANTITYPC_Orig
+                //                              , QUANTITYCS_Orig
+                //                              , ManBtchNum
+                //                              , LineRemark
+                //                              , IsSwitchToPcs
+                //                              , U_MustCase
+                //                            FROM {db.WEBDB}..FTAPP_SO1_DRAFT  with (nolock)
+                //                        Where 
+                //                            DOCENTRY= @DocEntry 
+                //                            order by PTYPE,  ITEMNAME asc ";
+
+                var sql_DraftExist
+                    = $@"SELECT DISTINCT
+                                DOCENTRY, LINENUM, ITEMCODE, ITEMNAME, CODEBARS, UOMQTY, STOCKQTY, PRICE,
+                                QUANTITY, QUANTITYCS, QTY, DISC, SUPP, DISCSUM, LINETOTAL, PENTRY, PLINE,
+                                PTYPE, SUGGESTQTY, DOCNUM, BORNE, SUPPSUM, INVQTY, INVPRICE, INVTOTAL,
+                                ITEMCOST, DIM1, DIM2, DIM3, MBID, SUPPCODE, QUANTITYPC, REFNO, REFITEM,
+                                UOM, BATCHID, COKEPROMO, SUPPCATNUM, TAXCODE, PRICE2, NONIM, PROMOCOUNT,
+                                NPENTRY, NPID, NPLINE, PROMOPACKAGE, PICKEDQTY, REFLINE, PickedPcs,
+                                PickedCase, NeededCase, NeededPcs, ContentDesc, SubSi, IsMissing,
+                                IsMissingCs, IsMissingPc, IsAvailableForPick, AgencyName, AgencyCode,
+                                QUANTITYPC_Orig, QUANTITYCS_Orig, ManBtchNum, LineRemark, IsSwitchToPcs,
+                                U_MustCase, 
+                                CASE 
+                                    WHEN PTYPE IS NULL OR PTYPE = 'N' THEN 0  -- Normal first (NULL or 'N')
+                                    WHEN PTYPE = 'B'                         THEN 1  -- Bundle next
+                                    WHEN PTYPE = 'F'                         THEN 3  -- FOC last
+                                    ELSE 2                                        -- Others (e.g. 'D') in the middle
+                                END
+                            FROM {db.WEBDB}..FTAPP_SO1_DRAFT
+                            WHERE DOCENTRY = @DocEntry
+                            ORDER BY
+                                CASE 
+                                    WHEN PTYPE IS NULL OR PTYPE = 'N' THEN 0  -- Normal first (NULL or 'N')
+                                    WHEN PTYPE = 'B'                         THEN 1  -- Bundle next
+                                    WHEN PTYPE = 'F'                         THEN 3  -- FOC last
+                                    ELSE 2                                        -- Others (e.g. 'D') in the middle
+                                END,                                
+                                ITEMNAME asc";
 
                 using var conn = new SqlConnection(_commDbConnStr);
 

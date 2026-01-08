@@ -1126,7 +1126,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                             var dupliCheck_sp = @$"Select * 
                                                    From {db.WEBDB}..FTAPP_DLB1 
-                                                   Where HeadGuid = @HeaderGuid 
+                                                   Where HeadGuid = @HeadGuid 
                                                      and DocNum = @DocNum 
                                                      and DocType = @DocType ";
 
@@ -1136,7 +1136,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                 doc.DocNum,
                                 doc.DocType,
 
-                            }).FirstOrDefault();
+                            }, trans).FirstOrDefault();
 
                             if (found == null)
                             {
@@ -1782,7 +1782,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 {
                     webDb = db.WEBDB,
                     whsCode = whsCode
-                }).ToList();
+                }, commandTimeout: 0).ToList();
 
                 if (agedInvs_InWhs.Count > 0)
                 {

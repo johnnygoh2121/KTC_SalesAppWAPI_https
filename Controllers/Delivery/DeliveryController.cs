@@ -3325,7 +3325,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 var query_dlb1 = @$"select * from {db.WEBDB}..FTAPP_DLB1 with (NOLOCK)
                                     Where DocNum = @DocNum 
                                           and DocType = @docType 
-                                          and HeadeGuid = @HeadGuid ";
+                                          and HeadGuid = @HeadGuid ";
 
                 var dlb1 = conn.Query<FTAPP_DLB1>(query_dlb1, new
                 {
