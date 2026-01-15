@@ -15,6 +15,8 @@ namespace KTC_SalesAppWAPI.Models.SalesOrder
         public string MustBatchLotAtGrpo { get; set; }
         public string MustBatchLotAtTrcn { get; set; }
         public string MustSelectBoxSize { get; set; }
+        public string AgencyCode { get; set; }
+        public string AgencyName { get; set; }
 
         // for bread
 

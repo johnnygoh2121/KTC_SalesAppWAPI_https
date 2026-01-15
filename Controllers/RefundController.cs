@@ -35,7 +35,7 @@ namespace KTC_SalesAppWAPI.Controllers
             _localAttchPath = configuration.GetSection("WebAttachmentPath").Value;
             _webHostAddrEndPoint = configuration.GetSection("AppSettings").GetSection("WebPortal_Host_EndPoint").Value;
 
-            
+
             WebHostAddrEndPoint = configuration.GetSection("AppSettings").GetSection("WebPortal_Host_EndPoint").Value;
 
         }
@@ -60,7 +60,7 @@ namespace KTC_SalesAppWAPI.Controllers
             }
         }
 
-        IActionResult PostRefund (DTO_Refund dto)
+        IActionResult PostRefund(DTO_Refund dto)
         {
             try
             {
@@ -91,8 +91,7 @@ namespace KTC_SalesAppWAPI.Controllers
                     return BadRequest("Invalid SUBSI name");
                 }
 
-                // post with redsharp
-                //var client = new RestClient($"{WebHostAddrEndPoint}{dto.RequestName}/{dto.CompanyId}/{dto.DocUpdateType}");
+                // post with red sharp                
                 // 20220413
                 var svrAdr = !string.IsNullOrWhiteSpace(db.PostSvrAdressPort) ? db.PostSvrAdressPort : WebHostAddrEndPoint;
                 var client = new RestClient($"{svrAdr}{dto.RequestName}/{db.COMPANYID}/{dto.DocUpdateType}");
@@ -107,19 +106,18 @@ namespace KTC_SalesAppWAPI.Controllers
 
                 if (response.IsSuccessful)
                 {
-                    var content = response.Content;
-                    var result = JsonConvert.DeserializeObject<RefundResult>(content);
+                    var content_s = response.Content;
+                    var result_s = JsonConvert.DeserializeObject<RefundResult>(content_s);
 
                     // need to save the file 
-                    return Ok(result);
+                    return Ok(result_s);
                 }
-                else
-                {
-                    var content = response.Content;
-                    var result = JsonConvert.DeserializeObject<RefundResult>(content);
 
-                    return BadRequest(result);
-                }                
+                // else fail
+                var content_f = response.Content;
+                var result_f = JsonConvert.DeserializeObject<RefundResult>(content_f);
+                return BadRequest(result_f);
+
             }
             catch (Exception except)
             {
@@ -146,7 +144,7 @@ namespace KTC_SalesAppWAPI.Controllers
                     return BadRequest("Invalid End Date");
                 }
 
-                var db = new DbNameHelper().GetDbInfo( _commDbConnStr, dto.SubSi);
+                var db = new DbNameHelper().GetDbInfo(_commDbConnStr, dto.SubSi);
                 if (db == null)
                 {
                     return BadRequest("Invalid SUBSI, not found");

@@ -10,6 +10,8 @@ namespace KTC_SalesAppWAPI.Models.COG
         public string MustBatchLotAtGrpo { get; set; }
         public string MustBatchLotAtTrcn { get; set; }
         public string MustSelectBoxSize { get; set; }
+        
+        public string AgencyName { get; set; }
 
         public string ItemCode { get; set; }
         public string ItemName { get; set; }

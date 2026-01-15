@@ -3348,7 +3348,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                 var resDelBoxes = conn.Execute(sp_delete, new
                 {
-                    hguid = $"{dlb1.HeadGuid}",
+                    headGuid = $"{dlb1.HeadGuid}",
                     InvDocNum = dto.DocNum
                 }, trans);
 
@@ -3361,16 +3361,17 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                 // added doc 
                 var sp_delete1 = @$"Delete from {db.WEBDB}..FTAPP_DLB1 
-                                    Where convert( nvarchar(50) ,HeadGuid) = @hguid
+                                    Where convert( nvarchar(50) ,HeadGuid) = @HeadGuid
                                           and DocNum = @DocNum 
                                           and DocType = @docType ";
 
                 var resDelDocs = conn.Execute(sp_delete1, new
                 {
-                    hguid = $"{dlb1.HeadGuid}",
+                    HeadGuid = $"{dlb1.HeadGuid}",
                     DocNum = dto.DocNum,
                     docType = dto.DocType
                 }, trans);
+
                 if (resDelDocs < 0)
                 {
                     trans.Rollback();
@@ -3677,7 +3678,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 }
 
                 // 20230316
-                // check for aged instransit warehouse 
+                // check for aged in stransit warehouse 
                 var sp_CheckAgedInv_InsWhs = @"exec sp_GetOldestAgedInv_TransWhs_v1 @webDb , @whsCode  ";
                 var agedInvs_InWhs = conn1.Query<AgedDoc>(sp_CheckAgedInv_InsWhs, new
                 {

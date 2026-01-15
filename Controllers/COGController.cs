@@ -1787,7 +1787,7 @@ namespace KTC_SalesAppWAPI.Controllers
                 }
 
                 var checkCode = dto.Code.TrimStart('0');                                     
-                var sq_item = @"exec sp_Cog_QueryOItm  @erpDb, @code";
+                var sq_item = @"exec sp_Cog_QueryOItm @erpDb, @code";
                 var items = conn.Query<OITM_Ext>(sq_item, new
                 {
                     erpDb = db.SAPDB,

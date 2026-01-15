@@ -66,10 +66,11 @@ namespace KTC_SalesAppWAPI.Models.Refund
 
         public string RefundType { get; set; }
 
+        public string TradeOrCredit { get; set; }
+
         public List<Refund1> Cheques { get; set; }
         public List<Refund2> Documents { get; set; }
         public List<Refund3> Attachments { get; set; }
-
 
         public string DocStatusDisplay
         {
