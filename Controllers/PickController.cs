@@ -1839,7 +1839,79 @@ namespace KTC_SalesAppWAPI.Controllers
                     return BadRequest("The db info reading error, please try again.");
                 }
 
-                // check got save draft
+                var sql_DraftExist
+                    = $@";WITH base AS
+                    (
+                        -- Keep your original SELECT DISTINCT + NOLOCK + WHERE DOCENTRY = @DocEntry
+                        SELECT DISTINCT
+                               DOCENTRY, LINENUM, ITEMCODE, ITEMNAME, CODEBARS , UOMQTY, STOCKQTY, PRICE, QUANTITY,
+                               QUANTITYCS, QTY, DISC, SUPP, DISCSUM, LINETOTAL, PENTRY, PLINE, PTYPE, SUGGESTQTY,
+                               DOCNUM, BORNE, SUPPSUM, INVQTY, INVPRICE, INVTOTAL, ITEMCOST, DIM1, DIM2, DIM3, MBID,
+                               SUPPCODE, QUANTITYPC, REFNO, REFITEM, UOM, BATCHID, COKEPROMO, SUPPCATNUM, TAXCODE,
+                               PRICE2, NONIM, PROMOCOUNT, NPENTRY , NPID, NPLINE, PROMOPACKAGE, PICKEDQTY, REFLINE,
+                               PickedPcs, PickedCase, NeededCase, NeededPcs, ContentDesc, SubSi, IsMissing,
+                               IsMissingCs, IsMissingPc, IsAvailableForPick, AgencyName, AgencyCode,
+                               QUANTITYPC_Orig, QUANTITYCS_Orig, ManBtchNum, LineRemark, IsSwitchToPcs, U_MustCase
+                        FROM {db.WEBDB}..FTAPP_SO1_DRAFT WITH (NOLOCK)
+                        WHERE DOCENTRY = @DocEntry
+                    ),
+                    promo_rank AS
+                    (
+                        SELECT
+                            b.*,
+                            CASE WHEN b.PTYPE IN ('B','F') THEN 1 ELSE 0 END AS _isPromo,
+                            CASE
+                                WHEN b.PTYPE = 'B' THEN 0
+                                WHEN b.PTYPE = 'F' THEN 1
+                                ELSE 2
+                            END AS _bf_order,
+
+                            -- Rank B's and F's separately by ITEMNAME inside each (MBID, PENTRY)
+                            CASE
+                                WHEN b.PTYPE IN ('B','F') THEN
+                                    ROW_NUMBER() OVER (
+                                        PARTITION BY b.MBID, b.PENTRY, b.PTYPE
+                                        ORDER BY b.ITEMNAME, b.LineNum
+                                    )
+                            END AS _pair
+                        FROM base b
+                    ),
+                    named AS
+                    (
+                        -- Compute the name to sort the pair by: prefer the B name, else F, else own name
+                        SELECT
+                            pr.*,
+                            MIN(CASE WHEN pr.PTYPE = 'B' THEN pr.ITEMNAME END)
+                                OVER (PARTITION BY pr.MBID, pr.PENTRY, pr._pair) AS _pair_b_name,
+                            MIN(CASE WHEN pr.PTYPE = 'F' THEN pr.ITEMNAME END)
+                                OVER (PARTITION BY pr.MBID, pr.PENTRY, pr._pair) AS _pair_f_name
+                        FROM promo_rank pr
+                    ),
+                    final AS
+                    (
+                        SELECT
+                            n.*,
+                            COALESCE(n._pair_b_name, n._pair_f_name, n.ITEMNAME) AS _name_key
+                        FROM named n
+                    )
+                    SELECT
+                        DOCENTRY, LINENUM, ITEMCODE, ITEMNAME, CODEBARS , UOMQTY, STOCKQTY, PRICE, QUANTITY,
+                        QUANTITYCS, QTY, DISC, SUPP, DISCSUM, LINETOTAL, PENTRY, PLINE, PTYPE, SUGGESTQTY, DOCNUM,
+                        BORNE, SUPPSUM, INVQTY, INVPRICE, INVTOTAL, ITEMCOST, DIM1, DIM2, DIM3, MBID, SUPPCODE,
+                        QUANTITYPC, REFNO, REFITEM, UOM, BATCHID, COKEPROMO, SUPPCATNUM, TAXCODE, PRICE2, NONIM,
+                        PROMOCOUNT, NPENTRY , NPID, NPLINE, PROMOPACKAGE, PICKEDQTY, REFLINE, PickedPcs, PickedCase,
+                        NeededCase, NeededPcs, ContentDesc, SubSi, IsMissing, IsMissingCs, IsMissingPc,
+                        IsAvailableForPick, AgencyName, AgencyCode, QUANTITYPC_Orig, QUANTITYCS_Orig, ManBtchNum,
+                        LineRemark, IsSwitchToPcs, U_MustCase
+                    FROM final
+                    ORDER BY
+                        _name_key ASC,                                    -- global A–Z using preferred pair name
+                        CASE WHEN _isPromo = 1 THEN 0 ELSE 1 END,         -- keep B/F together before any non-promo with same name
+                        MBID, PENTRY,                                     -- stable across groups with same name key
+                        CASE WHEN _isPromo = 1 THEN _pair ELSE 0 END,     -- pair alignment within B/F groups
+                        _bf_order,                                        -- B then F
+                        ITEMNAME, LineNum;                                -- final stability
+                    ";
 
                 //var sql_DraftExist = @$"SELECT distinct 
                 //                               DOCENTRY
@@ -1908,40 +1980,11 @@ namespace KTC_SalesAppWAPI.Controllers
                 //                              , LineRemark
                 //                              , IsSwitchToPcs
                 //                              , U_MustCase
-                //                            FROM {db.WEBDB}..FTAPP_SO1_DRAFT  with (nolock)
+                //                            FROM {db.WEBDB}..FTAPP_SO1_DRAFT  with (NOLOCK)
                 //                        Where 
-                //                            DOCENTRY= @DocEntry 
-                //                            order by PTYPE,  ITEMNAME asc ";
+                //                            DOCENTRY= @DocEntry  ";
 
-                var sql_DraftExist
-                    = $@"SELECT DISTINCT
-                                DOCENTRY, LINENUM, ITEMCODE, ITEMNAME, CODEBARS, UOMQTY, STOCKQTY, PRICE,
-                                QUANTITY, QUANTITYCS, QTY, DISC, SUPP, DISCSUM, LINETOTAL, PENTRY, PLINE,
-                                PTYPE, SUGGESTQTY, DOCNUM, BORNE, SUPPSUM, INVQTY, INVPRICE, INVTOTAL,
-                                ITEMCOST, DIM1, DIM2, DIM3, MBID, SUPPCODE, QUANTITYPC, REFNO, REFITEM,
-                                UOM, BATCHID, COKEPROMO, SUPPCATNUM, TAXCODE, PRICE2, NONIM, PROMOCOUNT,
-                                NPENTRY, NPID, NPLINE, PROMOPACKAGE, PICKEDQTY, REFLINE, PickedPcs,
-                                PickedCase, NeededCase, NeededPcs, ContentDesc, SubSi, IsMissing,
-                                IsMissingCs, IsMissingPc, IsAvailableForPick, AgencyName, AgencyCode,
-                                QUANTITYPC_Orig, QUANTITYCS_Orig, ManBtchNum, LineRemark, IsSwitchToPcs,
-                                U_MustCase, 
-                                CASE 
-                                    WHEN PTYPE IS NULL OR PTYPE = 'N' THEN 0  -- Normal first (NULL or 'N')
-                                    WHEN PTYPE = 'B'                         THEN 1  -- Bundle next
-                                    WHEN PTYPE = 'F'                         THEN 3  -- FOC last
-                                    ELSE 2                                        -- Others (e.g. 'D') in the middle
-                                END
-                            FROM {db.WEBDB}..FTAPP_SO1_DRAFT
-                            WHERE DOCENTRY = @DocEntry
-                            ORDER BY
-                                CASE 
-                                    WHEN PTYPE IS NULL OR PTYPE = 'N' THEN 0  -- Normal first (NULL or 'N')
-                                    WHEN PTYPE = 'B'                         THEN 1  -- Bundle next
-                                    WHEN PTYPE = 'F'                         THEN 3  -- FOC last
-                                    ELSE 2                                        -- Others (e.g. 'D') in the middle
-                                END,                                
-                                ITEMNAME asc";
-
+                // -- order by PTYPE,  ITEMNAME asc
                 using var conn = new SqlConnection(_commDbConnStr);
 
                 // read the distinct line only
@@ -4363,19 +4406,17 @@ namespace KTC_SalesAppWAPI.Controllers
                 {
                     return BadRequest("The warehouse code is empty");
                 }
-
                 var db = new DbNameHelper().GetDbInfo(_commDbConnStr, dto.Subsi);
                 if (db == null)
                 {
-                    return BadRequest("The compay info is empty");
+                    return BadRequest("The company info is empty");
                 }
-
                 using var conn = new SqlConnection(_commDbConnStr);
-                var sql_so = @$"SELECT * FROM {db.WEBDB}..SO with (nolock) Where DocEntry = @DocEntry";
+                var sql_so = @$"SELECT * FROM {db.WEBDB}..SO with (NOLOCK) Where DocEntry = @DocEntry";
                 var so = conn.Query<SO>(sql_so, new { DocEntry = dto.DocEntry }).FirstOrDefault();
                 if (so == null)
                 {
-                    return BadRequest($"The docentry {dto.DocEntry} no found");
+                    return BadRequest($"The DocEntry {dto.DocEntry} no found");
                 }
 
                 // query predefine bin and exp dates
@@ -4391,7 +4432,7 @@ namespace KTC_SalesAppWAPI.Controllers
                                         ,  EXPIRED
                                         ,  QUANTITY
                                         ,  WEIGHT
-                                from {db.WEBDB}..SOPICK1  with (nolock)
+                                from {db.WEBDB}..SOPICK1  with (NOLOCK)
                                 Where DOCENTRY = @DocEntry ";
 
                 var soPick1s = conn.Query<SOPICK1>(query_soPick1, new { DocEntry = dto.DocEntry }).ToList();

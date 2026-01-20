@@ -1374,11 +1374,12 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 
                 // 20230316
                 // check for aged instransit warehouse 
-                var sp_CheckAgedInv_InsWhs = @"exec sp_GetOldestAgedInv_TransWhs_v1 @webDb , @whsCode  ";
+                var sp_CheckAgedInv_InsWhs = @"exec sp_GetOldestAgedInv_TransWhs_v2 @webDb , @whsCode, @aagedDay  ";
                 var agedInvs_InWhs = conn1.Query<AgedDoc>(sp_CheckAgedInv_InsWhs, new
                 {
                     webDb = db.WEBDB,
-                    whsCode = whsCode
+                    whsCode = whsCode,
+                    aagedDay = agedDay
                 }).ToList();
 
                 if (agedInvs_InWhs.Count > 0)
@@ -1392,11 +1393,12 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
 
                 // check aged ibt
-                var sp_CheckAgedIBT = @"exec sp_GetOldestAgedIBT_v1 @webDb , @whsCode  ";
+                var sp_CheckAgedIBT = @"exec sp_GetOldestAgedIBT_v2 @webDb , @whsCode, @aagedDay  ";
                 var agedIbts = conn1.Query<AgedDoc>(sp_CheckAgedIBT, new
                 {
                     webDb = db.WEBDB,
-                    whsCode = whsCode
+                    whsCode = whsCode,
+                    aagedDay = agedDay
                 }).ToList();
 
                 if (agedIbts.Count > 0)
@@ -1777,11 +1779,12 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 
                 // 20230316
                 // check for aged in transit warehouse 
-                var sp_CheckAgedInv_InsWhs = @"exec sp_GetOldestAgedInv_TransWhs_v1 @webDb , @whsCode  ";
+                var sp_CheckAgedInv_InsWhs = @"exec sp_GetOldestAgedInv_TransWhs_v2 @webDb , @whsCode , @aagedDay ";
                 var agedInvs_InWhs = conn.Query<AgedDoc>(sp_CheckAgedInv_InsWhs, new
                 {
                     webDb = db.WEBDB,
-                    whsCode = whsCode
+                    whsCode = whsCode,
+                    aagedDay = agedDay
                 }, commandTimeout: 0).ToList();
 
                 if (agedInvs_InWhs.Count > 0)
@@ -1795,11 +1798,12 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     .Select(i => i.FirstOrDefault()).ToList();
 
                 // check aged ibt
-                var sp_CheckAgedIBT = @"exec sp_GetOldestAgedIBT_v1 @webDb , @whsCode  ";
+                var sp_CheckAgedIBT = @"exec sp_GetOldestAgedIBT_v2 @webDb , @whsCode , @aagedDay ";
                 var agedIbts = conn.Query<AgedDoc>(sp_CheckAgedIBT, new
                 {
                     webDb = db.WEBDB,
-                    whsCode = whsCode
+                    whsCode = whsCode,
+                    aagedDay = agedDay
                 }).ToList();
 
                 if (agedIbts.Count > 0)

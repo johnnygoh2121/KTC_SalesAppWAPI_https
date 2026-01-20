@@ -267,12 +267,30 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     agedInvsAll.AddRange(agedInvs);
                 }
 
+                // 20240323 
+                // get the default whs aged day 
+                var sp_defaultAgedday = $@"select setupValue 
+                          from KTCW_COMMON..FTApp_Config 
+                          Where SetupName = 'DeliveryAppPickInvoiceAgedInv'";
+
+                var defaultAgedDay = conn.ExecuteScalar<int>(sp_defaultAgedday);
+
+                // 20240323 
+                // query the whs custom aged day
+                var sp_WhsAgedDay = @$"
+                    select ISNULL(U_WhsAgedDocDay, {defaultAgedDay}) 
+                    from  {dbs.SAPDB}..OWHS 
+                    where WhsCode = @whsCode ";
+
+                var agedDay = conn.ExecuteScalar<int>(sp_WhsAgedDay, new { whsCode = dto.WhsCode });
+
                 // 20240316
-                var sp_intransitWhs = "exec sp_GetOldestAgedInv_TransWhs_v1 @webDb, @whsCode ";
+                var sp_intransitWhs = "exec sp_GetOldestAgedInv_TransWhs_v2 @webDb, @whsCode, @aagedDay ";
                 var agedInvs_InsWhs = conn.Query<AgedDoc>(sp_intransitWhs, new
                 {
                     webDb = dbs.WEBDB,
-                    whsCode = dto.WhsCode
+                    whsCode = dto.WhsCode,
+                    aagedDay = agedDay
                 }).ToList();
 
                 if (agedInvs_InsWhs.Count > 0)
@@ -3541,11 +3559,11 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 }
                 if (string.IsNullOrWhiteSpace(dto.SubsiId))
                 {
-                    return BadRequest("Invalid subsi");
+                    return BadRequest("Invalid SUBSI");
                 }
                 if (string.IsNullOrWhiteSpace(dto.UserCode))
                 {
-                    return BadRequest("Invalid usercode");
+                    return BadRequest("Invalid USERCODE");
                 }
                 if (string.IsNullOrWhiteSpace(dto.UserName))
                 {
@@ -3640,7 +3658,8 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                 // 20240323 
                 // query the whs custom aged day
-                var sp_WhsAgedDay = @$"select ISNULL(U_WhsAgedDocDay, {defaultAgedDay}) 
+                var sp_WhsAgedDay = @$"
+                                    select ISNULL(U_WhsAgedDocDay, {defaultAgedDay}) 
                                     from  {db.SAPDB}..OWHS 
                                     where WhsCode = @whsCode ";
 
@@ -3679,11 +3698,12 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                 // 20230316
                 // check for aged in stransit warehouse 
-                var sp_CheckAgedInv_InsWhs = @"exec sp_GetOldestAgedInv_TransWhs_v1 @webDb , @whsCode  ";
+                var sp_CheckAgedInv_InsWhs = @"exec sp_GetOldestAgedInv_TransWhs_v2 @webDb , @whsCode, @aagedDay  ";
                 var agedInvs_InWhs = conn1.Query<AgedDoc>(sp_CheckAgedInv_InsWhs, new
                 {
                     webDb = db.WEBDB,
-                    whsCode = whsCode
+                    whsCode = whsCode,
+                    aagedDay = agedDay
                 }).ToList();
 
                 if (agedInvs_InWhs.Count > 0)
@@ -3697,11 +3717,12 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     .Select(i => i.FirstOrDefault()).ToList();
 
                 // check aged ibt
-                var sp_CheckAgedIBT = @"exec sp_GetOldestAgedIBT_v1 @webDb , @whsCode  ";
+                var sp_CheckAgedIBT = @"exec sp_GetOldestAgedIBT_v2 @webDb , @whsCode, @aagedDay  ";
                 var agedIbts = conn1.Query<AgedDoc>(sp_CheckAgedIBT, new
                 {
                     webDb = db.WEBDB,
-                    whsCode = whsCode
+                    whsCode = whsCode,
+                    aagedDay = agedDay
                 }).ToList();
 
                 if (agedIbts.Count > 0)
@@ -4431,11 +4452,13 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                 // 20230316
                 // check for aged instransit warehouse 
-                var sp_CheckAgedInv_InsWhs = @"exec sp_GetOldestAgedInv_TransWhs_v1 @webDb , @whsCode  ";
+                var sp_CheckAgedInv_InsWhs = @"exec sp_GetOldestAgedInv_TransWhs_v2 @webDb , @whsCode,  @aagedDay  ";
+                
                 var agedInvs_InWhs = conn.Query<AgedDoc>(sp_CheckAgedInv_InsWhs, new
                 {
                     webDb = db.WEBDB,
-                    whsCode = whsCode
+                    whsCode = whsCode,
+                    aagedDay = agedDay
                 }, commandTimeout: 0).ToList();
 
                 if (agedInvs_InWhs.Count > 0)
@@ -4449,11 +4472,12 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     .Select(i => i.FirstOrDefault()).ToList();
 
                 // check aged ibt
-                var sp_CheckAgedIBT = @"exec sp_GetOldestAgedIBT_v1 @webDb , @whsCode  ";
+                var sp_CheckAgedIBT = @"exec sp_GetOldestAgedIBT_v2 @webDb , @whsCode , @aagedDay ";
                 var agedIbts = conn.Query<AgedDoc>(sp_CheckAgedIBT, new
                 {
                     webDb = db.WEBDB,
-                    whsCode = whsCode
+                    whsCode = whsCode,
+                    aagedDay = agedDay
                 }, commandTimeout: 0).ToList();
 
                 if (agedIbts.Count > 0)
