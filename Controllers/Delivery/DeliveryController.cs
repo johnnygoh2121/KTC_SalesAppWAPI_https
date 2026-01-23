@@ -10,6 +10,7 @@ using KTC_SalesAppWAPI.Models.Pick;
 using KTC_SalesAppWAPI.Models.SalesOrder;
 using KTC_SalesAppWAPI.Models.TrcukInspection;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
@@ -3591,11 +3592,29 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     goto ProcessNormalCheck;
                 }
 
-                // 20240202
-                // query check to got any aged invoice 
+                // 20240323 
+                // get the default whs aged day 
+                var sp_defaultAgedday = $@"select setupValue 
+                                        from KTCW_COMMON..FTApp_Config 
+                                        Where SetupName = 'DeliveryAppPickInvoiceAgedInv'";
+
                 var conn1 = new SqlConnection(_commDbConnStr);
+                var defaultAgedDay = conn1.ExecuteScalar<int>(sp_defaultAgedday);
+
                 var sp_checkInvWhs = @$"Select FROMWHS from {db.WEBDB}..IBT Where TRANSITNO = @docNum";
                 var whsCode = conn1.Query<string>(sp_checkInvWhs, new { docNum = dto.DocNum }).FirstOrDefault();
+
+                // 20240323 
+                // query the whs custom aged day
+                var sp_WhsAgedDay = @$"
+                                    select ISNULL(U_WhsAgedDocDay, {defaultAgedDay}) 
+                                    from  {db.SAPDB}..OWHS 
+                                    where WhsCode = @whsCode ";
+
+                var agedDay = conn1.ExecuteScalar<int>(sp_WhsAgedDay, new { whsCode = whsCode });
+
+                // 20240202
+                // query check to got any aged invoice 
 
                 if (string.IsNullOrWhiteSpace(whsCode))
                 {
@@ -3613,14 +3632,15 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 }
 
                 // check the whs is jam or not 
-                // 20240329 
-                var sp_QueryJamConfition = @"exec sp_GetIntruckDt_IBT @webDb,  @whsCode ";
+                // 20240329                       
+                var sp_QueryJamConfition = @"exec sp_GetIntruckDt_IBT_wAged @webDb,  @whsCode, @aaged ";
                 var Whses = conn1.Query<JamWhs>(sp_QueryJamConfition, new
                 {
                     webDb = db.WEBDB,
-                    whsCode = whsCode
-
+                    whsCode = whsCode,
+                    aaged = agedDay
                 }).ToList();
+
                 if (Whses.Count > 0) // got invoice delivery over the grade period 
                 {
 
@@ -3647,23 +3667,6 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 {
                     goto ProcessNormalCheck;
                 }
-
-                // 20240323 
-                // get the default whs aged day 
-                var sp_defaultAgedday = $@"select setupValue 
-                                        from KTCW_COMMON..FTApp_Config 
-                                        Where SetupName = 'DeliveryAppPickInvoiceAgedInv'";
-
-                var defaultAgedDay = conn1.ExecuteScalar<int>(sp_defaultAgedday);
-
-                // 20240323 
-                // query the whs custom aged day
-                var sp_WhsAgedDay = @$"
-                                    select ISNULL(U_WhsAgedDocDay, {defaultAgedDay}) 
-                                    from  {db.SAPDB}..OWHS 
-                                    where WhsCode = @whsCode ";
-
-                var agedDay = conn1.ExecuteScalar<int>(sp_WhsAgedDay, new { whsCode = whsCode });
 
                 // check aged invoices
                 //var sp_CheckAgedInv = @"exec sp_GetOldestAgedInv_v1 @webDb , @whsCode  ";
@@ -4290,6 +4293,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
         /// <returns></returns>
         IActionResult VerifyInvoice_FreshAdd(Dto_Delivery dto) // use by the driver to scan add invoice
         {
+            int agedDay = 3;
             try
             {
                 if (string.IsNullOrWhiteSpace(dto.InvNum))
@@ -4359,13 +4363,30 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     goto performAgedInvoice;
                 }
 
+                // 20240323 
+                // query the whs custom aged day                
+                var sp_defaultAgedday = $@"select setupValue 
+                                        from KTCW_COMMON..FTApp_Config 
+                                        Where SetupName = 'DeliveryAppPickInvoiceAgedInv'";
+
+                var defaultAgedDay = conn.ExecuteScalar<int>(sp_defaultAgedday);
+
+                var sp_WhsAgedDay = @$"select ISNULL(U_WhsAgedDocDay, {defaultAgedDay}) 
+                                    from  {db.SAPDB}..OWHS 
+                                    where WhsCode = @whsCode ";
+
+               
+                agedDay = conn.ExecuteScalar<int>(sp_WhsAgedDay, new { whsCode = whsCode });
+
                 // check the whs is jam or not - invoice only
                 // 20240329 
-                var sp_QueryJamConfition = @"exec sp_GetIntruckDt @webDb,  @whsCode ";
+
+                var sp_QueryJamConfition = @"exec sp_GetIntruckDt_wAgedDay @webDb,  @whsCode, @aaged ";
                 var Whses = conn.Query<JamWhs>(sp_QueryJamConfition, new
                 {
                     webDb = db.WEBDB,
-                    whsCode = whsCode
+                    whsCode = whsCode,
+                    aaged = agedDay
 
                 }).ToList();
                 if (Whses.Count > 0) // got invoice delivery over the grade period 
@@ -4402,20 +4423,6 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 // get the default whs aged day 
 
                 if (conn.State == System.Data.ConnectionState.Closed) conn.Open();
-
-                var sp_defaultAgedday = $@"select setupValue 
-                                        from KTCW_COMMON..FTApp_Config 
-                                        Where SetupName = 'DeliveryAppPickInvoiceAgedInv'";
-
-                var defaultAgedDay = conn.ExecuteScalar<int>(sp_defaultAgedday);
-
-                // 20240323 
-                // query the whs custom aged day
-                var sp_WhsAgedDay = @$"select ISNULL(U_WhsAgedDocDay, {defaultAgedDay}) 
-                                    from  {db.SAPDB}..OWHS 
-                                    where WhsCode = @whsCode ";
-
-                var agedDay = conn.ExecuteScalar<int>(sp_WhsAgedDay, new { whsCode = whsCode });
 
                 // for determine the return of the aged docs
                 var newAgedDocs = new List<AgedDoc>();
