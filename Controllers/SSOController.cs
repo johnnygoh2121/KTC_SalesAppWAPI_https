@@ -54,6 +54,10 @@ namespace KTC_SalesAppWAPI.Controllers
                     {
                         return LoadErpUserCustomer(dto);
                     }
+                //case "LoadErpUserCustomer_Seller":
+                //    {
+                //        return LoadErpUserCustomer_BySeller(dto); // for seller 
+                //    }
                 case "LoadErpUserCustomer_ByCards":
                     {
                         return LoadErpUserCustomer_ByCards(dto);
@@ -77,6 +81,10 @@ namespace KTC_SalesAppWAPI.Controllers
                 case "LoadErpUserCustomer_WildCard":
                     {
                         return LoadErpUserCustomer_WildCard(dto);
+                    }
+                case "LoadErpUserCustomer_WildCard_BySeller":
+                    {
+                        return LoadErpUserCustomer_WildCard_BySeller(dto);
                     }
                 case "RefreshAuthMenus":
                     {
@@ -173,6 +181,65 @@ namespace KTC_SalesAppWAPI.Controllers
                 //@CardType as nvarchar(1), 
                 //@wildCode as nvarchar(100)
                 var sql_sp = @"exec sp_SelectErpCustomer_Wildcard 
+                                    @CompanyName, 
+                                    @CompanyID,
+	                                @ErpDb,
+	                                @WebDb,
+	                                @QueryUserCode,
+	                                @CardType, 
+                                    @wildCode";
+
+                var param = new
+                {
+                    CompanyName = dbInfo.COMPANYNAME,
+                    CompanyId = dbInfo.COMPANYID,
+                    ErpDB = dbInfo.SAPDB,
+                    WebDb = dbInfo.WEBDB,
+                    QueryUserCode = dto.QueryUserCode,
+                    CardType = dto.QueryCardType,
+                    wildCode = dto.WildCode
+                };
+
+                using var conn = new SqlConnection(_commDbConnStr);
+                var tempList = conn.Query<OCRD_Ext>(sql_sp, param).ToList();
+
+                if (tempList?.Count == 0)
+                {
+                    return NotFound();
+                }
+
+                tempList = ProcessCardGLN(tempList, conn, dbInfo);
+
+                if (returnList == null) returnList = new List<OCRD_Ext>();
+                returnList.AddRange(tempList);
+                return Ok(returnList);
+            }
+            catch (Exception e)
+            {
+                LastError = $"{e.Message}\n{e.StackTrace}";
+                _logger.LogError(LastError);
+                return null;
+            }
+        }
+
+        IActionResult LoadErpUserCustomer_WildCard_BySeller(UserProfile_Dto dto)
+        {
+            try
+            {
+                List<OCRD_Ext> returnList = null;
+                var dbhelper = new DbNameHelper();
+
+                var dbInfo = dbhelper.GetDbInfo(_commDbConnStr, dto.QueryCompany);
+                if (dbInfo == null) return BadRequest("Invalid company.");
+
+                //   @CompanyName as nvarchar(120), 
+                //@CompanyID as nvarchar(120), 
+                //@ErpDb as nvarchar(120), 
+                //@WebDb as nvarchar(120), 
+                //@QueryUserCode as nvarchar(120), 
+                //@CardType as nvarchar(1), 
+                //@wildCode as nvarchar(100)
+                var sql_sp = @"exec sp_SelectErpCustomer_Wildcard_BySeller 
                                     @CompanyName, 
                                     @CompanyID,
 	                                @ErpDb,
@@ -1052,6 +1119,61 @@ namespace KTC_SalesAppWAPI.Controllers
                 return null;
             }
         }
+
+        // load all user card from svr to app 
+        // seller 
+        //IActionResult LoadErpUserCustomer_BySeller(UserProfile_Dto dto)  //string companies, string userCode, string cardType)
+        //{
+        //    try
+        //    {
+        //        List<OCRD_Ext> returnList = null;
+        //        var dbhelper = new DbNameHelper();
+
+        //        var dbInfo = dbhelper.GetDbInfo(_commDbConnStr, dto.QueryCompany);
+        //        if (dbInfo == null) return BadRequest("Invalid company.");
+
+        //        //@CompanyName as nvarchar(120), 
+        //        //@CompanyID as nvarchar(120), 
+        //        //@ErpDb as nvarchar(120), 
+        //        //@WebDb as nvarchar(120), 
+        //        //@QueryUserCode as nvarchar(120), 
+        //        //@CardType as nvarchar(1)
+
+        //        var sql_sp = @"exec sp_SelectErpCustomer @CompanyName, 
+        //                            @CompanyID,
+	       //                         @ErpDb,
+	       //                         @WebDb,
+	       //                         @QueryUserCode,
+	       //                         @CardType";
+
+        //        var param = new
+        //        {
+        //            CompanyName = dbInfo.COMPANYNAME,
+        //            CompanyId = dbInfo.COMPANYID,
+        //            ErpDB = dbInfo.SAPDB,
+        //            WebDb = dbInfo.WEBDB,
+        //            QueryUserCode = dto.QueryUserCode,
+        //            CardType = dto.QueryCardType
+        //        };
+
+        //        using var conn = new SqlConnection(_commDbConnStr);
+        //        var tempList = conn.Query<OCRD_Ext>(sql_sp, param).ToList();
+
+        //        if (tempList?.Count == 0) return NotFound();
+
+        //        tempList = ProcessCardGLN(tempList, conn, dbInfo);
+
+        //        if (returnList == null) returnList = new List<OCRD_Ext>();
+        //        returnList.AddRange(tempList);
+        //        return Ok(returnList);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        LastError = $"{e.Message}\n{e.StackTrace}";
+        //        _logger.LogError(LastError);
+        //        return null;
+        //    }
+        //}
 
         List<FTApp_Config> LoadAppConfigSetup()
         {
