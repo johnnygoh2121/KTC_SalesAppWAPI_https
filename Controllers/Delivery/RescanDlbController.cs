@@ -1817,25 +1817,35 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 if (newAgedDocs.Count == 0)
                 {
                     goto ProcessNormalCheck;
-                }                
+                }
 
                 // Find the oldest calendar date
-                var oldestDate = newAgedDocs.Min(d => d.DocDate.Date);
+                //var oldestDate = newAgedDocs.Min(d => d.DocDate.Date);
+
+                //// Select all docs that fall on that date, optionally order them for display
+                //var oldestDocs = newAgedDocs
+                //    .Where(d => d.DocDate.Date == oldestDate)                    
+                //    .ToList();
+
+
+                /// 20251229
+                // Find the oldest calendar date
+                //var oldestDate = newAgedDocs.Min(d => d.DocDate.Date);
+                
+                // 20260203
+                var oldest = newAgedDocs.Max(d => d.DayAged);
 
                 // Select all docs that fall on that date, optionally order them for display
                 var oldestDocs = newAgedDocs
-                    .Where(d => d.DocDate.Date == oldestDate)
-                    .OrderBy(d => d.DocDate) // if you want time-of-day order within that date
+                    .Where(d => d.DayAged == oldest)
                     .ToList();
-
+                
                 var dto1 = new Dto_AgedDoc
                 {
                     AgedDocs = oldestDocs,
                     Invoice = null
                 };
-
                 return Ok(dto1);
-
 
             // 20240524 
             // add select the top 10 record to driver 
