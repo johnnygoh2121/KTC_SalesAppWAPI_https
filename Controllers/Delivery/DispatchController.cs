@@ -3068,6 +3068,20 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     dlb1s.AddRange(filterByCardName);
                 }
 
+                // get box information
+                var sp_queryBox = @$" select t0.* 
+                                      from {db.WEBDB}..FTAPP_BOX t0  with (NOLOCK)  
+                                      inner join {db.WEBDB}..SO t1 with (NOLOCK) on t1.DocEntry = t0.BaseEntry
+                                      where t1.INVNO = @DocNum ";          
+
+                for (int u = 0; u < dlb1s.Count; u ++)
+                {
+                    dlb1s[u].Boxes = conn.Query<FTAPP_Box>(sp_queryBox, new
+                    {
+                        DocNum = dlb1s[u].DOCNUM
+                    }).ToList();
+                }
+
                 if (dlb1s.Count > 0)
                 {
                     return Ok(dlb1s);

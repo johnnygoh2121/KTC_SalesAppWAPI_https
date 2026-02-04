@@ -1,4 +1,6 @@
-﻿using System;
+﻿using KTC_SalesAppWAPI.Models.Pick;
+using System;
+using System.Collections.Generic;
 
 namespace KTC_SalesAppWAPI.Models.Delivery
 {
@@ -46,5 +48,7 @@ namespace KTC_SalesAppWAPI.Models.Delivery
 
 
         public bool App_Determined_IsInterbranch { get; set; }
+
+        public List<FTAPP_Box> Boxes { get; set; }
     }
 }
