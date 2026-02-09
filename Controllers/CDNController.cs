@@ -547,7 +547,6 @@ namespace KTC_SalesAppWAPI.Controllers
                 {
                     return BadRequest("request company name is empty");
                 }
-
                 if (string.IsNullOrWhiteSpace(dto.AgencyCode))
                 {
                     return BadRequest("request agency code is empty");
@@ -556,7 +555,6 @@ namespace KTC_SalesAppWAPI.Controllers
                 {
                     return BadRequest("request agency code is empty");
                 }
-
                 var dbInfo = new DbNameHelper().GetDbInfo(CommDbConnStr, dto.CompanyName);
                 if (dbInfo == null)
                 {

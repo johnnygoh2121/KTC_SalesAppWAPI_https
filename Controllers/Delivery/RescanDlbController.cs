@@ -2029,12 +2029,14 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                 , t3.WHSCODE [SO_WHSCODE]
                                 , t4.GlblLocNum [SO_WHS_GPS]
                                  from      {db.SAPDB}..OCRD t0 with (NOLOCK)
-                                inner join {db.SAPDB}..OWHS t1 with (NOLOCK) on t1.WhsCode = t0.U_DROPPOINT
-                                inner join {db.SAPDB}..OINV t2 with (NOLOCK) on t2.CardCode = t0.CardCode
-                                inner join {db.WEBDB}..SO   t3 with (NOLOCK) on t3.DocEntry = t2.U_SOID
-                                inner join {db.SAPDB}..OWHS t4 with (NOLOCK) on t4.WhsCode = t3.WHSCODE
-                                where LEN(ISNULL(U_DROPPOINT, '')) > 0 
-                                and t2.DocNum = @docnum ";
+                                left join {db.SAPDB}..OWHS t1 with (NOLOCK) on t1.WhsCode = t0.U_DROPPOINT
+                                left join {db.SAPDB}..OINV t2 with (NOLOCK) on t2.CardCode = t0.CardCode
+                                left join {db.WEBDB}..SO   t3 with (NOLOCK) on t3.DocEntry = t2.U_SOID
+                                left join {db.SAPDB}..OWHS t4 with (NOLOCK) on t4.WhsCode = t3.WHSCODE
+                                where t2.DocNum = @docnum
+
+                                        -- LEN(ISNULL(U_DROPPOINT, '')) > 0 
+                                        -- and t2.DocNum = @docnum ";
               
                 OINV inv = conn.Query<OINV>(query_inv, new { docnum = dto.DocNum }).FirstOrDefault();
                 if (inv == null)

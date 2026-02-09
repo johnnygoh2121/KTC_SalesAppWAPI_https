@@ -1,0 +1,1142 @@
+2026-02-05 17:16:00.662 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-05 17:16:01.880 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-02-05 17:16:01.883 +08:00 [INF] Hosting environment: Development
+2026-02-05 17:16:01.887 +08:00 [INF] Content root path: C:\Proj\VS2022\KTC_AppWebAPI _Https
+2026-02-05 17:16:01.966 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2026-02-05 17:16:01.966 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/weatherforecast  
+2026-02-05 17:16:02.014 +08:00 [WRN] Failed to determine the https port for redirect.
+2026-02-05 17:16:02.170 +08:00 [INF] Request finished in 208.265ms 404 
+2026-02-05 17:16:02.305 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2026-02-05 17:16:02.338 +08:00 [INF] Route matched with {action = "Get", controller = "WeatherForecast"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[KTC_SalesAppWAPI.WeatherForecast] Get() on controller KTC_SalesAppWAPI.Controllers.WeatherForecastController (KTC_SalesAppWAPI).
+2026-02-05 17:16:02.350 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.WeatherForecast[]'.
+2026-02-05 17:16:02.386 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI) in 38.7294ms
+2026-02-05 17:16:02.390 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2026-02-05 17:16:02.395 +08:00 [INF] Request finished in 434.3936ms 200 application/json; charset=utf-8
+2026-02-05 17:16:02.706 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/favicon.ico  
+2026-02-05 17:16:02.719 +08:00 [INF] Request finished in 13.2782ms 404 
+2026-02-05 17:19:03.494 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalCompanies application/json; charset=utf-8 4
+2026-02-05 17:19:03.497 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalCompaniesController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:19:03.526 +08:00 [INF] Route matched with {action = "Post", controller = "PortalCompanies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync() on controller KTC_SalesAppWAPI.Controllers.PortalCompaniesController (KTC_SalesAppWAPI).
+2026-02-05 17:19:05.113 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[KTC_SalesAppWAPI.Models.PortalCompany.PortalCompany, KTC_SalesAppWAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-05 17:19:05.125 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalCompaniesController.PostAsync (KTC_SalesAppWAPI) in 1595.9312ms
+2026-02-05 17:19:05.131 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalCompaniesController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:19:05.138 +08:00 [INF] Request finished in 1643.757ms 200 application/json; charset=utf-8
+2026-02-05 17:19:37.007 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalCompanies application/json; charset=utf-8 4
+2026-02-05 17:19:37.010 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalCompaniesController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:19:37.015 +08:00 [INF] Route matched with {action = "Post", controller = "PortalCompanies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync() on controller KTC_SalesAppWAPI.Controllers.PortalCompaniesController (KTC_SalesAppWAPI).
+2026-02-05 17:19:37.208 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[KTC_SalesAppWAPI.Models.PortalCompany.PortalCompany, KTC_SalesAppWAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-05 17:19:37.212 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalCompaniesController.PostAsync (KTC_SalesAppWAPI) in 193.8803ms
+2026-02-05 17:19:37.216 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalCompaniesController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:19:37.220 +08:00 [INF] Request finished in 212.3865ms 200 application/json; charset=utf-8
+2026-02-05 17:20:18.921 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalLogin application/json; charset=utf-8 108
+2026-02-05 17:20:18.930 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:20:18.955 +08:00 [INF] Route matched with {action = "Post", controller = "PortalLogin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync(KTC_SalesAppWAPI.DTOs.PortalLogin.PortalLogin_dto) on controller KTC_SalesAppWAPI.Controllers.PortalLoginController (KTC_SalesAppWAPI).
+2026-02-05 17:20:20.935 +08:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2026-02-05 17:20:20.945 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI) in 1984.451ms
+2026-02-05 17:20:20.966 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:20:20.973 +08:00 [INF] Request finished in 2052.397ms 404 application/problem+json; charset=utf-8
+2026-02-05 17:20:50.703 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalLogin application/json; charset=utf-8 108
+2026-02-05 17:20:50.714 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:20:50.720 +08:00 [INF] Route matched with {action = "Post", controller = "PortalLogin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync(KTC_SalesAppWAPI.DTOs.PortalLogin.PortalLogin_dto) on controller KTC_SalesAppWAPI.Controllers.PortalLoginController (KTC_SalesAppWAPI).
+2026-02-05 17:20:51.637 +08:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2026-02-05 17:20:51.644 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI) in 919.0952ms
+2026-02-05 17:20:51.652 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:20:51.660 +08:00 [INF] Request finished in 964.0681ms 404 application/problem+json; charset=utf-8
+2026-02-05 17:21:18.800 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalLogin application/json; charset=utf-8 110
+2026-02-05 17:21:18.841 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:18.846 +08:00 [INF] Route matched with {action = "Post", controller = "PortalLogin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync(KTC_SalesAppWAPI.DTOs.PortalLogin.PortalLogin_dto) on controller KTC_SalesAppWAPI.Controllers.PortalLoginController (KTC_SalesAppWAPI).
+2026-02-05 17:21:19.088 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.Models.Login.BearerToken'.
+2026-02-05 17:21:19.103 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI) in 251.714ms
+2026-02-05 17:21:19.114 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:19.123 +08:00 [INF] Request finished in 326.3365ms 200 application/json; charset=utf-8
+2026-02-05 17:21:19.276 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/SSO application/json; charset=utf-8 94
+2026-02-05 17:21:19.280 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.SSOController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:21:19.289 +08:00 [INF] Route matched with {action = "Post", controller = "SSO"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.UserProfile_Dto) on controller KTC_SalesAppWAPI.Controllers.SSOController (KTC_SalesAppWAPI).
+2026-02-05 17:21:24.440 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.DTOs.UserProfile_Dto'.
+2026-02-05 17:21:24.492 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.SSOController.Post (KTC_SalesAppWAPI) in 5198.8292ms
+2026-02-05 17:21:24.499 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.SSOController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:21:24.505 +08:00 [INF] Request finished in 5228.7129ms 200 application/json; charset=utf-8
+2026-02-05 17:21:24.742 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalLogin application/json; charset=utf-8 110
+2026-02-05 17:21:24.748 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:24.751 +08:00 [INF] Route matched with {action = "Post", controller = "PortalLogin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync(KTC_SalesAppWAPI.DTOs.PortalLogin.PortalLogin_dto) on controller KTC_SalesAppWAPI.Controllers.PortalLoginController (KTC_SalesAppWAPI).
+2026-02-05 17:21:24.874 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalLogin application/json; charset=utf-8 111
+2026-02-05 17:21:24.878 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:24.882 +08:00 [INF] Route matched with {action = "Post", controller = "PortalLogin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync(KTC_SalesAppWAPI.DTOs.PortalLogin.PortalLogin_dto) on controller KTC_SalesAppWAPI.Controllers.PortalLoginController (KTC_SalesAppWAPI).
+2026-02-05 17:21:24.884 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalLogin application/json; charset=utf-8 111
+2026-02-05 17:21:24.889 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalLogin application/json; charset=utf-8 110
+2026-02-05 17:21:24.889 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalLogin application/json; charset=utf-8 110
+2026-02-05 17:21:24.897 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:24.912 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:24.916 +08:00 [INF] Route matched with {action = "Post", controller = "PortalLogin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync(KTC_SalesAppWAPI.DTOs.PortalLogin.PortalLogin_dto) on controller KTC_SalesAppWAPI.Controllers.PortalLoginController (KTC_SalesAppWAPI).
+2026-02-05 17:21:24.932 +08:00 [INF] Route matched with {action = "Post", controller = "PortalLogin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync(KTC_SalesAppWAPI.DTOs.PortalLogin.PortalLogin_dto) on controller KTC_SalesAppWAPI.Controllers.PortalLoginController (KTC_SalesAppWAPI).
+2026-02-05 17:21:24.891 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:24.913 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.Models.Login.BearerToken'.
+2026-02-05 17:21:24.955 +08:00 [INF] Route matched with {action = "Post", controller = "PortalLogin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync(KTC_SalesAppWAPI.DTOs.PortalLogin.PortalLogin_dto) on controller KTC_SalesAppWAPI.Controllers.PortalLoginController (KTC_SalesAppWAPI).
+2026-02-05 17:21:24.916 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalLogin application/json; charset=utf-8 111
+2026-02-05 17:21:24.964 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI) in 209.151ms
+2026-02-05 17:21:24.969 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:24.973 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:24.977 +08:00 [INF] Route matched with {action = "Post", controller = "PortalLogin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync(KTC_SalesAppWAPI.DTOs.PortalLogin.PortalLogin_dto) on controller KTC_SalesAppWAPI.Controllers.PortalLoginController (KTC_SalesAppWAPI).
+2026-02-05 17:21:24.981 +08:00 [INF] Request finished in 239.2114ms 200 application/json; charset=utf-8
+2026-02-05 17:21:24.916 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalLogin application/json; charset=utf-8 110
+2026-02-05 17:21:24.916 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalLogin application/json; charset=utf-8 110
+2026-02-05 17:21:24.993 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:24.997 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.003 +08:00 [INF] Route matched with {action = "Post", controller = "PortalLogin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync(KTC_SalesAppWAPI.DTOs.PortalLogin.PortalLogin_dto) on controller KTC_SalesAppWAPI.Controllers.PortalLoginController (KTC_SalesAppWAPI).
+2026-02-05 17:21:25.008 +08:00 [INF] Route matched with {action = "Post", controller = "PortalLogin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync(KTC_SalesAppWAPI.DTOs.PortalLogin.PortalLogin_dto) on controller KTC_SalesAppWAPI.Controllers.PortalLoginController (KTC_SalesAppWAPI).
+2026-02-05 17:21:24.941 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalLogin application/json; charset=utf-8 110
+2026-02-05 17:21:24.941 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalLogin application/json; charset=utf-8 110
+2026-02-05 17:21:25.025 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.031 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.036 +08:00 [INF] Route matched with {action = "Post", controller = "PortalLogin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync(KTC_SalesAppWAPI.DTOs.PortalLogin.PortalLogin_dto) on controller KTC_SalesAppWAPI.Controllers.PortalLoginController (KTC_SalesAppWAPI).
+2026-02-05 17:21:25.041 +08:00 [INF] Route matched with {action = "Post", controller = "PortalLogin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync(KTC_SalesAppWAPI.DTOs.PortalLogin.PortalLogin_dto) on controller KTC_SalesAppWAPI.Controllers.PortalLoginController (KTC_SalesAppWAPI).
+2026-02-05 17:21:24.941 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalLogin application/json; charset=utf-8 110
+2026-02-05 17:21:24.941 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalLogin application/json; charset=utf-8 110
+2026-02-05 17:21:25.060 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.066 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.074 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalLogin application/json; charset=utf-8 111
+2026-02-05 17:21:25.074 +08:00 [INF] Route matched with {action = "Post", controller = "PortalLogin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync(KTC_SalesAppWAPI.DTOs.PortalLogin.PortalLogin_dto) on controller KTC_SalesAppWAPI.Controllers.PortalLoginController (KTC_SalesAppWAPI).
+2026-02-05 17:21:25.083 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.079 +08:00 [INF] Route matched with {action = "Post", controller = "PortalLogin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync(KTC_SalesAppWAPI.DTOs.PortalLogin.PortalLogin_dto) on controller KTC_SalesAppWAPI.Controllers.PortalLoginController (KTC_SalesAppWAPI).
+2026-02-05 17:21:25.103 +08:00 [INF] Route matched with {action = "Post", controller = "PortalLogin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync(KTC_SalesAppWAPI.DTOs.PortalLogin.PortalLogin_dto) on controller KTC_SalesAppWAPI.Controllers.PortalLoginController (KTC_SalesAppWAPI).
+2026-02-05 17:21:24.951 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalLogin application/json; charset=utf-8 110
+2026-02-05 17:21:25.129 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.140 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalLogin application/json; charset=utf-8 111
+2026-02-05 17:21:25.155 +08:00 [INF] Route matched with {action = "Post", controller = "PortalLogin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync(KTC_SalesAppWAPI.DTOs.PortalLogin.PortalLogin_dto) on controller KTC_SalesAppWAPI.Controllers.PortalLoginController (KTC_SalesAppWAPI).
+2026-02-05 17:21:25.161 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.173 +08:00 [INF] Route matched with {action = "Post", controller = "PortalLogin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync(KTC_SalesAppWAPI.DTOs.PortalLogin.PortalLogin_dto) on controller KTC_SalesAppWAPI.Controllers.PortalLoginController (KTC_SalesAppWAPI).
+2026-02-05 17:21:25.183 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/PortalLogin application/json; charset=utf-8 110
+2026-02-05 17:21:25.203 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.220 +08:00 [INF] Route matched with {action = "Post", controller = "PortalLogin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostAsync(KTC_SalesAppWAPI.DTOs.PortalLogin.PortalLogin_dto) on controller KTC_SalesAppWAPI.Controllers.PortalLoginController (KTC_SalesAppWAPI).
+2026-02-05 17:21:25.325 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.Models.Login.BearerToken'.
+2026-02-05 17:21:25.344 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.Models.Login.BearerToken'.
+2026-02-05 17:21:25.344 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.Models.Login.BearerToken'.
+2026-02-05 17:21:25.346 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI) in 458.6993ms
+2026-02-05 17:21:25.360 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI) in 346.7777ms
+2026-02-05 17:21:25.364 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI) in 426.7563ms
+2026-02-05 17:21:25.371 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.377 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.382 +08:00 [INF] Request finished in 466.4603ms 200 application/json; charset=utf-8
+2026-02-05 17:21:25.387 +08:00 [INF] Request finished in 498.8659ms 200 application/json; charset=utf-8
+2026-02-05 17:21:25.388 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.Models.Login.BearerToken'.
+2026-02-05 17:21:25.366 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.Models.Login.BearerToken'.
+2026-02-05 17:21:25.403 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.Models.Login.BearerToken'.
+2026-02-05 17:21:25.409 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.Models.Login.BearerToken'.
+2026-02-05 17:21:25.409 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.Models.Login.BearerToken'.
+2026-02-05 17:21:25.422 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.Models.Login.BearerToken'.
+2026-02-05 17:21:25.427 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI) in 476.0396ms
+2026-02-05 17:21:25.433 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI) in 379.0873ms
+2026-02-05 17:21:25.439 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.444 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.449 +08:00 [INF] Request finished in 559.7797ms 200 application/json; charset=utf-8
+2026-02-05 17:21:25.454 +08:00 [INF] Request finished in 512.6273ms 200 application/json; charset=utf-8
+2026-02-05 17:21:25.439 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI) in 201.5178ms
+2026-02-05 17:21:25.444 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.Models.Login.BearerToken'.
+2026-02-05 17:21:25.470 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.409 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.Models.Login.BearerToken'.
+2026-02-05 17:21:25.479 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI) in 389.7252ms
+2026-02-05 17:21:25.415 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.Models.Login.BearerToken'.
+2026-02-05 17:21:25.488 +08:00 [INF] Request finished in 297.9863ms 200 application/json; charset=utf-8
+2026-02-05 17:21:25.488 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.488 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI) in 300.7898ms
+2026-02-05 17:21:25.498 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI) in 478.2641ms
+2026-02-05 17:21:25.508 +08:00 [INF] Request finished in 567.5861ms 200 application/json; charset=utf-8
+2026-02-05 17:21:25.508 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.512 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.523 +08:00 [INF] Request finished in 382.6164ms 200 application/json; charset=utf-8
+2026-02-05 17:21:25.528 +08:00 [INF] Request finished in 611.8084ms 200 application/json; charset=utf-8
+2026-02-05 17:21:25.410 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.Models.Login.BearerToken'.
+2026-02-05 17:21:25.421 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI) in 252.8454ms
+2026-02-05 17:21:25.403 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.Models.Login.BearerToken'.
+2026-02-05 17:21:25.546 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI) in 581.7285ms
+2026-02-05 17:21:25.546 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.556 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.560 +08:00 [INF] Request finished in 608.6466ms 200 application/json; charset=utf-8
+2026-02-05 17:21:25.565 +08:00 [INF] Request finished in 680.7425ms 200 application/json; charset=utf-8
+2026-02-05 17:21:25.556 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI) in 434.0606ms
+2026-02-05 17:21:25.418 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI) in 370.3723ms
+2026-02-05 17:21:25.580 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.585 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.592 +08:00 [INF] Request finished in 517.6885ms 200 application/json; charset=utf-8
+2026-02-05 17:21:25.597 +08:00 [INF] Request finished in 656.6878ms 200 application/json; charset=utf-8
+2026-02-05 17:21:25.421 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI) in 312.4685ms
+2026-02-05 17:21:25.361 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.611 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.616 +08:00 [INF] Request finished in 742.2438ms 200 application/json; charset=utf-8
+2026-02-05 17:21:25.622 +08:00 [INF] Request finished in 681.6104ms 200 application/json; charset=utf-8
+2026-02-05 17:21:25.383 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.Models.Login.BearerToken'.
+2026-02-05 17:21:25.638 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI) in 652.498ms
+2026-02-05 17:21:25.645 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PortalLoginController.PostAsync (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.653 +08:00 [INF] Request finished in 737.0706ms 200 application/json; charset=utf-8
+2026-02-05 17:21:25.779 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/AppUpdate application/json; charset=utf-8 240
+2026-02-05 17:21:25.784 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.AppUpdateController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.793 +08:00 [INF] Route matched with {action = "Post", controller = "AppUpdate"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.AppUpdate.AppUpdate_Dto) on controller KTC_SalesAppWAPI.Controllers.AppUpdateController (KTC_SalesAppWAPI).
+2026-02-05 17:21:25.836 +08:00 [INF] Executing ObjectResult, writing value of type 'System.String'.
+2026-02-05 17:21:25.849 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.AppUpdateController.Post (KTC_SalesAppWAPI) in 50.561ms
+2026-02-05 17:21:25.857 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.AppUpdateController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.865 +08:00 [INF] Request finished in 86.1329ms 200 text/plain; charset=utf-8
+2026-02-05 17:21:25.916 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/SSO application/json; charset=utf-8 680
+2026-02-05 17:21:25.922 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.SSOController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:21:25.925 +08:00 [INF] Route matched with {action = "Post", controller = "SSO"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.UserProfile_Dto) on controller KTC_SalesAppWAPI.Controllers.SSOController (KTC_SalesAppWAPI).
+2026-02-05 17:21:26.211 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/AppDashBoard application/json; charset=utf-8 705
+2026-02-05 17:21:26.221 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.AppDashBoardController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:21:26.230 +08:00 [INF] Route matched with {action = "Post", controller = "AppDashBoard"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Dashboard.AppDashboard_Dto) on controller KTC_SalesAppWAPI.Controllers.AppDashBoardController (KTC_SalesAppWAPI).
+2026-02-05 17:21:26.818 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[KTC_SalesAppWAPI.Models.Geofence.FTAppGeoTrack, KTC_SalesAppWAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-05 17:21:26.826 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.SSOController.Post (KTC_SalesAppWAPI) in 895.4693ms
+2026-02-05 17:21:26.829 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.SSOController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:21:26.832 +08:00 [INF] Request finished in 916.0356ms 200 application/json; charset=utf-8
+2026-02-05 17:21:33.281 +08:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[KTC_SalesAppWAPI.Models.Dashboard.InfoBoard, KTC_SalesAppWAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-02-05 17:21:33.320 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.AppDashBoardController.Post (KTC_SalesAppWAPI) in 7085.1043ms
+2026-02-05 17:21:33.335 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.AppDashBoardController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:21:33.347 +08:00 [INF] Request finished in 7136.1635ms 200 application/json; charset=utf-8
+2026-02-05 17:21:41.006 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:21:41.022 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:21:41.035 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:21:41.101 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:21:41.109 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 68.6835ms
+2026-02-05 17:21:41.115 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:21:41.121 +08:00 [INF] Request finished in 115.7608ms 200 application/json; charset=utf-8
+2026-02-05 17:21:56.021 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:21:56.025 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:21:56.029 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:21:56.034 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:21:56.038 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 5.2748ms
+2026-02-05 17:21:56.042 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:21:56.046 +08:00 [INF] Request finished in 25.8289ms 200 application/json; charset=utf-8
+2026-02-05 17:22:11.040 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:22:11.045 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:22:11.052 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:22:11.061 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:22:11.069 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 9.8638ms
+2026-02-05 17:22:11.079 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:22:11.087 +08:00 [INF] Request finished in 47.503ms 200 application/json; charset=utf-8
+2026-02-05 17:22:26.062 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:22:26.071 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:22:26.079 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:22:26.089 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:22:26.097 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 10.6439ms
+2026-02-05 17:22:26.104 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:22:26.110 +08:00 [INF] Request finished in 48.3926ms 200 application/json; charset=utf-8
+2026-02-05 17:22:41.074 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:22:41.081 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:22:41.087 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:22:41.091 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:22:41.097 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 7.5496ms
+2026-02-05 17:22:41.104 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:22:41.111 +08:00 [INF] Request finished in 37.2273ms 200 application/json; charset=utf-8
+2026-02-05 17:22:50.282 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/SSO application/json; charset=utf-8 175
+2026-02-05 17:22:50.286 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.SSOController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:22:50.298 +08:00 [INF] Route matched with {action = "Post", controller = "SSO"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.UserProfile_Dto) on controller KTC_SalesAppWAPI.Controllers.SSOController (KTC_SalesAppWAPI).
+2026-02-05 17:22:57.668 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:22:57.673 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:22:57.677 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:22:57.683 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:22:57.689 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 7.5422ms
+2026-02-05 17:22:57.694 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:22:57.699 +08:00 [INF] Request finished in 30.8573ms 200 application/json; charset=utf-8
+2026-02-05 17:22:58.212 +08:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2026-02-05 17:22:58.217 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.SSOController.Post (KTC_SalesAppWAPI) in 7914.3628ms
+2026-02-05 17:22:58.221 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.SSOController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:22:58.224 +08:00 [INF] Request finished in 7942.1648ms 404 application/problem+json; charset=utf-8
+2026-02-05 17:23:11.081 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:23:11.087 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:23:11.092 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:23:11.103 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:23:11.117 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 16.7353ms
+2026-02-05 17:23:11.128 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:23:11.137 +08:00 [INF] Request finished in 55.6251ms 200 application/json; charset=utf-8
+2026-02-05 17:23:15.945 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/SSO application/json; charset=utf-8 176
+2026-02-05 17:23:15.953 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.SSOController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:23:15.962 +08:00 [INF] Route matched with {action = "Post", controller = "SSO"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.UserProfile_Dto) on controller KTC_SalesAppWAPI.Controllers.SSOController (KTC_SalesAppWAPI).
+2026-02-05 17:23:16.446 +08:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2026-02-05 17:23:16.456 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.SSOController.Post (KTC_SalesAppWAPI) in 487.2528ms
+2026-02-05 17:23:16.467 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.SSOController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:23:16.477 +08:00 [INF] Request finished in 531.2198ms 404 application/problem+json; charset=utf-8
+2026-02-05 17:23:26.096 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:23:26.104 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:23:26.114 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:23:26.122 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:23:26.129 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 8.9979ms
+2026-02-05 17:23:26.134 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:23:26.140 +08:00 [INF] Request finished in 43.6892ms 200 application/json; charset=utf-8
+2026-02-05 17:23:41.097 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:23:41.104 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:23:41.109 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:23:41.113 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:23:41.137 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 24.4526ms
+2026-02-05 17:23:41.145 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:23:41.153 +08:00 [INF] Request finished in 55.1798ms 200 application/json; charset=utf-8
+2026-02-05 17:23:56.120 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:23:56.129 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:23:56.139 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:23:56.152 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:23:56.166 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 15.6898ms
+2026-02-05 17:23:56.181 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:23:56.191 +08:00 [INF] Request finished in 71.849ms 200 application/json; charset=utf-8
+2026-02-05 17:24:11.141 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:24:11.151 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:24:11.156 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:24:11.162 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:24:11.167 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 5.7658ms
+2026-02-05 17:24:11.174 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:24:11.182 +08:00 [INF] Request finished in 40.8354ms 200 application/json; charset=utf-8
+2026-02-05 17:24:26.181 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:24:26.184 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:24:26.188 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:24:26.194 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:24:26.199 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 6.5943ms
+2026-02-05 17:24:26.205 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:24:26.212 +08:00 [INF] Request finished in 31.7651ms 200 application/json; charset=utf-8
+2026-02-05 17:24:41.198 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:24:41.206 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:24:41.213 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:24:41.220 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:24:41.225 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 4.9904ms
+2026-02-05 17:24:41.231 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:24:41.235 +08:00 [INF] Request finished in 36.2691ms 200 application/json; charset=utf-8
+2026-02-05 17:24:56.210 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:24:56.215 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:24:56.220 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:24:56.224 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:24:56.229 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 5.0061ms
+2026-02-05 17:24:56.236 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:24:56.242 +08:00 [INF] Request finished in 32.3696ms 200 application/json; charset=utf-8
+2026-02-05 17:25:11.231 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:25:11.236 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:25:11.242 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:25:11.248 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:25:11.257 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 9.255ms
+2026-02-05 17:25:11.269 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:25:11.279 +08:00 [INF] Request finished in 47.6907ms 200 application/json; charset=utf-8
+2026-02-05 17:25:26.250 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:25:26.259 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:25:26.267 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:25:26.279 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:25:26.295 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 17.3558ms
+2026-02-05 17:25:26.310 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:25:26.319 +08:00 [INF] Request finished in 68.044ms 200 application/json; charset=utf-8
+2026-02-05 17:25:41.261 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:25:41.271 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:25:41.280 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:25:41.293 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:25:41.299 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 8.7111ms
+2026-02-05 17:25:41.310 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:25:41.319 +08:00 [INF] Request finished in 58.478ms 200 application/json; charset=utf-8
+2026-02-05 17:25:56.276 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:25:56.281 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:25:56.286 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:25:56.298 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:25:56.306 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 12.2552ms
+2026-02-05 17:25:56.314 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:25:56.318 +08:00 [INF] Request finished in 42.4992ms 200 application/json; charset=utf-8
+2026-02-05 17:26:11.282 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:26:11.287 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:26:11.296 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:26:11.304 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:26:11.314 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 9.8614ms
+2026-02-05 17:26:11.323 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:26:11.329 +08:00 [INF] Request finished in 47.1079ms 200 application/json; charset=utf-8
+2026-02-05 17:26:26.300 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:26:26.306 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:26:26.311 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:26:26.320 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:26:26.326 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 6.5233ms
+2026-02-05 17:26:26.332 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:26:26.338 +08:00 [INF] Request finished in 38.7607ms 200 application/json; charset=utf-8
+2026-02-05 17:26:41.311 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:26:41.316 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:26:41.322 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:26:41.326 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:26:41.337 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 11.31ms
+2026-02-05 17:26:41.343 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:26:41.353 +08:00 [INF] Request finished in 42.2414ms 200 application/json; charset=utf-8
+2026-02-05 17:26:56.328 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:26:56.333 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:26:56.336 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:26:56.340 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:26:56.344 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 4.3376ms
+2026-02-05 17:26:56.350 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:26:56.355 +08:00 [INF] Request finished in 27.5379ms 200 application/json; charset=utf-8
+2026-02-05 17:27:11.337 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:27:11.346 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:27:11.358 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:27:11.366 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:27:11.370 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 4.4188ms
+2026-02-05 17:27:11.373 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:27:11.379 +08:00 [INF] Request finished in 41.9869ms 200 application/json; charset=utf-8
+2026-02-05 17:27:26.357 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:27:26.364 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:27:26.372 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:27:26.379 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:27:26.386 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 7.7495ms
+2026-02-05 17:27:26.391 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:27:26.397 +08:00 [INF] Request finished in 39.4357ms 200 application/json; charset=utf-8
+2026-02-05 17:27:41.378 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:27:41.383 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:27:41.386 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:27:41.392 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:27:41.400 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 7.8752ms
+2026-02-05 17:27:41.407 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:27:41.413 +08:00 [INF] Request finished in 34.6638ms 200 application/json; charset=utf-8
+2026-02-05 17:27:56.388 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:27:56.394 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:27:56.400 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:27:56.409 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:27:56.416 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 7.3135ms
+2026-02-05 17:27:56.423 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:27:56.429 +08:00 [INF] Request finished in 41.2274ms 200 application/json; charset=utf-8
+2026-02-05 17:28:11.498 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:28:11.501 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:28:11.506 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:28:11.509 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:28:11.512 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 2.9027ms
+2026-02-05 17:28:11.515 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:28:11.521 +08:00 [INF] Request finished in 23.1169ms 200 application/json; charset=utf-8
+2026-02-05 17:28:26.507 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:28:26.512 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:28:26.516 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:28:26.522 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:28:26.528 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 7.0238ms
+2026-02-05 17:28:26.534 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:28:26.541 +08:00 [INF] Request finished in 33.8772ms 200 application/json; charset=utf-8
+2026-02-05 17:28:41.522 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:28:41.527 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:28:41.531 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:28:41.535 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:28:41.542 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 6.9185ms
+2026-02-05 17:28:41.548 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:28:41.553 +08:00 [INF] Request finished in 31.029ms 200 application/json; charset=utf-8
+2026-02-05 17:28:56.546 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:28:56.553 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:28:56.557 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:28:56.560 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:28:56.564 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 4.4559ms
+2026-02-05 17:28:56.569 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:28:56.573 +08:00 [INF] Request finished in 27.2477ms 200 application/json; charset=utf-8
+2026-02-05 17:29:11.558 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:29:11.566 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:29:11.575 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:29:11.578 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:29:11.585 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 6.4584ms
+2026-02-05 17:29:11.590 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:29:11.595 +08:00 [INF] Request finished in 36.4212ms 200 application/json; charset=utf-8
+2026-02-05 17:29:26.562 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:29:26.568 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:29:26.573 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:29:26.577 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:29:26.581 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 4.5651ms
+2026-02-05 17:29:26.588 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:29:26.590 +08:00 [INF] Request finished in 28.5194ms 200 application/json; charset=utf-8
+2026-02-05 17:29:41.571 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:29:41.578 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:29:41.586 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:29:41.591 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:29:41.602 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 11.0521ms
+2026-02-05 17:29:41.611 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:29:41.619 +08:00 [INF] Request finished in 47.7707ms 200 application/json; charset=utf-8
+2026-02-05 17:29:56.597 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:29:56.602 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:29:56.606 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:29:56.612 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:29:56.615 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 3.5432ms
+2026-02-05 17:29:56.621 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:29:56.631 +08:00 [INF] Request finished in 33.6907ms 200 application/json; charset=utf-8
+2026-02-05 17:30:11.603 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:30:11.608 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:30:11.612 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:30:11.618 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:30:11.625 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 7.1558ms
+2026-02-05 17:30:11.632 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:30:11.637 +08:00 [INF] Request finished in 33.608ms 200 application/json; charset=utf-8
+2026-02-05 17:30:26.619 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:30:26.624 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:30:26.630 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:30:26.634 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:30:26.637 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 3.2488ms
+2026-02-05 17:30:26.642 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:30:26.647 +08:00 [INF] Request finished in 28.4797ms 200 application/json; charset=utf-8
+2026-02-05 17:30:41.641 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:30:41.647 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:30:41.653 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:30:41.657 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:30:41.665 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 7.9936ms
+2026-02-05 17:30:41.673 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:30:41.680 +08:00 [INF] Request finished in 38.7054ms 200 application/json; charset=utf-8
+2026-02-05 17:30:56.651 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:30:56.657 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:30:56.663 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:30:56.668 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:30:56.675 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 7.1599ms
+2026-02-05 17:30:56.681 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:30:56.686 +08:00 [INF] Request finished in 35.696ms 200 application/json; charset=utf-8
+2026-02-05 17:31:11.671 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:31:11.677 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:31:11.685 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:31:11.691 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:31:11.696 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 5.1975ms
+2026-02-05 17:31:11.704 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:31:11.707 +08:00 [INF] Request finished in 35.9025ms 200 application/json; charset=utf-8
+2026-02-05 17:31:26.674 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:31:26.677 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:31:26.684 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:31:26.688 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:31:26.693 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 5.4479ms
+2026-02-05 17:31:26.699 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:31:26.705 +08:00 [INF] Request finished in 31.1651ms 200 application/json; charset=utf-8
+2026-02-05 17:31:41.681 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:31:41.686 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:31:41.692 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:31:41.698 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:31:41.705 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 7.2359ms
+2026-02-05 17:31:41.715 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:31:41.719 +08:00 [INF] Request finished in 38.3934ms 200 application/json; charset=utf-8
+2026-02-05 17:31:56.701 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:31:56.706 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:31:56.710 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:31:56.714 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:31:56.720 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 6.1592ms
+2026-02-05 17:31:56.726 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:31:56.733 +08:00 [INF] Request finished in 33.3218ms 200 application/json; charset=utf-8
+2026-02-05 17:32:11.722 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:32:11.726 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:32:11.730 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:32:11.734 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:32:11.740 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 6.2263ms
+2026-02-05 17:32:11.747 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:32:11.750 +08:00 [INF] Request finished in 27.9616ms 200 application/json; charset=utf-8
+2026-02-05 17:32:26.740 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:32:26.746 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:32:26.754 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:32:26.760 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:32:26.765 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 5.3405ms
+2026-02-05 17:32:26.775 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:32:26.781 +08:00 [INF] Request finished in 41.4004ms 200 application/json; charset=utf-8
+2026-02-05 17:32:41.745 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:32:41.755 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:32:41.759 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:32:41.763 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:32:41.773 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 10.2335ms
+2026-02-05 17:32:41.779 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:32:41.783 +08:00 [INF] Request finished in 38.1186ms 200 application/json; charset=utf-8
+2026-02-05 17:32:56.767 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:32:56.772 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:32:56.777 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:32:56.782 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:32:56.788 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 6.2676ms
+2026-02-05 17:32:56.794 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:32:56.797 +08:00 [INF] Request finished in 30.2341ms 200 application/json; charset=utf-8
+2026-02-05 17:33:11.788 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:33:11.794 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:33:11.799 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:33:11.804 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:33:11.814 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 9.9079ms
+2026-02-05 17:33:11.818 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:33:11.823 +08:00 [INF] Request finished in 34.9089ms 200 application/json; charset=utf-8
+2026-02-05 17:33:26.807 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:33:26.809 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:33:26.812 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:33:26.817 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:33:26.819 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 3.0774ms
+2026-02-05 17:33:26.823 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:33:26.826 +08:00 [INF] Request finished in 19.1478ms 200 application/json; charset=utf-8
+2026-02-05 17:33:41.830 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:33:41.839 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:33:41.842 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:33:41.847 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:33:41.852 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 4.489ms
+2026-02-05 17:33:41.858 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:33:41.863 +08:00 [INF] Request finished in 32.8866ms 200 application/json; charset=utf-8
+2026-02-05 17:33:56.842 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:33:56.851 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:33:56.856 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:33:56.863 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:33:56.870 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 7.3675ms
+2026-02-05 17:33:56.877 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:33:56.884 +08:00 [INF] Request finished in 42.544ms 200 application/json; charset=utf-8
+2026-02-05 17:34:11.862 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:34:11.866 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:34:11.874 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:34:11.877 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:34:11.882 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 4.5634ms
+2026-02-05 17:34:11.888 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:34:11.896 +08:00 [INF] Request finished in 35.4274ms 200 application/json; charset=utf-8
+2026-02-05 17:34:26.876 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:34:26.880 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:34:26.885 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:34:26.888 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:34:26.892 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 4.4315ms
+2026-02-05 17:34:26.898 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:34:26.906 +08:00 [INF] Request finished in 30.8778ms 200 application/json; charset=utf-8
+2026-02-05 17:34:41.901 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:34:41.905 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:34:41.909 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:34:41.915 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:34:41.920 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 5.5198ms
+2026-02-05 17:34:41.929 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:34:41.938 +08:00 [INF] Request finished in 37.234ms 200 application/json; charset=utf-8
+2026-02-05 17:34:56.918 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:34:56.922 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:34:56.925 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:34:56.929 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:34:56.935 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 6.296ms
+2026-02-05 17:34:56.939 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:34:56.943 +08:00 [INF] Request finished in 25.3644ms 200 application/json; charset=utf-8
+2026-02-05 17:35:11.930 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:35:11.936 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:35:11.941 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:35:11.944 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:35:11.951 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 7.4941ms
+2026-02-05 17:35:11.960 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:35:11.965 +08:00 [INF] Request finished in 35.3251ms 200 application/json; charset=utf-8
+2026-02-05 17:35:26.941 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:35:26.946 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:35:26.950 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:35:26.956 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:35:26.959 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 4.1868ms
+2026-02-05 17:35:26.967 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:35:26.973 +08:00 [INF] Request finished in 31.7669ms 200 application/json; charset=utf-8
+2026-02-05 17:35:41.960 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:35:41.964 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:35:41.969 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:35:41.978 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:35:41.985 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 7.6057ms
+2026-02-05 17:35:41.994 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:35:42.002 +08:00 [INF] Request finished in 42.6293ms 200 application/json; charset=utf-8
+2026-02-05 17:35:57.006 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:35:57.010 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:35:57.014 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:35:57.020 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:35:57.025 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 5.1397ms
+2026-02-05 17:35:57.030 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:35:57.036 +08:00 [INF] Request finished in 30.5218ms 200 application/json; charset=utf-8
+2026-02-05 17:36:12.022 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:36:12.028 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:36:12.033 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:36:12.039 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:36:12.044 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 5.1568ms
+2026-02-05 17:36:12.053 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:36:12.063 +08:00 [INF] Request finished in 40.9011ms 200 application/json; charset=utf-8
+2026-02-05 17:36:27.038 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:36:27.046 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:36:27.053 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:36:27.061 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:36:27.069 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 8.222ms
+2026-02-05 17:36:27.074 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:36:27.081 +08:00 [INF] Request finished in 43.8289ms 200 application/json; charset=utf-8
+2026-02-05 17:36:42.052 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:36:42.057 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:36:42.062 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:36:42.069 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:36:42.081 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 13.0589ms
+2026-02-05 17:36:42.096 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:36:42.104 +08:00 [INF] Request finished in 52.2777ms 200 application/json; charset=utf-8
+2026-02-05 17:36:57.051 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:36:57.057 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:36:57.063 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:36:57.067 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:36:57.073 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 6.7971ms
+2026-02-05 17:36:57.078 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:36:57.081 +08:00 [INF] Request finished in 30.3129ms 200 application/json; charset=utf-8
+2026-02-05 17:37:12.062 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:37:12.070 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:37:12.075 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:37:12.080 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:37:12.085 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 4.7806ms
+2026-02-05 17:37:12.089 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:37:12.093 +08:00 [INF] Request finished in 31.4107ms 200 application/json; charset=utf-8
+2026-02-05 17:37:27.075 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:37:27.081 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:37:27.086 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:37:27.089 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:37:27.093 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 4.1171ms
+2026-02-05 17:37:27.101 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:37:27.107 +08:00 [INF] Request finished in 32.147ms 200 application/json; charset=utf-8
+2026-02-05 17:37:42.094 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:37:42.098 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:37:42.104 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:37:42.109 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:37:42.115 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 5.7716ms
+2026-02-05 17:37:42.121 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:37:42.128 +08:00 [INF] Request finished in 35.0339ms 200 application/json; charset=utf-8
+2026-02-05 17:37:57.115 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:37:57.121 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:37:57.128 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:37:57.134 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:37:57.140 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 5.9282ms
+2026-02-05 17:37:57.150 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:37:57.155 +08:00 [INF] Request finished in 40.2069ms 200 application/json; charset=utf-8
+2026-02-05 17:38:12.131 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:38:12.136 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:38:12.142 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:38:12.148 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:38:12.156 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 7.1832ms
+2026-02-05 17:38:12.165 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:38:12.173 +08:00 [INF] Request finished in 43.3244ms 200 application/json; charset=utf-8
+2026-02-05 17:38:27.151 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:38:27.156 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:38:27.159 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:38:27.162 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:38:27.167 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 5.2346ms
+2026-02-05 17:38:27.175 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:38:27.180 +08:00 [INF] Request finished in 28.4902ms 200 application/json; charset=utf-8
+2026-02-05 17:38:42.157 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:38:42.164 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:38:42.167 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:38:42.171 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:38:42.176 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 5.0178ms
+2026-02-05 17:38:42.182 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:38:42.188 +08:00 [INF] Request finished in 30.1471ms 200 application/json; charset=utf-8
+2026-02-05 17:38:57.181 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:38:57.191 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:38:57.200 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:38:57.205 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:38:57.210 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 4.892ms
+2026-02-05 17:38:57.214 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:38:57.217 +08:00 [INF] Request finished in 35.5849ms 200 application/json; charset=utf-8
+2026-02-05 17:39:12.212 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:39:12.220 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:39:12.224 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:39:12.228 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:39:12.235 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 7.4604ms
+2026-02-05 17:39:12.241 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:39:12.247 +08:00 [INF] Request finished in 35.1803ms 200 application/json; charset=utf-8
+2026-02-05 17:39:27.238 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:39:27.242 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:39:27.247 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:39:27.260 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:39:27.268 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 7.9559ms
+2026-02-05 17:39:27.274 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:39:27.278 +08:00 [INF] Request finished in 40.6793ms 200 application/json; charset=utf-8
+2026-02-05 17:39:42.237 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:39:42.243 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:39:42.250 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:39:42.260 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:39:42.273 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 13.323ms
+2026-02-05 17:39:42.281 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:39:42.289 +08:00 [INF] Request finished in 51.4802ms 200 application/json; charset=utf-8
+2026-02-05 17:39:57.252 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:39:57.259 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:39:57.264 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:39:57.269 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:39:57.275 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 6.3792ms
+2026-02-05 17:39:57.280 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:39:57.285 +08:00 [INF] Request finished in 32.2224ms 200 application/json; charset=utf-8
+2026-02-05 17:40:12.277 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:40:12.290 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:40:12.297 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:40:12.308 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:40:12.323 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 15.7212ms
+2026-02-05 17:40:12.334 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:40:12.343 +08:00 [INF] Request finished in 65.9069ms 200 application/json; charset=utf-8
+2026-02-05 17:40:27.314 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:40:27.322 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:40:27.326 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:40:27.331 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:40:27.337 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 5.784ms
+2026-02-05 17:40:27.345 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:40:27.349 +08:00 [INF] Request finished in 35.41ms 200 application/json; charset=utf-8
+2026-02-05 17:40:42.321 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:40:42.333 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:40:42.338 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:40:42.345 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:40:42.350 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 5.1452ms
+2026-02-05 17:40:42.353 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:40:42.360 +08:00 [INF] Request finished in 38.2346ms 200 application/json; charset=utf-8
+2026-02-05 17:40:57.332 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:40:57.335 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:40:57.339 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:40:57.342 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:40:57.348 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 6.0249ms
+2026-02-05 17:40:57.352 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:40:57.356 +08:00 [INF] Request finished in 24.5538ms 200 application/json; charset=utf-8
+2026-02-05 17:41:12.348 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:41:12.353 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:41:12.358 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:41:12.364 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:41:12.369 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 5.374ms
+2026-02-05 17:41:12.378 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:41:12.387 +08:00 [INF] Request finished in 38.8003ms 200 application/json; charset=utf-8
+2026-02-05 17:41:27.366 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:41:27.369 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:41:27.372 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:41:27.378 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:41:27.381 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 3.6399ms
+2026-02-05 17:41:27.383 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:41:27.387 +08:00 [INF] Request finished in 21.0831ms 200 application/json; charset=utf-8
+2026-02-05 17:41:42.440 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:41:42.444 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:41:42.448 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:41:42.453 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:41:42.457 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 4.5714ms
+2026-02-05 17:41:42.461 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:41:42.466 +08:00 [INF] Request finished in 25.7897ms 200 application/json; charset=utf-8
+2026-02-05 17:41:57.423 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:41:57.429 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:41:57.435 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:41:57.438 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:41:57.442 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 3.918ms
+2026-02-05 17:41:57.451 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:41:57.457 +08:00 [INF] Request finished in 34.1482ms 200 application/json; charset=utf-8
+2026-02-05 17:42:12.448 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:42:12.453 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:42:12.459 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:42:12.463 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:42:12.470 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 6.9949ms
+2026-02-05 17:42:12.476 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:42:12.482 +08:00 [INF] Request finished in 34.1654ms 200 application/json; charset=utf-8
+2026-02-05 17:42:27.494 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:42:27.498 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:42:27.501 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:42:27.506 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:42:27.510 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 4.1152ms
+2026-02-05 17:42:27.512 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:42:27.515 +08:00 [INF] Request finished in 21.1161ms 200 application/json; charset=utf-8
+2026-02-05 17:42:42.498 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:42:42.504 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:42:42.510 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:42:42.517 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:42:42.526 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 8.9394ms
+2026-02-05 17:42:42.537 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:42:42.546 +08:00 [INF] Request finished in 48.2156ms 200 application/json; charset=utf-8
+2026-02-05 17:42:57.518 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:42:57.523 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:42:57.527 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:42:57.533 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:42:57.538 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 5.2977ms
+2026-02-05 17:42:57.544 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:42:57.551 +08:00 [INF] Request finished in 33.4585ms 200 application/json; charset=utf-8
+2026-02-05 17:43:12.533 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:43:12.537 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:43:12.540 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:43:12.543 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:43:12.546 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 2.932ms
+2026-02-05 17:43:12.548 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:43:12.552 +08:00 [INF] Request finished in 19.1412ms 200 application/json; charset=utf-8
+2026-02-05 17:43:27.544 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:43:27.549 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:43:27.556 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:43:27.561 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:43:27.568 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 6.3172ms
+2026-02-05 17:43:27.576 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:43:27.584 +08:00 [INF] Request finished in 39.6988ms 200 application/json; charset=utf-8
+2026-02-05 17:43:42.567 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:43:42.573 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:43:42.581 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:43:42.589 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:43:42.599 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 10.1544ms
+2026-02-05 17:43:42.607 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:43:42.614 +08:00 [INF] Request finished in 47.4974ms 200 application/json; charset=utf-8
+2026-02-05 17:43:57.586 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:43:57.589 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:43:57.591 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:43:57.594 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:43:57.597 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 3.308ms
+2026-02-05 17:43:57.600 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:43:57.602 +08:00 [INF] Request finished in 16.0666ms 200 application/json; charset=utf-8
+2026-02-05 17:44:12.608 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:44:12.613 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:44:12.619 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:44:12.622 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:44:12.626 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 3.7207ms
+2026-02-05 17:44:12.629 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:44:12.634 +08:00 [INF] Request finished in 25.5934ms 200 application/json; charset=utf-8
+2026-02-05 17:44:27.628 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:44:27.636 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:44:27.642 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:44:27.646 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:44:27.652 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 6.2114ms
+2026-02-05 17:44:27.659 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:44:27.669 +08:00 [INF] Request finished in 41.041ms 200 application/json; charset=utf-8
+2026-02-05 17:44:42.650 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:44:42.652 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:44:42.654 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:44:42.657 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:44:42.660 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 3.3132ms
+2026-02-05 17:44:42.663 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:44:42.666 +08:00 [INF] Request finished in 16.7829ms 200 application/json; charset=utf-8
+2026-02-05 17:44:57.671 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:44:57.676 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:44:57.681 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:44:57.687 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:44:57.698 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 11.8781ms
+2026-02-05 17:44:57.710 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:44:57.721 +08:00 [INF] Request finished in 50.0406ms 200 application/json; charset=utf-8
+2026-02-05 17:45:12.697 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:45:12.703 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:45:12.708 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:45:12.714 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:45:12.721 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 7.8476ms
+2026-02-05 17:45:12.729 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:45:12.737 +08:00 [INF] Request finished in 39.6349ms 200 application/json; charset=utf-8
+2026-02-05 17:45:27.715 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:45:27.721 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:45:27.727 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:45:27.734 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:45:27.742 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 8.5804ms
+2026-02-05 17:45:27.749 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:45:27.756 +08:00 [INF] Request finished in 41.5861ms 200 application/json; charset=utf-8
+2026-02-05 17:45:42.733 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:45:42.739 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:45:42.744 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:45:42.749 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:45:42.760 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 11.422ms
+2026-02-05 17:45:42.767 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:45:42.776 +08:00 [INF] Request finished in 42.3087ms 200 application/json; charset=utf-8
+2026-02-05 17:45:57.757 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:45:57.761 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:45:57.767 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:45:57.773 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:45:57.777 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 4.5592ms
+2026-02-05 17:45:57.781 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:45:57.788 +08:00 [INF] Request finished in 31.0616ms 200 application/json; charset=utf-8
+2026-02-05 17:46:12.780 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:46:12.786 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:46:12.791 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:46:12.793 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:46:12.797 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 4.0014ms
+2026-02-05 17:46:12.803 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:46:12.808 +08:00 [INF] Request finished in 27.8347ms 200 application/json; charset=utf-8
+2026-02-05 17:46:27.794 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:46:27.797 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:46:27.799 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:46:27.802 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:46:27.806 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 4.2603ms
+2026-02-05 17:46:27.809 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:46:27.812 +08:00 [INF] Request finished in 18.1412ms 200 application/json; charset=utf-8
+2026-02-05 17:46:42.810 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:46:42.813 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:46:42.819 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:46:42.823 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:46:42.827 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 3.7594ms
+2026-02-05 17:46:42.833 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:46:42.836 +08:00 [INF] Request finished in 26.522ms 200 application/json; charset=utf-8
+2026-02-05 17:46:57.834 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:46:57.838 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:46:57.841 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:46:57.849 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:46:57.860 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 11.7941ms
+2026-02-05 17:46:57.870 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:46:57.878 +08:00 [INF] Request finished in 43.2413ms 200 application/json; charset=utf-8
+2026-02-05 17:47:12.855 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:47:12.859 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:47:12.862 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:47:12.865 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:47:12.868 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 2.9096ms
+2026-02-05 17:47:12.870 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:47:12.873 +08:00 [INF] Request finished in 17.5551ms 200 application/json; charset=utf-8
+2026-02-05 17:47:27.881 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:47:27.885 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:47:27.889 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:47:27.892 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:47:27.896 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 4.1272ms
+2026-02-05 17:47:27.899 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:47:27.908 +08:00 [INF] Request finished in 27.5567ms 200 application/json; charset=utf-8
+2026-02-05 17:47:42.896 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:47:42.904 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:47:42.908 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:47:42.911 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:47:42.915 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 4.3038ms
+2026-02-05 17:47:42.919 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:47:42.922 +08:00 [INF] Request finished in 26.1647ms 200 application/json; charset=utf-8
+2026-02-05 17:47:57.916 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:47:57.919 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:47:57.922 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:47:57.927 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:47:57.932 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 6.1704ms
+2026-02-05 17:47:57.937 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:47:57.942 +08:00 [INF] Request finished in 25.9213ms 200 application/json; charset=utf-8
+2026-02-05 17:48:12.940 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:48:12.945 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:48:12.951 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:48:12.960 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:48:12.966 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 7.1566ms
+2026-02-05 17:48:12.972 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:48:12.979 +08:00 [INF] Request finished in 38.5244ms 200 application/json; charset=utf-8
+2026-02-05 17:48:27.961 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:48:27.970 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:48:27.976 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:48:27.980 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:48:27.985 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 5.8298ms
+2026-02-05 17:48:27.988 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:48:27.992 +08:00 [INF] Request finished in 31.2278ms 200 application/json; charset=utf-8
+2026-02-05 17:48:42.983 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:48:42.987 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:48:42.994 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:48:42.998 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:48:43.006 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 7.5218ms
+2026-02-05 17:48:43.012 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:48:43.019 +08:00 [INF] Request finished in 36.6522ms 200 application/json; charset=utf-8
+2026-02-05 17:48:57.991 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:48:57.996 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:48:58.000 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:48:58.005 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:48:58.012 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 6.8626ms
+2026-02-05 17:48:58.016 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:48:58.019 +08:00 [INF] Request finished in 27.7151ms 200 application/json; charset=utf-8
+2026-02-05 17:49:13.011 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:49:13.019 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:49:13.024 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:49:13.030 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:49:13.036 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 6.3731ms
+2026-02-05 17:49:13.045 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:49:13.054 +08:00 [INF] Request finished in 42.74ms 200 application/json; charset=utf-8
+2026-02-05 17:49:28.036 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:49:28.052 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:49:28.057 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:49:28.076 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:49:28.087 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 11.3452ms
+2026-02-05 17:49:28.095 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:49:28.105 +08:00 [INF] Request finished in 68.7534ms 200 application/json; charset=utf-8
+2026-02-05 17:49:43.062 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:49:43.069 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:49:43.073 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:49:43.077 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:49:43.080 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 3.8853ms
+2026-02-05 17:49:43.088 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:49:43.095 +08:00 [INF] Request finished in 32.9676ms 200 application/json; charset=utf-8
+2026-02-05 17:49:58.078 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:49:58.086 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:49:58.090 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:49:58.094 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:49:58.099 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 4.7071ms
+2026-02-05 17:49:58.105 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:49:58.109 +08:00 [INF] Request finished in 30.8942ms 200 application/json; charset=utf-8
+2026-02-05 17:50:13.104 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:50:13.109 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:50:13.112 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:50:13.119 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:50:13.124 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 5.1548ms
+2026-02-05 17:50:13.132 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:50:13.139 +08:00 [INF] Request finished in 34.4988ms 200 application/json; charset=utf-8
+2026-02-05 17:50:28.118 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:50:28.121 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:50:28.123 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:50:28.126 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:50:28.130 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 3.3399ms
+2026-02-05 17:50:28.132 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:50:28.135 +08:00 [INF] Request finished in 16.798ms 200 application/json; charset=utf-8
+2026-02-05 17:50:43.127 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:50:43.132 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:50:43.140 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:50:43.147 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:50:43.156 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 9.0577ms
+2026-02-05 17:50:43.162 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:50:43.174 +08:00 [INF] Request finished in 46.94ms 200 application/json; charset=utf-8
+2026-02-05 17:50:58.149 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:50:58.153 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:50:58.156 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:50:58.160 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:50:58.165 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 5.3162ms
+2026-02-05 17:50:58.170 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:50:58.176 +08:00 [INF] Request finished in 26.9651ms 200 application/json; charset=utf-8
+2026-02-05 17:51:13.171 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:51:13.174 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:51:13.178 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:51:13.181 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:51:13.186 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 4.8035ms
+2026-02-05 17:51:13.190 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:51:13.195 +08:00 [INF] Request finished in 24.0984ms 200 application/json; charset=utf-8
+2026-02-05 17:51:28.188 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:51:28.195 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:51:28.200 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:51:28.209 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:51:28.218 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 9.2205ms
+2026-02-05 17:51:28.226 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:51:28.232 +08:00 [INF] Request finished in 43.5372ms 200 application/json; charset=utf-8
+2026-02-05 17:51:43.209 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:51:43.212 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:51:43.221 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:51:43.227 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:51:43.233 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 5.2067ms
+2026-02-05 17:51:43.240 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:51:43.246 +08:00 [INF] Request finished in 36.9288ms 200 application/json; charset=utf-8
+2026-02-05 17:51:58.233 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:51:58.240 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:51:58.244 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:51:58.253 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:51:58.260 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 7.0865ms
+2026-02-05 17:51:58.266 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:51:58.270 +08:00 [INF] Request finished in 37.7485ms 200 application/json; charset=utf-8
+2026-02-05 17:52:13.251 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:52:13.256 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:52:13.260 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:52:13.265 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:52:13.274 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 5.7597ms
+2026-02-05 17:52:13.282 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:52:13.287 +08:00 [INF] Request finished in 36.7931ms 200 application/json; charset=utf-8
+2026-02-05 17:52:28.274 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:52:28.284 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:52:28.289 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:52:28.295 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:52:28.299 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 4.385ms
+2026-02-05 17:52:28.304 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:52:28.308 +08:00 [INF] Request finished in 33.5688ms 200 application/json; charset=utf-8
+2026-02-05 17:52:43.291 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:52:43.294 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:52:43.298 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:52:43.303 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:52:43.308 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 5.431ms
+2026-02-05 17:52:43.312 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:52:43.319 +08:00 [INF] Request finished in 27.7438ms 200 application/json; charset=utf-8
+2026-02-05 17:52:58.316 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:52:58.323 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:52:58.331 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:52:58.340 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:52:58.344 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 4.6773ms
+2026-02-05 17:52:58.350 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:52:58.355 +08:00 [INF] Request finished in 39.1162ms 200 application/json; charset=utf-8
+2026-02-05 17:53:13.341 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:53:13.347 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:53:13.352 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:53:13.362 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:53:13.368 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 6.3197ms
+2026-02-05 17:53:13.381 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:53:13.392 +08:00 [INF] Request finished in 51.1668ms 200 application/json; charset=utf-8
+2026-02-05 17:53:15.883 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/SSO application/json; charset=utf-8 176
+2026-02-05 17:53:15.886 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.SSOController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:53:15.894 +08:00 [INF] Route matched with {action = "Post", controller = "SSO"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.UserProfile_Dto) on controller KTC_SalesAppWAPI.Controllers.SSOController (KTC_SalesAppWAPI).
+2026-02-05 17:53:16.499 +08:00 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2026-02-05 17:53:16.504 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.SSOController.Post (KTC_SalesAppWAPI) in 600.2229ms
+2026-02-05 17:53:16.511 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.SSOController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:53:16.514 +08:00 [INF] Request finished in 630.6108ms 404 application/problem+json; charset=utf-8
+2026-02-05 17:53:28.345 +08:00 [INF] Request starting HTTP/1.1 POST http://localhost:61293/Pack application/json; charset=utf-8 24
+2026-02-05 17:53:28.353 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:53:28.361 +08:00 [INF] Route matched with {action = "Post", controller = "Pack"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(KTC_SalesAppWAPI.DTOs.Pack.Dto_Pack) on controller KTC_SalesAppWAPI.Controllers.PackController (KTC_SalesAppWAPI).
+2026-02-05 17:53:28.366 +08:00 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType230`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-02-05 17:53:28.374 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI) in 7.4655ms
+2026-02-05 17:53:28.379 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.PackController.Post (KTC_SalesAppWAPI)'
+2026-02-05 17:53:28.386 +08:00 [INF] Request finished in 40.7681ms 200 application/json; charset=utf-8
+2026-02-05 20:02:02.852 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-05 20:02:07.706 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-02-05 20:02:07.755 +08:00 [INF] Hosting environment: Development
+2026-02-05 20:02:07.767 +08:00 [INF] Content root path: C:\Proj\VS2022\KTC_AppWebAPI _Https
+2026-02-05 20:02:07.952 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2026-02-05 20:02:07.952 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2026-02-05 20:02:07.952 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/weatherforecast  
+2026-02-05 20:02:08.075 +08:00 [WRN] Failed to determine the https port for redirect.
+2026-02-05 20:02:08.468 +08:00 [INF] Request finished in 508.5568ms 404 
+2026-02-05 20:02:08.468 +08:00 [INF] Request finished in 510.4305ms 404 
+2026-02-05 20:02:10.781 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2026-02-05 20:02:10.922 +08:00 [INF] Route matched with {action = "Get", controller = "WeatherForecast"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[KTC_SalesAppWAPI.WeatherForecast] Get() on controller KTC_SalesAppWAPI.Controllers.WeatherForecastController (KTC_SalesAppWAPI).
+2026-02-05 20:02:10.955 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.WeatherForecast[]'.
+2026-02-05 20:02:11.073 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI) in 122.0635ms
+2026-02-05 20:02:11.091 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2026-02-05 20:02:11.102 +08:00 [INF] Request finished in 3166.4123ms 200 application/json; charset=utf-8
+2026-02-05 20:02:11.542 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/favicon.ico  
+2026-02-05 20:02:11.606 +08:00 [INF] Request finished in 67.1979ms 404 
+2026-02-05 20:18:19.777 +08:00 [INF] User profile is available. Using 'C:\Users\User\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-02-05 20:18:21.868 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-02-05 20:18:21.874 +08:00 [INF] Hosting environment: Development
+2026-02-05 20:18:21.879 +08:00 [INF] Content root path: C:\Proj\VS2022\KTC_AppWebAPI _Https
+2026-02-05 20:18:22.095 +08:00 [INF] Request starting HTTP/1.1 HEAD http://localhost:61293/  
+2026-02-05 20:18:22.095 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/weatherforecast  
+2026-02-05 20:18:22.142 +08:00 [WRN] Failed to determine the https port for redirect.
+2026-02-05 20:18:22.285 +08:00 [INF] Request finished in 191.8715ms 404 
+2026-02-05 20:18:22.491 +08:00 [INF] Executing endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2026-02-05 20:18:22.550 +08:00 [INF] Route matched with {action = "Get", controller = "WeatherForecast"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[KTC_SalesAppWAPI.WeatherForecast] Get() on controller KTC_SalesAppWAPI.Controllers.WeatherForecastController (KTC_SalesAppWAPI).
+2026-02-05 20:18:22.567 +08:00 [INF] Executing ObjectResult, writing value of type 'KTC_SalesAppWAPI.WeatherForecast[]'.
+2026-02-05 20:18:22.619 +08:00 [INF] Executed action KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI) in 56.6953ms
+2026-02-05 20:18:22.630 +08:00 [INF] Executed endpoint 'KTC_SalesAppWAPI.Controllers.WeatherForecastController.Get (KTC_SalesAppWAPI)'
+2026-02-05 20:18:22.639 +08:00 [INF] Request finished in 552.6849ms 200 application/json; charset=utf-8
+2026-02-05 20:18:22.955 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:61293/favicon.ico  
+2026-02-05 20:18:23.115 +08:00 [INF] Request finished in 170.5381ms 404 
