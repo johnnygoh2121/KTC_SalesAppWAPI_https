@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading;
 
 namespace KTC_SalesAppWAPI.Controllers.Bread
 {
@@ -506,18 +507,9 @@ namespace KTC_SalesAppWAPI.Controllers.Bread
                     return BadRequest($"Doc# {docEntry} saved draft,\n" + errorMsg);
                 }
 
-                // add int he check for create invoice 
-                // 20240816
-                var sp_QuerySapInv = $@"Select top 1 * from {db.SAPDB}..OINV with (nolock) Where U_SOENTRY = @docEntry
-                                        order by DocDate desc; ";
-                var found_Inv = conn.Query<OINV>(sp_QuerySapInv, new { docEntry }).FirstOrDefault();
-
-                // try to get the cn (if any)
-                // add int he check for create invoice 
-                // 20240822
-                var sp_QuerySapCn = $@"Select top 1 * from {db.SAPDB}..ORIN with (nolock) Where U_SOENTRY = @docEntry
-                                        order by DocDate desc; ";
-                var found_Cn = conn.Query<ORIN>(sp_QuerySapCn, new { docEntry }).FirstOrDefault();
+                // add int he check for create invoice                 
+                var found_Inv = GetPostedInv(db, docEntry); 
+                var found_Cn  = GetPostedCN(db, docEntry);
 
                 // update the inv table as draft
                 if (found_Inv == null)
@@ -533,9 +525,9 @@ namespace KTC_SalesAppWAPI.Controllers.Bread
                     var upd = conn.Execute(update_portal_inv, new { docEntry });
                     return BadRequest("Server busy, please try submit again. doc save as draft Thanks. [E963IN]");
                 }
-               
+
                 // reupdate the inv object 
-                // reupdate the cn cmentry again 
+                // reupdate the cn cm entry again 
                 var update_inv1 = @$"Update {db.WEBDB}..INV 
                                         set DOCSTATUS = 'C',
                                         DOCNUM = @portalDocNum, 
@@ -578,6 +570,68 @@ namespace KTC_SalesAppWAPI.Controllers.Bread
                 {
                     Program.UserTransToken_BreadCreateInv.Remove(dto.UserCode);
                 }
+            }
+        }
+
+        OINV GetPostedInv(DbInfo db, long portalDocEntry)
+        {
+            try
+            {
+                using var conn = new SqlConnection(_commDbConnStr_Bread);
+                // by pass current locked row with READPAST
+                var sp_QuerySapInv = $@"Select top 1 * 
+                                        From {db.SAPDB}..OINV  with (READPAST)
+                                        Where U_SOENTRY = @portalDocEntry
+                                        ORDER BY DocEntry DESC ; ";
+
+                for (int i = 0; i < 3; i++)
+                {
+                    var found_Inv = conn.Query<OINV>(sp_QuerySapInv, new { portalDocEntry }).FirstOrDefault();                    
+                    if (found_Inv != null)
+                    {
+                        return found_Inv;
+                    }
+                    Thread.Sleep(500);
+                }
+                return null;
+            }
+            catch (Exception except)
+            {
+                LastError = $"{except.Message}\n{except.StackTrace}";
+                _logger.LogError(LastError);
+                return null;
+            }
+        }
+
+        ORIN GetPostedCN(DbInfo db, long portalDocEntry)
+        {
+            try
+            {
+                using var conn = new SqlConnection(_commDbConnStr_Bread);
+                // by pass current locked row with READPAST
+                var sp_QuerySapInv = $@"Select top 1 * 
+                                        From {db.SAPDB}..ORIN  with (READPAST)
+                                        Where U_SOENTRY = @portalDocEntry
+                                        ORDER BY DocEntry DESC ; ";
+
+                for (int i = 0; i < 3; i ++ )
+                {
+                    var found_Cn = conn.Query<ORIN>(sp_QuerySapInv, new { portalDocEntry }).FirstOrDefault();
+                    // first time 
+                    if (found_Cn != null)
+                    {
+                        return found_Cn;
+                    }
+                    Thread.Sleep(500);
+                }                      
+                return null;
+
+            }
+            catch (Exception except)
+            {
+                LastError = $"{except.Message}\n{except.StackTrace}";
+                _logger.LogError(LastError);
+                return null;
             }
         }
 
