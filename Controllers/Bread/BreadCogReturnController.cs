@@ -623,7 +623,7 @@ namespace KTC_SalesAppWAPI.Controllers.Bread
         {
             if (string.IsNullOrWhiteSpace(dto.Subsi))
             {
-                return BadRequest("Invalid subsi");
+                return BadRequest("Invalid SubSi");
             }
             if (dto.CnDoc == null)
             {
@@ -655,6 +655,7 @@ namespace KTC_SalesAppWAPI.Controllers.Bread
                         var deleteSql = @$"delete from {db.WEBDB}..FTAPP_RCN Where DocEntry = @docEntry;
                                            delete from {db.WEBDB}..FTAPP_RCN1 Where DocEntry = @docEntry;
                                            delete from {db.WEBDB}..FTAPP_RCN3 Where DocEntry = @docEntry; ";
+
                         conn.Execute(deleteSql, new { docEntry = dto.CnDoc.DOCENTRY }, trans);
 
                         // insert the head for RCN 

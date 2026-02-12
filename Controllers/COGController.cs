@@ -398,7 +398,7 @@ namespace KTC_SalesAppWAPI.Controllers
                 if (dto.IsStandAloneTrcn) // 20230614
                 {
                     sql_DefaultGracePeriod = @"Select SetupValue 
-                                                from FTApp_Config with (nolock) 
+                                                from FTApp_Config with (NOLOCK) 
                                                 Where SetupName= 'AppDiCnReturnGracePeriod_Driver'";
 
                     var conn = new SqlConnection(_commDbConnStr);
@@ -409,7 +409,7 @@ namespace KTC_SalesAppWAPI.Controllers
                 else // foloow seller grace period 
                 {
                     sql_DefaultGracePeriod = @"Select SetupValue 
-                                                from FTApp_Config with (nolock) 
+                                                from FTApp_Config with (NOLOCK) 
                                                 Where SetupName= 'AppDiCnReturnGracePeriod_Seller'";
 
                     var conn = new SqlConnection(_commDbConnStr);

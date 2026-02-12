@@ -507,9 +507,10 @@ namespace KTC_SalesAppWAPI.Controllers.Bread
                     return BadRequest($"Doc# {docEntry} saved draft,\n" + errorMsg);
                 }
 
-                // add int he check for create invoice                 
-                var found_Inv = GetPostedInv(db, docEntry); 
-                var found_Cn  = GetPostedCN(db, docEntry);
+                // add int he check for create invoice
+                BreadInvCnChecker.CommDbConnStr_Bread = _commDbConnStr_Bread;
+                var found_Inv = BreadInvCnChecker.GetPostedInv(db, docEntry); 
+                var found_Cn  = BreadInvCnChecker.GetPostedCN(db, docEntry);
 
                 // update the inv table as draft
                 if (found_Inv == null)
@@ -573,67 +574,67 @@ namespace KTC_SalesAppWAPI.Controllers.Bread
             }
         }
 
-        OINV GetPostedInv(DbInfo db, long portalDocEntry)
-        {
-            try
-            {
-                using var conn = new SqlConnection(_commDbConnStr_Bread);
-                // by pass current locked row with READPAST
-                var sp_QuerySapInv = $@"Select top 1 * 
-                                        From {db.SAPDB}..OINV  with (READPAST)
-                                        Where U_SOENTRY = @portalDocEntry
-                                        ORDER BY DocEntry DESC ; ";
+        //OINV GetPostedInv(DbInfo db, long portalDocEntry)
+        //{
+        //    try
+        //    {
+        //        using var conn = new SqlConnection(_commDbConnStr_Bread);
+        //        // by pass current locked row with READPAST
+        //        var sp_QuerySapInv = $@"Select top 1 * 
+        //                                From {db.SAPDB}..OINV  with (READPAST)
+        //                                Where U_SOENTRY = @portalDocEntry
+        //                                ORDER BY DocEntry DESC ; ";
 
-                for (int i = 0; i < 3; i++)
-                {
-                    var found_Inv = conn.Query<OINV>(sp_QuerySapInv, new { portalDocEntry }).FirstOrDefault();                    
-                    if (found_Inv != null)
-                    {
-                        return found_Inv;
-                    }
-                    Thread.Sleep(500);
-                }
-                return null;
-            }
-            catch (Exception except)
-            {
-                LastError = $"{except.Message}\n{except.StackTrace}";
-                _logger.LogError(LastError);
-                return null;
-            }
-        }
+        //        for (int i = 0; i < 3; i++)
+        //        {
+        //            var found_Inv = conn.Query<OINV>(sp_QuerySapInv, new { portalDocEntry }).FirstOrDefault();                    
+        //            if (found_Inv != null)
+        //            {
+        //                return found_Inv;
+        //            }
+        //            Thread.Sleep(500);
+        //        }
+        //        return null;
+        //    }
+        //    catch (Exception except)
+        //    {
+        //        LastError = $"{except.Message}\n{except.StackTrace}";
+        //        _logger.LogError(LastError);
+        //        return null;
+        //    }
+        //}
 
-        ORIN GetPostedCN(DbInfo db, long portalDocEntry)
-        {
-            try
-            {
-                using var conn = new SqlConnection(_commDbConnStr_Bread);
-                // by pass current locked row with READPAST
-                var sp_QuerySapInv = $@"Select top 1 * 
-                                        From {db.SAPDB}..ORIN  with (READPAST)
-                                        Where U_SOENTRY = @portalDocEntry
-                                        ORDER BY DocEntry DESC ; ";
+        //ORIN GetPostedCN(DbInfo db, long portalDocEntry)
+        //{
+        //    try
+        //    {
+        //        using var conn = new SqlConnection(_commDbConnStr_Bread);
+        //        // by pass current locked row with READPAST
+        //        var sp_QuerySapInv = $@"Select top 1 * 
+        //                                From {db.SAPDB}..ORIN  with (READPAST)
+        //                                Where U_SOENTRY = @portalDocEntry
+        //                                ORDER BY DocEntry DESC ; ";
 
-                for (int i = 0; i < 3; i ++ )
-                {
-                    var found_Cn = conn.Query<ORIN>(sp_QuerySapInv, new { portalDocEntry }).FirstOrDefault();
-                    // first time 
-                    if (found_Cn != null)
-                    {
-                        return found_Cn;
-                    }
-                    Thread.Sleep(500);
-                }                      
-                return null;
+        //        for (int i = 0; i < 3; i ++ )
+        //        {
+        //            var found_Cn = conn.Query<ORIN>(sp_QuerySapInv, new { portalDocEntry }).FirstOrDefault();
+        //            // first time 
+        //            if (found_Cn != null)
+        //            {
+        //                return found_Cn;
+        //            }
+        //            Thread.Sleep(500);
+        //        }                      
+        //        return null;
 
-            }
-            catch (Exception except)
-            {
-                LastError = $"{except.Message}\n{except.StackTrace}";
-                _logger.LogError(LastError);
-                return null;
-            }
-        }
+        //    }
+        //    catch (Exception except)
+        //    {
+        //        LastError = $"{except.Message}\n{except.StackTrace}";
+        //        _logger.LogError(LastError);
+        //        return null;
+        //    }
+        //}
 
         string HandlerSellerCreateInvoice(SqlConnection conn, DbInfo db, long docEntry, out string seriesName)
         {

@@ -703,7 +703,7 @@ namespace KTC_SalesAppWAPI.Controllers.Bread
             try
             {
                 // 20240816 
-                // add in memeroy control 
+                // add in memory control 
                 // check the user in dlb creation 
                 if (string.IsNullOrWhiteSpace(dto.UserCode))
                 {
@@ -752,7 +752,7 @@ namespace KTC_SalesAppWAPI.Controllers.Bread
                 }
                 if (string.IsNullOrWhiteSpace(dto.Subsi))
                 {
-                    return BadRequest("Invalid subsi");
+                    return BadRequest("Invalid SubSi");
                 }
                 if (dto.Line == null)
                 {
@@ -813,13 +813,11 @@ namespace KTC_SalesAppWAPI.Controllers.Bread
                 {
                     _logger.LogError($"Doc# {docEntry} saved draft,\n" + errorMsg);
                     return BadRequest($"Doc# {docEntry} saved draft,\n" + errorMsg);
-                }               
-                
-                var sql3 = @$"select top 1 * from {db.SAPDB}..ORIN Where U_SOENTRY = @docentry order by DocDate desc ;";
-                var foundCn = conn.Query<ORIN>(sql3, new { docentry = docEntry }).FirstOrDefault();
+                }
 
-                var sql4 = @$"select top 1 * from {db.SAPDB}..OINV Where U_SOENTRY = @docentry order by DocDate desc ;";
-                var foundInv = conn.Query<OINV>(sql3, new { docentry = docEntry }).FirstOrDefault();
+                BreadInvCnChecker.CommDbConnStr_Bread = _commDbConnStr_bread;
+                var foundCn = BreadInvCnChecker.GetPostedCN(db, docEntry);
+                var foundInv = BreadInvCnChecker.GetPostedInv(db, docEntry);
 
                 if (foundCn == null)
                 {
@@ -840,7 +838,7 @@ namespace KTC_SalesAppWAPI.Controllers.Bread
 
                 var sapInvEntry = foundInv == null ? "" : foundInv.DocEntry.ToString();
 
-                // reupdate the cn cmentry again 
+                // reupdate the cn CM Entry again 
                 var update_cn1 = @$"Update {db.WEBDB}..CN 
                                         set DOCSTATUS = 'C'
                                             , DOCNUM = @portalDocNum
@@ -882,15 +880,15 @@ namespace KTC_SalesAppWAPI.Controllers.Bread
                     Program.UserTransToken_BreadCreateCn.Remove(dto.UserCode);
                 }
             }
-        }
+        }     
 
         // seller create return cn for KTC store
-        string HandlerCreate_RetCN(SqlConnection conn, DbInfo db, long docEntry, out string seriesName )
+        string HandlerCreate_RetCN(SqlConnection conn, DbInfo db, long docEntry, out string seriesName)
         {
             LastError = "";
             seriesName = "";
             try
-            {  
+            {
                 // parepare the invoice data table 
                 var query = $@"SELECT T0.*
                                      ,T1.CARDCODE AS [SAPCARDCODE]
