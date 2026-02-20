@@ -452,7 +452,7 @@ namespace KTC_SalesAppWAPI.Controllers.Bread
                 }
                 if (string.IsNullOrWhiteSpace(dto.Subsi))
                 {
-                    return BadRequest("Invalid subsi");
+                    return BadRequest("Invalid SubSi");
                 }
                 if (string.IsNullOrWhiteSpace(dto.SaveType))
                 {

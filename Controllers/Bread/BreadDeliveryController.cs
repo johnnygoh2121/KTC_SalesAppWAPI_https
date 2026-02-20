@@ -1467,11 +1467,11 @@ namespace KTC_SalesAppWAPI.Controllers.Bread
             }
             if (dto.Head.Lines == null)
             {
-                return BadRequest("INvalid request doc lines");
+                return BadRequest("Invalid request doc lines");
             }
             if (string.IsNullOrWhiteSpace(dto.SubSi))
             {
-                return BadRequest("Invalid subsi");
+                return BadRequest("Invalid SubSi");
             }
             if (string.IsNullOrWhiteSpace(dto.UserCode))
             {
@@ -1576,7 +1576,7 @@ namespace KTC_SalesAppWAPI.Controllers.Bread
                                               _commDbConnStr_Bread, -1, "ORIN", SAPbobsCOM.BoObjectTypes.oCreditNotes);
 
 
-                    // check does the it docentry create in invoice 
+                    // check does the it docEntry create in invoice 
                     var checkInvSql = $@"Select * from {db.SAPDB}..ORIN with (nolock) Where U_SOENTRY = @itDocEntry";
                     var cn = conn.Query<ORIN>(checkInvSql, new { itDocEntry = dto.Head.BaseITEntry }).FirstOrDefault();
                     if (cn != null)

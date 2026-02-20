@@ -275,7 +275,7 @@ namespace KTC_SalesAppWAPI.Helpers.DiApi
                 }
                 else
                 {
-                    errmsg = $"Unable to update sap doc reference, fail to load document by docentry CN: {CnEntry}, GI:{newKey}";
+                    errmsg = $"Unable to update sap doc reference, fail to load document by DocEntry CN: {CnEntry}, GI:{newKey}";
                     return errmsg;
                 }
 

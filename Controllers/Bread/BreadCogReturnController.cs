@@ -1370,7 +1370,7 @@ namespace KTC_SalesAppWAPI.Controllers.Bread
             {
                 if (string.IsNullOrWhiteSpace(dto.Subsi))
                 {
-                    return BadRequest("invalid subsi");
+                    return BadRequest("invalid SubSi");
                 }
                 if (dto.CnDocEntry <= 0)
                 {

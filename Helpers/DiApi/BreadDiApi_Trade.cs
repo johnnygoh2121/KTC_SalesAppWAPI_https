@@ -519,7 +519,8 @@ namespace KTC_SalesAppWAPI.Helpers.DiApi
         /// <param name="dt1"></param>
         /// <param name="nocn"></param>
         /// <returns></returns>
-        public string createCNInv(string docentry, DataTable dt, DataTable dt1, bool noinv, bool followLineWhs = false)
+        public string createCNInv(string docentry, DataTable dt, DataTable dt1, 
+            bool noinv, bool followLineWhs = false)
         {
             var docBatches_CN = GetBatches_AllLine(docentry, "CN3");
             var docBatches_INV = GetBatches_AllLine(docentry, "INV3");

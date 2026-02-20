@@ -889,7 +889,7 @@ namespace KTC_SalesAppWAPI.Controllers.Bread
             seriesName = "";
             try
             {
-                // parepare the invoice data table 
+                // prepare the invoice data table 
                 var query = $@"SELECT T0.*
                                      ,T1.CARDCODE AS [SAPCARDCODE]
                                      ,T2.CNARINVSERIES AS [INVSERIES]
@@ -923,7 +923,7 @@ namespace KTC_SalesAppWAPI.Controllers.Bread
 
                 seriesName = $"{cn_dt.Rows[0]["SERIESNAME"]}";
 
-                var sapcard = cn_dt.Rows[0]["SAPCARDCODE"].ToString();
+                var sapCard = cn_dt.Rows[0]["SAPCARDCODE"].ToString();
                 var priceList = db.DEF_PRICELIST;
 
                 query = $@"SELECT T1.*
@@ -940,7 +940,7 @@ namespace KTC_SalesAppWAPI.Controllers.Bread
                                 INNER JOIN [{db.SAPDB}].[DBO].[OCRD] T2 ON ISNULL(T2.U_PORTALID, T0.CardCode) = T0.CARDCODE 
                                     AND T2.CARDTYPE = 'C' 
                                     AND T2.FrozenFor = 'N' 
-                                    AND T2.CardCode = '{sapcard}'
+                                    AND T2.CardCode = '{sapCard}'
                             LEFT OUTER JOIN [{db.SAPDB}].[DBO].[OCRD] T3 ON T3.CardCode = T0.COMPANYID 
                             LEFT OUTER JOIN [{db.SAPDB}].[DBO].[ITM1] T4 ON T4.ItemCode = T1.ITEMCODE 
                                     AND T4.PriceList = T2.ListNum 
@@ -999,13 +999,13 @@ namespace KTC_SalesAppWAPI.Controllers.Bread
             {
                 if (string.IsNullOrWhiteSpace(dto.Subsi))
                 {
-                    return BadRequest("Subsi is empty");
+                    return BadRequest("SubSi is empty");
                 }
 
                 var db = new DbNameHelper().GetDbInfo(_commDbConnStr_bread, dto.Subsi);
                 if (db == null)
                 {
-                    return BadRequest("db info query error, or invalid subsi");
+                    return BadRequest("db info query error, or invalid SubSi");
                 }
 
                 var sql = "exec sp_SelectReasonCode_Bread @webDb";
