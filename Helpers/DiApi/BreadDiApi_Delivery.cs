@@ -19,14 +19,11 @@ namespace KTC_SalesAppWAPI.Helpers.DiApi
         public int GRPostDocEntry { get; set; } // for good receipt doc num
         public int ITPostDocEntry { get; set; } // for good receipt doc num
 
-
-
         string Common_DBConnStr { get; set; } = string.Empty;
         string errmsg { get; set; }
         int AttachedFileCnt { get; set; } = -1;
 
         Company oCompany { get; set; }
-
         DbInfo Db { get; set; }
         BreadDocHeader Doc { get; set; } = null;
         List<BreadDocDetail> DocDetails { get; set; } = null;
@@ -42,7 +39,7 @@ namespace KTC_SalesAppWAPI.Helpers.DiApi
         string GRRemark { get; set; }
         string Ref2 { get; set; }
 
-        // for craete of invoice or inventory transfer
+        // for create of invoice or inventory transfer
         public BreadDiApi_Delivery(DbInfo db, BreadDocHeader head, List<BreadDocDetail> lines,
                             string common_DBConnStr, int filesCount, string curSapTableName,
                             BoObjectTypes currentDocType = BoObjectTypes.oDeliveryNotes,
@@ -303,7 +300,10 @@ namespace KTC_SalesAppWAPI.Helpers.DiApi
         {
             try
             {
-                var updateSql = @$"Update {Db.WEBDB}..FTAPP_RCN Set GIENTRY = @giDocEntry Where docEntry = @cnDocEntry";
+                var updateSql = @$"update {Db.WEBDB}..FTAPP_RCN 
+                                   set GIENTRY = @giDocEntry 
+                                   where docEntry = @cnDocEntry";
+
                 using var conn = new SqlConnection(Common_DBConnStr);
                 conn.Execute(updateSql, new
                 {
@@ -969,7 +969,7 @@ namespace KTC_SalesAppWAPI.Helpers.DiApi
             try
             {
                 var sql = $@"SELECT U_OcrCod1  
-                             FROM {sapDb}..OWHS 
+                             FROM {sapDb}..OWHS with (NOLOCK)
                              WHERE WhsCode = '{targetWhs}'";
 
                 return Conn.Query<string>(sql).FirstOrDefault();

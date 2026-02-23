@@ -16,6 +16,7 @@ using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
@@ -46,7 +47,7 @@ namespace KTC_SalesAppWAPI.Controllers
         {
             _configuration = configuration;
             _logger = logger;
-            _commDbConnStr = _configuration.GetConnectionString(_dbComm);            
+            _commDbConnStr = _configuration.GetConnectionString(_dbComm);
             WebHostAddrEndPoint = configuration.GetSection("AppSettings").GetSection("WebPortal_Host_EndPoint").Value;
         }
 
@@ -797,33 +798,33 @@ namespace KTC_SalesAppWAPI.Controllers
             conn.Open();
             using (var trans = conn.BeginTransaction())
 
-            try
-            {
-                // delete the box content
-                var deleteBox_Draft =
-                        @$"Delete from {db.WEBDB}..FTAPP_SecBox1_Draft  WHERE BaseEntry = @DocEntry; 
+                try
+                {
+                    // delete the box content
+                    var deleteBox_Draft =
+                            @$"Delete from {db.WEBDB}..FTAPP_SecBox1_Draft  WHERE BaseEntry = @DocEntry; 
                         Delete from {db.WEBDB}..FTAPP_SecBox_Draft   WHERE BaseEntry = @DocEntry;
                         Delete from {db.WEBDB}..FTAPP_SecBatch_Draft 
                                 where DocEntry  = @DocEntry
                                 and PickingMode = @PickingMode ; ";
 
-                var result = conn.Execute(deleteBox_Draft,
-                    new
-                    {
-                        dto.DocEntry,
-                        dto.PickingMode
-                    }, trans);
+                    var result = conn.Execute(deleteBox_Draft,
+                        new
+                        {
+                            dto.DocEntry,
+                            dto.PickingMode
+                        }, trans);
 
-                trans.Commit();
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                trans.Rollback();
-                LastError = $"{e.Message}\n{e.StackTrace}";
-                _logger.LogError(LastError);
-                return BadRequest($"request not handler.\n{LastError}");
-            }
+                    trans.Commit();
+                    return Ok();
+                }
+                catch (Exception e)
+                {
+                    trans.Rollback();
+                    LastError = $"{e.Message}\n{e.StackTrace}";
+                    _logger.LogError(LastError);
+                    return BadRequest($"request not handler.\n{LastError}");
+                }
         }
 
         IActionResult ClearSecBoxLine(Dto_Pick dto)
@@ -2041,7 +2042,7 @@ namespace KTC_SalesAppWAPI.Controllers
 
                         if (results[i].U_MustCase == "Y")
                         {
-                            results[i].QUANTITYPC = 0;;
+                            results[i].QUANTITYPC = 0; ;
                             results[i].QUANTITYCS = results[i].QUANTITY;
                             results[i].UOM = "CS";
                         }
@@ -2156,16 +2157,16 @@ namespace KTC_SalesAppWAPI.Controllers
                 if (string.IsNullOrWhiteSpace(dto.UserToken))
                 {
                     goto ByPassTransCheck;
-                    //return BadRequest("bad user login, please log out app, " +
-                    //    "and login again to refresh login token. Thanks");
                 }
 
                 // check the memory for the key exist
-                if (Program.UserTransToken_PostPick == null) Program.UserTransToken_PostPick = new Dictionary<string, bool>();
+                if (Program.UserTransToken_PostPick == null)
+                {
+                    Program.UserTransToken_PostPick = new Dictionary<string, bool>();
+                }
 
                 // check user token in list
                 var isListed = Program.UserTransToken_PostPick.ContainsKey(dto.UserToken);
-
                 if (isListed) // yes in 
                 {
                     bool inTran = Program.UserTransToken_PostPick[dto.UserToken];
@@ -2224,16 +2225,19 @@ namespace KTC_SalesAppWAPI.Controllers
                     return BadRequest("Not able to read db info, pls try again.");
                 }
                 #endregion end 
-                var sql_SettingSaveTrace = "Select SetupValue from FTApp_Config Where SetupName  = 'SavePickBeforeAfter'";
-                var trcaeSteupValue = new SqlConnection(_commDbConnStr).ExecuteScalar<string>(sql_SettingSaveTrace);
+                var sql_SettingSaveTrace = @$"Select SetupValue
+                                            from FTApp_Config 
+                                            Where SetupName  = 'SavePickBeforeAfter'; ";
+
+                var traceSetupValue = new SqlConnection(_commDbConnStr)
+                    .ExecuteScalar<string>(sql_SettingSaveTrace);
 
                 // 20230129
                 // add in save when received from app 
-                if (!string.IsNullOrWhiteSpace(trcaeSteupValue) && trcaeSteupValue == "Y")
+                if (!string.IsNullOrWhiteSpace(traceSetupValue) && traceSetupValue == "Y")
                 {
                     SaveLineFromReceived(db0, dto.PickedDoc.Lines);
                 }
-
 
                 // --------------------------------------------------------------------
                 // check invoice existed 
@@ -2243,12 +2247,12 @@ namespace KTC_SalesAppWAPI.Controllers
                 #region double check the inv # in sap
                 using (var connCheckInv = new SqlConnection(_commDbConnStr))
                 {
-                    var sql = @$"SELECT DocNum , DocEntry , u_soid
-                                 FROM {db0.SAPDB}..OINV WITH (NOLOCK) 
-                                 WHERE U_SOID = @docEntry ";
+                    var sql = $@"SELECT TOP 1 DocEntry, DocNum, U_SOID  
+                                FROM {db0.SAPDB}..OINV 
+                                WHERE U_SOID = @DocEntry";
 
                     var sapInv = connCheckInv.Query<OINV>(sql, new { docEntry = dto.DocEntry }).FirstOrDefault();
-                    if (sapInv != null && sapInv.U_SOID.Equals(dto.DocEntry))
+                    if (sapInv != null)
                     {
                         if (connCheckInv.State == System.Data.ConnectionState.Closed) connCheckInv.Open();
                         var transInvUpdate = connCheckInv.BeginTransaction();
@@ -2257,10 +2261,10 @@ namespace KTC_SalesAppWAPI.Controllers
                             try
                             {
                                 var update_soWithInv = $@"UPDATE {db0.WEBDB}..SO  
-                                        SET INVNO = @InvNo ,  
-                                            INVENTRY = @InvEntry ,  
-                                            DOCSTATUS = @DocStatus  
-                                        WHERE DOCENTRY = @DocEntry ";
+                                                            SET INVNO = @InvNo ,  
+                                                                INVENTRY = @InvEntry ,  
+                                                                DOCSTATUS = @DocStatus  
+                                                            WHERE DOCENTRY = @DocEntry ";
 
                                 var result = connCheckInv.Execute(update_soWithInv,
                                                         new
@@ -2318,9 +2322,10 @@ namespace KTC_SalesAppWAPI.Controllers
                 // check before post
                 using (var connCurSo = new SqlConnection(_commDbConnStr))
                 {
-                    var getCurSo = $@"SELECT * 
-                                      FROM {db0.WEBDB}..SO with (nolock)
-                                      Where DocEntry = @DocEntry";
+                    var getCurSo = $@"select top 1 * 
+                                      from {db0.WEBDB}..SO with (NOLOCK)
+                                      where DocEntry = @DocEntry
+                                      order by DocEntry desc ; ";
 
                     var soDoc = connCurSo.Query<SO>(getCurSo, new { dto.DocEntry }).FirstOrDefault();
                     if (soDoc == null)
@@ -2335,7 +2340,6 @@ namespace KTC_SalesAppWAPI.Controllers
                     }
                 } // close the db sql connection
 
-
                 // 20220115 
                 // try to adjust the pick qty tally with the posting line
                 var lines = dto.PickedDoc.Lines;
@@ -2343,23 +2347,23 @@ namespace KTC_SalesAppWAPI.Controllers
                 {
                     for (int id = 0; id < lines.Count; id++)
                     {
-                        var pline = lines[id];
-                        if (pline == null) continue;
+                        var pLine = lines[id];
+                        if (pLine == null) continue;
 
-                        if (pline.QUANTITY != pline.PICKEDQTY)
+                        if (pLine.QUANTITY != pLine.PICKEDQTY)
                         {
                             var sp_query_picked = @"exec sp_GetPickedQty @webDb, @docEntry, @itemCode,  @linenum";
-                            var draftboxPickedInPcs = pickQtyConn.ExecuteScalar<decimal>(sp_query_picked, new
+                            var draftBoxPickedInPcs = pickQtyConn.ExecuteScalar<decimal>(sp_query_picked, new
                             {
                                 webDb = db0.WEBDB,
-                                docEntry = pline.DOCENTRY,
-                                itemCode = pline.ITEMCODE,
-                                linenum = pline.LINENUM
+                                docEntry = pLine.DOCENTRY,
+                                itemCode = pLine.ITEMCODE,
+                                linenum = pLine.LINENUM
                             });
 
-                            if (pline.PICKEDQTY != draftboxPickedInPcs)
+                            if (pLine.PICKEDQTY != draftBoxPickedInPcs)
                             {
-                                dto.PickedDoc.Lines[id].PICKEDQTY = draftboxPickedInPcs;
+                                dto.PickedDoc.Lines[id].PICKEDQTY = draftBoxPickedInPcs;
                             }
                         }
                     }
@@ -2382,20 +2386,20 @@ namespace KTC_SalesAppWAPI.Controllers
 
                     // check each line picked qty is enough with on hand whs store
                     var message = "";
-                    var inSuficient = false;
+                    var inSufficient = false;
                     using (var connCheckOITW = new SqlConnection(_commDbConnStr))
                     {
                         combinedPickedQty.ForEach(i =>
                         {
                             var sql_check = $@"select OnHand 
-                                            from {db0.SAPDB}..OITW
-                                            Where ItemCode = @ItemCode 
-                                            and WhsCode = @WhsCode";
+                                                from {db0.SAPDB}..OITW
+                                                Where ItemCode = @ItemCode 
+                                                and WhsCode = @WhsCode ; ";
 
                             var onHand = connCheckOITW.ExecuteScalar<decimal>(sql_check, new { ItemCode = i.ItemCode, whsCode = whsCode });
                             if (onHand < i.SumPickedQty)
                             {
-                                inSuficient = true;
+                                inSufficient = true;
 
                                 var lines = string.Join(", ",
                                     dto.PickedDoc.Lines
@@ -2416,7 +2420,7 @@ namespace KTC_SalesAppWAPI.Controllers
                         });
                     } // close the db sql connection
 
-                    if (inSuficient)
+                    if (inSufficient)
                     {
                         return BadRequest(message);
                     }
@@ -2427,44 +2431,47 @@ namespace KTC_SalesAppWAPI.Controllers
                 using (var connPeriodOnHandQty = new SqlConnection(_commDbConnStr))
                 {
                     var periodLineQty = $@"SELECT                                         
-                                       T1.LINENUM, T1.ITEMCODE, T1.QUANTITY, T1.PICKEDQTY, t1.CODEBARS, t1.ITEMNAME, 
-                                       T2.OnHand [STOCKQTY], T3.[U_CSUS_UOM] [UOMQTY]
-                                       FROM  [{db0.WEBDB}].dbo.SO  T0 with (nolock) 
+                                               T1.LINENUM, T1.ITEMCODE, T1.QUANTITY, T1.PICKEDQTY, 
+                                               T1.CODEBARS, T1.ITEMNAME, 
+                                               T2.OnHand [STOCKQTY], T3.[U_CSUS_UOM] [UOMQTY]
+                                       FROM  [{db0.WEBDB}].dbo.SO   T0 with (NOLOCK)
 		                                        INNER JOIN 
-                                             [{db0.WEBDB}].dbo.SO1 T1 with (nolock) ON T1.DOCENTRY = T0.DOCENTRY
+                                             [{db0.WEBDB}].dbo.SO1  T1 with (NOLOCK) ON T1.DOCENTRY = T0.DOCENTRY
 		                                        INNER JOIN 
-                                             [{db0.SAPDB}].dbo.OITW T2 with (nolock) ON T2.ItemCode = T1.ITEMCODE 
-                                                           AND T2.WhsCode = T0.WHSCODE
+                                             [{db0.SAPDB}].dbo.OITW T2 ON T2.ItemCode = T1.ITEMCODE 
+                                                                      AND T2.WhsCode = T0.WHSCODE
                                                 INNER JOIN 
-                                             [{db0.SAPDB}].dbo.OITM T3 with (nolock) ON T2.ItemCode = T3.ITEMCODE 
+                                             [{db0.SAPDB}].dbo.OITM T3 with (NOLOCK) ON T2.ItemCode = T3.ITEMCODE 
                                        WHERE T0.DOCENTRY = @DocEntry ";
 
                     // ---------------------------------------------------------
                     // get all line with period on hand qty
-                    var soAvailQtyLine = connPeriodOnHandQty.Query<SO1>(periodLineQty, new { DocEntry = dto.DocEntry }).ToList();
-                    if (soAvailQtyLine != null && soAvailQtyLine.Count > 0)
+                    var soAvailQtyLine = connPeriodOnHandQty
+                        .Query<SO1>(periodLineQty, new { dto.DocEntry }).ToList();
+
+                    if (soAvailQtyLine.Count > 0)
                     {
                         for (int oi = 0; oi < dto.PickedDoc.Lines.Count; oi++)
                         {
-                            var postingline = dto.PickedDoc.Lines[oi];
-                            if (postingline == null) continue;
+                            var postingLine = dto.PickedDoc.Lines[oi];
+                            if (postingLine == null) continue;
 
                             var found = soAvailQtyLine.FirstOrDefault(x =>
-                                                                x.ITEMCODE.Equals(postingline.ITEMCODE) &&
-                                                                x.LINENUM.Equals(postingline.LINENUM) &&
-                                                                x.STOCKQTY < postingline.PICKEDQTY);
+                                                                x.ITEMCODE.Equals(postingLine.ITEMCODE) &&
+                                                                x.LINENUM.Equals(postingLine.LINENUM) &&
+                                                                x.STOCKQTY < postingLine.PICKEDQTY);
                             if (found != null)
                             {
                                 if (found.UOMQTY == 0) found.UOMQTY = 1;
 
-                                var message = $"Item {postingline.ITEMCODE}" +
-                                           $"\n{postingline.ITEMNAME}" +
-                                           $"\n{postingline.CODEBARS}" +
-                                           $"\n{postingline.SUPPCATNUM} " +
-                                           $"\n\n#{dto.DocEntry}, Orig. Line # {postingline.LINENUM}, " +
+                                var message = $"Item {postingLine.ITEMCODE}" +
+                                           $"\n{postingLine.ITEMNAME}" +
+                                           $"\n{postingLine.CODEBARS}" +
+                                           $"\n{postingLine.SUPPCATNUM} " +
+                                           $"\n\n#{dto.DocEntry}, Orig. Line # {postingLine.LINENUM}, " +
                                            $"\nUOM Qty {found.UOMQTY:N0}\n[Sys. Qty insufficient]" +
                                                  $"\n[Picked Qty] > [Sys. Qty]" +
-                                                 $"\n{postingline.PICKEDQTY:N0} > {found.STOCKQTY:N0}" +
+                                                 $"\n{postingLine.PICKEDQTY:N0} > {found.STOCKQTY:N0}" +
                                                  $"\nPls picked {found.STOCKQTY:N0} to this line, and re-post.";
 
                                 return BadRequest(message);
@@ -2483,14 +2490,16 @@ namespace KTC_SalesAppWAPI.Controllers
                 //}
 
                 // --------------------------------------------
-                // masssge the SO line with orig SO line 
+                // Massage the SO line with Original SO line 
                 using (var connMassageSoLines = new SqlConnection(_commDbConnStr))
                 {
                     var sql_getSOLines = $@"SELECT * 
-                                            FROM {db0.WEBDB}..SO1 with (nolock) 
-                                            WHERE DocEntry = @DocEntry ";
+                                            FROM {db0.WEBDB}..SO1 with (NOLOCK) 
+                                            WHERE DocEntry = @DocEntry ; ";
 
-                    var SOLines = new SqlConnection(_commDbConnStr).Query<SO1>(sql_getSOLines, new { dto.DocEntry }).ToList();
+                    var SOLines = new SqlConnection(_commDbConnStr)
+                        .Query<SO1>(sql_getSOLines, new { dto.DocEntry }).ToList();
+
                     for (int id = 0; id < SOLines.Count; id++)
                     {
                         var so1 = SOLines[id];
@@ -2510,7 +2519,7 @@ namespace KTC_SalesAppWAPI.Controllers
                     }
 
                     dto.PickedDoc.Lines = new List<SO1>(SOLines);  // 20230129   
-                    if (!string.IsNullOrWhiteSpace(trcaeSteupValue) && $"{trcaeSteupValue}".ToLower().Equals("Y")) // mean no 
+                    if (!string.IsNullOrWhiteSpace(traceSetupValue) && $"{traceSetupValue}".ToLower().Equals("Y")) // mean no 
                     {
                         SaveLineFromPick(db0, dto.PickedDoc.Lines); // before massage
                         SaveLineForPost(db0, SOLines); // after massage                         
@@ -2673,8 +2682,8 @@ namespace KTC_SalesAppWAPI.Controllers
                 // 20211231
                 using (var connMsgShipAddr = new SqlConnection(_commDbConnStr))
                 {
-                    var sp_query_ShiptoAddres = @"exec sp_SelectAddress @erpDb, @cardCode, @addrssType";
-                    var shipTo_cardAddress = connMsgShipAddr.ExecuteScalar<string>(sp_query_ShiptoAddres, new
+                    var sp_query_ShipToAddres = @"exec sp_SelectAddress @erpDb, @cardCode, @addrssType";
+                    var shipTo_cardAddress = connMsgShipAddr.ExecuteScalar<string>(sp_query_ShipToAddres, new
                     {
                         erpDb = db0.SAPDB,
                         cardCode = dto.PickedDoc.CARDCODE,
@@ -2689,8 +2698,8 @@ namespace KTC_SalesAppWAPI.Controllers
 
                     // update the bill to address
                     //  20240905
-                    var sp_query_BilltoAddres = @"exec sp_SelectAddress @erpDb, @cardCode, @addrssType";
-                    var billTo_cardAddress = connMsgShipAddr.ExecuteScalar<string>(sp_query_BilltoAddres, new
+                    var sp_query_BillToAddres = @"exec sp_SelectAddress @erpDb, @cardCode, @addrssType";
+                    var billTo_cardAddress = connMsgShipAddr.ExecuteScalar<string>(sp_query_BillToAddres, new
                     {
                         erpDb = db0.SAPDB,
                         cardCode = dto.PickedDoc.CARDCODE,
@@ -2704,7 +2713,7 @@ namespace KTC_SalesAppWAPI.Controllers
                     }
                 }
 
-                // post with redsharp
+                // post with red sharp
                 //var client = new RestClient($"{WebHostAddrEndPoint}{dto.RequestName}/{dto.CompanyId}/{dto.DocUpdateType}");
                 // 20220413
                 var svrAdr = !string.IsNullOrWhiteSpace(db0.PostSvrAdressPort) ? db0.PostSvrAdressPort : WebHostAddrEndPoint;
@@ -3507,24 +3516,79 @@ namespace KTC_SalesAppWAPI.Controllers
             if (boxes == null) return true;
             if (boxes.Count == 0) return true;
 
+            // 20260223
+            // massage the box with pick mode = PC
+            using (var connCheck = new SqlConnection(_commDbConnStr))
+            {
+                // 1. Identify which boxes qualify for conversion check
+                // We only care about "PC" mode with exactly 1 content line
+                var itemsToLookup = boxes
+                    .Where(b => b?.PickMode?.ToString().ToUpper() == "PC" && b.Contents?.Count == 1)
+                    .Select(b => b.Contents[0].ItemCode)
+                    .Distinct()
+                    .ToList();
+
+                if (itemsToLookup.Any())
+                {
+                    // 2. Fetch all UOMs in one trip
+                    var uomLookup = connCheck.Query<(string ItemCode, decimal UomQty)>(
+                                                    $@"SELECT ItemCode, U_CSUS_UOM 
+                                                       FROM {db.SAPDB}..OITM WITH (NOLOCK) 
+                                                       WHERE ItemCode IN @itemsToLookup",
+                        new { itemsToLookup }
+                    ).ToDictionary(x => x.ItemCode, x => x.UomQty);
+
+                    // 3. Update the original list
+                    foreach (var box in boxes)
+                    {
+                        // Skip boxes that don't meet your criteria
+                        if (box?.Contents == null || box.Contents.Count != 1) continue;
+                        if (box.PickMode?.ToString().ToUpper() != "PC") continue;
+
+                        var content = box.Contents[0];
+                        if ($"{content.Packaging}".ToUpper() != "PC") continue;
+
+                        if (uomLookup.TryGetValue(content.ItemCode, out decimal itemUomQty) && itemUomQty > 0)
+                        {
+                            // Only convert to "CS" if it's a perfect whole number
+                            if (content.Qty % itemUomQty == 0)
+                            {
+                                decimal csQty = content.Qty / itemUomQty;
+
+                                // Update the existing object in the list
+                                content.Qty = csQty;
+                                content.Packaging = "CS";
+                                box.LabelConsistTotalBoxes = (int)csQty;
+                                box.PickMode = "CS";
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Now your 'boxes' list is updated and ready for your SQL Insert logic
+
             using var conn = new SqlConnection(_commDbConnStr);
             conn.Open();
             using var trans = conn.BeginTransaction();
             try
             {
                 //---------------------------------
-                var checkDuplicate_sql = @$"Select top 2 Boxid 
-                                            from  {db.WEBDB}..FTAPP_Box with (nolock)
-                                            Where BaseEntry = @DocEntry ";
+                var checkDuplicate_sql = @$"select top 1 BoxId 
+                                            from  {db.WEBDB}..FTAPP_Box with (NOLOCK)
+                                            where BaseEntry = @docEntry 
+                                            order by BaseEntry desc ";
 
-                var boxListExist = conn.Query<FTAPP_Box>(checkDuplicate_sql, new { DocEntry = docEntry }, trans).ToList();
-                if (boxListExist.Count > 0) // if found box delete
+                var boxListExist = conn
+                    .Query<FTAPP_Box>(checkDuplicate_sql, new { docEntry }, trans).FirstOrDefault();
+
+                if (boxListExist != null) // if found box delete
                 {
                     // remove the old save boxes 
                     var sql_removeOldBox = @$"Delete from {db.WEBDB}..FTAPP_Box 
-                                            Where BaseEntry = @DocEntry ";
+                                              Where BaseEntry = @docEntry ";
 
-                    var res = conn.Execute(sql_removeOldBox, new { DocEntry = docEntry }, trans, commandTimeout: 0);
+                    var res = conn.Execute(sql_removeOldBox, new { docEntry }, trans, commandTimeout: 0);
                     if (res <= 0)
                     {
                         trans.Rollback();
@@ -3534,16 +3598,18 @@ namespace KTC_SalesAppWAPI.Controllers
                 }
 
                 // check box 1 ---------------------------------
-                checkDuplicate_sql = $"Select top 2 boxguid from  [{db.WEBDB}]..[FTAPP_Box1] with (nolock) " +
-                                       " Where BaseEntry = @DocEntry ";
+                checkDuplicate_sql = $@"select top 1 BoxGuid 
+                                        from  [{db.WEBDB}]..[FTAPP_Box1] with (NOLOCK)
+                                        where BaseEntry = @docEntry 
+                                        order by BaseEntry desc ";
 
-                var box1List = conn.Query<FTAPP_Box>(checkDuplicate_sql, new { DocEntry = docEntry }, trans).ToList();
-                if (box1List.Count > 0)
+                var box1List = conn.Query<FTAPP_Box>(checkDuplicate_sql, new { docEntry }, trans).FirstOrDefault();
+                if (box1List != null)
                 {
-                    var sql_removeOldBox1 = $"Delete from  [{db.WEBDB}].[dbo].[FTAPP_Box1] " +
-                                       " Where BaseEntry= @DocEntry ";
+                    var sql_removeOldBox1 = @$"delete from  [{db.WEBDB}].[dbo].[FTAPP_Box1] 
+                                               where BaseEntry= @docEntry ";
 
-                    var res = conn.Execute(sql_removeOldBox1, new { DocEntry = docEntry }, trans, commandTimeout: 0);
+                    var res = conn.Execute(sql_removeOldBox1, new { docEntry }, trans, commandTimeout: 0);
                     if (res <= 0)
                     {
                         trans.Rollback();
@@ -3662,15 +3728,22 @@ namespace KTC_SalesAppWAPI.Controllers
             try
             {
                 // remove daft so1 -------------------
-                var check_sp = $@"Select * from {db.WEBDB}..FTAPP_SO1_DRAFT  where DocEntry = @DocEntry ";
-                var founds = conn.Query<SO1>(check_sp, new { DocEntry = dto.DocEntry }, transaction).ToList();
-                if (founds.Count > 0)
-                {
-                    var delete_draft = @$"Delete from {db.WEBDB}..FTAPP_SO1_DRAFT
-                                     where DOCENTRY = @DOCENTRY ";
+                var check_sp = $@"select top 1 * 
+                                    from {db.WEBDB}..FTAPP_SO1_DRAFT 
+                                    where DocEntry = @DocEntry 
+                                    order by DocEntry desc ";
 
-                    var deleteres = conn.Execute(delete_draft, founds, transaction);
-                    if (deleteres <= 0)
+                var found = conn.Query<SO1>(check_sp,
+                    new { dto.DocEntry }, transaction).FirstOrDefault();
+
+                if (found != null)
+                {
+                    var delete_draft = @$"delete 
+                                          from {db.WEBDB}..FTAPP_SO1_DRAFT
+                                          where DOCENTRY = @DocEntry ";
+
+                    var deleteRes = conn.Execute(delete_draft, new { dto.DocEntry }, transaction);
+                    if (deleteRes <= 0)
                     {
                         transaction.Rollback();
                         return BadRequest($@"Error delete FTAPP_SO1_DRAFT for {db.COMPANYNAME} SO# {dto.DocEntry} ");
@@ -3678,16 +3751,22 @@ namespace KTC_SalesAppWAPI.Controllers
                 }
 
                 // ---------------------------
-                var sp_checkBox = $@"Select *  from {db.WEBDB}..FTAPP_Box_DRAFT
-                                     where BaseEntry = @DocEntry";
-                var foundBoxes = conn.Query<FTAPP_Box>(sp_checkBox, new { DocEntry = dto.DocEntry }, transaction).ToList();
-                if (foundBoxes.Count > 0)
+                var sp_checkBox = $@"select top 1 *  
+                                     from {db.WEBDB}..FTAPP_Box_DRAFT
+                                     where BaseEntry = @DocEntry
+                                     order by BaseEntry desc ; ";
+
+                var foundBox = conn
+                    .Query<FTAPP_Box>(sp_checkBox, new { dto.DocEntry }, transaction).FirstOrDefault();
+
+                if (foundBox != null)
                 {
                     // remove daft box -------------------
                     var delete_draft = @$"Delete from {db.WEBDB}..FTAPP_Box_DRAFT
-                                      where BaseEntry = @BaseEntry ";
-                    var deleteres = conn.Execute(delete_draft, foundBoxes, transaction);
-                    if (deleteres <= 0)
+                                          where BaseEntry = @DocEntry ";
+
+                    var deleteRes = conn.Execute(delete_draft, new { dto.DocEntry }, transaction);
+                    if (deleteRes <= 0)
                     {
                         transaction.Rollback();
                         return BadRequest($@"Error delete FTAPP_Box_DRAFT for  {db.COMPANYNAME} SO# {dto.DocEntry} ");
@@ -3695,41 +3774,48 @@ namespace KTC_SalesAppWAPI.Controllers
                 }
 
                 // ---------------------------
-                var sp_checkBox1 = $@"Select * from {db.WEBDB}..FTAPP_Box1_DRAFT
-                                     where BaseEntry = @DocEntry ";
+                var sp_checkBox1 = $@"select top 1 * 
+                                      from {db.WEBDB}..FTAPP_Box1_DRAFT
+                                      where BaseEntry = @DocEntry 
+                                      order by BaseEntry desc; ";
+                
+                var foundBox1 = conn
+                    .Query<FTAPP_Box1>(sp_checkBox1, new { dto.DocEntry }, transaction).FirstOrDefault();
 
-                var foundBox1s = conn.Query<FTAPP_Box1>(sp_checkBox1, new { DocEntry = dto.DocEntry }, transaction).ToList();
-                if (foundBox1s.Count > 0)
+                if (foundBox1 != null)
                 {
                     // remove draft box line -------------------
-                    var delete_draft = @$"Delete from {db.WEBDB}..FTAPP_Box1_DRAFT
-                                          where BaseEntry = @BaseEntry ";
-                    var deleteres = conn.Execute(delete_draft, foundBox1s, transaction);
-                    if (deleteres <= 0)
+                    var delete_draft = @$"delete 
+                                          from {db.WEBDB}..FTAPP_Box1_DRAFT
+                                          where BaseEntry = @DocEntry ";
+
+                    var deleteRes = conn.Execute(delete_draft, new { dto.DocEntry }, transaction);
+                    if (deleteRes <= 0)
                     {
                         transaction.Rollback();
                         return BadRequest($@"Error delete FTAPP_Box1_DRAFT for  {db.COMPANYNAME} SO# {dto.DocEntry} ");
                     }
                 }
 
-
                 // remove the doc entry batch 
                 // delete the line 
                 // 20240521
                 var sp_check_batch = @$"select * from  {db.WEBDB}..FTAPP_Batch_Draft 
-                                       Where DocEntry = @docEntry ";
+                                            where DocEntry = @docEntry ; ";
 
-                var batchesFound = conn.Query<FTAPP_Batch>(sp_check_batch, new { docEntry = dto.DocEntry }, transaction).ToList();
+                var batchesFound = conn.Query<FTAPP_Batch>(sp_check_batch,
+                    new { docEntry = dto.DocEntry }, transaction).ToList();
+
                 if (batchesFound.Count > 0)
                 {
                     var delete_draft = $@"Delete from {db.WEBDB}..FTAPP_Batch_Draft 
-                                      Where Id = @id ";
+                                          Where Id = @id ";
 
-                    var deleteres = conn.Execute(delete_draft, batchesFound, transaction);
-                    if (deleteres <= 0)
+                    var deleteRes = conn.Execute(delete_draft, batchesFound, transaction);
+                    if (deleteRes <= 0)
                     {
                         transaction.Rollback();
-                        return BadRequest($@"Error delete FTAPP_Batch_Draft for  {db.COMPANYNAME} SO# {dto.DocEntry} ");
+                        return BadRequest($@"Error delete FTAPP_Batch_Draft for {db.COMPANYNAME} SO# {dto.DocEntry} ");
                     }
                 }
 
@@ -4045,62 +4131,6 @@ namespace KTC_SalesAppWAPI.Controllers
                 return BadRequest($"request not handler.\n{LastError}");
             }
         }
-
-        //void InsertSoLineBatch(DbInfo db, SqlConnection conn,
-        //                        SqlTransaction trans, List<FTAPP_Batch> list, int docEntry, string tableName)
-        //{
-        //    try
-        //    {
-        //        var insert_sql = $@"INSERT INTO {db.WEBDB}..{tableName} (
-        //                                 DocEntry
-        //                               , BaseLine
-        //                               , LineNum
-        //                               , ItemCode
-        //                               , ItemName
-        //                               , WhsCode
-        //                               , WhsName
-        //                               , BatchNo
-        //                               , BatchQty
-        //                               , CsQty
-        //                               , PcQty
-        //                               , OBTQ_Abs
-        //                               , OBTN_Abs
-        //                               , UomQty
-        //                               , PickedQty
-        //                               , PickedCsQty
-        //                               , PickedPcQty     
-        //                               , BoxId
-        //                               , AppVersion
-        //                               , TransDt
-        //                        ) VALUES ( 
-        //                                   @DocEntry
-        //                                  ,@BaseLine
-        //                                  ,@LineNum
-        //                                  ,@ItemCode
-        //                                  ,@ItemName
-        //                                  ,@WhsCode
-        //                                  ,@WhsName
-        //                                  ,@BatchNo
-        //                                  ,@BatchQty
-        //                                  ,@CsQty
-        //                                  ,@PcQty
-        //                                  ,@OBTQ_Abs
-        //                                  ,@OBTN_Abs
-        //                                  ,@UomQty
-        //                                  ,@PickedQty
-        //                                  ,@PickedCsQty
-        //                                  ,@PickedPcQty
-        //                                  ,@BoxId
-        //                                  ,@AppVersion
-        //                                  ,GETDATE()) ";
-        //        conn.Execute(insert_sql, list, trans);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        LastError = $"{e.Message}\n{e.StackTrace}";
-        //        _logger.LogError(LastError);
-        //    }
-        //}
 
         void RemoveSecBoxBox1_Draft(DbInfo db, int DocEntry)
         {
@@ -4758,7 +4788,7 @@ namespace KTC_SalesAppWAPI.Controllers
                 var db = new DbNameHelper().GetDbInfo(_commDbConnStr, dto.Subsi);
                 if (db == null)
                 {
-                    return BadRequest("The compay info is empty");
+                    return BadRequest("The company info is empty");
                 }
 
                 if (dto.DocStatus == "H")
@@ -4799,7 +4829,7 @@ namespace KTC_SalesAppWAPI.Controllers
                     trans0.Commit();
                 }
 
-                // doc statuc with Q and I go flow below
+                // doc status with Q and I go flow below
                 //var sql = @"exec sp_SelectQueueSO @webDB, @erpDb, @subsi, @docStatus, @SubSiID";
 
                 // 2021 07 15 new query script 
