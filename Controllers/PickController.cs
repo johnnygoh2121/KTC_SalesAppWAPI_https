@@ -3546,10 +3546,14 @@ namespace KTC_SalesAppWAPI.Controllers
                         if (box.PickMode?.ToString().ToUpper() != "PC") continue;
 
                         var content = box.Contents[0];
-                        if ($"{content.Packaging}".ToUpper() != "PC") continue;
+                        if ($"{content.Packaging}".ToUpper() != "PC") continue;                        
 
                         if (uomLookup.TryGetValue(content.ItemCode, out decimal itemUomQty) && itemUomQty > 0)
                         {
+                            // if uom is 1 then leave it pc 
+                            // 20260225
+                            if (itemUomQty == 1) continue;
+
                             // Only convert to "CS" if it's a perfect whole number
                             if (content.Qty % itemUomQty == 0)
                             {
