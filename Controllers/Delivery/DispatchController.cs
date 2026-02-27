@@ -8,6 +8,7 @@ using KTC_SalesAppWAPI.Models.CommonDb;
 using KTC_SalesAppWAPI.Models.Delivery;
 using KTC_SalesAppWAPI.Models.Dispatch;
 using KTC_SalesAppWAPI.Models.DN;
+using KTC_SalesAppWAPI.Models.Login;
 using KTC_SalesAppWAPI.Models.Pick;
 using KTC_SalesAppWAPI.Models.SalesOrder;
 using KTC_SalesAppWAPI.Models.Transfer;
@@ -51,7 +52,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
             {
                 case "LoadDlbSumm":
                     {
-                        return LoadDlbSumm(dto);
+                        return LoadDlbSummary(dto); //LoadDlbSumm(dto);
                     }
                 case "LoadDlbDoc_ByCardName":
                     {
@@ -1046,9 +1047,9 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                         }).FirstOrDefault();
                     }
 
-                    var isDone = CreateTransferToStore(db, dlb1.DocNum,(int) dto.DlbEntry, 
+                    var isDone = CreateTransferToStore(db, dlb1.DocNum, (int)dto.DlbEntry,
                         isIBTInv, whs,
-                        dto.UserCode, dto.UserName,   
+                        dto.UserCode, dto.UserName,
                         updateConn, updTrans);
 
 
@@ -1074,7 +1075,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
         }
 
         bool CreateTransferToStore(DbInfo db, int InvNum, int dlbEntry, bool isIbtInv, OWHS_Ext whs,
-            string whsAppLoginCode , string whsAppLoginName , 
+            string whsAppLoginCode, string whsAppLoginName,
             SqlConnection updateConn, SqlTransaction updateTrans)
         {
             try
@@ -1116,7 +1117,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     return true;
                 }
 
-                string receiverCode = inv.CardCode, receiverName = inv.CardName, 
+                string receiverCode = inv.CardCode, receiverName = inv.CardName,
                        locationCode = inv.ShipToCode, locationName = inv.ShipToCode, driverName = "NA";
 
                 if (isIbtInv == true && whs != null)
@@ -1140,7 +1141,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     DocStatus = "T",
                     DriverName = driverName,
                     GroupGuid = groupGuid,
-                    Module = isIbtInv == true ? "ToWhs_ByDriver" : "ToStore", 
+                    Module = isIbtInv == true ? "ToWhs_ByDriver" : "ToStore",
                     DLBEntry = dlbEntry
                 };
 
@@ -1189,7 +1190,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 {
                     InvNo = InvNum,
                     TransDt = DateTime.Now,
-                    GroupGuid = groupGuid,                     
+                    GroupGuid = groupGuid,
                 };
 
                 tLines.Add(newT);
@@ -2291,7 +2292,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
             }).ToList();
 
             if (lines.Count == 0)
-            {                                             
+            {
                 var sp_recreateDlb2 = $"exec sp_RepairFTAPP_DLB2_SingleInvNo @webDb, @dlbNum, @invNum ";
                 using var reCreateConn_dlb2 = new SqlConnection(_commDbConnStr);
                 var res = reCreateConn_dlb2.Execute(sp_recreateDlb2, new
@@ -2446,10 +2447,10 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
             var foundBx = conn.Query<FTAPP_DLB2>(query_box, new
             {
                 InvDocNum = dto.InvNum,
-                BoxId    = dto.BoxId,
-                DlbEntry = dto.DlbEntry             
+                BoxId = dto.BoxId,
+                DlbEntry = dto.DlbEntry
             }).FirstOrDefault();
-            
+
             if (foundBx == null)
             {
                 // 20251203
@@ -3072,9 +3073,9 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                 var sp_queryBox = @$" select t0.* 
                                       from {db.WEBDB}..FTAPP_BOX t0  with (NOLOCK)  
                                       inner join {db.WEBDB}..SO t1 with (NOLOCK) on t1.DocEntry = t0.BaseEntry
-                                      where t1.INVNO = @DocNum ";          
+                                      where t1.INVNO = @DocNum ";
 
-                for (int u = 0; u < dlb1s.Count; u ++)
+                for (int u = 0; u < dlb1s.Count; u++)
                 {
                     dlb1s[u].Boxes = conn.Query<FTAPP_Box>(sp_queryBox, new
                     {
@@ -3134,6 +3135,59 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     return Ok(selectedDlb1);
                 }
                 return NotFound();
+            }
+            catch (Exception e)
+            {
+                LastError = $"{e.Message}\n{e.StackTrace}";
+                _logger.LogError(LastError);
+                return BadRequest($"request not handler.\n{LastError}");
+            }
+        }
+
+        // 20260227
+        IActionResult LoadDlbSummary(Dto_Dispatch dto)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(dto.TruckNo))
+                {
+                    return BadRequest("invalid truck no.");
+                }
+                if (dto.DlvryDate == default)
+                {
+                    return BadRequest("Invalid date");
+                }
+
+                // combine reading the dlb summary 
+                var companies = new DbNameHelper().GetDbInfo_DeliveryApp(_commDbConnStr);
+                if (companies.Count == 0)
+                {
+                    return BadRequest("delivery features no deployed");
+                }
+
+                using var conn = new SqlConnection(_commDbConnStr);
+                var dlbDocs = new List<DLBSumm>();
+                for (int c = 0; c < companies.Count; c++)
+                {
+                    var company = companies[c];
+                    if (company == null) continue;
+
+                    var query = $@"exec sp_GetDlbDoc @webDb, @truckNo";
+                    var list = conn.Query<DLBSumm>(query,
+                        new
+                        {
+                            webDb = company.WEBDB,
+                            truckNo = dto.TruckNo
+                        }).ToList();
+
+                    if (list.Count > 0)
+                    {
+                        dlbDocs.AddRange(list);
+                    }
+                }
+                if (dlbDocs.Count == 0) return NotFound();
+
+                return Ok(dlbDocs);
             }
             catch (Exception e)
             {
@@ -3226,7 +3280,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                       from KTCW_COMMON..FTAPP_StoreCheckedIn 
                                       Where CardName = @CardName 
                                       and TruckNo = @TruckNo 
-                                      order by id desc";
+                                      order by id desc ";
 
                     // update the last check in time.
                     groupByStore[g].LastCheckedInDt = conn.ExecuteScalar<DateTime>(sql_checkIn,
@@ -3237,21 +3291,21 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                         });
 
                     // add list of invoice number 
-                    var db1 = new DbNameHelper().GetDbInfo( _commDbConnStr, groupByStore[g].Subsi);
+                    var db1 = new DbNameHelper().GetDbInfo(_commDbConnStr, groupByStore[g].Subsi);
                     if (db1 != null)
                     {
-                        var inv1DocNum = $@"Select distinct DocNum from {db1.WEBDB}..DLB1 
+                        var inv1DocNum = $@"Select distinct DocNum 
+                                            from {db1.WEBDB}..DLB1 
                                             Where DocEntry = @DocEntry 
                                             and CardCode = @CardCode
                                             and DocType = 'I' ";
 
                         groupByStore[g].InvoiceNumList = conn.Query<int>(inv1DocNum, new
                         {
-                            DocEntry = groupByStore[g].DocEntry, 
+                            DocEntry = groupByStore[g].DocEntry,
                             CardCode = groupByStore[g].CardCode
                         }).ToList();
                     }
-
 
                     if (store.IsInterbranch) // load in the invoice, drop point warehouse 
                     {
@@ -3263,16 +3317,17 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                             var db = companies[u];
                             if (db == null) continue;
 
-                            var sp_Listinvoice = "exec sp_GetDlbDoc_ByCardName_Test1 @webDb, @truckNo, @storeName";
+                            //var sp_Listinvoice = "exec sp_GetDlbDoc_ByCardName_Test2 @webDb, @truckNo, @storeName";
+                            var sp_Listinvoice = "exec sp_GetDlbDoc_ByCardName_Test2 @webDb, @truckNo , @cardCode";
                             var dlb1s = conn.Query<DLB1>(sp_Listinvoice, new
                             {
                                 webDb = db.WEBDB,
                                 truckNo = dto.TruckNo,
-                                storeName = store.CardName
+                                cardCode = store.CardCode
                             }).ToList();
 
                             if (dlb1s.Count == 0) continue;
-                            
+
                             if (store.DocType == "I") // invoice 
                             {
                                 // base on the dlb1
@@ -3308,7 +3363,7 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
                                 var sp_ibtWhs = $@"select t1.GlblLocNum [DROP_POINT_GEOCODE]
                                                 , t1.WhsCode [InterBranchWhsCode]
-                                                , t1.WhsName [InterBranchWhsName]
+                                                , t1.WhsName [c]
                                                 from {db.WEBDB}..IBT t0 with (NOLOCK)
                                                 left join {db.SAPDB}..OWHS t1 with (NOLOCK) on t1.WhsCode = t0.WhsCode
                                                 Where t0.Transitno = @transferDocNum";
@@ -3324,7 +3379,6 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                                     groupByStore[g].WhsCode = trf.InterBranchWhsCode;
                                     groupByStore[g].WhsName = trf.InterBranchWhsName;
                                 }
-
                             }
                         }
                     }

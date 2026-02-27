@@ -43,7 +43,7 @@ namespace KTC_SalesAppWAPI.Models.Dispatch
 
         public DateTime OutDt { get; set; } = default;
 
-        public List<int> InvoiceNumList { get; set; }
+        public List<int> InvoiceNumList { get; set; } = new List<int>();
 
         public bool App_Determined_IsInterbranch { get; set; }
 
