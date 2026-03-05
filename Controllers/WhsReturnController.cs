@@ -1568,8 +1568,8 @@ namespace KTC_SalesAppWAPI.Controllers
                 // double check any varient return
                 if (dto.RtnLines != null)
                 {
-                    var hasVarient = dto.RtnLines.Any(c => c.CnQty != c.RtnQty);
-                    if (hasVarient)
+                    var hasVariant = dto.RtnLines.Any(c => c.CnQty != c.RtnQty);
+                    if (hasVariant)
                     {
                         SaveHrCharge(dto, db);
                     }
@@ -1710,9 +1710,11 @@ namespace KTC_SalesAppWAPI.Controllers
                     // get the charge amt 
                     if (dto.Head.HasVarient)
                     {
-                        using var conn1 = new SqlConnection(_commDbConnStr); // intial new connection
-                        var query_Charge = $@"Select * from {db.WEBDB}..FTAPP_CnSummary1 with (nolock)
-                                      Where CnDocEntry = @CnDocEntry ";
+                        using var conn1 = new SqlConnection(_commDbConnStr); // initial new connection
+                        var query_Charge = $@"select top 1 * 
+                                              from {db.WEBDB}..FTAPP_CnSummary1
+                                              where CnDocEntry = @CnDocEntry 
+                                              order by CnDocEntry desc  ";
 
                         var charge = conn1.Query<CnSummary>(query_Charge,
                             new
@@ -1771,9 +1773,6 @@ namespace KTC_SalesAppWAPI.Controllers
         // create record into HR table - CnSummary
         bool SaveHrCharge(WhsRet_Dto dto, DbInfo db)
         {
-            if (dto.Head == null) return true;
-            if (dto.Head.HasVarient == false) return true;
-
             var cnEntry = dto.Doc1.DocEntry;
             using var conn = new SqlConnection(_commDbConnStr);
             var sp_query = @"exec sp_SelectCnWithRetButVarient1 @webDb, @cnDocEntry ";
@@ -1784,7 +1783,7 @@ namespace KTC_SalesAppWAPI.Controllers
             }).FirstOrDefault();
 
             if (cnSummary == null) return true;
-            if ($"{cnSummary.ChargeAmt:N2}".Equals("0.00")) return true; //check the amt is zero then return
+            if (cnSummary.ChargeAmt == decimal.Zero) return true;
 
             // check duplicated 
             if (conn.State == System.Data.ConnectionState.Closed) conn.Open();
@@ -1792,8 +1791,10 @@ namespace KTC_SalesAppWAPI.Controllers
 
             try
             {
-                var dupCharge = $@"Select * from {db.WEBDB}..FTAPP_CnSummary1
-                                   Where CnDocEntry = @CnDocEntry ";
+                var dupCharge = $@"select top 1 * 
+                                   from {db.WEBDB}..FTAPP_CnSummary1
+                                   where CnDocEntry = @CnDocEntry 
+                                   order by CnDocEntry desc  ";
 
                 var dupChargeCn = conn.Query<CnSummary>(dupCharge, new { CnDocEntry = cnEntry }, trans).FirstOrDefault();
                 if (dupChargeCn != null)
@@ -1807,14 +1808,14 @@ namespace KTC_SalesAppWAPI.Controllers
                     if (result <= 0)
                     {
                         trans.Rollback();
-                        LastError = $"Del-Upd CNSumm fail, subsi {db.COMPANYNAME}, CnEntry : {dto.CnDocEntry}";
+                        LastError = $"Del-Upd CN Summary fail, SUBSI {db.COMPANYNAME}, CnEntry : {dto.CnDocEntry}";
                         _logger.LogError(LastError);
                         return false;
                     }
                 }
 
                 // insert the data
-                var sqlinsert = $@" INSERT INTO  {db.WEBDB}..FTAPP_CnSummary1 (
+                var sqlInsert = $@" INSERT INTO {db.WEBDB}..FTAPP_CnSummary1 (
                                          SubSi
                                        , CnDocEntry
                                        , CNNO
@@ -1861,11 +1862,11 @@ namespace KTC_SalesAppWAPI.Controllers
                                          ,@Run1
                                          ,@ReportedDate );";
 
-                var res = conn.Execute(sqlinsert, cnSummary, trans);
+                var res = conn.Execute(sqlInsert, cnSummary, trans);
                 if (res <= 0)
                 {
                     trans.Rollback();
-                    LastError = $"Insert CNSumm fail, subsi {db.COMPANYNAME}, CnEntry : {dto.CnDocEntry}";
+                    LastError = $"Insert CN Summary fail, SUBSI {db.COMPANYNAME}, CnEntry : {dto.CnDocEntry}";
                     _logger.LogError(LastError);
                     return false;
                 }
