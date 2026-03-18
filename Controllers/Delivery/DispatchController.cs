@@ -205,10 +205,10 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
 
             // loop thru card name 
             // load the DLB 
-            // update each DLB the tiem stamp 
+            // update each DLB the time stamp 
             // checking 
             // exec KTCW_COMMON..[sp_GetDlbDoc_ByCardName] 'AVONWEB', 'KDW6661', 'SERVAY HYPERMARKET(LIKA'
-            // cobine reading the dlb summary 
+            // combine reading the dlb summary 
 
 
             var dlb1s = new List<DLB1>();
@@ -3186,6 +3186,9 @@ namespace KTC_SalesAppWAPI.Controllers.Delivery
                     }
                 }
                 if (dlbDocs.Count == 0) return NotFound();
+
+                // recheck each dlb summary to fill in geocode 
+
 
                 return Ok(dlbDocs);
             }

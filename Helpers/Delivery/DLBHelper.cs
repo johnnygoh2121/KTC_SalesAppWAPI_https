@@ -379,7 +379,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
                 var updateFTAPP_DLB_Res2 = conn.Execute(update_FTAPP_DLB2, new
                 {
                     docEntry,
-                    HeadGuid,                                
+                    HeadGuid,
                 }, trans);
 
                 if (updateFTAPP_DLB_Res2 < 0)
@@ -848,7 +848,7 @@ namespace KTC_SalesAppWAPI.Helpers.Delivery
 
         TerritoryGeo GetTerritoryAndGeo(string cardCode)
         {
-            var sp_query = @$"select t2.descript[TERRITORY], t1.GlblLocNum [GEOCODE] , t1.U_DELGLN  [U_DELGLN]
+            var sp_query = @$" select t2.descript[TERRITORY], t1.GlblLocNum [GEOCODE] , t1.U_DELGLN  [U_DELGLN]
                                 from                               
                                 {Db.SAPDB}..OCRD t1 with (NOLOCK)
                                 left join 

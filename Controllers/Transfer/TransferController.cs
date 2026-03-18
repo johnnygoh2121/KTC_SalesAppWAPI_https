@@ -300,10 +300,6 @@ namespace KTC_SalesAppWAPI.Controllers.Transfer
             using var conn = new SqlConnection(_commDbConnStr);
             try
             {
-
-               
-
-
                 // prepare the dlb1 list 
                 var newDlbs = new List<FTAPP_DLB1>();
                 var newDlbs_Boxes = new List<FTAPP_DLB2>();
